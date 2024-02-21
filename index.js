@@ -1,10 +1,11 @@
-import express, { json, urlencoded } from "express";
+const express = require("express");
+const { json, urlencoded } = require("express");
 const app = express();
 require("dotenv").config();
 
 const { PORT, MONGODB_PASSWORD } = process.env;
 
-import { connect } from "mongoose";
+const { connect } = require("mongoose");
 
 connect(
     `mongodb+srv://carryall:${MONGODB_PASSWORD}@cluster0.lobzfqe.mongodb.net/`
@@ -15,9 +16,9 @@ connect(
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
-import productsRouter from "./server/routes/products";
-app.use("/products", productsRouter); // 중간에 관리자인지 확인할 필요 있음
-import categoriesRouter from "./server/routes/categories";
+const productsRouter = require('./server/routes/products.js');
+app.use("/products", productsRouter); 
+const categoriesRouter = require('./server/routes/categories.js');
 app.use("/categories", categoriesRouter);
 
 app.get("/", (req, res) => {

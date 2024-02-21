@@ -1,5 +1,5 @@
 //주문 스키마
-import { Schema } from "mongoose";
+const { Schema } = require("mongoose");
 const orderSchema = new Schema({
   // 주문 고유번호
   orderId: {

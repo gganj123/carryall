@@ -1,5 +1,5 @@
 // 회원 스키마
-import { Schema } from "mongoose";
+const { Schema } = require("mongoose");
 const customerSchema = new Schema({
   // 회원 고유번호(아이디)
   custId: {

@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { Category } from "../models";
-import asyncHandler from "../utils/asyncHandler";
+const { Router } = require("express");
+const Category = require("../models").Category;
+const asyncHandler = require("../utils/asyncHandler");
 // 카테고리 수정 한 화면에서 진행하는 경우인가 확인
 const router = Router();
 
@@ -63,4 +63,4 @@ router.delete("/", async (req, res) => {
   console.log("res");
 });
 
-export default router;
+module.exports = router;

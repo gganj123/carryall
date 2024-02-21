@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { Product, Category } from "../models";
-import asyncHandler from "../utils/asyncHandler";
+const { Router } = require("express");
+const { Product, Category } = require("../models");
+const asyncHandler = require("../utils/asyncHandler");
 
 const router = Router();
 
@@ -104,6 +104,6 @@ router.delete("/:productId", async (req, res, next) => {
   // redirect
 });
 
-export default router;
+module.exports = router;
 
 // 관리자 페이지에서 권한 판단해야하나? 관리자 권한 없으면 api 사용 불가같이...

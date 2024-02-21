@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
+const { Schema } = require("mongoose");
 
 const AdressSchema = new Schema({
   // 회원 고유번호
@@ -44,4 +43,4 @@ const AdressSchema = new Schema({
   },
 });
 
-export default AdressSchema;
+module.exports = AdressSchema;

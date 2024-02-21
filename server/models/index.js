@@ -1,6 +1,8 @@
 // 여기 import
-import { model } from "mongoose";
-import ProductSchema from "./schemas/product";
-import CategorySchema from "./schemas/category";
-export const Product = model("Product", ProductSchema);
-export const Category = model("Category", CategorySchema);
+const { model } = require("mongoose");
+const ProductSchema = require("./schemas/product");
+const CategorySchema = require("./schemas/category");
+const Product = model("Product", ProductSchema);
+const Category = model("Category", CategorySchema);
+
+module.exports = { Product, Category };

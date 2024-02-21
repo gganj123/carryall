@@ -1,5 +1,5 @@
-import { Schema } from "mongoose";
-import shortId from "./types/short-id.js";
+const { Schema } = require("mongoose");
+const shortId = require("./types/short-id.js");
 
 const ProductSchema = new Schema(
   {
@@ -43,4 +43,4 @@ const ProductSchema = new Schema(
   }
 );
 
-export default ProductSchema;
+module.exports = ProductSchema;
