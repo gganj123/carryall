@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  height: 100vh;
+}
+li {
+  list-style: none;
+}
+a {
+  color: #424242;
+  text-decoration: none;
+}
+button {
+  border: none;
+}
+.container{
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 60px; */
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.tab {
+  display: flex;
+  margin-bottom: 117px;
+  cursor: pointer;
+}
+.tab li {
+  width: 397px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fbfbfb;
+}
+.tab li a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tab li.active {
+  background-color: #424242;
+}
+.tab li.active a {
+  color: #fff;
+}
+/* #loginForm {
+} */
+#loginForm h2 {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.formGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.formGroup input {
+  width: 550px;
+  height: 75px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  border: none;
+  background-color: #fff;
+  font-size: 18px;
+}
+.formGroup + .formGroup {
+  margin-top: 20px;
+}
+h2.fakeTit {
+  margin-top: 60px;
+}
+#loginBtn, #joinBtn, #fakeBtn, .snsJoin {
+  width: 705px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background-color: #424242;
+  color: #fff;
+  margin: 0 auto;
+  margin-top: 97px;
+}
+#joinBtn{
+  margin-top: 30px;
+  width: 550px;
+}
+#fakeBtn {
+  width: 550px;
+  background-color: #cbcbcb;
+  color: #000;
+  margin-top: 30px;
+}
+.btnWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.snsJoin {
+  color: #000;
+  background-color: #f5f5f5;
+  width: calc(50% - 10px);
+  margin-top: 0;
+}
+.joinWrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-top: 30px;
+  text-align: center;
+  max-width: 500px;
+  margin-bottom: 200px;
+}
+.joinWrap li {
+  display: flex;
+  justify-content: space-around;
+  width: 33.33333%;
+  border-right: 1px solid #424242;
+}
+.joinWrap a {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.joinWrap li:last-of-type {
+  border-right: unset;
+}
