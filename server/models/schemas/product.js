@@ -1,10 +1,25 @@
 const { Schema } = require("mongoose");
-const ProductSchema = new Schema(
-  {
-    title: String,
-    content: String,
+const shortId= require('./types/short-id');
+
+const ProductSchema = new Schema({
+  productId: {
+    default:"Product"+shortId
   },
-  { timestamps: true }
-);
+  title: {
+    type: String,
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  author: {
+    type: String,
+    default: '작성자',
+  }
+},
+ {
+  timestamps: true,
+});
 
 module.exports = ProductSchema;
