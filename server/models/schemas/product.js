@@ -1,5 +1,5 @@
-const { Schema } = require("mongoose");
-const shortId = require("./types/short-id");
+import { Schema } from "mongoose";
+import shortId from "./types/short-id.js";
 
 const ProductSchema = new Schema(
   {
@@ -24,7 +24,8 @@ const ProductSchema = new Schema(
       required: true,
     },
     productDate: Date, // required true가 아니면 디폴트값 설정해도 좋을 듯, 상품 등록일 = createdAt? 처리 괜찮은지
-    option: { // 옵션이 한정되어 있을 경우 n개 중에 고르게 하기
+    option: {
+      // 옵션이 한정되어 있을 경우 n개 중에 고르게 하기
       type: String,
       required: true,
     },
@@ -42,4 +43,4 @@ const ProductSchema = new Schema(
   }
 );
 
-module.exports = ProductSchema;
+export default ProductSchema;

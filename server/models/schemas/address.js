@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const AdressSchema = new Schema({
@@ -44,4 +44,4 @@ const AdressSchema = new Schema({
   },
 });
 
-module.exports = AdressSchema;
+export default AdressSchema;

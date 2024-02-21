@@ -1,14 +1,14 @@
-const { Schema } = require("mongoose");
-const shortId= require('./types/short-id');
+import { Schema } from "mongoose";
+import shortId from "./types/short-id.js";
 
 const ProductSchema = new Schema({
   categoryId: {
-    default:"category"+shortId
+    default: "category" + shortId,
   },
   categoryName: {
     type: String,
     required: true,
-  }
+  },
 });
 
-module.exports = ProductSchema;
+export default ProductSchema;

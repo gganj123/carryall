@@ -1,7 +1,6 @@
 // 여기 import
-const mongoose = require("mongoose");
-const ProductSchema = require("./schemas/product");
-const CategorySchema = require("./schemas/category");
-// 여기 export
-exports.Product = mongoose.model("Product", ProductSchema);
-exports.Category = mongoose.model("Category", CategorySchema);
+import { model } from "mongoose";
+import ProductSchema from "./schemas/product";
+import CategorySchema from "./schemas/category";
+export const Product = model("Product", ProductSchema);
+export const Category = model("Category", CategorySchema);

@@ -1,19 +1,22 @@
-const { Router } = require('express');
-const { Category } = require('../models');
-const asyncHandler = require('../utils/asyncHandler');
+import { Router } from "express";
+import { Category } from "../models";
+import asyncHandler from "../utils/asyncHandler";
 // 카테고리 수정 한 화면에서 진행하는 경우인가 확인
 const router = Router();
 
-router.get('/', asyncHandler(async (req, res) => { // 전체 보기
-  if (req.query.write) {
-    res.render('category/edit');
-    return;
-  } // 목록에서 글 페이지로 이동 가능
-  
-  const categories = await Category.find({});
-  res.render('/', { categories }); // api 명세서 주소 여기로 맞추면 되는지
-}));
+router.get(
+  "/",
+  asyncHandler(async (req, res) => {
+    // 전체 보기
+    if (req.query.write) {
+      res.render("category/edit");
+      return;
+    } // 목록에서 글 페이지로 이동 가능
 
+    const categories = await Category.find({});
+    res.render("/", { categories }); // api 명세서 주소 여기로 맞추면 되는지
+  })
+);
 
 // router.get('/:categoryId', asyncHandler(async (req, res) => { 카테고리에 따라서 리스트 보여주기 가능?
 //   const { categoryId } = req.params;
@@ -27,29 +30,37 @@ router.get('/', asyncHandler(async (req, res) => { // 전체 보기
 //   res.render('category/view', { category });
 // })); 보류
 
-router.post('/', asyncHandler(async (req, res, next) => { // 등록하기
-  const { categoryName } = req.body;
-  if (!categoryName) {
-    throw new Error('모든 요소를 입력해주세요.');
-  }
-    
-  await Category.create({ categoryName });
-  res.redirect(`/`);
-}));
+router.post(
+  "/",
+  asyncHandler(async (req, res, next) => {
+    // 등록하기
+    const { categoryName } = req.body;
+    if (!categoryName) {
+      throw new Error("모든 요소를 입력해주세요.");
+    }
 
-router.put('/', asyncHandler(async (req, res, next) => { // 수정하기
-  const { categoryId, categoryName } = req.body;
-  if (!categoryName) {
-    throw new Error('모든 요소를 입력해주세요.');
-  }
-  await Category.findOneAndUpdate({ categoryId }, { categoryName });
-  res.redirect(`/`);
-}));
+    await Category.create({ categoryName });
+    res.redirect(`/`);
+  })
+);
 
-router.delete('/', async (req, res) => {
+router.put(
+  "/",
+  asyncHandler(async (req, res, next) => {
+    // 수정하기
+    const { categoryId, categoryName } = req.body;
+    if (!categoryName) {
+      throw new Error("모든 요소를 입력해주세요.");
+    }
+    await Category.findOneAndUpdate({ categoryId }, { categoryName });
+    res.redirect(`/`);
+  })
+);
+
+router.delete("/", async (req, res) => {
   const { categoryId } = req.body;
   await Category.deleteOne({ categoryId });
-  console.log('res');
+  console.log("res");
 });
 
-module.exports = router;
+export default router;
