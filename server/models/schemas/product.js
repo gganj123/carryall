@@ -3,9 +3,7 @@ const shortId = require("./types/short-id.js");
 
 const ProductSchema = new Schema(
   {
-    productId: {
-      default: "Product" + shortId,
-    },
+    productId: shortId,
     categoryId: {
       type: Schema.Types.ObjectId, // 참조 맞나?
       ref: "Category",

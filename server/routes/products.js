@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Product, Category } = require("../models");
+const { Product } = require("../models");
 const asyncHandler = require("../utils/asyncHandler");
 
 const router = Router();
@@ -89,7 +89,7 @@ router.put(
       throw new Error("모든 요소를 입력해주세요.");
     }
 
-    await Post.findOneAndUpdate(
+    await Product.findOneAndUpdate(
       { productId },
       { productName, price, productImage, option, stock, brand }
     );
@@ -99,7 +99,7 @@ router.put(
 
 router.delete("/:productId", async (req, res, next) => {
   const { productId } = req.params;
-  await Post.deleteOne({ productId });
+  await Product.deleteOne({ productId });
   res.send("OK");
   // redirect
 });
