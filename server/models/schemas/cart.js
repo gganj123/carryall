@@ -11,7 +11,7 @@ const CartSchema = new Schema({
   productCount: {
     type: Number,
     required: true,
-  },
+  }, 
 });
 
-module.exports = CartSchema
+module.exports = CartSchema;
