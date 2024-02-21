@@ -28,18 +28,18 @@ router.get('/:productId', asyncHandler(async (req, res) => { // 하나 보기
 }));
 
 router.post('/', asyncHandler(async (req, res) => { // 등록하기
-  const { productName, price, productImage, option, stock, brand } = req.body;
+  const { productId, productName, price, productImage, option, stock, brand } = req.body;
   try {
     if (!productName || !price || !productImage || !option || !stock || !brand) {
       throw new Error('모든 요소를 입력해주세요.');
     }
     
-    const post = await Product.create({ productName, price, productImage, option, stock, brand });
-    res.redirect(`/products/${post.shortId}`);
+    await Product.create({ productId, productName, price, productImage, option, stock, brand });
+    res.redirect(`/products/${productId}`);
   } catch (err) {
     next(err);
   }
-}));
+})); // date 나중에 추가
 
 router.put('/:productId', asyncHandler(async (req, res) => { // 수정하기
   const { productId } = req.params;
@@ -60,6 +60,7 @@ router.delete('/:productId', async (req, res, next) => {
   const { productId } = req.params;
   await Post.deleteOne({ productId });
   res.send('OK');
+  // redirect
 });
 
 module.exports = router;
