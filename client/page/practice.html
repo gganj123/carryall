@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>carryAll</title>
+  <link rel="stylesheet" href="/carryall/client/css/practice.css">
+  <link rel="stylesheet" href="/carryall/client/css/reset_practice.css">
+</head>
+<body>
+  <div class="header" style="height: 60px; width: 100%; display: flex; align-items: center;"></div>
+    <div class="header" style="height: 60px; width: 100%; display: flex; align-items: center;background-color: white;">
+        <h1 style="margin-right: 50px; font-family:Roboto; font-weight: 700; font-style: italic; ">CARRYALL</h1>
+        <input class ="inputform" type="text" placeholder="검색" style="height: 50%; padding: 5px; border-radius: 5px; margin-right: 50px;">
+        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold">장바구니</button>
+        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">로그인</button>
+        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">마이페이지</button>
+        <button style="height: 50%; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">회원가입</button>
+    </div>
+
+  <!-- <div class="container"> -->
+    <div class="container" style="height: 100%; width: 100%; display: flex; flex-wrap: wrap;">
+      <div class="side1" style="height: 700px; width: 22%; background-color: gray; ">
+          <h1>side1</h1>
+      </div>
+      <main id="main">
+        <div class="totalImage">
+          <div class="mainImage">
+            <img class="mainImage" src="1.webp">
+          </div>
+          <div class="detailImage">
+            <ul>
+              <li class="image" id="on"><a href ="#a"><img src="2.webp"></a></li>
+              <li class="image"><a href ="#a"><img src="3.webp"></a></li>
+              <li class="image"><a href ="#a"><img src="4.webp"></a></li>
+              <li class="image"><a href ="#a"><img src="5.webp"></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="totalDetail">
+          <div class="totalDetailOption">
+            <h1>미디엄 빅투아르백 - 서플 카프스킨 블랙</h1>
+            <p>detail</p>
+            <dl>
+              <dt>판매가</dt>
+              <dd class="price">5,200,000원</dd>
+              <dt>브랜드</dt>
+              <dd>셀린느</dd>
+              <dt>옵션선택</dt>
+              <dd>
+                <select name="selectbox">
+                  <option value="1">블랙</option>
+                  <option value="2">화이트</option>
+                  <option value="3">브라운</option>
+                </select>
+              </dd>
+              <dt>수량</dt>
+              <dd>
+                <span class="-"><button>-</button></span>
+                <span class="">1</span>
+                <button class="+">+</button>
+              </dd>
+              <dt>배송비</dt>
+              <dd>무료</dd>
+            </dl>
+            <div class="number">
+              <p class="orderName">미디엄 빅투아르백 - 서플 카프스킨 블랙</p>
+              <div class="orderNumber">
+                <input type="number" name="num" id="num">
+                <span class="numberPrice">3,000원</span>
+              </div>
+            </div>
+            <div class="totalPrice">
+              <p>총 상품 금액</p>
+              <p class="resultPrice">3,000원</p>
+            </div>
+          </div>
+          <div class="totalDetailPurchase">
+            <button type="button" id="cartBtn">장바구니</button>
+            <button type="button" id="orderBtn">주문하기</button>
+          </div>
+        </div>
+      </main>
+      <div class="side2" style="height: 700px; width: 22%; background-color: gray;">
+        <h1>side2</h1>
+      </div>
+    </div>
+  <!-- </div> -->
+  <div class="footer">
+    <div class="1">이용약관</div>
+    <div class="2">개인정보처리방침</div>
+    <div class="3">이용안내</div>
+    <div class="4">입점/제휴안내</div>
+  </div>
+</body>
+</html>
