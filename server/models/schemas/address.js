@@ -30,6 +30,7 @@ const AdressSchema = new Schema({
   // 주소
   add: {
     // type: String,
+    // required: true
   },
   // 상세 주소
   detailAdd: {
