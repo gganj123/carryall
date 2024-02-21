@@ -1,23 +1,16 @@
-const express = require('express');
+const express = require("express");
+const mongoose = require("mongoose");
+
 const app = express();
-require('dotenv').config();
 
+mongoose.connect(); // 몽고디비 주소
 
-app.get('/', (req, res) => {
-    res.send('GET /users');
+mongoose.connection.on("connected", () => {
+  console.log("Successfully connected to MongoDB");
 });
 
-app.post('/', (req, res) => {
-    res.send('POST /users');
+app.get("/", (req, res) => {
+  res.send("OK");
 });
-
-app.put('/', (req, res) => {
-    res.send('PUT /users');
-});
-
-app.delete('/', (req, res) => {
-    res.send('DELETE /users');
-});
-
 
 app.listen(process.env.PORT);
