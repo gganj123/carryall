@@ -2,8 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const app = express();
-
-mongoose.connect(); // 몽고디비 주소
+require("dotenv").config();
+mongoose.connect('mongodb+srv://twincornjr:uo6hMfF6UP3xWxNJ@cluster0.tj5uf36.mongodb.net/').then(() => console.log('connected')).catch(() => console.log('fail'))
 
 mongoose.connection.on("connected", () => {
   console.log("Successfully connected to MongoDB");
