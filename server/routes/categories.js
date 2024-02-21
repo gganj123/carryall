@@ -32,7 +32,7 @@ router.get(
 
 router.post(
   "/",
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     // 등록하기
     const { categoryName } = req.body;
     if (!categoryName) {
