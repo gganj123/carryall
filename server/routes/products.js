@@ -29,31 +29,25 @@ router.get('/:productId', asyncHandler(async (req, res) => { // 하나 보기
 
 router.post('/', asyncHandler(async (req, res) => { // 등록하기
   const { productId, productName, price, productImage, option, stock, brand } = req.body;
-  try {
-    if (!productName || !price || !productImage || !option || !stock || !brand) {
-      throw new Error('모든 요소를 입력해주세요.');
-    }
-    
-    await Product.create({ productId, productName, price, productImage, option, stock, brand });
-    res.redirect(`/products/${productId}`);
-  } catch (err) {
-    next(err);
+
+  if (!productName || !price || !productImage || !option || !stock || !brand) {
+    throw new Error('모든 요소를 입력해주세요.');
   }
+    
+  await Product.create({ productId, productName, price, productImage, option, stock, brand });
+  res.redirect(`/products/${productId}`);
 })); // date 나중에 추가
 
 router.put('/:productId', asyncHandler(async (req, res) => { // 수정하기
   const { productId } = req.params;
   const { productName, price, productImage, option, stock, brand } = req.body;
-  try {
-    if (!productName || !price || !productImage || !option || !stock || !brand) {
-      throw new Error('모든 요소를 입력해주세요.');
-    }
-    
-    await Post.findOneAndUpdate({ productId }, { productName, price, productImage, option, stock, brand });
-    res.redirect(`/products/${productId}`);
-  } catch (err) {
-    next(err);
+  if (!productName || !price || !productImage || !option || !stock || !brand) {
+    throw new Error('모든 요소를 입력해주세요.');
   }
+    
+  await Post.findOneAndUpdate({ productId }, { productName, price, productImage, option, stock, brand });
+  res.redirect(`/products/${productId}`);
+
 }));
 
 router.delete('/:productId', async (req, res, next) => {

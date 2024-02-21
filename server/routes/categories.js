@@ -29,30 +29,21 @@ router.get('/', asyncHandler(async (req, res) => { // 전체 보기
 
 router.post('/', asyncHandler(async (req, res, next) => { // 등록하기
   const { categoryName } = req.body;
-  try {
-    if (!categoryName) {
-      throw new Error('모든 요소를 입력해주세요.');
-    }
-    
-    await Category.create({ categoryName });
-    res.redirect(`/`);
-  } catch (err) {
-    next(err);
+  if (!categoryName) {
+    throw new Error('모든 요소를 입력해주세요.');
   }
+    
+  await Category.create({ categoryName });
+  res.redirect(`/`);
 }));
 
 router.put('/', asyncHandler(async (req, res, next) => { // 수정하기
   const { categoryId, categoryName } = req.body;
-  try {
-    if (!categoryName) {
-      throw new Error('모든 요소를 입력해주세요.');
-    }
-    
-    await Category.findOneAndUpdate({ categoryId }, { categoryName });
-    res.redirect(`/`);
-  } catch (err) {
-    next(err);
+  if (!categoryName) {
+    throw new Error('모든 요소를 입력해주세요.');
   }
+  await Category.findOneAndUpdate({ categoryId }, { categoryName });
+  res.redirect(`/`);
 }));
 
 router.delete('/', async (req, res) => {
