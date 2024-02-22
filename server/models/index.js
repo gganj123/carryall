@@ -9,4 +9,7 @@ const Category = model("Category", CategorySchema);
 const Cart = model("Cart", CartSchema);
 const Address = model("Address", AddressSchema);
 
+
 module.exports = { Product, Category, Cart, Address };
+
+

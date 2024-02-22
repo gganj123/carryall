@@ -17,9 +17,11 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 
 const productsRouter = require('./server/routes/products.js');
-app.use("/products", productsRouter); 
+app.use("/product", productsRouter); 
+
+
 const categoriesRouter = require('./server/routes/categories.js');
-app.use("/categories", categoriesRouter);
+app.use("/category", categoriesRouter);
 
 const cartsRouter = require('./server/routes/carts.js');
 app.use("/carts", cartsRouter);
