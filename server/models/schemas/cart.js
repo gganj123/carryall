@@ -6,11 +6,14 @@ const CartSchema = new Schema({
     type: String,
     required: true,
   },
-  // 상품 주문 갯수
-  productCount: {
+  // 상품 갯수
+  quantity: {
     type: Number,
     required: true,
   }, 
 });
 
 module.exports = CartSchema;
+
+
+

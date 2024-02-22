@@ -21,6 +21,9 @@ app.use("/products", productsRouter);
 const categoriesRouter = require('./server/routes/categories.js');
 app.use("/categories", categoriesRouter);
 
+const cartsRouter = require('./server/routes/carts.js');
+app.use("/carts", cartsRouter);
+
 app.get("/", (req, res) => {
   res.send("접속 성공"); // res로
 });

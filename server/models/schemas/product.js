@@ -1,17 +1,16 @@
 const { Schema } = require("mongoose");
-const shortId = require("./types/short-id.js");
-var autoIncrement = require('mongoose-auto-increment');
-autoIncrement.initialize(mongoose.connection);
+const mongoose = require("mongoose");
+const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const ProductSchema = new Schema(
   {
-    productId: {type: Number, default: 0},
+    id: { type: Number, default: 0 },
     categoryId: {
-      type: shortId,
+      type: Schema.Types.ObjectId,
       ref: "Category",
-      required: true,
+      required: true
     },
-    productName: {
+    name: {
       type: String,
       required: true,
     },
@@ -19,13 +18,12 @@ const ProductSchema = new Schema(
       type: Number,
       required: true,
     },
-    productImage: {
+    image: {
       type: String,
-      required: true,
+      required: true
     },
-    productDate: Date, // required true가 아니면 디폴트값 설정해도 좋을 듯, 상품 등록일 = createdAt? 처리 괜찮은지
     option: {
-      // 옵션이 한정되어 있을 경우 n개 중에 고르게 하기
+      // 옵션 등록 수정 삭제
       type: String,
       required: true,
     },
@@ -34,13 +32,16 @@ const ProductSchema = new Schema(
       required: true,
     },
     brand: {
+      // 브랜드 등록 수정 삭제
       type: String,
       required: true,
     },
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
+ProductSchema.plugin(AutoIncrement, { inc_field:'id' });
+
 
 module.exports = ProductSchema;
