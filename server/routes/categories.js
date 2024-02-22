@@ -12,7 +12,7 @@ router.get(
       res.render("category/edit");
       return;
     } // 목록에서 글 페이지로 이동 가능
-
+// 등록할 때 세이브가 ㅜ머지
     const categories = await Category.find({});
     res.render("/", { categories }); // api 명세서 주소 여기로 맞추면 되는지
   })
@@ -32,7 +32,7 @@ router.get(
 
 router.post(
   "/",
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     // 등록하기
     const { categoryName } = req.body;
     if (!categoryName) {
