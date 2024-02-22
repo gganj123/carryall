@@ -19,9 +19,7 @@ router.get(
   "/:_id",
   asyncHandler(async (req, res) => {
     const { _id } = req.params;
-    const product = await Product.findOne({ _id }).populate(
-      "categoryId"
-    );
+    const product = await Product.findOne({ _id }).populate("categoryId");
     res.json(product);
   })
 )

@@ -1,13 +1,11 @@
 const { Router } = require("express");
 const Category = require("../models").Category;
 const asyncHandler = require("../utils/asyncHandler");
-// 카테고리 수정 한 화면에서 진행하는 경우인가 확인
 const router = Router();
 
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-// 등록할 때 세이브가 ㅜ머지
     const categories = await Category.find({});
     res.json(categories);
   })
@@ -29,21 +27,21 @@ router.post(
 );
 
 router.put(
-  "/:_id",
+  "/:id",
   asyncHandler(async (req, res) => {
-    const { _id } = req.params;
+    const { id } = req.params;
     const { name } = req.body;
     if (!name) {
       throw new Error("모든 요소를 입력해주세요.");
     }
-    const category = await Category.findOneAndUpdate({ _id }, { name },{ new: true });
+    const category = await Category.findOneAndUpdate({ id }, { name },{ new: true });
     res.json(category)
   })
 );
 
-router.delete("/:_id", async (req, res) => {
-  const { _id } = req.params;
-  await Category.deleteOne({ _id });
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  await Category.deleteOne({ id });
   res.send("ok")
 });
 
