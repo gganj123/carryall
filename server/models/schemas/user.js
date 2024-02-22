@@ -5,14 +5,6 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  cart: [{
-    productId : {
-        type: String,
-    },
-    quantity : {
-        type: Number,
-    }
-  }], 
 });
 
 module.exports = UserSchema;
