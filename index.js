@@ -24,7 +24,7 @@ const categoriesRouter = require('./server/routes/categories.js');
 app.use("/category", categoriesRouter);
 
 const cartsRouter = require('./server/routes/carts.js');
-app.use("/carts", cartsRouter);
+app.use("/cart", cartsRouter);
 
 app.get("/", (req, res) => {
   res.send("접속 성공"); // res로
