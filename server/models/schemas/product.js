@@ -3,10 +3,14 @@ const mongoose = require("mongoose");
 const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const ProductSchema = new Schema(
-  {
-    id: { type: Number, default: 0 },
+  { 
+    _id: {
+    type: Number,
+    default: 0,
+    required: true
+    },
     categoryId: {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: "Category",
       required: true
     },
@@ -23,7 +27,6 @@ const ProductSchema = new Schema(
       required: true
     },
     option: {
-      // 옵션 등록 수정 삭제
       type: String,
       required: true,
     },
@@ -32,16 +35,14 @@ const ProductSchema = new Schema(
       required: true,
     },
     brand: {
-      // 브랜드 등록 수정 삭제
       type: String,
       required: true,
     },
   },
   {
-    timestamps: true
+    timestamps: true, versionKey: false
   }
 );
-ProductSchema.plugin(AutoIncrement, { inc_field:'id' });
-
+ProductSchema.plugin(AutoIncrement, { inc_field:'_id' });
 
 module.exports = ProductSchema;

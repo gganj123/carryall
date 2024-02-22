@@ -29,21 +29,21 @@ router.post(
 );
 
 router.put(
-  "/:id",
+  "/:_id",
   asyncHandler(async (req, res) => {
-    const { id } = req.params;
+    const { _id } = req.params;
     const { name } = req.body;
     if (!name) {
       throw new Error("모든 요소를 입력해주세요.");
     }
-    const category = await Category.updateOne({ id }, { name });
+    const category = await Category.findOneAndUpdate({ _id }, { name },{ new: true });
     res.json(category)
   })
 );
 
-router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  await Category.deleteOne({ id });
+router.delete("/:_id", async (req, res) => {
+  const { _id } = req.params;
+  await Category.deleteOne({ _id });
   res.send("ok")
 });
 
