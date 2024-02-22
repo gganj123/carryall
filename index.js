@@ -17,9 +17,11 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 
 const productsRouter = require('./server/routes/products.js');
-app.use("/products", productsRouter); 
+app.use("/product", productsRouter); 
+
+
 const categoriesRouter = require('./server/routes/categories.js');
-app.use("/categories", categoriesRouter);
+app.use("/category", categoriesRouter);
 
 app.get("/", (req, res) => {
   res.send("접속 성공"); // res로

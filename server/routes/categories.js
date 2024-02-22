@@ -7,60 +7,44 @@ const router = Router();
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    // 전체 보기
-    if (req.query.write) {
-      res.render("category/edit");
-      return;
-    } // 목록에서 글 페이지로 이동 가능
 // 등록할 때 세이브가 ㅜ머지
     const categories = await Category.find({});
-    res.render("/", { categories }); // api 명세서 주소 여기로 맞추면 되는지
+    res.json(categories);
   })
 );
 
-// router.get('/:categoryId', asyncHandler(async (req, res) => { 카테고리에 따라서 리스트 보여주기 가능?
-//   const { categoryId } = req.params;
-//   const category = await Category.findOne({ categoryId })
-//   // 카테고리 목록 보이도록
-
-//   if (req.query.edit) {
-//     res.render('category/edit', { category });
-//     return;
-//   } // 세부페이지에서 수정페이지 이동 가능
-//   res.render('category/view', { category });
-// })); 보류
 
 router.post(
   "/",
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res) => {
     // 등록하기
-    const { categoryName } = req.body;
-    if (!categoryName) {
+    const { name } = req.body;
+    if (!name) {
       throw new Error("모든 요소를 입력해주세요.");
     }
 
-    await Category.create({ categoryName });
-    res.redirect(`/`);
+    const category = await Category.create({ name });
+    res.json(category)
   })
 );
 
 router.put(
-  "/",
-  asyncHandler(async (req, res, next) => {
-    // 수정하기
-    const { categoryId, categoryName } = req.body;
-    if (!categoryName) {
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { name } = req.body;
+    if (!name) {
       throw new Error("모든 요소를 입력해주세요.");
     }
-    await Category.findOneAndUpdate({ categoryId }, { categoryName });
-    res.redirect(`/`);
+    const category = await Category.updateOne({ id }, { name });
+    res.json(category)
   })
 );
 
-router.delete("/", async (req, res) => {
-  const { categoryId } = req.body;
-  await Category.deleteOne({ categoryId });
-  console.log("res");
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  await Category.deleteOne({ id });
+  res.send("ok")
 });
 
 module.exports = router;
