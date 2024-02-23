@@ -30,24 +30,3 @@ router.delete("/:_id", async (req, res) => {
 
 
 module.exports = router;
-
-// router.get(
-//   "/",
-//   asyncHandler(async (req, res) => {
-//     const admins = await Admin.find({});
-//     res.json(admins);
-//   })
-// );
-
-// router.post(
-//   "/add",
-//   asyncHandler(async (req, res) => {
-//     const { adminId } = req.params;
-//     const { adminPassword } = req.body;
-//     const createdAdmin = await Admin.create({ adminId, adminPassword });
-
-//     res.json(createdAdmin);
-//   })
-// );
-
-module.exports = router;

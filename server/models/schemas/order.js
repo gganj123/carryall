@@ -4,11 +4,6 @@ const shortId = require("./types/short-id.js");
 const OrderSchema = new Schema({
   // 주문 고유번호 -> 스키마 등록할 때 만들어주면 내가 만들지 않아도 됨
   orderId: shortId,
-  // 주문 날짜
-  createdDate: {
-    type: Date,
-    required: true,
-  },
   // 주문 현황
   status: {
     type: String,
@@ -64,5 +59,9 @@ const OrderSchema = new Schema({
     },
     required: true
   }
-});
+},
+    // 주문 날짜 - 자동으로 생성되게
+    {
+      timestamps: true, versionKey: false
+    });
 module.exports = OrderSchema;
