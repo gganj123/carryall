@@ -40,17 +40,19 @@ const OrderSchema = new Schema({
     required: true
   }, 
   // 주문 상품
-  product: {
-    type: { //변수명 item될 수도
-      productName: String,
-      productId: String,
+  products: [{
+    type: { 
+      name: String,
+      id: String,
       price: Number, 
-      productImage: String,
-      productOption: String, //스트링 맞는지 확인
-      productQuantity: Number
+      image: String,
+      option: String,
+      quantity: Number, // 장바구니 참조
+      brand:String
     }, 
     required: true
-  },
+  }],
+  
   // 대표 상품(주문 화면에서 대표로 표시될 상품 이미지, 상품)
   representativeProduct: {
     type: {
