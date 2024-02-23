@@ -4,13 +4,13 @@ const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const ProductSchema = new Schema(
   { 
-    _id: {
+    id: {
     type: Number,
     default: 0,
     required: true
     },
     categoryId: {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: "Category",
       required: true
     },
@@ -43,6 +43,6 @@ const ProductSchema = new Schema(
     timestamps: true, versionKey: false
   }
 );
-ProductSchema.plugin(AutoIncrement, { inc_field:'_id' });
+ProductSchema.plugin(AutoIncrement, { inc_field:'id' });
 
 module.exports = ProductSchema;
