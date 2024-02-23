@@ -27,11 +27,13 @@ app.use("/category", categoriesRouter);
 // const cartsRouter = require('./server/routes/carts.js');
 // app.use("/cart", cartsRouter);
 
-// const ordersRouter = require('./server/routes/order.js');
-// app.use("/order", ordersRouter);
+
+const ordersRouter = require('./server/routes/order.js');
+app.use("/orders", ordersRouter);
+
 
 app.get("/", (req, res) => {
-  res.send("접속 성공"); // res로
+  res.send("접속 성공"); 
 });
 
 app.listen(PORT, () => {

@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-//주문 스키마
-const { Schema } = require("mongoose");
-const shortId = require("../models/schemas/types/short-id")
-=======
 const { Router } = require("express");
 const Order = require("../models").Order;
 const asyncHandler = require("../utils/asyncHandler");
->>>>>>> ba3ae439131c75f195fd0f475a5d29f010b738c5
 
 const router = Router();
 
@@ -123,5 +117,4 @@ router.delete("/:_id", async (req, res) => {
 
 
 module.exports = router;
-
 
