@@ -16,10 +16,10 @@ router.get(
 
 // 이거 문제 ㅠ
 router.get( 
-  "/:_id",
+  "/:id",
   asyncHandler(async (req, res) => {
-    const { _id } = req.params;
-    const product = await Product.findOne({ _id }).populate("categoryId");
+    const { id } = req.params;
+    const product = await Product.findOne({ id }).populate("categoryId");
     res.json(product);
   })
 )
@@ -28,14 +28,14 @@ router.post(
   "/",
   asyncHandler(async (req, res) => {
     // 등록하기
-    const { _id, categoryId, name, price, image, option, stock, brand } = req.body;
+    const { id, categoryId, name, price, image, option, stock, brand } = req.body;
 
     if (!name || !price || !image || !option || !stock || !brand) {
       throw new Error("모든 요소를 입력해주세요.");
     }
 
     const product = await Product.create({
-      _id,
+      id,
       categoryId,
       name,
       price,
@@ -49,26 +49,26 @@ router.post(
 ); // date 나중에 추가
 
 router.put(
-  "/:_id",
+  "/:id",
   asyncHandler(async (req, res) => {
     // 수정하기
-    const { _id } = req.params;
+    const { id } = req.params;
     const { name, price, image, option, stock, brand } = req.body;
     if (!name || !price || !image || !option || !stock || !brand) {
       throw new Error("모든 요소를 입력해주세요.");
     }
 
     const product = await Product.findOneAndUpdate(
-      { _id },
+      { id },
       { name, price, image, option, stock, brand },{ new: true }
     );
     res.json(product);
   })
 );
 
-router.delete("/:_id", async (req, res) => {
-  const { _id } = req.params;
-  await Product.deleteOne({ _id });
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  await Product.deleteOne({ id });
   res.json({ result: "success" });
 });
 
