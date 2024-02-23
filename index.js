@@ -22,7 +22,7 @@ const categoriesRouter = require('./server/routes/categories.js');
 app.use("/categories", categoriesRouter);
 
 app.get("/", (req, res) => {
-  res.send("접속 성공"); // res
+  res.send("접속 성공"); // res로
 });
 
 app.listen(PORT, () => {
