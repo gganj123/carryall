@@ -38,6 +38,10 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
     },
+    detail: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true, versionKey: false

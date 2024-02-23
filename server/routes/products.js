@@ -1,5 +1,4 @@
 const { Router } = require("express");
-const mongoose = require("mongoose");
 const { Product } = require("../models");
 const asyncHandler = require("../utils/asyncHandler");
 
@@ -28,7 +27,7 @@ router.post(
   "/",
   asyncHandler(async (req, res) => {
     // 등록하기
-    const { id, categoryId, name, price, image, option, stock, brand } = req.body;
+    const { id, categoryId, name, price, image, option, stock, brand, detail } = req.body;
 
     if (!name || !price || !image || !option || !stock || !brand) {
       throw new Error("모든 요소를 입력해주세요.");
@@ -43,6 +42,7 @@ router.post(
       option,
       stock,
       brand,
+      detail
     });
     res.json(product);
   })
@@ -53,14 +53,14 @@ router.put(
   asyncHandler(async (req, res) => {
     // 수정하기
     const { id } = req.params;
-    const { name, price, image, option, stock, brand } = req.body;
+    const { name, price, image, option, stock, brand, detail } = req.body;
     if (!name || !price || !image || !option || !stock || !brand) {
       throw new Error("모든 요소를 입력해주세요.");
     }
 
     const product = await Product.findOneAndUpdate(
       { id },
-      { name, price, image, option, stock, brand },{ new: true }
+      { name, price, image, option, stock, brand, detail },{ new: true }
     );
     res.json(product);
   })
