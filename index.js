@@ -24,13 +24,9 @@ app.use("/product", productsRouter);
 const categoriesRouter = require('./server/routes/categories.js');
 app.use("/category", categoriesRouter);
 
-// const cartsRouter = require('./server/routes/carts.js');
-// app.use("/cart", cartsRouter);
+const cartsRouter = require('./server/routes/carts.js');
+app.use("/cart", cartsRouter);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1f1a4abe181ccd531692d8a9b8df5ccbd4c87e41
 const ordersRouter = require('./server/routes/orders.js');
 app.use("/orders", ordersRouter);
 
