@@ -30,6 +30,9 @@ app.use("/cart", cartsRouter);
 const ordersRouter = require('./server/routes/orders.js');
 app.use("/orders", ordersRouter);
 
+const usersRouter = require('./server/routes/users.js');
+app.use("/", usersRouter);
+
 
 app.get("/", (req, res) => {
   res.send("접속 성공"); 
