@@ -18,6 +18,9 @@ connect(
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
+const indexRouter = require('./server/routes');
+app.use('/', indexRouter);
+
 const productsRouter = require('./server/routes/products.js');
 app.use("/product", productsRouter); 
 
