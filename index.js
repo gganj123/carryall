@@ -35,7 +35,7 @@ app.use("/orders", ordersRouter);
 
 
 app.get("/", (req, res) => {
-  res.send("접속 성공"); 
+  res.send("접속성공"); 
 });
 
 app.listen(PORT, () => {
