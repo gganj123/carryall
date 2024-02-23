@@ -1,8 +1,8 @@
 const { Schema } = require("mongoose");
 
-const AdressSchema = new Schema({
+const AddressSchema = new Schema({
   // 회원 고유번호
-  custId: {
+  Id: {
     type: Number,
     required: true,
   },
@@ -43,4 +43,4 @@ const AdressSchema = new Schema({
   },
 });
 
-module.exports = AdressSchema;
+module.exports = AddressSchema;
