@@ -26,8 +26,8 @@ const cartsRouter = require('./server/routes/carts.js');
 app.use("/cart", cartsRouter);
 
 
-const ordersRouter = require('./server/routes/orders.js');
-app.use("/order", ordersRouter);
+const ordersRouter = require('./server/routes/order.js');
+app.use("/orders", ordersRouter);
 
 
 app.get("/", (req, res) => {
