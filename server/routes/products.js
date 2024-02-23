@@ -13,7 +13,6 @@ router.get(
   })
 );
 
-// 이거 문제 ㅠ
 router.get( 
   "/:id",
   asyncHandler(async (req, res) => {
