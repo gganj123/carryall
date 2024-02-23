@@ -2,7 +2,7 @@ const { model } = require("mongoose");
 const ProductSchema = require("./schemas/product");
 const CategorySchema = require("./schemas/category");
 const CartSchema = require("./schemas/cart");
-const UserSchema = require("./schemas/user");
+const UserSchema = require("./schemas/userReal");
 const AddressSchema = require("./schemas/address");
 const OrderSchema = require('./schemas/order')
 

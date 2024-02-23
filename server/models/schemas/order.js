@@ -1,15 +1,9 @@
 //주문 스키마
 const { Schema } = require("mongoose");
 const shortId = require("./types/short-id.js");
-
 const OrderSchema = new Schema({
   // 주문 고유번호 -> 스키마 등록할 때 만들어주면 내가 만들지 않아도 됨
   orderId: shortId,
-  // 주문 날짜
-  createdDate: {
-    type: Date,
-    required: true,
-  },
   // 주문 현황
   status: {
     type: String,
@@ -45,20 +39,19 @@ const OrderSchema = new Schema({
     type: String,
     required: true
   }, 
-
   // 주문 상품
-  product: {
-    type: { //변수명 item될 수도
-      productName: String,
-      productId: String,
+  products: [{
+    type: { 
+      name: String,
+      id: String,
       price: Number, 
-      productImage: String,
-      productOption: String, //스트링 맞는지 확인
-      productQuantity: Number
+      image: String,
+      option: String,
+      quantity: Number, // 장바구니 참조
+      brand:String
     }, 
     required: true
-  },
-
+  }],
   // 대표 상품(주문 화면에서 대표로 표시될 상품 이미지, 상품)
   representativeProduct: {
     type: {
@@ -67,6 +60,9 @@ const OrderSchema = new Schema({
     },
     required: true
   }
-});
-
+},
+    // 주문 날짜 - 자동으로 생성되게
+    {
+      timestamps: true, versionKey: false
+    });
 module.exports = OrderSchema;
