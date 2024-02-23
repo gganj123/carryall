@@ -31,6 +31,8 @@ app.use("/category", categoriesRouter);
 const ordersRouter = require('./server/routes/orders.js');
 app.use("/orders", ordersRouter);
 
+const adminsRouter = require('./server/routes/admins.js');
+app.use("/admins", adminsRouter);
 
 app.get("/", (req, res) => {
   res.send("접속 성공"); 
