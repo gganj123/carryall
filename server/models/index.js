@@ -1,4 +1,4 @@
-// 여기 import
+
 const { model } = require("mongoose");
 const ProductSchema = require("./schemas/product");
 const CategorySchema = require("./schemas/category");
