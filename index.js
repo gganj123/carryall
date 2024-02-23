@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const { json, urlencoded } = require("express");
 const app = express();
 require("dotenv").config();
@@ -13,6 +14,7 @@ connect(
   .then(() => console.log("connected"))
   .catch(() => console.log("failed"));
 
+  app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
@@ -22,11 +24,11 @@ app.use("/product", productsRouter);
 const categoriesRouter = require('./server/routes/categories.js');
 app.use("/category", categoriesRouter);
 
-const cartsRouter = require('./server/routes/carts.js');
-app.use("/cart", cartsRouter);
+// const cartsRouter = require('./server/routes/carts.js');
+// app.use("/cart", cartsRouter);
 
-const ordersRouter = require('./server/routes/orders.js');
-app.use("/order", ordersRouter);
+// const ordersRouter = require('./server/routes/order.js');
+// app.use("/order", ordersRouter);
 
 app.get("/", (req, res) => {
   res.send("접속 성공"); // res로

@@ -1,6 +1,6 @@
 //주문 스키마
 const { Schema } = require("mongoose");
-const shortId = require("./types/short-id.js");
+const shortId = require("../models/schemas/types/short-id")
 
 const OrderSchema = new Schema({
   // 주문 고유번호 -> 스키마 등록할 때 만들어주면 내가 만들지 않아도 됨
