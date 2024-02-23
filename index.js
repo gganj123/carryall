@@ -30,7 +30,7 @@ app.use("/orders", ordersRouter);
 
 
 app.get("/", (req, res) => {
-  res.send("접속 성공"); // res로
+  res.send("접속 성공"); 
 });
 
 app.listen(PORT, () => {
