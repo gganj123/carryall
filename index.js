@@ -25,7 +25,7 @@ const categoriesRouter = require('./server/routes/categories.js');
 app.use("/category", categoriesRouter);
 
 // const cartsRouter = require('./server/routes/carts.js');
-// app.use("/cart", cartsRouter)
+// app.use("/cart", cartsRouter);
 
 
 const ordersRouter = require('./server/routes/orders.js');
