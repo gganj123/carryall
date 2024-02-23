@@ -63,7 +63,7 @@ img {
     display: block;
   }
 .checkbox {
-    width: 4%;
+    width: 6%;
 }
 .option,
 .quantity,
@@ -130,6 +130,10 @@ img {
   
 }
 
+.descriptionItemName{
+  text-decoration: none;
+}
+
 #btnDeleteSelected {
   background-color: gray;
   color: black;
@@ -139,4 +143,13 @@ img {
 
 .cartSubmit {
   border: none;
+}
+
+.quantityNum{
+  background: #fff;
+  width: 50px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  margin-right: 15px;
+  border-radius: 0px;
 }

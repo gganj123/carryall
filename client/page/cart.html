@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/shoppingcart.css">
+    <link rel="stylesheet" href="../css/cart.css">
     <title>Document</title>
     <script src="../component/cart.js"></script>
+    <script src="../component/cart.js"></script>
+  
 </head>
 
 <body>
@@ -38,32 +40,23 @@
                     <div class="description">                                                                           
                       <a class="image" href=""><img class="imageFrame" src="../img/erbag.png" alt="CARRYALL Bag"></a>
                       <div style="display: block;">
-                        <p><a class="descriptionItemName" href="">애스터프레이 리가즈</a></p>
-                        <span class="descriptionItemBrand">brandname</span>
+                        <p><a class="descriptionItemName" href="">product name</a></p>
+                        <span class="descriptionItemBrand">brand name</span>
                       </div>
                     </div>
-                    <p class="option txtCenter">Color : Black</p>
-                    <input class="quantity txtCenter"  type="number" size="" value="1" min="1" max="99">
+                    <div class="option txtCenter">
+                      <p class="">Color Black</p>
+                    </div>
+                    <div class="quantity txtCenter">
+                      <input class="quantityNum" type="number" name="num" value="1" min="1" max="99">
+                    </div>
+                      <!--<span class="quantityMinus"><button>-</button></span>-->
+                      <!--<span>1</span>-->
+                      <!--<span class="quantityplus"><button>+</button></span>-->
                     <span class="price txtCenter">125000</span>
-                    <span class="total txtCenter">125000</span>
+                    <span class="total txtCenter">125,000</span>
                   </div>
               </li>
-              <li class= "cartItemContainer">
-                <div class="cartItem">
-                  <div class="checkbox"><input type="checkbox"></div>
-                  <div class="description">                                                                           
-                    <a class="image" href=""><img class="imageFrame" src="../img/erbag.png" alt="CARRYALL Bag"></a>
-                    <div style="display: block;">
-                      <p><a class="descriptionItemName" href="">애스터프레이 리가즈2</a></p>
-                      <span class="descriptionItemBrand">brandname</span>
-                    </div>
-                  </div>
-                  <p class="option txtCenter">Color : Black</p>
-                  <input class="quantity txtCenter"  type="number" size="" value="1" min="1" max="99">
-                  <span class="price txtCenter">225000</span>
-                  <span class="total txtCenter">225000</span>
-                </div>
-            </li>   
             </ul>
               <a href="javascript:void(0);" class="btn" id="btnDeleteSelected">선택상품 삭제</a>
               <a href="javascript:void(0);" class="btn" id="btnDeleteAll">전체상품 삭제</a>
