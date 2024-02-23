@@ -8,7 +8,7 @@ router.get(
   asyncHandler(async (req, res) => {
     const { userId } = req.params;
     const found = await Cart.findOne({ userId });
-    const carts = found ? found.cart : null;
+    const carts = found ? found : null;
 
     res.json(carts);
   })

@@ -19,12 +19,15 @@ app.use(urlencoded({ extended: true }));
 const productsRouter = require('./server/routes/products.js');
 app.use("/product", productsRouter); 
 
-
 const categoriesRouter = require('./server/routes/categories.js');
 app.use("/category", categoriesRouter);
 
 const cartsRouter = require('./server/routes/carts.js');
 app.use("/cart", cartsRouter);
+
+const ordersRouter = require('./server/routes/order.js');
+app.use("/orders", ordersRouter);
+
 
 app.get("/", (req, res) => {
   res.send("접속 성공"); // res로
