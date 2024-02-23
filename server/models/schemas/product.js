@@ -1,11 +1,13 @@
 const { Schema } = require("mongoose");
 const shortId = require("./types/short-id.js");
+var autoIncrement = require('mongoose-auto-increment');
+autoIncrement.initialize(mongoose.connection);
 
 const ProductSchema = new Schema(
   {
-    productId: shortId,
+    productId: {type: Number, default: 0},
     categoryId: {
-      type: Schema.Types.ObjectId, // 참조 맞나?
+      type: shortId,
       ref: "Category",
       required: true,
     },
