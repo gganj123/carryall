@@ -1,23 +1,31 @@
-const express = require('express');
+const express = require("express");
+const { json, urlencoded } = require("express");
 const app = express();
-require('dotenv').config();
+require("dotenv").config();
 
+const { PORT, MONGODB_PASSWORD } = process.env;
 
-app.get('/', (req, res) => {
-    res.send('GET /users');
+const { connect } = require("mongoose");
+
+connect(
+    `mongodb+srv://carryall:${MONGODB_PASSWORD}@cluster0.lobzfqe.mongodb.net/`
+  )
+  .then(() => console.log("connected"))
+  .catch(() => console.log("failed"));
+
+app.use(json());
+app.use(urlencoded({ extended: true }));
+
+const productsRouter = require('./server/routes/products.js');
+app.use("/products", productsRouter); 
+const categoriesRouter = require('./server/routes/categories.js');
+app.use("/categories", categoriesRouter);
+
+app.get("/", (req, res) => {
+  res.send('asdasd');
 });
 
-app.post('/', (req, res) => {
-    res.send('POST /users');
+app.listen(PORT, () => {
+  console.log(`server is running on port ${PORT}`);
 });
 
-app.put('/', (req, res) => {
-    res.send('PUT /users');
-});
-
-app.delete('/', (req, res) => {
-    res.send('DELETE /users');
-});
-
-
-app.listen(process.env.PORT);
