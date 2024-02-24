@@ -43,6 +43,7 @@ const UserSchema = new Schema(
       type: Boolean,
       required: true,
     },
+    passwordReset: {type: Boolean,default: false,}
   },
   {
     versionKey: false,

@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const { Router } = require("express");
 const Category = require("../models").Category;
 const asyncHandler = require("../utils/asyncHandler");
@@ -11,7 +12,6 @@ router.get(
   })
 );
 
-
 router.post(
   "/",
   asyncHandler(async (req, res, next) => {
@@ -22,27 +22,35 @@ router.post(
     }
 
     const category = await Category.create({ name });
-    res.json(category)
+    res.json(category);
   })
 );
 
 router.put(
-  "/:id",
+  "/:_id",
   asyncHandler(async (req, res) => {
-    const { id } = req.params;
+    const { _id } = req.params;
     const { name } = req.body;
     if (!name) {
       throw new Error("모든 요소를 입력해주세요.");
     }
-    const category = await Category.findOneAndUpdate({ id }, { name },{ new: true });
-    res.json(category)
+
+    const categoryId = new mongoose.Types.ObjectId(id);
+
+    const category = await Category.findOneAndUpdate(
+      categoryId,
+      { name },
+      { new: true }
+    );
+    res.json(category);
   })
 );
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
-  await Category.deleteOne({ id });
-  res.send("ok")
+  const categoryId = new mongoose.Types.ObjectId(id);
+  await Category.deleteOne(categoryId);
+  res.send("ok");
 });
 
 module.exports = router;
