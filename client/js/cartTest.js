@@ -29,7 +29,7 @@ function addItemToCart() {
   // 더미 데이터를 생성하여 배열에 추가
   const dummyData = {
     _id: itemId,
-    isChecked: false,
+    isChecked: true,
     imageUrl: "../img/chanel.png",
     name: "Name ",
     brand: "Brand ",
@@ -46,4 +46,3 @@ function addItemToCart() {
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
   displayUserCartInfo();
 }
-
