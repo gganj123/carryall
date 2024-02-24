@@ -1,10 +1,11 @@
-const { Router } = require("express");
 const mongoose = require("mongoose");
+const { Router } = require("express");
 const { Product } = require("../models");
 const asyncHandler = require("../utils/asyncHandler");
 
 const router = Router();
 
+// 주문 목록 전체 조회
 router.get(
   "/",
   asyncHandler(async (req, res) => {
@@ -14,28 +15,30 @@ router.get(
   })
 );
 
-// 이거 문제 ㅠ
+//상품 상세조회
 router.get( 
   "/:id",
   asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const product = await Product.findOne({ id }).populate("categoryId");
+
+    const productId = new mongoose.Types.ObjectId(id);
+
+    const product = await Product.findOne(productId).populate("categoryId");
     res.json(product);
   })
 )
 
+// 상품 등록
 router.post(
   "/",
   asyncHandler(async (req, res) => {
-    // 등록하기
-    const { id, categoryId, name, price, image, option, stock, brand } = req.body;
+    const { name, categoryId, price, image, option, stock, brand, detail } = req.body;
 
-    if (!name || !price || !image || !option || !stock || !brand) {
+    if (!categoryId || !name || !price || !image || !option || !stock || !brand || !detail) {
       throw new Error("모든 요소를 입력해주세요.");
     }
 
     const product = await Product.create({
-      id,
       categoryId,
       name,
       price,
@@ -43,32 +46,41 @@ router.post(
       option,
       stock,
       brand,
+      detail
     });
     res.json(product);
   })
-); // date 나중에 추가
+); //date 나중에 추가
 
+//상품 수정
 router.put(
   "/:id",
   asyncHandler(async (req, res) => {
-    // 수정하기
     const { id } = req.params;
-    const { name, price, image, option, stock, brand } = req.body;
-    if (!name || !price || !image || !option || !stock || !brand) {
+
+    const { name, categoryId, price, image, option, stock, brand, detail } = req.body;
+
+    if (!categoryId || !name || !price || !image || !option || !stock || !brand || !detail) {
       throw new Error("모든 요소를 입력해주세요.");
     }
 
+    const productId = new mongoose.Types.ObjectId(id);
+
     const product = await Product.findOneAndUpdate(
-      { id },
-      { name, price, image, option, stock, brand },{ new: true }
+      productId ,
+      {name, categoryId, price, image, option, stock, brand, detail },{ new: true }
     );
     res.json(product);
   })
 );
 
+//상품 삭제 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
-  await Product.deleteOne({ id });
+
+  const productId = new mongoose.Types.ObjectId(id);
+  
+  await Product.deleteOne(productId);
   res.json({ result: "success" });
 });
 
