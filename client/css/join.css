@@ -1,0 +1,86 @@
+.inputForm {
+  display: flex;
+  width: 550px;
+}
+fieldset {
+  border: none;
+  width: 100%;
+}
+.formTit {
+  text-align: center;
+  margin-bottom: 60px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.pathBox {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.pathBox li {
+  width: calc(100% / 3);
+  text-align: center;
+  height: 50px;
+  border-bottom: 1px solid #424242;
+  margin-bottom: 50px;
+}
+.pathBox li a {
+  text-align: center;
+  font-size: 17px;
+}
+.joinBox .reqTxt {
+  width: 100%;
+}
+.joinBox .reqTxt h6 {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.joinBox .reqTxt h6 span {
+  font-weight: normal;
+}
+.formBox li:not(.reqTxt) {
+  display: flex;
+  /* align-items: center; */
+  flex-direction: column;
+  margin-top: 20px;
+}
+.formBox input {
+  height: 58px;
+  width: 400px;
+  width: 80%;
+  border: unset;
+  background-color: #f5f5f5;
+}
+.formBox .label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.errTxt {
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 15px;
+  font-weight: normal;
+  margin-top: 8px;
+  color: #E20000;
+}
+
+/* 비밀번호 확인 */
+.chkPwd input {
+  width: 100%;
+  height: 58px;
+  border: none;
+  background-color: #f5f5f5;
+  margin-top: 60px;
+}
+.chkTxt {
+  margin-top: 13px;
+  font-size: 17px;
+  font-weight: normal;
+  display: block;
+  line-height: 1.5;
+}
