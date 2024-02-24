@@ -1,10 +1,10 @@
-<!-- 은지 > 비회원 로그인 -->
+<!-- 은지 > 회원가입 페이지 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>carryAll_회원가입</title>
+  <title>carryAll_회원가입 완료</title>
   <link rel="stylesheet" href="../../css/styles.css">
   <link rel="stylesheet" href="../../css/login.css">
 </head>
@@ -39,24 +39,17 @@
 
   <section class="container">
     <form id="loginForm">
-      <h2>회원가입</h2>
-      <button type="button" id="joinBtn">일반 회원가입</button>
-
-      <h2 class="fakeTit">SNS 간편 회원가입(구현X)</h2>
-      <button type="submit" id="fakeBtn">카카오 간편 가입</button>
-      <div class="btnWrap">
-        <button class="snsJoin">apple 회원가입</button>
-        <button class="snsJoin">네이버 회원가입</button>
+      <h2 class="joinTit">Welcome!</h2>
+      <p class="subTit"><span>"엘리스"</span> 님, 가입을 축하드려요.<br>엘리스 랩의 다양한 혜택을 받아보세요!</p>
+      <div class="joinFinishedImg">
+        <img src="../../img/join_finished.png" alt="carryAll">
       </div>
-      <ul class="joinWrap">
-        <li><a href="../member/login_member.html">로그인</a></li>
-        <li><a href="#">아이디 찾기</a></li>
-        <li><a href="#">비밀번호 찾기</a></li>
-      </ul>
+      <div class="btnWrap">
+        <button class="snsJoin">홈으로</button>
+        <button class="snsJoin joinLogin">로그인</button>
+      </div>
+      
     </form>
   </section>
-
-  <!-- 회원가입 폼 script -->
-  
 </body>
 </html>

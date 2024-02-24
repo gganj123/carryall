@@ -26,7 +26,7 @@
         // 등록하기
         const name = document.getElementById("a").value;
         try {
-          const response = await axios.post(`http://localhost:5000/category`, {
+          const response = await axios.post(`http://localhost:5001/category`, {
             name,
           });
           // 등록 후 화면이 바로 바뀌어야 함
