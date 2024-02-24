@@ -4,50 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>carryAll</title>
-  <link rel="stylesheet" href="product.css">
+  <link rel="stylesheet" href="/carryall/client/css/product.css">
 </head>
 <body>
-  <!-- <div class="header">
-    <div class="logo">
-      <img src="#" alt="로고">
-    </div>
-    <div class="search">
-      <form action="">
-        <label for="searchInput">검색창</label>
-        <input id = "searchInput" type="text">
-        <button></button>
-      </form>
-    </div>
-    <div class="home">홈</div>
-    <div class="home">마켓</div>
-    <div class="home">로그인</div>
-    <div class="home">마이페이지</div>
-    <div class="home">회원가입</div>
-  </div> -->
-  <div class="header" style="height: 60px; width: 1902px; display: flex; align-items: center;"></div>
-    <div class="header" style="height: 60px; width: 1902px; display: flex; align-items: center;background-color: white;">
+  <div class="header" style="height: 60px; width: 100%; display: flex; align-items: center;"></div>
+  <div class="header" style="height: 60px; width: 100%; display: flex; align-items: center;background-color: white;">
         <h1 style="margin-right: 50px; font-family:Roboto; font-weight: 700; font-style: italic; ">CARRYALL</h1>
         <input class ="inputform" type="text" placeholder="검색" style="height: 50%; padding: 5px; border-radius: 5px; margin-right: 50px;">
         <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold">장바구니</button>
         <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">로그인</button>
         <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">마이페이지</button>
         <button style="height: 50%; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">회원가입</button>
-    </div>
+  </div>
 
-  <!-- <div class="header"></div> -->
   <div class="total">
-    <div class="mainphoto" img src="#" alt="메인사진">메인사진</div>
+    <div class="mainPhoto">
+      <img class="mainPhoto" src="/carryall/client/img/ban_3.jpeg">
+    </div>
     <!-- <div class="category">카테고리
       <div class="tote">토트백</div>
       <div class="cross">크로스백</div>
       <div class="back">백팩</div>
     </div> -->
-    <div class="nav" style="height: 480px; width: 1900px; display: flex; flex-wrap: wrap;">
-      <div style="height: 700px; width: 22%; background-color: gray; ">
-          <h1>side1</h1>
+    <div class="container" style="height: 100px; width: 100%; display: flex; flex-wrap: wrap;">
+      <div class="side1" style="height: 100%; width: 22%; background-color: gray; ">
+        <h1>side1</h1>
       </div>
-      <div style="height: 700px; width: 56%; background-color: #d9d9d9; ">
-          <h1>main</h1>
+      <div class="main" style="width: 56%; background-color: #d9d9d9; ">
+        <!-- <h1>main</h1> -->
           <div class="selectbox">
             <select name="selectbox">
               <option value="1">최신순</option>
@@ -56,46 +40,45 @@
               <option value="4">높은가격순</option>
             </select>
           </div>
-          <div class="items">
-            <div class="item1">
-              <img src="#" alt="item1">
-              <div class="brand">브랜드명</div>
-              <div class="name">상품명</div>
-              <div class="price">가격</div>
-            </div>
-            <div class="item2">
-              <img src="#" alt="item1">
-              <div class="brand">브랜드명</div>
-              <div class="name">상품명</div>
-              <div class="price">가격</div>
-            </div>
-            <div class="item3">
-              <img src="#" alt="item1">
-              <div class="brand">브랜드명</div>
-              <div class="name">상품명</div>
-              <div class="price">가격</div>
-            </div>
-            <div class="item4">
-              <img src="#" alt="item1">
-              <div class="brand">브랜드명</div>
-              <div class="name">상품명</div>
-              <div class="price">가격</div>
-            </div>
-          </div>
-          <div class="pageNumber">- 1 -</div>
+          <div class="productList">
+              <div class="detail" id="detail" src="practice.html" a="#"></div>
+
+            <!-- <div class="item">
+              <div class="img">
+                <img src="/carryall/client/img/1.webp" alt="">
+              </div>
+              <div class="text">
+                <h2 id="root">브랜드명</h2>
+                <p>제품명</p>
+                <p>가격</p>
+              </div>
+            </div> -->
+
+            <!-- <div class="item">
+              <div class="img">
+                <img src="/carryall/client/img/1.webp" alt="">
+              </div>
+              <div class="text">
+                <h2>브랜드명</h2>
+                <p>제품명</p>
+                <p>가격</p>
+              </div>
+            </div> -->
+          </div> 
         </div>
-        <div style="height: 700px; width: 22%; background-color: gray;">
+        <div style="height: 100%; width: 22%; background-color: gray;">
           <h1>side2</h1>
         </div>
       </div>
       </div>
     </div>
   </div>
-  <div class="footer">
+  <!-- <div class="footer">
     <div class="1">이용약관</div>
     <div class="2">개인정보처리방침</div>
     <div class="3">이용안내</div>
     <div class="4">입점/제휴안내</div>
-  </div>
+  </div> -->
+  <script src="/carryall/client/js/product.js"></script>
 </body>
 </html>
