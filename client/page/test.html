@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
 </head>
 <body>
-    <h1>test</h1>
+    <h1>Test Page</h1>
+
+    <script>
+        const dataToSend = {   "categoryId":"65d86b62492ce9bb377f0bf8",
+    "name":"111",
+    "price":10030,
+    "image":"https://www.naver.com/",
+    "option":"d",
+    "stock":12111111,
+    "brand":"06team",
+    "detail":"06team"
+};
+
+// axios.post('http://localhost:5000/product', dataToSend)
+// .then(response => {
+//     // 서버로부터 받은 응답을 처리합니다.
+//     console.log(response.data); // 서버에서 전송된 데이터 출력
+// })
+// .catch(error => {
+//     // 오류가 발생했을 때 처리합니다.
+//     console.error('Error fetching data:', error);
+// });
+
+
+axios.get('http://localhost:5000/product')
+.then(res => {
+    // 서버로부터 받은 응답을 처리합니다.
+    console.log(res.data);
+
+})
+.catch(error => {
+    // 오류가 발생했을 때 처리합니다.
+    console.error('Error fetching data:', error);
+});
+
+
+    </script>
 </body>
 </html>
