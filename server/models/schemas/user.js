@@ -2,11 +2,7 @@
 const { Schema } = require("mongoose");
 const UserSchema = new Schema(
   {
-    // 회원 고유번호(아이디)
-    // id: {
-    //   type: Schema.Types.ObjectId,
-    //   required: true,
-    // },
+    // 유저 아이디
     username: {
       type: String,
       required: true,
