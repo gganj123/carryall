@@ -27,9 +27,9 @@ router.post(
 );
 
 router.put(
-  "/:_id",
+  "/:id",
   asyncHandler(async (req, res) => {
-    const { _id } = req.params;
+    const { id } = req.params;
     const { name } = req.body;
     if (!name) {
       throw new Error("모든 요소를 입력해주세요.");
