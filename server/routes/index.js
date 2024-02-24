@@ -3,12 +3,8 @@ const asyncHandler = require("../utils/asyncHandler.js");
 const { User } = require("../models");
 const getHash = require("../utils/hashPassword.js");
 const router = Router();
-const generateRandomPassword = require('../utils/generate-random-password')
+const generateRandomPassword = require('../utils/getRandomPassword')
 const sendMail = require("../utils/sendMail.js");
-
-router.get('/reset-password', (req, res, next) => {
-  res.render('user/reset-password');
-});
 
 router.post('/reset-password', asyncHandler(async (req, res) => { // 비밀번호 리셋하려고 이메일 입력받는 곳
   const { email } = req.body;
