@@ -1,99 +1,155 @@
 document.addEventListener("DOMContentLoaded", function() {
-  const selectAllCheckbox = document.getElementById('selectAllCheckbox');
-  const btnDeleteAll = document.getElementById('btnDeleteAll');
-  const btnDeleteSelected = document.getElementById('btnDeleteSelected');
-  const checkboxes = document.querySelectorAll('.cartItemContainer input[type="checkbox"]');
+  const totalCheck = document.querySelector(".totalCkBtn");
+  const itemsContainer = document.querySelector(".itemContainer");
+  const btnDeleteAll = document.querySelector(".btnDeleteAll");
+  const btnDeleteSelected = document.querySelector(".btnDeleteSelected");
+  
 
-  // 전체 체크 
-  selectAllCheckbox.addEventListener('change', function() {
-    checkboxes.forEach(function(checkbox) {
-      checkbox.checked = selectAllCheckbox.checked;
-    });
+  totalCheck.addEventListener("click", function() {
+    const isChecked = totalCheck.checked;
+    const checkboxes = itemsContainer.querySelectorAll('.itemCkBtn');
+
+    if(isChecked) {
+      for(i = 0; i<checkboxes.length; i++){
+        checkboxes[i].checked = true;//체크된 클래스가 chk의 값은 true로 준다.
+      }
+    }else{
+      for(i = 0; i<checkboxes.length; i++){
+        checkboxes[i].checked = false;//체크된 클래스가 chk의 값은 false로 준다.
+      }
+    }
+
   });
 
-  // 전체 아이템 삭제 
-  btnDeleteAll.addEventListener('click', function() {
-    const cartItems = document.querySelectorAll('.cartItemContainer');
-
-    cartItems.forEach(function(item) {
-      item.remove();
-    });
+  btnDeleteAll.addEventListener("click", function() {
+    deleteAllItems();
   });
 
-  // 선택 아이템 삭제
-  btnDeleteSelected.addEventListener('click', function() {
-    const checkedItems = document.querySelectorAll('.cartItemContainer input[type="checkbox"]:checked');
-
-    checkedItems.forEach(function(item) {
-      item.closest('.cartItemContainer').remove();
-    });
+  btnDeleteSelected.addEventListener("click", function() {
+    deleteSelectedItems();
+  });
+  // 각 수량 증가/감소 버튼에 대한 이벤트 리스너 추가
+  itemsContainer.addEventListener("click", function(event) {
+    if (event.target.classList.contains('quantityMinus')) {
+      decreaseQuantity(event.target);
+    } else if (event.target.classList.contains('quantityPlus')) {
+      increaseQuantity(event.target);
+    }
   });
 
-  // 상품 정보 표시
-  displayProductInfo();
-
-  const quantityInputs = document.querySelectorAll('.cartItemContainer .quantity');
-  quantityInputs.forEach(function(input) {
-    input.addEventListener('input', updateOrderAmount); // input 이벤트
-  });
+  displayUserCartInfo();
 });
 
-/** 각 상품의 수량이 변경될 때 호출되는 함수 */
-function updateOrderAmount() {
-  const cartItems = document.querySelectorAll('.cartItemContainer');
+function deleteAllItems() {
+  localStorage.removeItem("cartItems");
+  const itemsContainer = document.querySelector('.itemContainer');
+  itemsContainer.innerHTML = "";
+  const selectAllCheckbox = document.querySelector(".totalCkBtn");
+  selectAllCheckbox.checked = false;
+}
 
-  // 각 상품 아이템에 대해 반복
-  cartItems.forEach(function(item) {
-    const priceElement = item.querySelector('.price');
-    const quantityElement = item.querySelector('.quantity');
-    const totalElement = item.querySelector('.total');
+function deleteSelectedItems() {
+  const itemsContainer = document.querySelector('.itemContainer');
+  const checkboxes = itemsContainer.querySelectorAll('.itemCkBtn');
 
-    // 상품 금액과 수량 가져오기
-    let price = parseFloat(priceElement.textContent);
-    let quantity = parseInt(quantityElement.value);
-    let total = price * quantity;
+  checkboxes.forEach(checkbox => {
+    if (checkbox.checked) {
+      const index = Array.from(checkboxes).indexOf(checkbox);
+      // 로컬 스토리지에서 해당 상품을 삭제
+      const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      cartItems.splice(index, 1);
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      // 화면에서 해당 상품을 삭제
+      checkbox.closest('.cartItem').remove();
+    }
+  });
 
-    price = addCommasToNumber(price);
-    total = addCommasToNumber(total);
-    totalElement.textContent = total;
+  // 전체 체크박스 해제
+  const totalCheck = document.querySelector(".totalCkBtn");
+  totalCheck.checked = false;
+}
+
+function decreaseQuantity(element) {
+  const quantityInput = element.closest('.quantityBox').querySelector('.quantity');
+  let newValue = parseInt(quantityInput.value) - 1;
+  if (newValue < 1) newValue = 1;
+  quantityInput.value = newValue;
+  updateQuantityAndStorage(element, newValue);
+}
+
+function increaseQuantity(element) {
+  const quantityInput = element.closest('.quantityBox').querySelector('.quantity');
+  let newValue = parseInt(quantityInput.value) + 1;
+  if (newValue > 99) newValue = 99;
+  quantityInput.value = newValue;
+  updateQuantityAndStorage(element, newValue);
+}
+
+function updateQuantityAndStorage(element, newValue) {
+  const quantityInput = element.closest('.quantityBox').querySelector('.quantity');
+  const cartItem = element.closest('.cartItem');
+  const index = Array.from(cartItem.parentElement.children).indexOf(cartItem);
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  cartItems[index].quantity = newValue;
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  updateTotalPrice(element, newValue, cartItems[index].price);
+  displayUserCartInfo();
+}
+
+function updateTotalPrice(element, newValue, itemPrice) {
+  const totalPriceElement = element.closest('.cartItem').querySelector('.cartBoxH5');
+  totalPriceElement.textContent = newValue * itemPrice;
+}
+
+// 수량 증가/감소 버튼에 대한 이벤트 리스너 추가
+itemsContainer.addEventListener("click", function(event) {
+  if (event.target.classList.contains('quantityMinus')) {
+    decreaseQuantity(event.target);
+  } else if (event.target.classList.contains('quantityPlus')) {
+    increaseQuantity(event.target);
+  }
+});
+
+function displayUserCartInfo() {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const itemsContainer = document.querySelector(".itemContainer");
+  
+  itemsContainer.innerHTML = "";
+
+  cartItems.forEach(item => {
+      const newItem = document.createElement("div");
+      newItem.classList.add("cartItem");
+      newItem.innerHTML = `
+          <input type="checkbox" class="itemCkBtn">
+          <div class="cartBoxH1 item" style="display: flex;">
+              <img src="${item.imageUrl}" alt="${item.name} 이미지" class="itemImg">
+              <div class="item itemInfo">
+                  <p class="itemName">${item.name}</p>
+                  <p class="itemBrand">${item.brand}</p>
+              </div>
+          </div>
+          <p class="cartBoxH2 item">${item.option}</p>
+          <div class="cartBoxH3 quantityBox item">
+              <span class="quantityMinus item"><button>-</button></span>
+              <input class="quantity item" type="number" value="${item.quantity}" min="1" max="99"></input>
+              <span class="quantityPlus item"><button>+</button></span>
+          </div>
+          <p class="cartBoxH4 item">${item.price}</p>
+          <p class="cartBoxH5 item">${item.price * item.quantity}</p>
+      `;
+      itemsContainer.appendChild(newItem);
+  });
+
+  // 장바구니 정보를 표시한 후에는 수량 증가/감소 버튼에 대한 이벤트 리스너를 다시 추가
+  itemsContainer.querySelectorAll('.quantityMinus').forEach(button => {
+    button.addEventListener('click', function() {
+      decreaseQuantity(button);
+    });
+  });
+  itemsContainer.querySelectorAll('.quantityPlus').forEach(button => {
+    button.addEventListener('click', function() {
+      increaseQuantity(button);
+    });
   });
 }
 
-function displayProductInfo() {
-  // JSON 파일 경로
-  const jsonFilePath  = '../temp/product.json';
-
-  // JSON 파일을 가져오기
-  fetch(jsonFilePath)
-    .then(response => response.json())
-    .then(data => {
-      // 상품 정보를 가져와서 화면에 표시
-      const productContainer = document.getElementById('productContainer');
-      productContainer.innerHTML = `
-        <div class="cartItemContainer">
-          <div class="cartItem">
-            <div class="checkbox"><input type="checkbox"></div>
-            <div class="description">                                                                           
-              <a class="image" href=""><img class="imageFrame" src="${data.productImageUrl}" alt="${data.productName}"></a>
-              <div style="display: block;">
-                <p><a class="descriptionItemName" href="">${data.productName}</a></p>
-                <span class="descriptionItemBrand">${data.brandName}</span>
-              </div>
-            </div>
-            <div>
-              <p class="option txtCenter">Color: ${data.options.color}</p>
-            </div>
-            <input class="quantity quantity txtCenter" type="number" name="num" value="${data.count}" min="1" max="99">
-            <span class="price txtCenter">${data.productPrice}</span>
-            <span class="total txtCenter">${data.cellPrice}</span>
-          </div>
-        </div>
-      `;
-    })
-    .catch(error => console.error('Error fetching product info:', error));
-}
-
-/** 숫자 3자리마다 , 찍기 */
-function addCommasToNumber(number) {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
