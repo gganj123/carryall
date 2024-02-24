@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
   
+
+    
     // 로컬 스토리지에 업데이트된 isChecked 속성 저장
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   
