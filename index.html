@@ -21,7 +21,7 @@
       async function handleCategorySubmit() { // 등록하기
         const name = document.getElementById("a").value;
         try {
-          const response = await axios.post(`http://localhost:5000/category`, {
+          const response = await axios.post(`http://localhost:5001/category`, {
             name,
           });
           // 등록 후 화면이 바로 바뀌어야 함
@@ -33,7 +33,7 @@
 
       async function getCategoryData() { // 목록 출력하기
         try {
-            await axios.get("http://localhost:5000/category")
+            await axios.get("http://localhost:5001/category")
             .then(res => {
                 const mapping = res.data
                 const catName = mapping.map((element,index) => {
@@ -52,7 +52,7 @@
         // divElement.parentNode.replaceChild(inputElement, divElement);
         
         try {
-            const response = await axios.put(`http://localhost:5000/category/${index}`, {
+            const response = await axios.put(`http://localhost:5001/category/${index}`, {
                 name:"수정합니다"
             });
             console.log(response);
