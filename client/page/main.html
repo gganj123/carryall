@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/slider.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
 </head>
 
 <body>
@@ -29,7 +30,7 @@
         <ul class="slide_pagination"></ul>
     </div>
     <div class ="total" style="height: 3000px; margin-top: 100px; display: flex; flex-wrap: wrap;background-color:#fafafa;">
-        <div class ="side1" style="height: 100%; width: 21%; margin-right: 10px; background-color:#fafafa;">
+        <div class ="side1" style="height: 100%; width: 23%; margin-right: 10px; background-color:#fafafa;">
             <div class="category_box" style="text-align: left;">
                     <div>
                         <button class="headmenu" style="display: flex; align-items: flex-end; height: 30%;width: 80%; margin-bottom: 10px;">
@@ -62,7 +63,7 @@
                     </div>
                 </div>
         </div>
-        <div class="main_story" style="height:20%; width: 56%; background-color: #fafafa; margin-right: 10px; display: flex; flex-wrap: wrap;">
+        <div class="main_story" style="height:20%; width: 60%; background-color: #fafafa; margin-right: 10px; display: flex; flex-wrap: wrap;">
                 
             <div style="margin-top: 0px; background-color: #fafafa;">
                 <div class="main_s" style="height: 480px; width: 100%; background-color: #fafafa; display: flex; flex-wrap: wrap; margin-top:0px;">
@@ -83,15 +84,15 @@
                             </form>
                         </div>
                         <div class="main_story"
-                            style="height: 400px; width: 100%; background-color: #fafafa; display: flex; flex-wrap: wrap; margin-top:50px">
-                            <div class="main_object" style="height: 400px; width: 23%; margin-right: 20px;">
+                            style="height: 880px; width: 100%; background-color: #fafafa; display: flex; flex-wrap: wrap; margin-top:50px; margin-bottom: 50px; background-color: yellow;">
+                            <div class="main_object" style="height: 350px; width: 23%; margin-right: 20px;">
                                 <div>
                                     <img src="../img/erbag.png" alt="">
                                     <h2>HermèsBag</h2>
                                     <h3>Hermès<br>5,000,000원</h3>
                                 </div>
                             </div>
-                            <div class="main_object" style="height: 400px; width: 23%; margin-right: 20px;">
+                            <div class="main_object" style="height: 350px; width: 23%; margin-right: 20px;">
                                 <div>
                                     <img src="../img/chanel.png" alt="">
                                     <h2>ChaBag</h2>
@@ -99,20 +100,22 @@
                                 </div>
 
                             </div>
-                            <div class="main_object" style="height: 400px; width: 23%; margin-right: 20px;">
+                            <div class="main_object" style="height: 350px; width: 23%; margin-right: 20px;">
                                 <div>
                                     <img src="../img/erbag.png" alt="">
                                     <h2>HermèsBag</h2>
                                     <h3>Hermès<br>5,000,000원</h3>
                                 </div>
                             </div>
-                            <div class="main_object" style="height: 400px; width: 23%; margin-right: 20px;">
+                            <div class="main_object" style="height: 350px; width: 23%; margin-right: 20px;">
                                 <div>
                                     <img src="../img/chanel.png" alt="">
                                     <h2>ChaBag</h2>
                                     <h3>Chanel<br>4,000,000원</h3>
                                 </div>
                             </div>
+                            
+                        <div style="height: 485px; width:95%;  display: flex; flex-wrap: wrap; background-color: orange; justify-content: center;">
                             <div class="main_story1" style="height: 480px; width: 32%; margin-right: 10px;">
                                 <div style="margin-top: 300px; margin-left: 30px;">
                                     <h1>01<br>Brand Story</h1>
@@ -128,20 +131,19 @@
                                     <h1>03<br>Brand Story</h1>
                                 </div>
                             </div>
+                        </div>
 
                             <div class="main_story"
                                 style="height: 480px; width: 100%; background-color: #fafafa; display: flex; flex-wrap: wrap; margin-top: 50px;">
                                 <div style="height: 90px; width: 100%; margin-right: 10px;">
-                                    <div>
                                         <h2>Deals of the Week</h2>
                                         <h3 class="font_20" style="font-weight: 500;">득템 아이템</h3>
-                                    </div>
                                 </div>
-                                <div class="main_story">
                                     <!-- 데이터 가져오기 -->
-                                    <div id="expenses" style="height: 400px; width: 100%; background-color: #fafafa; display: flex; flex-wrap: wrap;"></div>
+
+                                    <div id="objectList"
+                                    style="height: 300px; width: 100%; background-color: #fafafa; display: flex; flex-wrap: wrap; background-color: yellow;"></div>
                                 </div>
-                        
                             </div>
                             
                         </div>
@@ -155,7 +157,7 @@
                 </ul> 무한 스크롤 -->
                          
         </div>
-        <div class = "side2" style="height: 100%; width: 21%; margin-right: 10px; background-color:#fafafa;"></div>
+        <!-- <div class = "side2" style="height: 100px; width: 14%; margin-right: 10px; background-color:#fafafa;"></div> -->
     </div>
     <footer id="footer"></footer>
     <div class="top">top</div>
@@ -165,8 +167,7 @@
         <script src="../js/json.js"></script>
         <script src="../js/header.js"></script>
         <script src="../js/footer.js"></script>
-        
-        <script src="../js/router.js"></script>
+        <script src="../js/objectList.js"></script>
 
         <!-- <script src="../js/scroll.js"></script> -->
 
