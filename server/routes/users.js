@@ -147,7 +147,7 @@ router.put(
       emailSubscription,
     } = req.body;
     const hashPassword = hashedPassword(password);
-    const foundUser = await User.findOneAndUpdate(
+    await User.findOneAndUpdate(
       { username: req.session.username },
       {
         password: hashPassword,
@@ -158,7 +158,7 @@ router.put(
         emailSubscription,
       }
     );
-    res.json({ message: "회원정보가 수정되었습니다", user: foundUser });
+    res.send("회원정보가 수정되었습니다");
   })
 );
 
