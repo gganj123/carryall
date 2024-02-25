@@ -1,6 +1,9 @@
 body {
   background-color: #fff;
 }
+.container{
+  padding-bottom: 200px;
+}
 .inputForm {
   display: flex;
   width: 550px;

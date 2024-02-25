@@ -93,13 +93,33 @@
                   <input type="text" class="inputType01" id="phoneNum" required="">
                 </label>
               </li>
+              <li>
+                <label for="smsConsent" class="label">
+                  <input type="checkbox" id="smsConsent" required="">
+                  <span> SMS 수신 동의</span>
+                </label>
+              </li>
             </ul>
 
             <!-- 7. 주소 -->
-
             <li>
-              <h6>부가정보</h6>
+              <label for="address01" class="label">
+                <span>* 주소</span>
+              </label>
+              <div class="address_line address_line01 f_fs">
+                <input type="text" name="address" id="address01" class="inputType01" >
+                <a href="#">우편번호 검색</a>
+              </div>
+              <div class="address_line address_line02 f_c label">
+                  <label for="address02" class="label"></label>
+                  <input type="text" name="address" id="address02" class="inputType01" >
+                  <label for="address03" class="label"></label>
+                  <input type="text" name="address" id="address03" class="inputType01" >
+              </div>
             </li>
+
+            
+          
   
             <div class="btn_box f_c">
               <button type="button" class="btnType01">이전</button>
