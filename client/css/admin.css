@@ -1,0 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #fff;
+}
+li {
+  list-style: none;
+}
+a {
+  color: #424242;
+  text-decoration: none;
+}
+button {
+  border: none;
+}
+main {
+  margin-top: 8%;
+}
+.container{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 60px; */
+  position: relative;
+  top: 18%;
+  /* transform: translateY(-50%); */
+}
+h2 {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.contWrap {
+  /* background-color: lightblue; */
+  width: 100%;
+  max-width: 1070px;
+  display: flex;
+  justify-content: space-between;
+}
+.navCont {
+  width: 28%;
+  background-color: #eaeaea;
+  padding: 30px 20px;
+}
+.navCont li {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+.navCont li.navTit {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  margin-top: 40px;
+}
+.navCont li.navTit.n1 {
+  margin-top: 0;
+}
+.infoCont {
+  width: 70%;
+  padding-top: 20px;
+}
+.infoCont h3 {
+  border-bottom: 1px solid #424242;
+  padding-bottom: 8px;
+  font-size: 18px;
+  font-weight: 500;
+}
+/* 기본 레이아웃 end */
+
+

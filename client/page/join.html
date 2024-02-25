@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>carryAll_비회원 주문조회</title>
-  <link rel="stylesheet" href="../../css/styles.css">
-  <link rel="stylesheet" href="../../css/login.css">
+  <title>carryAll_회원가입</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
   <!-- 은지 -->
@@ -39,68 +39,23 @@
 
   <section class="container">
     <form id="loginForm">
-      <h2>비회원 주문조회</h2>
-      <ul class="tab">
-        <li><a href="../member/login_member.html">회원 로그인</a></li>
-        <li class="active"><a href="../member/login_nonMember.html">비회원 주문조회</a></li>
-      </ul>
-      <div class="formGroup">
-        <label for="username"></label>
-        <input type="text" id="username" name="username" placeholder="주문자 이름" required>
+      <h2>회원가입</h2>
+      <button type="button" id="joinBtn">일반 회원가입</button>
+
+      <h2 class="fakeTit">SNS 간편 회원가입(구현X)</h2>
+      <button type="submit" id="fakeBtn">카카오 간편 가입</button>
+      <div class="btnWrap">
+        <button class="snsJoin">apple 회원가입</button>
+        <button class="snsJoin">네이버 회원가입</button>
       </div>
-      <div class="formGroup">
-        <label for="ordernumber"></label>
-        <input type="text" id="ordernumber" name="ordernumber" placeholder="주문번호" required>
-      </div>
-      <div class="formGroup">
-        <label for="password"></label>
-        <input type="password" id="password" name="password" placeholder="비회원주문 비밀번호" required>
-      </div>
-      <button type="submit" id="loginBtn">로그인</button>
       <ul class="joinWrap">
-        <li><a href="../member/join.html">회원가입</a></li>
+        <li><a href="./login_member.html">로그인</a></li>
         <li><a href="#">아이디 찾기</a></li>
         <li><a href="#">비밀번호 찾기</a></li>
       </ul>
     </form>
   </section>
 
-  <!-- 로그인 폼 script -->
-  <script>
-    document.getElementById("loginForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      var username = document.getElementById("username").value;
-      var password = document.getElementById("password").value;
-
-      // GET 요청 보내기
-      fetch("/login?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password))
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-
-      // POST 요청 보내기
-      fetch("/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    });
-  </script>
+  <!-- 회원가입 폼 script -->
 </body>
 </html>
