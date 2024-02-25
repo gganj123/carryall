@@ -2,7 +2,7 @@
 const { Schema } = require("mongoose");
 const OrderSchema = new Schema(
   {
-    // 주문 고유번호 -> 내가 만들지 않아도 됨
+    // 주문 고유번호 
     id: Schema.Types.ObjectId,
     // 주문 현황
     status: {
