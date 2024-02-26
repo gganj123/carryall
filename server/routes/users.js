@@ -109,7 +109,7 @@ router.post(
       emailSubscription,
     } = req.body;
 
-    const hashPassword = await hashedPassword(password);
+    const hashPassword = hashedPassword(password);
 
     const member = await User.findOne({
       $or: [{ username: username }, { email: email }],
@@ -148,7 +148,7 @@ router.put(
       telSubscription,
       emailSubscription,
     } = req.body;
-    const hashPassword = await hashedPassword(password);
+    const hashPassword = hashedPassword(password);
     await User.findOneAndUpdate(
       { username: req.session.username },
       {

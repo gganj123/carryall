@@ -10,7 +10,7 @@ router.post('/reset-password', asyncHandler(async (req, res) => { // 비밀번�
   const { email } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
-    throw new Error('해당 메일로 가입된 사용자가 없습니다.');
+    throw new Error('해당 메일로 가입된 사용자가 없음');
   }
   
   // 랜덤 패스워드 생성
@@ -21,6 +21,7 @@ router.post('/reset-password', asyncHandler(async (req, res) => { // 비밀번�
 
   // 패스워드 발송하기
    await sendMail(email, "임시 비밀번호를 발송합니다.", randomPassword);
+   res.json('')
 }));
 
 module.exports = router;
