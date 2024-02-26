@@ -5,8 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>carryAll_회원가입</title>
-  <link rel="stylesheet" href="../../css/styles.css">
-  <link rel="stylesheet" href="../../css/login.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="../css/join.css">
 </head>
 <body>
   <!-- 은지 -->
@@ -38,25 +39,30 @@
   </div> -->
 
   <section class="container">
-    <form action="../../../../../index.html" method="post" class="inputForm">
+    <form action="../../index.html" method="post" class="inputForm">
       <fieldset>
-        <legend>회원가입</legend>
-          <div class="box">
+        <legend class="formTit">회원가입</legend>
+          <ul class="pathBox">
+            <li><a href="#">약관동의</a></li>
+            <li><a href="#">정보입력</a></li>
+            <li><a href="#">가입완료</a></li>
+          </ul>
+          <div class="box formBox">
             <ul class="joinBox">
-              <li>
+              <li class="reqTxt">
                 <h6>회원정보 입력<span>* 필수 입력 항목입니다.</span></h6>
               </li>
               <!-- 1. 아이디 -->
               <li>
                 <label for="name" class="label">
-                    <span>아이디</span>
+                    <span>* 아이디</span>
                     <input type="text" class="inputType01" id="name" required="" >
                 </label>
               </li>
               <!-- 2. 비밀번호 -->
               <li>
                 <label for="password" class="label">
-                  <span>비밀번호</span>
+                  <span>* 비밀번호</span>
                   <input type="password" class="inputType01" id="password" required="" >
                 </label>
                 <div class="errTxt">
@@ -67,7 +73,7 @@
               <!-- 3. 비밀번호 확인 -->
               <li>
                 <label for="passwordReconfirm" class="label">
-                  <span>비밀번호 확인</span>
+                  <span>* 비밀번호 확인</span>
                   <input type="password" class="inputType01" id="passwordReconfirm" required="" >
                 </label>
               </li>
@@ -75,7 +81,7 @@
               <!-- 4. 이름 -->
               <li>
                 <label for="name" class="label">
-                  <span>이름</span>
+                  <span>* 이름</span>
                   <input type="text" class="inputType01" id="name" required="">
                 </label>
               </li>
@@ -83,17 +89,37 @@
               <!-- 6. 휴대폰 번호 -->
               <li>
                 <label for="phoneNum" class="label">
-                  <span>전화번호</span>
+                  <span>* 휴대폰 번호</span>
                   <input type="text" class="inputType01" id="phoneNum" required="">
+                </label>
+              </li>
+              <li>
+                <label for="smsConsent" class="label">
+                  <input type="checkbox" id="smsConsent" required="">
+                  <span> SMS 수신 동의</span>
                 </label>
               </li>
             </ul>
 
             <!-- 7. 주소 -->
-
             <li>
-              <h6>부가정보</h6>
+              <label for="address01" class="label">
+                <span>* 주소</span>
+              </label>
+              <div class="address_line address_line01 f_fs">
+                <input type="text" name="address" id="address01" class="inputType01" >
+                <a href="#">우편번호 검색</a>
+              </div>
+              <div class="address_line address_line02 f_c label">
+                  <label for="address02" class="label"></label>
+                  <input type="text" name="address" id="address02" class="inputType01" >
+                  <label for="address03" class="label"></label>
+                  <input type="text" name="address" id="address03" class="inputType01" >
+              </div>
             </li>
+
+            
+          
   
             <div class="btn_box f_c">
               <button type="button" class="btnType01">이전</button>
