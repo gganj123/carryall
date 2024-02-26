@@ -209,4 +209,24 @@ router.get(
   })
 );
 
+// 비번 찾기
+router.post('/reset-password', asyncHandler(async (req, res) => { 
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    res.writeHead(500, {'Content-Type': 'text/plain'});
+    res.end('해당하는 사용자가 존재하지 않습니다.');
+  }
+  
+  // 랜덤 패스워드 생성
+  const randomPassword = generateRandomPassword();
+  await User.updateOne({ email }, {
+    password: hashedPassword(randomPassword),
+  });
+
+  // 패스워드 발송하기
+   await sendMail(email, "임시 비밀번호를 발송합니다.", randomPassword);
+   res.json('발송 완료')
+}));
+
 module.exports = router;
