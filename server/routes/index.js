@@ -6,11 +6,12 @@ const router = Router();
 const generateRandomPassword = require('../utils/getRandomPassword')
 const sendMail = require("../utils/sendMail.js");
 
-router.post('/reset-password', asyncHandler(async (req, res) => { // 비밀번호 리셋하려고 이메일 입력받는 곳
+router.post('/reset-password', asyncHandler(async (req, res) => { 
   const { email } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
-    throw new Error('해당 메일로 가입된 사용자가 없음');
+    res.writeHead(500, {'Content-Type': 'text/plain'});
+    res.end('해당하는 사용자가 존재하지 않습니다.');
   }
   
   // 랜덤 패스워드 생성

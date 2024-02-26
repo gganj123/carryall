@@ -17,7 +17,8 @@ router.post(
     // 등록하기
     const { name } = req.body;
     if (!name) {
-      throw new Error("이름을 입력해주세요.");
+      res.writeHead(500, {'Content-Type': 'text/plain'});
+      res.end('이름을 입력하지 않음');
     }
 
     const category = await Category.create({ name });
@@ -31,7 +32,8 @@ router.put(
     const { _id } = req.params;
     const { name } = req.body;
     if (!name) {
-      throw new Error("이름을 입력해주세요.");
+      res.writeHead(500, {'Content-Type': 'text/plain'});
+      res.end('이름을 입력하지 않음');
     }
 
     const category = await Category.findOneupdate({ _id }, { name });

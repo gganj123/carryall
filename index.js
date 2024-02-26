@@ -12,6 +12,7 @@ const categoriesRouter = require("./server/routes/categories.js");
 const cartsRouter = require("./server/routes/carts.js");
 const ordersRouter = require("./server/routes/orders.js");
 const usersRouter = require('./server/routes/users.js');
+const adminRequired = require('./server/middlewares/admin_required');
 
 connect(
   `mongodb+srv://carryall:${MONGODB_PASSWORD}@cluster0.lobzfqe.mongodb.net/`
@@ -25,7 +26,7 @@ app.use(urlencoded({ extended: true }));
 
 app.use('/', indexRouter);
 app.use("/products", productsRouter);
-app.use("/categories", categoriesRouter);
+app.use("/categories",categoriesRouter);
 app.use("/carts", cartsRouter);
 app.use("/orders", ordersRouter);
 app.use("/", usersRouter);

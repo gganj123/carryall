@@ -1,7 +1,12 @@
 const { createHash } = require('crypto');
 
 module.exports = (password) => {
-  const hash = createHash('sha1');
-  hash.update(password);
-  return hash.digest('hex');
+  try {
+    const hash = createHash('sha1');
+    hash.update(password);
+    return hash.digest('hex');
+  } catch (error) {
+    alert("잘못 입력받았습니다")
+    return;
+  }
 };
