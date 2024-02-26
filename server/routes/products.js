@@ -32,7 +32,8 @@ router.post(
     const { name, categoryId, price, image, option, stock, brand, detail } = req.body;
 
     if (!categoryId || !name || !price || !image || !option || !stock || !brand || !detail) {
-      throw new Error("모든 요소를 입력해주세요.");
+      res.writeHead(500, {'Content-Type': 'text/plain'});
+      res.end('모든 메세지를 입력하지 않음');
     }
 
     const product = await Product.create({
@@ -58,7 +59,8 @@ router.put(
     const { name, categoryId, price, image, option, stock, brand, detail } = req.body;
 
     if (!categoryId || !name || !price || !image || !option || !stock || !brand || !detail) {
-      throw new Error("모든 요소를 입력해주세요.");
+      res.writeHead(500, {'Content-Type': 'text/plain'});
+      res.end('모든 메세지를 입력하지 않음');
     }
 
     const product = await Product.findOneAndUpdate(
