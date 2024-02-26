@@ -13,7 +13,7 @@ router.post('/reset-password', asyncHandler(async (req, res) => { // 비밀번�
     throw new Error('해당 메일로 가입된 사용자가 없습니다.');
   }
   
-  // 랜덤 패스워드 생성하기
+  // 랜덤 패스워드 생성
   const randomPassword = generateRandomPassword();
   await User.updateOne({ email }, {
     password: getHash(randomPassword),
