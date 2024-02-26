@@ -4,6 +4,11 @@ const OrderSchema = new Schema(
   {
     // 주문 고유번호 
     id: Schema.Types.ObjectId,
+    //MR1 - 구매이력 알기 위해서 주문 날짜 자동 생성 X 수동으로
+    date: {
+      type: Date,
+      required: true
+    },
     // 주문 현황
     status: {
       type: String,
@@ -48,11 +53,6 @@ const OrderSchema = new Schema(
         required: true,
       },
     ],
-  },
-  // 주문 날짜 - 자동으로 생성되게
-  {
-    timestamps: true,
-    versionKey: false,
   }
 );
 module.exports = OrderSchema;

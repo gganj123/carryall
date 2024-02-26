@@ -23,7 +23,8 @@ router.get(
   "/:_id",
   asyncHandler(async (req, res) => {
     const { _id } = req.params;
-    const order = await Order.findOne({_id}, "-detail");
+    const order = await Order.findOne({_id}).populate("productId",
+    "name categoryId price image option stock brand")
     res.json(order);
   })
 );
@@ -33,23 +34,25 @@ router.post(
   "/",
   asyncHandler(async (req, res) => {
     const {
+      date,
       status,
-      rcpName,
-      rcpZipCode,
-      rcpAddress,
-      rcpAddressDetail,
-      rcpTel,
+      recipientName,
+      recipientZipCode,
+      recipientAddress,
+      recipientAddressDetail,
+      recipientTel,
       request,
       productId,
     } = req.body;
 
     if (
+      !date ||
       !status ||
-      !rcpName ||
-      !rcpZipCode ||
-      !rcpAddress ||
-      !rcpAddressDetail ||
-      !rcpTel ||
+      !recipientName ||
+      !recipientZipCode ||
+      !recipientAddress ||
+      !recipientAddressDetail ||
+      !recipientTel ||
       !request ||
       !productId
     ) {
@@ -57,12 +60,13 @@ router.post(
     }
 
     const order = await Order.create({
+      date,
       status,
-      rcpName,
-      rcpZipCode,
-      rcpAddress,
-      rcpAddressDetail,
-      rcpTel,
+      recipientName,
+      recipientZipCode,
+      recipientAddress,
+      recipientAddressDetail,
+      recipientTel,
       request,
       productId,
     });
@@ -76,22 +80,24 @@ router.put(
   asyncHandler(async (req, res) => {
     const { _id } = req.params;
     const {
+      date,
       status,
-      rcpName,
-      rcpZipCode,
-      rcpAddress,
-      rcpAddressDetail,
-      rcpTel,
+      recipientName,
+      recipientZipCode,
+      recipientAddress,
+      recipientAddressDetail,
+      recipientTel,
       request,
       productId,
     } = req.body;
     if (
+      !date ||
       !status ||
-      !rcpName ||
-      !rcpZipCode ||
-      !rcpAddress ||
-      !rcpAddressDetail ||
-      !rcpTel ||
+      !recipientName ||
+      !recipientZipCode ||
+      !recipientAddress ||
+      !recipientAddressDetail ||
+      !recipientTel ||
       !request ||
       !productId
     ) {
@@ -101,12 +107,13 @@ router.put(
     const order = await Order.findOneAndUpdate(
       { _id },
       {
+        date,
         status,
-        rcpName,
-        rcpZipCode,
-        rcpAddress,
-        rcpAddressDetail,
-        rcpTel,
+        recipientName,
+        recipientZipCode,
+        recipientAddress,
+        recipientAddressDetail,
+        recipientTel,
         request,
         productId,
       },
