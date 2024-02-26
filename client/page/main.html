@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/slider.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/animations.css">
+
 </head>
 
 <body>
@@ -20,9 +22,9 @@
         <div class="slide_item item1">
             <p><img class="image" src="../img/ban_1.jpeg" alt=""></p>
         </div>
-        <div class="slide_item item2"><p><img src="../img/ban_2.jpeg" alt=""></p></div>
+        <div class="slide_item item2"><p><img class="image" src="../img/ban_2.jpeg" alt=""></p></div>
         <div class="slide_item item3"><p><img class="image" src="../img/ban_4.jpeg" alt=""></p></div>
-        <div class="slide_item item4"><p><img src="../img/ban_3.jpeg" alt=""></p></div>
+        <div class="slide_item item4"><p><img class="image" src="../img/ban_3.jpeg" alt=""></p></div>
         <div class="slide_item item5"><p><img class="image" src="../img/slid.png" alt=""></p></div>
         <div class="slide_prev_button slide_button"> &lt;</div>
         <div class="slide_next_button slide_button">></div>
@@ -87,22 +89,8 @@
                                 <div id="obListDateSorting"
                                     style="height: 300px; width: 100%; background-color: #fafafa; display: flex; flex-wrap: wrap;"></div>
                                 </div>
-
-                            </div>
-                            <div class="main_object" style="height: 400px; width: 23%; margin-right: 20px;">
-                                <div>
-                                    <img src="../img/erbag.png" alt="">
-                                    <h2>HermèsBag</h2>
-                                    <h3>Hermès<br>5,000,000원</h3>
-                                </div>
-                            </div>
-                            <div class="main_object" style="height: 400px; width: 23%; margin-right: 20px;">
-                                <div>
-                                    <img src="../img/chanel.png" alt="">
-                                    <h2>ChaBag</h2>
-                                    <h3>Chanel<br>4,000,000원</h3>
-                                </div>
-                            </div>
+                            
+                        <div style="height: 485px; width:95%;  display: flex; flex-wrap: wrap; justify-content: center;">
                             <div class="main_story1" style="height: 480px; width: 32%; margin-right: 10px;">
                                 <div style="margin-top: 300px; margin-left: 30px;">
                                     <h1>01<br>Brand Story</h1>
@@ -151,11 +139,9 @@
 
         <script src="../js/slide.js"></script>
         <script src="../js/top.js"></script>
-        <script src="../js/json.js"></script>
         <script src="../js/header.js"></script>
         <script src="../js/footer.js"></script>
-        
-        <script src="../js/router.js"></script>
+        <script src="../js/objectList.js"></script>
 
         <!-- <script src="../js/scroll.js"></script> -->
 
