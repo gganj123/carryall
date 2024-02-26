@@ -49,7 +49,7 @@ router.post(
   })
 ); //date 나중에 추가
 
-//상품 수정
+// 상품 수정
 router.put(
   "/:_id",
   asyncHandler(async (req, res) => {
