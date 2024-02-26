@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const { Router } = require("express");
 const { Product } = require("../models");
 const asyncHandler = require("../utils/asyncHandler");
@@ -17,13 +16,11 @@ router.get(
 
 //상품 상세조회
 router.get( 
-  "/:id",
+  "/:_id",
   asyncHandler(async (req, res) => {
-    const { id } = req.params;
+    const { _id } = req.params;
 
-    const productId = new mongoose.Types.ObjectId(id);
-
-    const product = await Product.findOne(productId).populate("categoryId");
+    const product = await Product.findOne({ _id }).populate("categoryId");
     res.json(product);
   })
 )
@@ -54,9 +51,9 @@ router.post(
 
 //상품 수정
 router.put(
-  "/:id",
+  "/:_id",
   asyncHandler(async (req, res) => {
-    const { id } = req.params;
+    const { _id } = req.params;
 
     const { name, categoryId, price, image, option, stock, brand, detail } = req.body;
 
@@ -64,10 +61,8 @@ router.put(
       throw new Error("모든 요소를 입력해주세요.");
     }
 
-    const productId = new mongoose.Types.ObjectId(id);
-
     const product = await Product.findOneAndUpdate(
-      productId ,
+      { _id } ,
       {name, categoryId, price, image, option, stock, brand, detail },{ new: true }
     );
     res.json(product);
@@ -75,12 +70,10 @@ router.put(
 );
 
 //상품 삭제 
-router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-
-  const productId = new mongoose.Types.ObjectId(id);
+router.delete("/:_id", async (req, res) => {
+  const { _id } = req.params;
   
-  await Product.deleteOne(productId);
+  await Product.deleteOne( { _id });
   res.json({ result: "success" });
 });
 
