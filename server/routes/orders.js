@@ -23,8 +23,10 @@ router.get(
   "/:_id",
   asyncHandler(async (req, res) => {
     const { _id } = req.params;
-    const order = await Order.findOne({_id}).populate("productId",
-    "name categoryId price image option stock brand")
+    const order = await Order.findOne({ _id }).populate(
+      "productId",
+      "name categoryId price image option stock brand"
+    );
     res.json(order);
   })
 );
@@ -126,7 +128,7 @@ router.put(
 // 주문 삭제
 router.delete("/:_id", async (req, res) => {
   const { _id } = req.params;
-  await Order.deleteOne({_id});
+  await Order.deleteOne({ _id });
   res.json({ result: "success" });
 });
 
