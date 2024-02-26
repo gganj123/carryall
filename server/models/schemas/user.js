@@ -42,8 +42,7 @@ const UserSchema = new Schema(
     emailSubscription: {
       type: Boolean,
       required: true,
-    },
-    passwordReset: {type: Boolean,default: false,}
+    }
   },
   {
     versionKey: false,
