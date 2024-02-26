@@ -18,7 +18,7 @@ router.post(
     // 등록하기
     const { name } = req.body;
     if (!name) {
-      throw new Error("모든 요소를 입력해주세요.");
+      throw new Error("이름을 입력해주세요.");
     }
 
     const category = await Category.create({ name });
@@ -32,10 +32,10 @@ router.put(
     const { _id } = req.params;
     const { name } = req.body;
     if (!name) {
-      throw new Error("모든 요소를 입력해주세요.");
+      throw new Error("이름을 입력해주세요.");
     }
 
-    const categoryId = new mongoose.Types.ObjectId(id);
+    const categoryId = new mongoose.Types.ObjectId(_id);
 
     const category = await Category.findOneAndUpdate(
       categoryId,
