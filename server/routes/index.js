@@ -21,7 +21,7 @@ router.post('/reset-password', asyncHandler(async (req, res) => { // 비밀번�
 
   // 패스워드 발송하기
    await sendMail(email, "임시 비밀번호를 발송합니다.", randomPassword);
-   res.json('')
+   res.json('발송 완료')
 }));
 
 module.exports = router;

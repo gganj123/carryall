@@ -30,8 +30,11 @@ router.use(passport.session());
 passport.use(
   new LocalStrategy(async (userId, password, done) => {
     let foundUser = await User.findOne({ username: userId });
-    if (!foundUser || foundUser.password !== hashedPassword(password)) {
-      return done(null, false, { message: "회원을 찾을 수 없습니다." });
+
+    if (!foundUser) {
+      return done(null, false, { message: "로그인 정보가 다릅니다." });
+    } else if (foundUser.password !== hashedPassword(password)) {
+      return done(null, false, { message: "비밀번호 정보가 다릅니다." });
     }
     if (foundUser.password == hashedPassword(password)) {
       return done(null, foundUser);
@@ -122,7 +125,7 @@ router.post(
     } else {
       const newMember = await User.create({
         username,
-        password: hashPassword, // 비밀번호는 해싱한 비밀번호로 저장
+        password : hashPassword, // 비밀번호는 해싱한 비밀번호로 저장
         name,
         email,
         gender,
