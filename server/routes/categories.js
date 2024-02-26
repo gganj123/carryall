@@ -34,9 +34,8 @@ router.put(
       throw new Error("모든 요소를 입력해주세요.");
     }
 
-    await Category.updateOne({ _id }, { name });
-    const updatedCategory = await Category.findById(_id);
-    res.json(updatedCategory)
+    const category = await Category.findOneupdate({ _id }, { name });
+    res.json(category)
   })
 );
 
