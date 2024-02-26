@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const { Router } = require("express");
 const { Order } = require("../models");
 const asyncHandler = require("../utils/asyncHandler");
@@ -21,14 +20,11 @@ router.get(
 
 // 하나의 주문 조회  -> productId의 요소들 중 detail은 빼고 가져옴
 router.get(
-  "/:id",
+  "/:_id",
   asyncHandler(async (req, res) => {
-    const { id } = req.params;
-    const orderId = new mongoose.Types.ObjectId(id);
-    const order = await Order.findOne(orderId).populate(
-      "productId",
-      "name categoryId price image option stock brand"
-    );
+    const { _id } = req.params;
+    const order = await Order.findOne({_id}).populate("productId",
+    "name categoryId price image option stock brand")
     res.json(order);
   })
 );
@@ -38,23 +34,25 @@ router.post(
   "/",
   asyncHandler(async (req, res) => {
     const {
+      date,
       status,
-      rcpName,
-      rcpZipCode,
-      rcpAddress,
-      rcpAddressDetail,
-      rcpTel,
+      recipientName,
+      recipientZipCode,
+      recipientAddress,
+      recipientAddressDetail,
+      recipientTel,
       request,
       productId,
     } = req.body;
 
     if (
+      !date ||
       !status ||
-      !rcpName ||
-      !rcpZipCode ||
-      !rcpAddress ||
-      !rcpAddressDetail ||
-      !rcpTel ||
+      !recipientName ||
+      !recipientZipCode ||
+      !recipientAddress ||
+      !recipientAddressDetail ||
+      !recipientTel ||
       !request ||
       !productId
     ) {
@@ -62,12 +60,13 @@ router.post(
     }
 
     const order = await Order.create({
+      date,
       status,
-      rcpName,
-      rcpZipCode,
-      rcpAddress,
-      rcpAddressDetail,
-      rcpTel,
+      recipientName,
+      recipientZipCode,
+      recipientAddress,
+      recipientAddressDetail,
+      recipientTel,
       request,
       productId,
     });
@@ -77,43 +76,44 @@ router.post(
 
 //주문 수정 -> 테스트 시 실제 있는 주문 아이디, 상품 아이디 주의해야합니다!
 router.put(
-  "/:id",
+  "/:_id",
   asyncHandler(async (req, res) => {
-    const { id } = req.params;
+    const { _id } = req.params;
     const {
+      date,
       status,
-      rcpName,
-      rcpZipCode,
-      rcpAddress,
-      rcpAddressDetail,
-      rcpTel,
+      recipientName,
+      recipientZipCode,
+      recipientAddress,
+      recipientAddressDetail,
+      recipientTel,
       request,
       productId,
     } = req.body;
     if (
+      !date ||
       !status ||
-      !rcpName ||
-      !rcpZipCode ||
-      !rcpAddress ||
-      !rcpAddressDetail ||
-      !rcpTel ||
+      !recipientName ||
+      !recipientZipCode ||
+      !recipientAddress ||
+      !recipientAddressDetail ||
+      !recipientTel ||
       !request ||
       !productId
     ) {
       throw new Error("모든 요소를 입력해주세요.");
     }
 
-    const orderId = new mongoose.Types.ObjectId(id);
-
     const order = await Order.findOneAndUpdate(
-      orderId,
+      { _id },
       {
+        date,
         status,
-        rcpName,
-        rcpZipCode,
-        rcpAddress,
-        rcpAddressDetail,
-        rcpTel,
+        recipientName,
+        recipientZipCode,
+        recipientAddress,
+        recipientAddressDetail,
+        recipientTel,
         request,
         productId,
       },
@@ -124,10 +124,9 @@ router.put(
 );
 
 // 주문 삭제
-router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  const orderId = new mongoose.Types.ObjectId(id);
-  await Order.deleteOne(orderId);
+router.delete("/:_id", async (req, res) => {
+  const { _id } = req.params;
+  await Order.deleteOne({_id});
   res.json({ result: "success" });
 });
 

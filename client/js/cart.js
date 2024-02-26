@@ -4,13 +4,17 @@ document.addEventListener("DOMContentLoaded", function() {
   const btnDeleteAll = document.querySelector(".btnDeleteAll");
   const btnDeleteSelected = document.querySelector(".btnDeleteSelected");
 
-  // 로컬 스토리지에서 cartItems 배열 가져오기
-  let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+
 
   totalCheck.addEventListener("click", function() {
+    // 로컬 스토리지에서 cartItems 배열 가져오기
+    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     const isChecked = totalCheck.checked;
     const checkboxes = itemsContainer.querySelectorAll('.itemCkBtn');
-  
+    
+    console.log(checkboxes);
+
     for(let i = 0; i < checkboxes.length; i++) {
       checkboxes[i].checked = isChecked;
   
@@ -25,9 +29,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // 로컬 스토리지에 업데이트된 isChecked 속성 저장
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   
-    // 각 상품의 체크 여부에 따라 총 가격 계산
-    const sumItemPrice = calculateTotalPrice(cartItems);
-    updateTotalPrice(sumItemPrice);
+
+    displayUserCartInfo();
   });  
 
   btnDeleteAll.addEventListener("click", function() {
@@ -82,10 +85,13 @@ function displayUserCartInfo() {
   let discountPrice = 0;
   let totalItemPrice = 0;
 
+
   cartItems.forEach(item => {
     // 각 상품의 총 가격 계산
     const itemPrice = item.price * item.quantity;
-    sumItemPrice += itemPrice;
+    let forattedNum = itemPrice.toLocaleString();
+    if(item.isChecked) sumItemPrice += itemPrice;
+
 
     const newItem = document.createElement("div");
     newItem.classList.add("cartItem");
@@ -104,8 +110,8 @@ function displayUserCartInfo() {
           <input class="quantity item" type="number" value="${item.quantity}" min="1" max="99"></input>
           <span class="quantityPlus item"><button onclick="increaseQuantity('${item._id}')">+</button></span>
       </div>
-      <p class="cartBoxH4 item">${item.price}</p>
-      <p class="cartBoxH5 item">${itemPrice}</p>
+      <p class="cartBoxH4 item">${forattedNum}</p>
+      <p class="cartBoxH5 item">${forattedNum}</p>
     `;
     itemsContainer.appendChild(newItem);
 
@@ -123,20 +129,25 @@ function displayUserCartInfo() {
       }
     });
 
+    
+    
     // 각 체크박스의 상태를 확인하여 체크된 상품들만 가격을 더해서 sumItemPrice에 저장
     const checkbox = newItem.querySelector('.itemCkBtn');
     checkbox.addEventListener('change', function() {
+      
       item.isChecked = checkbox.checked; // 체크박스 상태에 따라 isChecked 속성을 수정
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       sumItemPrice = calculateTotalPrice(cartItems); // 체크된 상품들의 총 가격 계산
       updateTotalPrice(sumItemPrice); // 총 가격 업데이트
+      checkedcheckboxes();
     });
   });
   
-  // 총 가격 업데이트
-  totalItemPrice = sumItemPrice - discountPrice;
-  updateTotalPrice(sumItemPrice);
 
+  // 총 가격 업데이트
+  updateTotalPrice(sumItemPrice);
+  checkedcheckboxes();
+  
   function calculateTotalPrice(items) {
     return items.reduce((total, item) => {
       if (item.isChecked) {
@@ -152,18 +163,32 @@ function displayUserCartInfo() {
     const newTotalPrice = document.createElement("div");
     newTotalPrice.classList.add("paymentBoxBody");
     newTotalPrice.innerHTML = `
-      <p class="cartBoxH1 header sumItemPrice">${sumItemPrice}</p>
+      <p class="cartBoxH1 header sumItemPrice">${sumItemPrice.toLocaleString()}</p>
       <p class="cartBoxH2 header ">-</p>
-      <p class="cartBoxH3 header delPrice">${discountPrice}</p>
+      <p class="cartBoxH3 header delPrice">${discountPrice.toLocaleString()}</p>
       <p class="cartBoxH4 header ">=</p>
-      <p class="cartBoxH5 header totalPrice">${totalItemPrice}</p>
+      <p class="cartBoxH5 header totalPrice">${(sumItemPrice - discountPrice).toLocaleString()}</p>
     `;
     totalPriceBox.appendChild(newTotalPrice);
+  }
+
+  function checkedcheckboxes(){
+    const checkboxes = document.querySelectorAll('.itemCkBtn');
+    const totalCheck = document.querySelector(".totalCkBtn");
+    
+    let boolList = [];
+    for(let i of checkboxes) {
+      boolList.push(i['checked']);
+    }
+    
+    totalCheck.checked = !boolList.includes(false);
+
   }
 }
 
 function increaseQuantity(itemId) {
   let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
   const updatedCartItems = cartItems.map(item => {
     if (item._id === itemId) {
       item.quantity += 1;
@@ -172,6 +197,7 @@ function increaseQuantity(itemId) {
     return item;
   });
   localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+
   displayUserCartInfo();
 }
 

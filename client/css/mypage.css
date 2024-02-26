@@ -1,0 +1,89 @@
+body {
+  height: auto;
+}
+.container {
+  padding-bottom: 100px;
+}
+.profileWrap {
+  width: 100%;
+  max-width: 1070px;
+  background-color: #d9d9d9;
+  padding: 47px 42px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.profileImg {
+  width: 140px;
+  height: 140px;
+  background-color: #fff;
+  margin-right: 47px;
+  border-radius: 50%;
+}
+.profileTxt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.profileTxt .nameId {
+  font-size: 30px;
+  color: #000;
+  margin-bottom: 15px;
+}
+.profileTxt .nameDesc {
+  font-size: 17px;
+  color: #424242;
+}
+.btnWrap {
+  width: 161px;
+  height: 100%;
+  padding-left: 37%;
+}
+.profileBtn {
+  display: block;
+  width: 161px;
+  height: 53px;
+  line-height: 53px;
+  background-color: #f8f8f8;
+  text-align: center;
+}
+.mypage .mainCont {
+  width: 70%;
+}
+.mypage .infoCont {
+  width: 100%;
+}
+.infoCont .shipBox {
+  width: 100%;
+  display: flex;
+  padding: 40px 0;
+}
+.infoCont .shipBox li {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.infoCont .shipBox li h6 {
+  width: 70px;
+  height: 70px;
+  font-size: 20px;
+  text-align: center;
+  line-height: 70px;
+}
+.infoCont .shipBox li p {
+  font-size: 17px;
+  text-align: center;
+}
+.shippedBox {
+  border-top: 1px solid #424242;
+  border-bottom: 1px solid #424242;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: ;
+}
+.shippedBox li {
+  line-height: 60px;
+}

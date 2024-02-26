@@ -21,8 +21,6 @@ const local = new LocalStrategy(config, async (email, password, done) => {
       shortId: user.shortId,
       email: user.email,
       name: user.name,
-      passwordReset: user.passwordReset
-      // passwordReset 전달하기
     });
   } catch (err) {
     done(err, null);
