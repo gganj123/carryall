@@ -3,9 +3,7 @@ const Cart = require("../db").Cart;
 const asyncHandler = require("../utils/asyncHandler");
 const router = Router();
 
-router.get(
-  "/:userId",
-  asyncHandler(async (req, res) => {
+router.get("/", asyncHandler(async (req, res) => {
     const { userId } = req.params;
     const found = await Cart.findOne({ userId });
     const carts = found ? found : null;
@@ -48,7 +46,7 @@ router.delete(
     const { productId } = req.body;
     await Cart.findOneAndDelete({ userId, productId });
 
-    res.send("삭제 완료");
+    res.json( { message : "삭제 완료" });
   })
 );
 
@@ -59,7 +57,7 @@ router.delete(
     const { userId } = req.params;
     await Cart.deleteMany({ userId });
 
-    res.send("전체삭제 완료");
+    res.json({ message : "전체삭제 완료" });
   })
 );
 
