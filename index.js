@@ -1,6 +1,4 @@
 const express = require("express");
-const fs = require('fs');
-const path = require('path');
 const cors = require("cors");
 const { json, urlencoded } = require("express");
 const app = express();
@@ -8,17 +6,6 @@ require("dotenv").config();
 const { PORT, MONGODB_PASSWORD } = process.env;
 const { connect } = require("mongoose");
 
-const indexRouter = require("./server/routes"); 
-
-const productsRouter = require("./server/routes/productRouter.js");
-const categoriesRouter = require("./server/routes/categoryRouter.js");
-// const cartsRouter = require("./server/routes/carts.js");
-const ordersRouter = require("./server/routes/orders.js");
-const usersRouter = require("./server/routes/usersRouter.js");
-const adminRequired = require("./server/middlewares/adminRequired.js");
-const errorHandler = require("./server/middlewares/errorHandler.js");
-
-// mongoDB 연결
 connect(
   `mongodb+srv://carryall:${MONGODB_PASSWORD}@cluster0.lobzfqe.mongodb.net/`
 )
@@ -30,17 +17,28 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 
 const indexRouter = require('./server/routes');
-app.use('/', indexRouter);
-const productsRouter = require("./server/routes/products.js");
-app.use("/products", productsRouter);
-const categoriesRouter = require("./server/routes/categories.js");
-app.use("/categories", categoriesRouter);
+const productsRouter = require("./server/routes/productrouter.js");
+const categoriesRouter = require("./server/routes/categoryRouter.js");
 const cartsRouter = require("./server/routes/carts.js");
-app.use("/carts", cartsRouter);
 const ordersRouter = require("./server/routes/orders.js");
-app.use("/orders", ordersRouter);
-// const usersRouter = require('./server/routes/users.js');
-// app.use("/", usersRouter);
+const usersRouter = require("./server/routes/usersRouter.js");
+const viewRouter = require("./server/routes/viewRouter.js");
+const adminRouter = require("./server/routes/admins.js");
+
+
+
+app.use(express.static('client'));
+app.use(viewRouter);
+
+app.use('/api', indexRouter);
+app.use("/api/products", productsRouter);
+app.use("/api/categories", categoriesRouter);
+app.use("/api/carts", cartsRouter);
+app.use("/api/orders", ordersRouter);
+app.use("/api", usersRouter);
+app.use("/api/admins", adminRouter);
+
+app.use(errorHandler);
 
 app.get("/",(req, res)=> {
   res.send("접속 성공");
