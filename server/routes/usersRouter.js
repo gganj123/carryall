@@ -4,10 +4,9 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const asyncHandler = require("../utils/asyncHandler");
 const hashedPassword = require("../utils/hashPassword");
 const User = require("../db").User;
-const userController = require("../controller/user");
+const userController = require("../controller/userController");
 
 const router = express.Router();
 
@@ -62,29 +61,30 @@ passport.deserializeUser(async (user, done) => {
 });
 
 // 로그인
-// router.post("/login", userController.login);
-
-// 로그인
 router.post(
   "/login",
-  asyncHandler(async (req, res, next) => {
-    passport.authenticate("local", (err, user, info) => {
-      // 세션 생성코드 실행
-      if (err) return res.status(500).json(err); // 서버 에러
-      if (!user) return res.status(404).json(info.message); // 유저없음
-      req.logIn(user, (err) => {
-        // 세션 만들기 시작
-        if (err) return next(err);
-        req.session.username = user.username;
+  async (req, res, next) => {
+    try {
+      passport.authenticate("local", (err, user, info) => {
+        // 세션 생성코드 실행
+        if (err) return res.status(500).json(err); // 서버 에러
+        if (!user) return res.status(404).json(info.message); // 유저없음
+        req.logIn(user, (err) => {
+          // 세션 만들기 시작
+          if (err) return next(err);
+          req.session.username = user.username;
 
-        res.json({
-          message: "로그인 성공",
-          username: user.username,
-          name: user.name,
+          res.json({
+            message: "로그인 성공",
+            username: user.username,
+            name: user.name,
+          });
         });
-      });
-    })(req, res, next); // 아이디/비번 DB 비교하는 코드 실행
-  })
+      })(req, res, next); // 아이디/비번 DB 비교하는 코드 실행
+    } catch (err) {
+      console.error(err);
+    }
+  }
 );
 
 // 로그아웃
