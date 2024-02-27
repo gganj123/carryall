@@ -6,8 +6,8 @@
   <title>carryAll</title>
   <link rel="stylesheet" href="/css/styles.css">
 
-  <link rel="stylesheet" href="/carryall/client/css/practice.css">
-  <link rel="stylesheet" href="/carryall/client/css/reset_practice.css">
+  <link rel="stylesheet" href="/css/practice.css">
+  <link rel="stylesheet" href="/css/reset_practice.css">
 </head>
 <body>
 
@@ -60,9 +60,9 @@
               <dt>옵션선택</dt>
               <dd>
                 <select name="selectbox" class="selectbox">
-                  <option value="1">블랙</option>
-                  <option value="2">화이트</option>
-                  <option value="3">브라운</option>
+                  <option value="1">black</option>
+                  <option value="2">white</option>
+                  <option value="3">brown</option>
                 </select>
               </dd>
               <dt>배송비</dt>
@@ -98,7 +98,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id');
       document.addEventListener("DOMContentLoaded", function() {
-      axios.get('http://localhost:5000/product')
+      axios.get('/api/products')
         .then(res => {
           const products = res.data; // 받아온 상품 데이터
           const filteredProduct = products.filter(product => product._id === productId);
