@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const asyncHandler = require("../utils/asyncHandler.js");
-const { User } = require("../models");
+const { User } = require("../db"); 
 const getHash = require("../utils/hashPassword.js");
 const router = Router();
 const generateRandomPassword = require('../utils/getRandomPassword')

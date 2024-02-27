@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const Cart = require("../models").Cart;
+const Cart = require("../db").Cart;
 const asyncHandler = require("../utils/asyncHandler");
 const router = Router();
 

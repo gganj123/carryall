@@ -6,13 +6,15 @@ require("dotenv").config();
 const { PORT, MONGODB_PASSWORD } = process.env;
 const { connect } = require("mongoose");
 
-const indexRouter = require('./server/routes'); //MR1 - require 파일 위로 뺌
+// 라우터 연결
+const indexRouter = require('./server/routes'); 
 const productsRouter = require("./server/routes/products.js");
 const categoriesRouter = require("./server/routes/categories.js");
 const cartsRouter = require("./server/routes/carts.js");
 const ordersRouter = require("./server/routes/orders.js");
 const usersRouter = require('./server/routes/users.js');
 
+// mongoDB 연결
 connect(
   `mongodb+srv://carryall:${MONGODB_PASSWORD}@cluster0.lobzfqe.mongodb.net/`
 )
