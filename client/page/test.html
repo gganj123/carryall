@@ -27,12 +27,12 @@ axios.delete('http://localhost:5001/categories/65dc1ed7f6360a7e0520670d')
 });
 
 
-// axios.get('http://localhost:5001/categories')
-// .then(res => {
-//     // 서버로부터 받은 응답을 처리합니다.
-//     console.log(res.data);
+axios.get('http://localhost:5000/product')
+.then(res => {
+    // 서버로부터 받은 응답을 처리합니다.
+    console.log(res.data);
 
-// })
+})
 // .catch(error => {
 //     // 오류가 발생했을 때 처리합니다.
 //     console.error('Error fetching data:', error);

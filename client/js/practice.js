@@ -32,4 +32,33 @@ function updatePrice() {
   priceElement.textContent = totalPrice.toLocaleString() + "원";
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+  // 서버로부터 데이터를 받아온 후에 실행될 함수
+  axios.get('http://localhost:5000/product')
+    .then(res => {
+      const product = res.data; // 받아온 상품 데이터
 
+      // dataToSend 객체의 정보를 각 요소에 할당
+      document.querySelector('.totalDetailOption h1').innerText = product.name;
+      document.querySelector('.totalDetailOption .price').innerText = product.price;
+      document.querySelector('.totalPrice .price').innerText = product.price;
+      document.querySelector('.totalDetailOption .brand').innerText = product.brand;
+      document.querySelector('.contentPoint ul').innerHTML = `
+          <li class="point">소재: 합성피혁</li>
+          <li class="point">색상: 블랙 / 아이보리 / 카멜</li>
+          <li class="point">추가 상세 : ${product.detail}</li>
+          <li class="point">추가 상세 : ${product.detail}</li>
+      `;
+      document.querySelector('.totalDetailOption dl select[name="selectbox"]').innerHTML = `
+          <option value="1">${product.option}</option>
+          <option value="2">아이보리</option>
+          <option value="3">브라운</option>
+      `;
+
+      // 이미지 변경
+      document.querySelector('.mainImage img').src = product.image;
+    })
+    .catch(error => {
+      console.error('Error fetching product data:', error);
+    });
+});
