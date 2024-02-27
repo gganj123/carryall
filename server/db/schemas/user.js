@@ -33,6 +33,13 @@ const UserSchema = new Schema(
     // 생일
     birthday: {
       type: Date,
+    },
+    // 관리자 or 회원
+    role: {
+      type: String,
+      required:false,
+      default:'user',
+      enum: ['admin', 'user']
     }
   },
   {

@@ -1,7 +1,7 @@
 const { Router } = require("express");
-const { Order } = require("../models");
+const { Order } = require("../db");
 const asyncHandler = require("../utils/asyncHandler");
-const OrderDTO = require("../controller/orderDTO.js");
+// const OrderDTO = require("../controller/orderDTO.js");
 const mongoose = require('mongoose');
 
 
