@@ -4,7 +4,7 @@ const OrderSchema = new Schema(
   {
     // 주문 고유번호 
     id: Schema.Types.ObjectId,
-    //MR1 - 구매이력 알기 위해서 주문 날짜 자동 생성 X 수동으로
+    // 주문 날짜
     date: {
       type: Date,
       required: true

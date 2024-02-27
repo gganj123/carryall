@@ -1,7 +1,7 @@
 //모델 -> 어플리케이션에서 사용되는 데이터와 그 데이터를 처리
-const { model } = require("mongoose");
-const OrderSchema = require("../schemas/order.js");
-const Order = model("Order", OrderSchema);
+const mongoose = require("mongoose");
+const orderSchema = require("../schemas/order");
+const Order = mongoose.model("orders", orderSchema);
 
 class OrderModel {
   // 주문 조회
