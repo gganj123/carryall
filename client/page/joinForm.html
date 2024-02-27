@@ -39,7 +39,7 @@
   </div> -->
 
   <section class="container joinFormWarp">
-    <form action="../../index.html" method="post" class="inputForm">
+    <form id="signupForm" action="#" method="post" class="inputForm">
       <fieldset>
         <legend class="formTit">회원가입</legend>
           <ul class="pathBox">
@@ -54,9 +54,9 @@
               </li>
               <!-- 1. 아이디 -->
               <li>
-                <label for="name" class="label">
+                <label for="idName" class="label">
                     <span>* 아이디</span>
-                    <input type="text" class="inputType01" id="name" required="" >
+                    <input type="text" class="inputType01" id="idName" required="" >
                 </label>
               </li>
               <!-- 2. 비밀번호 -->
@@ -131,9 +131,9 @@
                   <input style="margin-top: 20px;" type="text" name="address" id="address03" class="inputType01" placeholder="추가 상세 주소를 입력하세요." >
               </div>
             </li>
-            <div class="joinBtn btn_box f_c">
-              <button type="button" class="btnType01">이전</button>
-              <button type="submit" class="btnType02" onclick="saveToSessionStorage()">확인</button>
+            <div class="joinBtn btn_box">
+              <button type="button" class="btnType01" onclick="goToPreviousPage()"">이전</button>
+              <button type="button" class="btnType02" onclick="submitForm()">확인</button>
             </div>
           </div>
       </fieldset>                        
@@ -143,6 +143,10 @@
 
   <!-- 회원가입 폼 script -->
   <script src="../js/join.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+  <!-- 우편번호 API -->
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script>
     // 1. 이메일 주소 유효성 추가
     var emailInput = document.getElementById("email");
@@ -208,10 +212,70 @@
         }
       }).open();
     }
+
+
+    //5. api 입력
+    function submitForm() {
+      // HTML 폼 요소에 입력된 값을 수집합니다.
+      // 아이디 : idName
+      // 비밀번호 : password
+      // 이름 : name
+      // 이메일 : email
+      // 휴대폰번호 : phoneNum
+      // 주소 : `${address01}${address02}${address03}`
+
+      const username = document.getElementById('idName').value;
+      const password = document.getElementById('password').value;
+      const name = document.getElementById('name').value;
+      // const passwordReconfirm = document.getElementById('passwordReconfirm').value;
+      const email = document.getElementById('email').value;
+      const phoneNum = document.getElementById('phoneNum').value;
+      const address01 = document.getElementById('address01').value;
+      const address02 = document.getElementById('address02').value;
+      const address03 = document.getElementById('address03').value;
+
+      // {
+      //   "username":"singdddsing",
+      //   "password":"test3",
+      //   "email":"testtestest@teddddst.com",
+      //   "tel":"010-9999-0000",
+      //   "name":"테스트유싱 2256",
+      //   "zipCode":"123",
+      //   "address":"주소1",
+      //   "addressDetail":"주소2"
+      // }
+
+
+      // 수집된 데이터를 서버에 전송합니다.
+      axios.post('http://localhost:5001/join', {
+        "username": username,
+        "password": password,
+        "email": email,
+        // "emailSubscription":false,
+        "tel": phoneNum,
+        // "telSubscription":true,
+        "name": name,
+        "zipCode": address01,
+        "address": address02,
+        "addressDetail": address03,
+      })
+      .then(response => {
+        // 서버로부터의 응답을 처리합니다.
+        console.log('회원가입이 완료되었습니다.', response.data);
+        // 여기서 다음 단계로 넘어가거나 원하는 작업을 수행할 수 있습니다.
+      })
+      .catch(error => {
+        // 오류가 발생했을 때 처리합니다.
+        console.error('회원가입 오류:', error);
+      });
+    }
+    function goToPreviousPage() {
+      // 이전 페이지로 돌아가는 코드를 추가합니다.
+      window.history.back()
+    }
     
     </script>
-    <!-- 우편번호 API -->
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 </body>
 </html>
 
