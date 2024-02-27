@@ -6,7 +6,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const asyncHandler = require("../utils/asyncHandler");
 const hashedPassword = require("../utils/hashPassword");
-const User = require("../models").User;
+const User = require("../db").User;
 const router = express.Router();
 
 // express-session

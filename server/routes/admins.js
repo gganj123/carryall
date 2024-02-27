@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const Admin = require("../models").Admin;
+const Admin = require("../db").Admin;
 const asyncHandler = require("../utils/asyncHandler");
 const router = Router();
 

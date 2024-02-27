@@ -15,6 +15,7 @@ const usersRouter = require("./server/routes/users.js");
 const adminRequired = require("./server/middlewares/admin_required");
 const errorHandler = require("./server/middlewares/error-handler");
 
+// mongoDB 연결
 connect(
   `mongodb+srv://carryall:${MONGODB_PASSWORD}@cluster0.lobzfqe.mongodb.net/`
 )
