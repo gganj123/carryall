@@ -8,17 +8,17 @@ viewRouter.use('/admin',serveStatic('admin'));
 viewRouter.use('/cart',serveStatic('cart'));
 viewRouter.use('/cartTest',serveStatic('cartTest'));
 viewRouter.use('/detail',serveStatic('detail'))
-viewRouter.use('/join_agree',serveStatic('join_agree'));
-viewRouter.use('/join_finished',serveStatic('join_finished'));
-viewRouter.use('/join_form',serveStatic('join_form'));
+viewRouter.use('/joinagree',serveStatic('joinagree'));
+viewRouter.use('/joinfinished',serveStatic('joinfinished'));
+viewRouter.use('/joinform',serveStatic('joinform'));
 viewRouter.use('/join',serveStatic('join'));
-viewRouter.use('/login_checkPwd',serveStatic('login_checkPwd'));
-viewRouter.use('/login_member',serveStatic('login_member'));
-viewRouter.use('/login_nonMember',serveStatic('login_nonMember'));
+viewRouter.use('/logincheckPwd',serveStatic('logincheckPwd'));
+viewRouter.use('/loginMember',serveStatic('loginMember'));
+viewRouter.use('/loginnonMember',serveStatic('loginnonMember'));
 viewRouter.use('/order',serveStatic('order'));
 viewRouter.use('/practice',serveStatic('practice'));
-viewRouter.use('/test_ver2',serveStatic('test_ver2'));
 viewRouter.use('/test',serveStatic('test'));
+viewRouter.use('/mypage',serveStatic('mypage'));
 
 
 

@@ -8,8 +8,9 @@ document.addEventListener("DOMContentLoaded", function() {
         </button>
         <input class="headInput" type="text" placeholder="검색">
         <button class="headmenu" style="color:black"><a href="/cart">장바구니</button>
-        <button class="headmenu" style="color:black"><a href="/login_member">로그인</button>
-        <button class="headmenu" style="color:black"><a href="/login_member">마이페이지</button>
-        <button class="headmenu" style="color:black"><a href="/join_agree">회원가입</button>
+        <button class="headmenu" style="color:black"><a href="/loginmember">로그인</button>
+        <button class="headmenu" style="color:black"><a href="/mypage">마이페이지</button>
+        <button class="headmenu" style="color:black"><a href="/joinagree">회원가입</button>
     </div>`;
 });
+

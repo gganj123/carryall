@@ -90,11 +90,7 @@ router.post("/join", asyncHandler(async (req, res) => {
     password,
     name,
     email,
-    gender,
     tel,
-    birthday,
-    telSubscription,
-    emailSubscription,
   } = req.body;
 
   const hashPassword = hashedPassword(password);
@@ -112,11 +108,7 @@ router.post("/join", asyncHandler(async (req, res) => {
       password: hashPassword, // 비밀번호는 해싱한 비밀번호로 저장
       name,
       email,
-      gender,
       tel,
-      birthday,
-      telSubscription,
-      emailSubscription,
     });
     res.json(newMember);
   }

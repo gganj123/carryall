@@ -3,7 +3,7 @@
   padding: 0;
 }
 body {
-  height: 100vh;
+  height: auto;
   background-color: #fff;
 }
 li {
@@ -23,7 +23,7 @@ button {
   justify-content: center;
   /* margin-top: 60px; */
   position: relative;
-  top: 18%;
+  margin-top: 18%;
   /* transform: translateY(-50%); */
 }
 .tab {
@@ -117,7 +117,7 @@ h2.fakeTit {
   color: #000;
   background-color: #f5f5f5;
   width: calc(50% - 10px);
-  margin-top: 0;
+  margin: 0;
 }
 .joinWrap {
   width: 100%;
@@ -143,4 +143,14 @@ h2.fakeTit {
 }
 .joinWrap li:last-of-type {
   border-right: unset;
+}
+.joinFinishedImg {
+  width: 550px;
+}
+.joinFinishedImg img {
+  width: 100%;
+}
+.subTit {
+  text-align: center;
+  margin-bottom: 20px;
 }

@@ -14,7 +14,7 @@ function fetchData() {
             <input type="text" class ="cate font_17" value="${product.name}">
           </div>
           <div class="sortbutton">
-            <button class="change col font_17">수정</button>
+            <button class="change butt col font_17">수정</button>
           </div>
           <div class="infoCont" style="width:100%; padding-top: 0;">
             <h3> </h3>
@@ -47,7 +47,7 @@ function addForm(){
     <div class="check">
       <input type="checkbox" name="checkbox1">&ensp;&nbsp;1</div>
       <div class="sort"><input type="text" class ="regi cate font_17"></div>
-      <div class="sortbutton"><button id="regiButton" class="col font_17">등록</button></div>
+      <div class="sortbutton"><button id="regiButton" class="col font_17 butt">등록</button></div>
       <div class="infoCont" style="width:100%; padding-top: 0;">
         <h3> </h3></div>
 </div>`;
