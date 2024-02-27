@@ -1,5 +1,5 @@
 // 정보들은 controller로부터 받아 검증 후 model을 통해 동작
-const Product = require("../db/models/product-model");
+const Product = require("../db/models/productModel");
 
 class ProductService {
   async createProduct(newProduct) {

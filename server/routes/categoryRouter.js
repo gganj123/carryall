@@ -1,5 +1,5 @@
 const Router = require("express");
-const categoryController = require("../controller/category-controller");
+const categoryController = require("../controller/categoryController");
 const { body } = require("express-validator");
 
 const categoryRouter = Router();
@@ -7,7 +7,7 @@ const categoryRouter = Router();
 categoryRouter.get("/", categoryController.getCategory);
 categoryRouter.post(
   "/",
-  [body("name").trim().isLength({ min: 5 })],
+  [body("name").trim().isLength({ min: 1 })],
   categoryController.createCategory
 );
 categoryRouter.put("/:_id", categoryController.updateCategory);
