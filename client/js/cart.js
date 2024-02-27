@@ -3,6 +3,18 @@ document.addEventListener("DOMContentLoaded", function() {
   const itemsContainer = document.querySelector(".itemContainer");
   const btnDeleteAll = document.querySelector(".btnDeleteAll");
   const btnDeleteSelected = document.querySelector(".btnDeleteSelected");
+  const btnOrderSubmit = document.querySelector(".btnOrderSubmit");
+
+  btnOrderSubmit.addEventListener("click", function() {
+    // if(로그인상태 == 0){
+    //   alert('로그인 페이지로 이동합니다.')
+    //   location.href = '로그인페이지'
+    // } 
+    // else {//로그인 되어 있는 상태면
+
+    // }
+    addItemToOrder();
+  });
 
 
 
@@ -13,8 +25,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const isChecked = totalCheck.checked;
     const checkboxes = itemsContainer.querySelectorAll('.itemCkBtn');
     
-    console.log(checkboxes);
-
     for(let i = 0; i < checkboxes.length; i++) {
       checkboxes[i].checked = isChecked;
   
@@ -45,11 +55,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 function deleteAllItems() {
-  localStorage.removeItem("cartItems");
-  const itemsContainer = document.querySelector('.itemContainer');
-  itemsContainer.innerHTML = "";
-  const selectAllCheckbox = document.querySelector(".totalCkBtn");
-  selectAllCheckbox.checked = false;
+  if(로그인상태 == 0){
+    localStorage.removeItem("cartItems");
+    const itemsContainer = document.querySelector('.itemContainer');
+    itemsContainer.innerHTML = "";
+    const selectAllCheckbox = document.querySelector(".totalCkBtn");
+    selectAllCheckbox.checked = false;
+  } 
+  else {//로그인 되어 있는 상태면
+   
+  }
+
 }
 
 function deleteSelectedItems() {
@@ -75,6 +91,13 @@ function deleteSelectedItems() {
 }
 
 function displayUserCartInfo() {
+  // if(로그인상태 == 0){
+    
+    
+  // } 
+  // else {//로그인 되어 있는 상태면
+   
+  // }
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const itemsContainer = document.querySelector(".itemContainer");
   const totalPriceBox = document.querySelector(".totalPrice");
@@ -146,11 +169,11 @@ function displayUserCartInfo() {
     const newTotalPrice = document.createElement("div");
     newTotalPrice.classList.add("paymentBoxBody");
     newTotalPrice.innerHTML = `
-      <p class="cartBoxH1 header sumItemPrice">${sumItemPrice.toLocaleString()}</p>
+      <p class="cartBoxH1 header sumItemPrice">${sumItemPrice.toLocaleString() + "원"}</p>
       <p class="cartBoxH2 header ">-</p>
-      <p class="cartBoxH3 header delPrice">${discountPrice.toLocaleString()}</p>
+      <p class="cartBoxH3 header delPrice">${discountPrice.toLocaleString() + "원"}</p>
       <p class="cartBoxH4 header ">=</p>
-      <p class="cartBoxH5 header totalPrice">${(sumItemPrice - discountPrice).toLocaleString()}</p>
+      <p class="cartBoxH5 header totalPrice">${(sumItemPrice - discountPrice).toLocaleString() + "원"}</p>
     `;
     totalPriceBox.appendChild(newTotalPrice);
   }
@@ -206,17 +229,35 @@ function decreaseQuantity(itemId) {
   displayUserCartInfo();
 }
 
+function addItemToOrder() {
+  // 로컬 스토리지에서 저장된 cartItems 데이터 가져오기, 없으면 빈 배열로 초기화
+  // 로컬 스토리지에서 저장된 orderItems 데이터 가져오기, 없으면 빈 배열로 초기화
+  let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  let orderItems = [];
+  // isChecked 값이 true인 아이템만 필터링
+  let checkedItems = cartItems.filter(item => item.isChecked);
 
-    // // 아이템 수량 변경 시 totalPricePerItem 갱신
-    // const quantityInput = newItem.querySelector('.quantity');
-    // quantityInput.addEventListener('change', function() {
-    //   const newQuantity = parseInt(quantityInput.value);
-    //   if (!isNaN(newQuantity) && newQuantity >= 1 && newQuantity <= 99) {
-    //     item.quantity = newQuantity;
-    //     item.totalPricePerItem = item.price * newQuantity;
-    //     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    //     displayUserCartInfo(); // 화면 갱신
-    //   } else {
-    //     alert('수량은 1 이상 99 이하여야 합니다.');
-    //   }
-    // });
+
+  // 중복된 아이템이 있는지 확인하고 없으면 orderItems에 추가
+  checkedItems.forEach(checkedItem => {
+    let isExist = orderItems.some(orderItem => orderItem._id === checkedItem._id);
+    if (!isExist) {
+      // 중복된 아이템이 없으면 orderItems에 추가
+      orderItems.push({
+        _id: checkedItem._id,
+        imageUrl: checkedItem.imageUrl,
+        name: checkedItem.name,
+        brand: checkedItem.brand,
+        option: checkedItem.option,
+        quantity: checkedItem.quantity,
+        price: checkedItem.price,
+        totalPricePerItem: checkedItem.quantity * checkedItem.price
+      });
+    }
+  });
+    
+  // orderItems를 로컬 스토리지에 다시 저장
+  localStorage.setItem("orderItems", JSON.stringify(orderItems));
+}
+    
+    

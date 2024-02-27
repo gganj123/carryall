@@ -1,5 +1,5 @@
 
-axios.get('http://localhost:5000/product')
+axios.get('http://localhost:5001/products')
   .then(res => {
     const productList = res.data;
     let htmlString = '';
@@ -8,7 +8,7 @@ axios.get('http://localhost:5000/product')
     productList.forEach(product => {
       htmlString += `<div style="height: 300px; width: 23%; margin-right: 20px;">
       <ul>`
-      htmlString += `<li><img class="obimg" src="${product.image}" alt="Product Image"></li>`;//이미지 넣어서 나오게 해보기
+      htmlString += `<li><img class="obimg" id="${product._id}" src="${product.image}" alt="${product.id}"></li>`;//이미지 넣어서 나오게 해보기
       htmlString += `<li><strong>Name: ${product.name}</strong></li> `;
       htmlString += `<li><strong>Brand:</strong> ${product.brand}</li>`;
       htmlString += `<li><strong>Price: ${product.price.toLocaleString('ko-KR')}</strong></li>`;
@@ -22,7 +22,7 @@ axios.get('http://localhost:5000/product')
   });
 
 
-  axios.get('http://localhost:5000/product')
+  axios.get('http://localhost:5001/products')
   .then(res => {
     // 등록일순으로 데이터 정렬
     const productList = res.data.sort((a, b) => {

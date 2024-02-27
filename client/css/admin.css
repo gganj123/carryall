@@ -68,6 +68,64 @@ h2 {
   font-size: 18px;
   font-weight: 500;
 }
+
+.infoCont h4 {
+  border-bottom: 2px solid #420000;
+  padding-bottom: 8px;
+  font-size: 17px;
+  font-weight: 500;
+}
 /* 기본 레이아웃 end */
 
+button{
+  width : 120px;
+  height : 30px;
+  background-color: #BDBDBD;
+}
+.col{
+  background-color: #333333;
+  color: #ffffff;
+}
 
+.balance{
+  float: right;
+  margin-right: 50px;
+
+}
+
+div.adminList{
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: 50px;
+  margin-top: 10px;
+}
+
+div.check{
+  width:20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sort{
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div.sortbutton{
+  width:30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input.cate{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 170px;
+  text-align: center;
+}

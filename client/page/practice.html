@@ -12,10 +12,10 @@
   <div class="header" style="height: 60px; width: 100%; display: flex; align-items: center;background-color: white;">
         <h1 style="margin-right: 50px; font-family:Roboto; font-weight: 700; font-style: italic; ">CARRYALL</h1>
         <input class ="inputform" type="text" placeholder="검색" style="height: 50%; padding: 5px; border-radius: 5px; margin-right: 50px;">
-        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold">장바구니</button>
-        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">로그인</button>
-        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">마이페이지</button>
-        <button style="height: 50%; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">회원가입</button>
+        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;"><a href="/carryall/client/page/cart.html">장바구니</a></button>
+        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;"><a href="/carryall/client/page/login_member.html"></a>로그인</button>
+        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;"><a href="/carryall/client/page/">마이페이지</a></button>
+        <button style="height: 50%; background-color:white; border: white; font-size: 1.2em; font-weight: bold;"><a href="/carryall/client/page/join.html">회원가입</a></button>
   </div>
 
   <div class="container" style="height: 100%; width: 100%; display: flex; flex-wrap: wrap;">
@@ -65,7 +65,7 @@
               <dd class="brand">셀린느</dd>
               <dt>옵션선택</dt>
               <dd>
-                <select name="selectbox">
+                <select name="selectbox" class="selectbox">
                   <option value="1">블랙</option>
                   <option value="2">화이트</option>
                   <option value="3">브라운</option>
@@ -96,7 +96,40 @@
         <h1>side2</h1>
       </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script>
 
+document.addEventListener("DOMContentLoaded", function() {
+axios.get('http://localhost:5000/product/50')
+.then(res => {
+  const product = res.data; // 받아온 상품 데이터
+
+// dataToSend 객체의 정보를 각 요소에 할당
+document.querySelector('.totalDetailOption h1').innerText = product.name;
+document.querySelector('.totalDetailOption .price').innerText = product.price;
+document.querySelector('.totalPrice .price').innerText = product.price;
+document.querySelector('.totalDetailOption .brand').innerText = product.brand;
+document.querySelector('.contentPoint ul').innerHTML = `
+    <li class="point">소재: 합성피혁</li>
+    <li class="point">색상: 블랙 / 아이보리 / 카멜</li>
+    <li class="point">추가 상세 : ${product.detail}</li>
+    <li class="point">추가 상세 : ${product.detail}</li>
+`;
+document.querySelector('.totalDetailOption dl select[name="selectbox"]').innerHTML = `
+    <option value="1">${product.option}</option>
+    <option value="2">아이보리</option>
+    <option value="3">브라운</option>
+`;
+// 이미지 변경
+document.querySelector('.mainImage img').src = product.image;
+    console.log(res.data); 
+})
+.catch(error => {
+    // 오류가 발생했을 때 처리합니다.
+    console.error('Error fetching data:', error);
+});
+})
+    </script>
   <div class="footer">
     <div class="1">이용약관</div>
     <div class="2">개인정보처리방침</div>
@@ -105,4 +138,3 @@
   </div>
 </body>
 </html>
-<script src="/carryall/client/js/practice.js"></script>
