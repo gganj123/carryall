@@ -1,4 +1,6 @@
 const express = require("express");
+const fs = require('fs');
+const path = require('path');
 const cors = require("cors");
 const { json, urlencoded } = require("express");
 const app = express();
@@ -27,17 +29,20 @@ app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
-app.use("/", indexRouter);
+const indexRouter = require('./server/routes');
+app.use('/', indexRouter);
+const productsRouter = require("./server/routes/products.js");
 app.use("/products", productsRouter);
+const categoriesRouter = require("./server/routes/categories.js");
 app.use("/categories", categoriesRouter);
-
-// app.use("/carts", cartsRouter);
+const cartsRouter = require("./server/routes/carts.js");
+app.use("/carts", cartsRouter);
+const ordersRouter = require("./server/routes/orders.js");
 app.use("/orders", ordersRouter);
-app.use("/users", usersRouter);
+// const usersRouter = require('./server/routes/users.js');
+// app.use("/", usersRouter);
 
-app.use(errorHandler); //정확한 에러메세지 알고자 일단 주석처리
-
-app.get("/", (req, res) => {
+app.get("/",(req, res)=> {
   res.send("접속 성공");
 });
 

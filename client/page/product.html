@@ -4,22 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>carryAll</title>
-  <link rel="stylesheet" href="/carryall/client/css/product.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/product.css">
+  <!-- <link rel="stylesheet" href="/carryall/client/css/reset_practice.css"> -->
 </head>
 <body>
-  <div class="header" style="height: 60px; width: 100%; display: flex; align-items: center;"></div>
-  <div class="header" style="height: 60px; width: 100%; display: flex; align-items: center;background-color: white;">
-        <h1 style="margin-right: 50px; font-family:Roboto; font-weight: 700; font-style: italic; ">CARRYALL</h1>
-        <input class ="inputform" type="text" placeholder="검색" style="height: 50%; padding: 5px; border-radius: 5px; margin-right: 50px;">
-        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold">장바구니</button>
-        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">로그인</button>
-        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">마이페이지</button>
-        <button style="height: 50%; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">회원가입</button>
-  </div>
+  <header id="header"></header>
+
 
   <div class="total">
-    <div class="mainPhoto">
-      <img class="mainPhoto" src="/carryall/client/img/ban_3.jpeg">
+    <div class="mainPhoto" style="background-color: #10111a;">
+      <img class="mainPhoto" style = "width: 70% ; height:auto;"src="/img/ban_3.jpeg">
     </div>
     <!-- <div class="category">카테고리
       <div class="tote">토트백</div>
@@ -27,58 +22,65 @@
       <div class="back">백팩</div>
     </div> -->
     <div class="container" style="height: 100px; width: 100%; display: flex; flex-wrap: wrap;">
-      <div class="side1" style="height: 100%; width: 22%; background-color: gray; ">
-        <h1>side1</h1>
+      <div class="side1" style="height: 2000px; width: 22%; background-color: #fafafa; ">
       </div>
-      <div class="main" style="width: 56%; background-color: #d9d9d9; ">
+      <div class="main" style="width: 56%; background-color: #fafafa; ">
         <!-- <h1>main</h1> -->
           <div class="selectbox">
-            <select name="selectbox">
-              <option value="1">최신순</option>
-              <option value="2">판매인기순</option>
-              <option value="3">낮은가격순</option>
-              <option value="4">높은가격순</option>
-            </select>
+            <select name="sort" id="sort" class="font_17" style="background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 0px; ">
+              <option value="a">선택</option>
+              <option value="a">최신상품</option>
+              <option value="b">판매인기</option>
+              <option value="c">낮은가격</option>
+              <option value="d">높은가격</option>
+          </select>
           </div>
-          <div class="productList">
-              <div class="detail" id="detail" src="practice.html" a="#"></div>
-
-            <!-- <div class="item">
-              <div class="img">
-                <img src="/carryall/client/img/1.webp" alt="">
-              </div>
-              <div class="text">
-                <h2 id="root">브랜드명</h2>
-                <p>제품명</p>
-                <p>가격</p>
-              </div>
-            </div> -->
-
-            <!-- <div class="item">
-              <div class="img">
-                <img src="/carryall/client/img/1.webp" alt="">
-              </div>
-              <div class="text">
-                <h2>브랜드명</h2>
-                <p>제품명</p>
-                <p>가격</p>
-              </div>
-            </div> -->
+          <div class="productList" id="objectList">
+              <div class="detail" id="detail"></div>
+            <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+              <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                  
+                  axios.get('/api/products')
+                  .then(res => {
+                    const productList = res.data;
+                    let htmlString = '';
+                    console.log(res.data);
+            
+                    productList.forEach(product => {
+                      htmlString += `<div class="item" style="height: 330px; width: 244.44px; margin-bottom:100px;">`
+                      htmlString += `<img div class="img" style="width: 100%; height: auto;  display: block;" id="${product._id}" src="${product.image}" alt="Product Image" onclick="handleImageClick('${product._id}')">`;//이미지 넣어서 나오게 해보기
+                      htmlString += `<h2 id="root"> ${product.brand}</h2>`;
+                      htmlString += `<div p>${product.name}</div> `;
+                      htmlString += `<p>${product.price.toLocaleString('ko-KR')}</p>`;
+                      htmlString += `</div>`;
+                    });
+            
+                    document.getElementById('objectList').innerHTML = htmlString;
+                  })
+                  .catch(error => {
+                    console.error('Error fetching data:', error);
+                  });
+                });
+                function handleImageClick(productId) {
+                // 클릭된 이미지의 ID를 이용하여 다른 페이지로 이동
+                window.location.href = "/practice?id=" + productId;
+                }
+              </script>
           </div> 
         </div>
-        <div style="height: 100%; width: 22%; background-color: gray;">
-          <h1>side2</h1>
+        <div style="height: 2000px; width: 22%; background-color: #fafafa;">
+
         </div>
       </div>
       </div>
     </div>
   </div>
-  <!-- <div class="footer">
-    <div class="1">이용약관</div>
-    <div class="2">개인정보처리방침</div>
-    <div class="3">이용안내</div>
-    <div class="4">입점/제휴안내</div>
-  </div> -->
+  <div style="height: 500px;"></div>
+
+  <script src="/js/header.js"></script>
+  <script src="/js/footer.js"></script>
   <script src="/carryall/client/js/product.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 </body>
 </html>
