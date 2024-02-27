@@ -1,63 +1,85 @@
-// 상품 데이터를 생성하는 함수
-function createProduct(index) {
-  return {
-      img: `/carryall/client/img/ban_${index}.jpeg`, // 이미지 경로 예시
-      brand: `Brand ${index}`,
-      name: `Product ${index}`,
-      price: `${index}`
-  };
-}
+// // 상품 데이터를 생성하는 함수
+// function createProduct(index) {
+//   return {
+//       img: `/carryall/client/img/ban_${index}.jpeg`, // 이미지 경로 예시
+//       brand: `Brand ${index}`,
+//       name: `Product ${index}`,
+//       price: `${index}`
+//   };
+// }
 
-// 상품 개수 설정
-const numberOfProducts = 20;
+// // 상품 개수 설정
+// const numberOfProducts = 20;
 
-// Mock 데이터 생성
-const products = Array.from({ length: numberOfProducts }, (_, index) => createProduct(index + 1));
+// // Mock 데이터 생성
+// const products = Array.from({ length: numberOfProducts }, (_, index) => createProduct(index + 1));
 
-// 이제 products 배열에 20개의 상품이 들어 있습니다.
-// 이 배열을 renderProducts 함수에 전달하여 화면에 표시할 수 있습니다.
+// // 이제 products 배열에 20개의 상품이 들어 있습니다.
+// // 이 배열을 renderProducts 함수에 전달하여 화면에 표시할 수 있습니다.
 
-// productList 요소 찾기
-const productList = document.getElementById("detail");
+// // productList 요소 찾기
+// const productList = document.getElementById("detail");
 
-// 상품을 렌더링하는 함수
-function renderProducts(products) {
-  products.forEach(product => {
-    // div.item 요소 생성
-    const item = document.createElement("div");
-    item.classList.add("item");
+// // 상품을 렌더링하는 함수
+// function renderProducts(products) {
+//   products.forEach(product => {
+//     // div.item 요소 생성
+//     const item = document.createElement("div");
+//     item.classList.add("item");
 
-    // div.img 요소 생성
-    const imgDiv = document.createElement("div");
-    imgDiv.classList.add("img");
-    const img = document.createElement("img");
-    img.src = product.img;
-    img.alt = "Product Image";
-    imgDiv.appendChild(img);
+//     // div.img 요소 생성
+//     const imgDiv = document.createElement("div");
+//     imgDiv.classList.add("img");
+//     const img = document.createElement("img");
+//     img.src = product.img;
+//     img.alt = "Product Image";
+//     imgDiv.appendChild(img);
 
-    // div.text 요소 생성
-    const textDiv = document.createElement("div");
-    textDiv.classList.add("text");
-    const brandHeading = document.createElement("h2");
-    brandHeading.textContent = product.brand;
-    const nameParagraph = document.createElement("p");
-    nameParagraph.textContent = product.name;
-    const priceParagraph = document.createElement("p");
-    priceParagraph.textContent = product.price;
+//     // div.text 요소 생성
+//     const textDiv = document.createElement("div");
+//     textDiv.classList.add("text");
+//     const brandHeading = document.createElement("h2");
+//     brandHeading.textContent = product.brand;
+//     const nameParagraph = document.createElement("p");
+//     nameParagraph.textContent = product.name;
+//     const priceParagraph = document.createElement("p");
+//     priceParagraph.textContent = product.price;
 
-    // div.text에 하위 요소 추가
-    textDiv.appendChild(brandHeading);
-    textDiv.appendChild(nameParagraph);
-    textDiv.appendChild(priceParagraph);
+//     // div.text에 하위 요소 추가
+//     textDiv.appendChild(brandHeading);
+//     textDiv.appendChild(nameParagraph);
+//     textDiv.appendChild(priceParagraph);
 
-    // div.item에 하위 요소 추가
-    item.appendChild(imgDiv);
-    item.appendChild(textDiv);
+//     // div.item에 하위 요소 추가
+//     item.appendChild(imgDiv);
+//     item.appendChild(textDiv);
 
-    // productList에 div.item 추가
-    productList.appendChild(item);
+//     // productList에 div.item 추가
+//     productList.appendChild(item);
+//   });
+// }
+<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+axios.get('http://localhost:5000/product')
+.then(res => {
+  const productList = res.data;
+  let htmlString = '';
+  console.log(res.data);
+
+  productList.forEach(product => {
+    htmlString += `<div style="height: 300px; width: 23%; margin-right: 20px;">
+    <ul>`
+    htmlString += `<li><img class="obimg" src="${product.image}" alt="Product Image"></li>`;//이미지 넣어서 나오게 해보기
+    htmlString += `<li><strong>Name: ${product.name}</strong></li> `;
+    htmlString += `<li><strong>Brand:</strong> ${product.brand}</li>`;
+    htmlString += `<li><strong>Price: ${product.price.toLocaleString('ko-KR')}</strong></li>`;
+    htmlString += `</ul></div>`;
   });
-}
+
+  document.getElementById('objectList').innerHTML = htmlString;
+})
+.catch(error => {
+  console.error('Error fetching data:', error);
+});
 
 // 초기 상품 데이터 로드
 renderProducts(products);
