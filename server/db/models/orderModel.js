@@ -10,7 +10,12 @@ class OrderModel {
       const orders = await Order.find()
       .populate(
         "productId",
-        "name categoryId price image option stock brand");
+        "name categoryId price image option stock brand")
+        .populate(
+          "userId",
+          "tel zipCode address addressDetail"
+        );
+        
       return orders;
     } catch (err) {
       const error = new Error("모든 주문 정보를 불러오는데 실패했습니다.");
@@ -26,6 +31,10 @@ class OrderModel {
       .populate(
         "productId",
         "name categoryId price image option stock brand"
+      )
+      .populate(
+        "userId",
+        "tel zipCode address addressDetail"
       );
       return order
     } catch (err) {
@@ -41,7 +50,7 @@ class OrderModel {
       const order = await Order.findOneAndUpdate(
       { _id },
         orderInfo,
-        { new:true }  
+        { new:true }
       )
       return order;
     } catch (err) {
@@ -53,15 +62,9 @@ class OrderModel {
 
   // 주문 추가(=생성)
   async create(orderInfo) {
-    try {
-      const newOrder = await Order.create(orderInfo);
+    const newOrder = await Order.create(orderInfo);
       return newOrder;
-    } catch (err) {
-      const error = new Error("에러 : 주문 생성중 실패");
-      error.statusCode = 403;
-      throw error;
-    }
-  }  
+  }
 
   // 주문 삭제
   async delete(_id) {

@@ -12,7 +12,7 @@ const productsRouter = require("./server/routes/productRouter.js");
 const categoriesRouter = require("./server/routes/categoryRouter.js");
 // const cartsRouter = require("./server/routes/carts.js");
 const ordersRouter = require("./server/routes/orders.js");
-const usersRouter = require("./server/routes/users.js");
+const usersRouter = require("./server/routes/usersRouter.js");
 const adminRequired = require("./server/middlewares/adminRequired.js");
 const errorHandler = require("./server/middlewares/errorHandler.js");
 
@@ -30,10 +30,12 @@ app.use(urlencoded({ extended: true }));
 app.use("/", indexRouter);
 app.use("/products", productsRouter);
 app.use("/categories", categoriesRouter);
-app.use("/orders", ordersRouter);
-// app.use("/users", usersRouter);
 
-app.use(errorHandler);
+// app.use("/carts", cartsRouter);
+app.use("/orders", ordersRouter);
+app.use("/users", usersRouter);
+
+app.use(errorHandler); //정확한 에러메세지 알고자 일단 주석처리
 
 app.get("/", (req, res) => {
   res.send("접속 성공");

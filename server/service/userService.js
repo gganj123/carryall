@@ -8,6 +8,15 @@ class UserService {
     this.userModel = userModel;
   }
 
+  // 로그인
+  async login(username, password) {
+    const user = await this.userModel.findByUsername({ username });
+    if(!user || user.password !== password) {
+      throw new Error('로그인정보가 일치하지 않습니다.')
+    }
+    return user;
+  }
+
   // 회원가입
   async createUser(userData) {
     const {
