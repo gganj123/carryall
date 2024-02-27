@@ -26,12 +26,12 @@ app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
-app.use("/", indexRouter);
-app.use("/products", productsRouter);
-app.use("/categories", categoriesRouter);
-app.use("/carts", cartsRouter);
-app.use("/orders", ordersRouter);
-app.use("/", usersRouter);
+app.use("/a", indexRouter);
+// app.use("/products", productsRouter);
+// app.use("/categories", categoriesRouter);
+// app.use("/carts", cartsRouter);
+// app.use("/orders", ordersRouter);
+// app.use("/", usersRouter);
 
 app.use(errorHandler);
 

@@ -4,7 +4,6 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const asyncHandler = require("../utils/asyncHandler");
 const hashedPassword = require("../utils/hashPassword");
 const User = require("../db").User;
 const userController = require("../controller/user");
@@ -67,7 +66,7 @@ passport.deserializeUser(async (user, done) => {
 // 로그인
 router.post(
   "/login",
-  asyncHandler(async (req, res, next) => {
+async (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
       // 세션 생성코드 실행
       if (err) return res.status(500).json(err); // 서버 에러
@@ -85,7 +84,7 @@ router.post(
       });
     })(req, res, next); // 아이디/비번 DB 비교하는 코드 실행
   })
-);
+
 
 // 로그아웃
 router.post("/logout", userController.logout);

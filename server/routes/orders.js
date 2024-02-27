@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const { Order } = require("../db");
-const asyncHandler = require("../utils/asyncHandler");
 const mongoose = require('mongoose');
 const router = Router();
 
