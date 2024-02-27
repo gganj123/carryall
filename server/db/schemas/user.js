@@ -20,27 +20,33 @@ const UserSchema = new Schema(
     email: {
       type: String,
     },
-    // 성별
-    gender: {
-      type: String,
-      enum: ['M', 'F'],
-    },
     // 전화번호
     tel: {
       type: String,
       required: true,
     },
-    // 생일
-    birthday: {
-      type: Date,
+    // 받는 분 우편번호
+    zipCode: {
+      type: String,
+      required: true,
+    },
+    // 받는 분 주소
+    address: {
+      type: String,
+      required: true,
+    },
+    // 받는 분 상세주소
+    addressDetail: {
+      type: String,
+      required: true,
     },
     // 관리자 or 회원
     role: {
       type: String,
-      required:false,
-      default:'user',
-      enum: ['admin', 'user']
-    }
+      required: false,
+      default: "user",
+      enum: ["admin", "user"],
+    },
   },
   {
     versionKey: false,
