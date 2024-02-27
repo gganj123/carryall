@@ -14,36 +14,12 @@ const OrderSchema = new Schema(
       type: String,
       required: true,
     },
-    //받는 분 성함
-    recipientName: { //MR1_변수명 rcp 모두 recipient로 통일
-      type: String,
+    // 받는 분 정보(user와 연결, id)
+    objectId:  {
+      type: Schema.Types.ObjectId,
+      ref: "User",
       required: true,
-    },
-    // 받는 분 우편번호
-    recipientZipCode: {
-      type: String,
-      required: true,
-    },
-    // 받는 분 주소
-    recipientAddress: {
-      type: String,
-      required: true,
-    },
-    // 받는 분 상세주소
-    recipientAddressDetail: {
-      type: String,
-      required: true,
-    },
-    // 받는 분 전화번호
-    recipientTel: {
-      type: String,
-      required: true,
-    },
-    // 배송 요청사항
-    request: {
-      type: String,
-      required: true,
-    },
+    },    
     // 주문 상품
     productId: [
       {

@@ -6,6 +6,8 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const hashedPassword = require("../utils/hashPassword");
 const User = require("../db").User;
+const userController = require("../controller/user");
+
 const router = express.Router();
 
 // express-session
@@ -59,173 +61,59 @@ passport.deserializeUser(async (user, done) => {
 });
 
 // 로그인
-router.post(
-  "/login",
-  asyncHandler(async (req, res, next) => {
-    passport.authenticate("local", (err, user, info) => {
-      // 세션 생성코드 실행
-      if (err) return res.status(500).json(err); // 서버 에러
-      if (!user) return res.status(404).json(info.message); // 유저없음
-      req.logIn(user, (err) => {
-        // 세션 만들기 시작
-        if (err) return next(err);
-        req.session.username = user.username;
+// router.post("/login", userController.login);
 
-        res.json({
-          message: "로그인 성공",
-          username: user.username,
-          name: user.name,
-        });
-      });
-    })(req, res, next); // 아이디/비번 DB 비교하는 코드 실행
-  })
-);
+// 로그인
+// router.post(
+//   "/login",
+//   asyncHandler(async (req, res, next) => {
+//     passport.authenticate("local", (err, user, info) => {
+//       // 세션 생성코드 실행
+//       if (err) return res.status(500).json(err); // 서버 에러
+//       if (!user) return res.status(404).json(info.message); // 유저없음
+//       req.logIn(user, (err) => {
+//         // 세션 만들기 시작
+//         if (err) return next(err);
+//         req.session.username = user.username;
 
-// 회원가입 페이지
-router.get(
-  "/register",
-  asyncHandler(async (req, res) => {
-    const loginUser = await User.findOne({ username: req.session.username });
-
-    if (loginUser) {
-      res.redirect("/");
-    }
-
-
-  })
-);
-
-// 회원가입 요청
-router.post(
-  "/join",
-  asyncHandler(async (req, res) => {
-    const {
-      username,
-      password,
-      name,
-      email,
-      gender,
-      tel,
-      birthday,
-      telSubscription,
-      emailSubscription,
-    } = req.body;
-
-    const hashPassword = hashedPassword(password);
-
-    const member = await User.findOne({
-      $or: [{ username: username }, { email: email }],
-    }); // id 또는 email 중복 찾기
-
-    if (member && member.username == username) {
-      res.json({ message: "중복된 아이디입니다." });
-    } else if (member && member.email == email) {
-      res.json({ message: "중복된 이메일입니다." });
-    } else {
-      const newMember = await User.create({
-        username,
-        password : hashPassword, // 비밀번호는 해싱한 비밀번호로 저장
-        name,
-        email,
-        gender,
-        tel,
-        birthday,
-        telSubscription,
-        emailSubscription,
-      });
-      res.json({ message: "회원가입이 완료되었습니다.", user: newMember });
-    }
-  })
-);
-
-// 회원정보 수정
-router.put(
-  "/user",
-  asyncHandler(async (req, res) => {
-    const {
-      password, // 비밀번호는 해싱한 비밀번호로 저장
-      name,
-      email,
-      tel,
-      telSubscription,
-      emailSubscription,
-    } = req.body;
-    const hashPassword = hashedPassword(password);
-    await User.findOneAndUpdate(
-      { username: req.session.username },
-      {
-        password: hashPassword,
-        name,
-        email,
-        tel,
-        telSubscription,
-        emailSubscription,
-      }
-    );
-    res.json({ message : "회원정보가 수정되었습니다" });
-  })
-);
-
-// 회원 탈퇴
-router.delete(
-  "/withdrawal",
-  asyncHandler(async (req, res) => {
-    await User.findOneAndDelete({
-      username: req.session.username,
-    });
-    res.json({ message: "회원탈퇴가 완료되었습니다." });
-  })
-);
+//         res.json({
+//           message: "로그인 성공",
+//           username: user.username,
+//           name: user.name,
+//         });
+//       });
+//     })(req, res, next); // 아이디/비번 DB 비교하는 코드 실행
+//   })
+// );
 
 // 로그아웃
-router.post(
-  "/logout",
-  asyncHandler(async (req, res) => {
-    // post말고 get사용시 오류가 발생할 수 있음
-    req.session.destroy((err) => {
-      // 세션삭제 후 리다이렉트
-      if (err) {
-        console.error(`에러 발생 : ${err}`);
-        return res.status(500).json({ message: "서버 오류" });
-      }
-      res.clearCookie("connect.sid").redirect('/') // 로그아웃 시 쿠키삭제하고 메인으로 리다이렉트하기!
-    });
+router.post("/logout", userController.logout);
 
-  })
-);
+// 회원가입
+router.post("/join", userController.joinUser);
+
+// 회원정보 수정
+router.put("/user", userController.updateUser);
+
+// 회원 탈퇴
+router.delete("/withdrawal", userController.deleteUser);
+
+// 회원가입 페이지
+// router.get(
+//   "/register",
+//   asyncHandler(async (req, res) => {
+//     const loginUser = await User.findOne({ username: req.session.username });
+
+//     if (loginUser) {
+//       res.redirect("/");
+//     }
+//   })
+// );
 
 // 회원정보
-router.get(
-  "/mypage",
-  asyncHandler(async (req, res) => {
+router.get('/mypage', userController.mypage);
 
-    const member = await User.findOne({ username : req.session.username }) // 세션 아이디로 회원찾기
-    if (member) {
-      res.json(member);
-    } else {
-      res.json({ message : "로그인해주세요." });
-    }
-  })
-);
-
-// 비번 찾기
-router.post('/reset-password', asyncHandler(async (req, res) => { 
-  const { email } = req.body;
-  const user = await User.findOne({ email });
-  if (!user) {
-    res.writeHead(500, {'Content-Type': 'text/plain'});
-    res.end('해당하는 사용자가 존재하지 않습니다.');
-  }
-  
-  // 랜덤 패스워드 생성
-  const randomPassword = generateRandomPassword();
-  await User.updateOne({ email }, {
-    password: hashedPassword(randomPassword),
-  });
-
-  // 패스워드 발송하기
-   await sendMail(email, "임시 비밀번호를 발송합니다.", randomPassword);
-   res.json('발송 완료')
-}));
+// 비밀번호 초기화
+router.post("/reset-password", userController.resetPassword);
 
 module.exports = router;

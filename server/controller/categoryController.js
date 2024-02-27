@@ -1,4 +1,4 @@
-const CategoryService = require('../services/category-service');
+const CategoryService = require('../service/categoryService');
 const { validationResult } = require("express-validator");
 
 class CategoryController {
