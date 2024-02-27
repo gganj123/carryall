@@ -25,7 +25,7 @@
       <main id="main">
         <div class="totalImage">
           <div class="mainImage">
-            <img class="mainImage" src="/carryall/client/img/1.webp">
+            <img class="mainImage img22" src="">
           </div>
           <!-- <div class="detailImage">
             <ul>
@@ -48,7 +48,7 @@
               </div>
               <div class="contentDetail">
                 <div class="contentPhoto">
-                  <img class="mainImage" src="/carryall/client/img/1.webp">
+                  <img class="mainImage" src="/carryall/client/img/2.webp">
                 </div>
               </div>              
             </div>
@@ -96,39 +96,47 @@
         <h1>side2</h1>
       </div>
   </div>
+  
   <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script>
+      const currentURL = window.location.href;
 
-document.addEventListener("DOMContentLoaded", function() {
-axios.get('http://localhost:5000/product/50')
-.then(res => {
-  const product = res.data; // 받아온 상품 데이터
+// URL에서 ID 추출하기
+const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get('id');
+      document.addEventListener("DOMContentLoaded", function() {
+      axios.get('http://localhost:5000/product')
+        .then(res => {
+          const products = res.data; // 받아온 상품 데이터
+          const filteredProduct = products.filter(product => product._id === productId);
+          console.log(filteredProduct);
+          console.log(productId);
+      // dataToSend 객체의 정보를 각 요소에 할당
+      document.querySelector('.mainImage.img22').src = filteredProduct[0].image;
+      document.querySelector('.totalDetailOption h1').innerText = filteredProduct[0].name;
+      document.querySelector('.totalDetailOption .price').innerText = filteredProduct[0].price;
+      document.querySelector('.totalPrice .price').innerText = filteredProduct[0].price;
+      document.querySelector('.totalDetailOption .brand').innerText = filteredProduct[0].brand;
+      document.querySelector('.contentPoint ul').innerHTML = `
+        <li class="point">소재: 합성피혁</li>
+        <li class="point">색상: 블랙 / 아이보리 / 카멜</li>
+        <li class="point">추가 상세 : ${product.detail}</li>
+        <li class="point">추가 상세 : ${product.detail}</li>
+          `;
+      document.querySelector('.totalDetailOption dl select[name="selectbox"]').innerHTML = `
+        <option value="1">${product.option}</option>
+        <option value="2">아이보리</option>
+        <option value="3">브라운</option>
+          `;
+      // 이미지 변경
 
-// dataToSend 객체의 정보를 각 요소에 할당
-document.querySelector('.totalDetailOption h1').innerText = product.name;
-document.querySelector('.totalDetailOption .price').innerText = product.price;
-document.querySelector('.totalPrice .price').innerText = product.price;
-document.querySelector('.totalDetailOption .brand').innerText = product.brand;
-document.querySelector('.contentPoint ul').innerHTML = `
-    <li class="point">소재: 합성피혁</li>
-    <li class="point">색상: 블랙 / 아이보리 / 카멜</li>
-    <li class="point">추가 상세 : ${product.detail}</li>
-    <li class="point">추가 상세 : ${product.detail}</li>
-`;
-document.querySelector('.totalDetailOption dl select[name="selectbox"]').innerHTML = `
-    <option value="1">${product.option}</option>
-    <option value="2">아이보리</option>
-    <option value="3">브라운</option>
-`;
-// 이미지 변경
-document.querySelector('.mainImage img').src = product.image;
-    console.log(res.data); 
-})
-.catch(error => {
-    // 오류가 발생했을 때 처리합니다.
-    console.error('Error fetching data:', error);
-});
-})
+        console.log(res.data);
+      })
+      .catch(error => {
+      // 오류가 발생했을 때 처리합니다.
+      console.error('Error fetching data:', error);
+      });
+      })
     </script>
   <div class="footer">
     <div class="1">이용약관</div>
