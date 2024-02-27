@@ -1,20 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Order Page</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/cart.css">
+
+  <title>Document</title>
 </head>
 <body>
-    <h1>Order Page</h1>
-
+    <h1>주문서 작성 / 결제</h1>
     <form>
-        <h2>Order Items</h2>
-        <!-- Add your order items here -->
+        <div class="cartBox">
+          <div class="cartBoxHeader">
+              <p class="cartBoxH1 header">상품정보</p>
+              <p class="cartBoxH2 header">옵션</p>
+              <p class="cartBoxH3 header">수량</p>
+              <p class="cartBoxH4 header">상품금액</p>
+              <p class="cartBoxH5 header">주문금액</p>
+          </div>
 
-        <h2>Delivery Address</h2>
-        <label for="address">Address:</label>
-        <input type="text" id="address" name="address" required>
+          <div class="itemContainer">
+            <!-- 장바구니 결과표시 -->
 
-        <button type="submit">Place Order</button>
+          </div>
+        </div> 
+        <div class="payment">
+          <div class="paymentTitle">결제 예정금액</div>
+          <div class="paymentBox">
+              <div class="paymentBoxHeader">
+                  <p class="cartBoxH1 header">총 상품 금액</p>
+                  <p class="cartBoxH2 header"></p>
+                  <p class="cartBoxH3 header">할인 금액</p>
+                  <p class="cartBoxH4 header"></p>
+                  <p class="cartBoxH5 header">결제 예정 금액</p>
+              </div>
+              <div class="totalPrice">
+                <!-- 가격 표시 -->
+              </div>              
+          </div>
+      </div>
+      배송지<br>
+      <li>
+        <label for="name" class="label">
+          <span>* 이름</span>
+          <input type="text" class="inputType01" id="name" required="">
+        </label>
+      </li>
+
+      <!-- 6. 휴대폰 번호 -->
+      <li>
+        <label for="phoneNum" class="label">
+          <span>* 휴대폰 번호</span>
+          <input type="text" class="inputType01" id="phoneNum" required="">
+        </label>
+      </li>
+            <!-- 7. 주소 -->
+            <li>
+              <label for="address01" class="label">
+                <span>* 주소</span>
+                <input type='radio' name='add' value='' checked/>기본 주소
+                <input type='radio' name='add' value='' />새로 입력
+              </label>
+              <div class="address_line address_line01 f_fs">
+                <input type="text" name="address" id="address01" class="inputType01" >
+                <a href="#">우편번호 검색</a>
+              </div>
+              <div class="address_line address_line02 f_c label">
+                  <label for="address02" class="label"></label>
+                  <input type="text" name="address" id="address02" class="inputType01" >
+                  <label for="address03" class="label"></label>
+                  <input type="text" name="address" id="address03" class="inputType01" >
+              </div>
+            </li>
+            <p>결제 수단</p>
+            <input type='radio' name='결제수단' value='' checked/>무통장입금
+            <input type='radio' name='결제수단' value='' />신용카드
+            <input type='radio' name='결제수단' value=''/>휴대폰
+            <input type='radio' name='결제수단' value='' />계좌이체
+        <div class="orderBtnContainer">
+          <button class="btnOrderSubmit" onclick="location.href='./cartTest.html'">상품 주문</button>
+      </div>
     </form>
+    <script src="../js/order.js"></script>
 </body>
 </html>
