@@ -30,9 +30,14 @@ app.use("/orders", ordersRouter);
 // app.use("/", usersRouter);
 
 app.get("/", (req, res) => {
-  res.send("접속 성공");
+  res.sendFile(__dirname + "/client/page/main.html");
+});
+
+app.get("/detail", (req, res) => {
+  res.sendFile(__dirname + "/client/page/practice.html");
 });
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
 });
+
