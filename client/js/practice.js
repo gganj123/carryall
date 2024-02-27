@@ -34,7 +34,7 @@ function updatePrice() {
 
 document.addEventListener("DOMContentLoaded", function() {
   // 서버로부터 데이터를 받아온 후에 실행될 함수
-  axios.get('http://localhost:5000/product')
+  axios.get('http://localhost:5001/products')
     .then(res => {
       const product = res.data; // 받아온 상품 데이터
 

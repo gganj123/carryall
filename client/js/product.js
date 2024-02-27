@@ -59,7 +59,7 @@
 //   });
 // }
 <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-axios.get('http://localhost:5000/product')
+axios.get('http://localhost:5001/products')
 .then(res => {
   const productList = res.data;
   let htmlString = '';

@@ -1,9 +1,11 @@
 
-axios.get('http://localhost:5001/products')
+axios.get('/products')
   .then(res => {
     const productList = res.data;
     let htmlString = '';
     console.log(res.data);
+
+herf = '/detail?id=asdadsadadad'
 
     productList.forEach(product => {
       htmlString += `<div style="height: 300px; width: 23%; margin-right: 20px;">
@@ -22,7 +24,7 @@ axios.get('http://localhost:5001/products')
   });
 
 
-  axios.get('http://localhost:5001/products')
+  axios.get('/products')
   .then(res => {
     // 등록일순으로 데이터 정렬
     const productList = res.data.sort((a, b) => {

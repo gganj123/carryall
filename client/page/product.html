@@ -47,7 +47,7 @@
               <script>
                 document.addEventListener("DOMContentLoaded", function() {
                   
-                  axios.get('http://localhost:5000/product')
+                  axios.get('/products')
                   .then(res => {
                     const productList = res.data;
                     let htmlString = '';
@@ -55,7 +55,7 @@
             
                     productList.forEach(product => {
                       htmlString += `<div class="item" style="height: 282px; width: 244.44px;">`
-                      htmlString += `<img div class="img" id="${product._id}" src="${product.image}" alt="Product Image" onclick="handleImageClick('${product._id}')">`;//이미지 넣어서 나오게 해보기
+                      htmlString += `<img div class="img" style="width: 100%; height: auto;  display: block;" id="${product._id}" src="${product.image}" alt="Product Image" onclick="handleImageClick('${product._id}')">`;//이미지 넣어서 나오게 해보기
                       htmlString += `<h2 id="root"> ${product.brand}</h2>`;
                       htmlString += `<div p>${product.name}</div> `;
                       htmlString += `<p>${product.price.toLocaleString('ko-KR')}</p>`;
@@ -70,7 +70,7 @@
                 });
                 function handleImageClick(productId) {
                 // 클릭된 이미지의 ID를 이용하여 다른 페이지로 이동
-                window.location.href = "/carryall/client/page/practice.html?id=" + productId;
+                window.location.href = "/practice?id=" + productId;
                 }
               </script>
           </div> 
