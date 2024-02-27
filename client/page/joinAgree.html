@@ -1,0 +1,170 @@
+<!-- 은지 > 회원가입 동의 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>carryAll_회원가입 동의</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="../css/join.css">
+</head>
+<body>
+  <!-- 은지 -->
+  <div class="header" style="height: 0px; width: 1902px; display: flex; align-items: center;"></div>
+  <div class="header" style="height: 60px; width: 1902px; display: flex; align-items: center;background-color: white;">
+    <h1 style="margin-right: 50px; font-family:Roboto; font-weight: 700; font-style: italic; ">carryAll</h1>
+    <input class ="inputform" type="text" placeholder="검색" style="height: 50%; padding: 5px; border-radius: 5px; margin-right: 50px;">
+    <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold">장바구니</button>
+    <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">로그인</button>
+    <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">마이페이지</button>
+    <button style="height: 50%; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">회원가입</button>
+  </div>
+  <!-- 상단 메인 배너 -->
+  <!-- <div class = "nav" style=" background-color:#d9d9d9; height: 480px; width: 1902px;">
+    <h1>nav</h1>
+  </div> -->
+
+  <!-- 여백 틀 -->
+  <!-- <div class="nav" style="height: 480px; width: 1900px; border: 1px solid tomato; display: flex; flex-wrap: wrap;">
+    <div style="height: 700px; width: 21%; background-color: gray; margin-right: 10px;">
+      <h1>side1</h1>
+    </div>
+    <div style="height: 700px; width: 56%; background-color: #d9d9d9; margin-right: 10px;">
+      <h1>main</h1>
+    </div>
+    <div style="height: 700px; width: 21%; background-color: gray;">
+      <h1>side2</h1>
+    </div>
+  </div> -->
+
+  <section class="container">
+    <!-- <form action="../../index.html" method="post" class="inputForm" id="termsForm"> -->
+    <form class="inputForm" id="termsForm">
+      <fieldset>
+        <legend class="formTit">회원가입</legend>
+          <ul class="pathBox">
+            <li><a style="font-weight: 500;" href="#">약관동의</a></li>
+            <li><a href="./join_form.html">정보입력</a></li>
+            <li><a href="#">가입완료</a></li>
+          </ul>
+
+          <div class="box agreeBox">
+            <ul class="joinBox">
+              <li>
+                <label>
+                  <input type="checkbox" id="allAgreeCheckbox">
+                  <span>약관 전체 동의</span>
+                </label>
+                <p class="agreeDesc">회원가입을 위해 이용약관 및 정보이용 안내에 대한 동의가 필요합니다.</p>
+              </li>
+              
+              <li>
+                <label class="agree">
+                  <input type="checkbox" class="subAgreeCheckbox" id="termsCheckbox">
+                  <span>이용약관 (필수) <img src="../img/icon_arrow.png" alt="이용약관 (필수)"></span>
+                </label>
+                <div class="chkBox">
+                  text
+                </div>
+              </li>
+
+              <li>
+                <label class="agree">
+                  <input type="checkbox" class="subAgreeCheckbox" id="privacyCheckbox">
+                  <span>개인정보 수집 및 이용 (필수) <img src="../img/icon_arrow.png" alt="이용약관 (필수)"></span>
+                </label>
+                <div class="chkBox">
+                  회사는 회원가입, 민원 등 고객상담 처리, 본인확인(14세 미만 아동 확인) 등 의사소통을 위한 정보 활용 및
+                  이벤트 등과 같은 마케팅용도 활용, 회원의 서비스 이용에 대한 통계, 이용자들의 개인정보를 통한 서비스
+                  개발을 위해 아래와 같은 개인정보를 수집하고 있습니다.
+                  <br>
+                  1. - 목적 : 이용자 식별 및 본인여부 확인-
+                  항목 : 이름, 아이디, 비밀번호,닉네임, 이메일, 휴대폰번호, 주소, 전화번호 등- 보유 및 이용기간 :
+                  회원탈퇴 후 5일까지
+                </div>
+              </li>
+            </ul>
+
+            <h2 class="certiTit">본인 인증방법</h2>
+            <button type="submit" id="fakeBtn">휴대폰 본인인증</button>
+            <p class="certiDesc">이미 회원이신가요? <a href="./login_member.html">로그인하기</a></p>
+            <div class="certiBtn">
+              <button type="button" class="btnType01">이전</button>
+              <button type="submit" class="btnType02" onclick="saveToSessionStorage()">다음</button>
+            </div>
+          </div>
+      </fieldset>                        
+    </form>
+  </section>
+
+  <!-- 회원가입 폼 script -->
+  <script>
+    const allAgreeCheckbox = document.getElementById('allAgreeCheckbox');
+    const termsCheckbox = document.getElementById('termsCheckbox');
+    const privacyCheckbox = document.getElementById('privacyCheckbox');
+    const subAgreeCheckboxes = document.querySelectorAll('.subAgreeCheckbox');
+
+    // 1. 약관 전체 동의 체크박스 이벤트 처리
+    allAgreeCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        subAgreeCheckboxes.forEach(checkbox => {
+          checkbox.checked = true;
+        });
+      } else {
+        subAgreeCheckboxes.forEach(checkbox => {
+          checkbox.checked = false;
+        });
+      }
+    });
+
+    // 2. 개별 약관 동의 체크박스 이벤트 처리
+    subAgreeCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        if (!this.checked) {
+          allAgreeCheckbox.checked = false;
+        } else {
+          // 모든 개별 약관 동의 체크 여부 확인
+          let allChecked = true;
+          subAgreeCheckboxes.forEach(subCheckbox => {
+            if (!subCheckbox.checked) {
+              allChecked = false;
+            }
+          });
+          if (allChecked) {
+            allAgreeCheckbox.checked = true;
+          }
+        }
+      });
+    });
+
+    // 3. 폼 제출 시 동의 여부 확인
+    document.getElementById('termsForm').addEventListener('submit', function(event) {
+      let subAgreementsChecked = false;
+      subAgreeCheckboxes.forEach(subCheckbox => {
+        if (subCheckbox.checked) {
+          subAgreementsChecked = true;
+        }
+      });
+      if (!subAgreementsChecked) {
+        alert('(필수)약관에 동의해야 합니다.');
+        event.preventDefault();
+      } else if (!allAgreeCheckbox.checked) {
+        alert('모든 (필수)약관에 동의해야 합니다.');
+        event.preventDefault();
+      }
+    });
+
+    // 4. 각 label.agree 클릭시 .chkBox에 active 클래스 toggle
+    const checkboxes = document.querySelectorAll('.subAgreeCheckbox');
+
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('click', function() {
+        const chkBox = this.closest('li').querySelector('.chkBox');
+        chkBox.classList.toggle('active');
+      });
+    });
+
+  </script>
+</body>
+</html>

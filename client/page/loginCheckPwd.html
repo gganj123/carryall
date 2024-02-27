@@ -1,14 +1,15 @@
-<!-- 은지 > 회원가입 동의 -->
+<!-- 은지 > 비밀번호 확인 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>carryAll_회원가입</title>
+  <title>carryAll_비밀번호 확인</title>
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="../css/join.css">
 </head>
-<body>
+<body style="height: 100vh;">
   <!-- 은지 -->
   <div class="header" style="height: 0px; width: 1902px; display: flex; align-items: center;"></div>
   <div class="header" style="height: 60px; width: 1902px; display: flex; align-items: center;background-color: white;">
@@ -37,26 +38,27 @@
     </div>
   </div> -->
 
-  <section class="container">
-    <form id="loginForm">
-      <h2>회원가입</h2>
-      <button type="button" id="joinBtn">일반 회원가입</button>
-
-      <h2 class="fakeTit">SNS 간편 회원가입(구현X)</h2>
-      <button type="submit" id="fakeBtn"><img class="snsIcon kakao" src="../img/icon_kakao.png" alt="카카오 간편 가입">카카오 간편 가입</button>
-      <div class="btnWrap">
-        <button class="snsJoin"><img class="snsIcon apple" src="../img/icon_apple.png" alt="apple 회원가입">apple 회원가입</button>
-        <button class="snsJoin"><img class="snsIcon naver" src="../img/icon_naver.png" alt="네이버 회원가입">네이버 회원가입</button>
-      </div>
-      <ul class="joinWrap">
-        <li><a href="./login_member.html">로그인</a></li>
-        <li><a href="#">아이디 찾기</a></li>
-        <li><a href="#">비밀번호 찾기</a></li>
-      </ul>
-    </form>
+  <section class="container" style="top: 50%; transform: translateY(-50%);">
+    <form class="inputForm chkPwd">
+      <fieldset class="formTit">
+        <legend>비밀번호 확인</legend>
+        <div class="box formBox">
+          <ul>
+            <li>
+              <label for="password" class="label">
+                <input type="password" class="inputType01" id="password" required="" placeholder="비밀번호를 입력해주세요.">
+              </label>
+              <div style="margin-left: 0;" class="errTxt">
+                비밀번호를 확인해주세요.
+              </div>
+            </li>
+          </ul>
+        </div>
+        <button type="button" id="joinBtn">확인</button>
+        <span class="chkTxt">회원님의 안전한 개인정보 보호를 위해<br>비밀번호를 다시 한번 확인합니다.</span>
+      </fieldset>
   </section>
 
   <!-- 회원가입 폼 script -->
-  
 </body>
 </html>

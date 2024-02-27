@@ -63,6 +63,19 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: relative;
+}
+.infoCont .shipBox li::after {
+  content: '';
+  position: absolute;
+  top: 50%; right: 0;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 14px;
+  background: url(../img/icon_arrow.png) no-repeat center/cover;
+}
+.infoCont .shipBox li:last-child:after {
+  display: none;
 }
 .infoCont .shipBox li h6 {
   width: 70px;
@@ -82,7 +95,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: ;
+  margin-bottom: 20px;
 }
 .shippedBox li {
   line-height: 60px;
