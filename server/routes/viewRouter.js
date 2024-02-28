@@ -22,11 +22,6 @@ viewRouter.use('/mypage',serveStatic('mypage'));
 
 
 
-
-
-
-
-
 function serveStatic (resource) {
     const pathName = path.join(__dirname, '../../client/page');
     const option = {index: `${resource}.html`};
