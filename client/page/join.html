@@ -58,19 +58,30 @@
 
   <!-- 회원가입 폼 script -->
   <script>
+    // 1. 페이지 이동
     document.getElementById("joinBtn").addEventListener("click", function() {
       window.location.href = "./joinAgree.html";
     });
 
+    // 2. sns로그인 closing
     document.addEventListener('DOMContentLoaded', function() {
-    const snsJoinButtons = document.querySelectorAll('.snsJoin');
-    
-    snsJoinButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        alert("SNS 로그인은 준비중입니다.");
+      const snsJoinButtons = document.querySelectorAll('.snsJoin');
+      
+      snsJoinButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          alert("SNS 로그인은 준비중입니다.");
+        });
       });
     });
-  });
+
+    // 3. 아이디-비밀번호 찾기 closing
+    const nonFeatLinks = document.querySelectorAll('a.nonFeat');
+    nonFeatLinks.forEach(link => {
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
+        alert("해당 기능은 준비중입니다.");
+      });
+    });
   </script>
 </body>
 </html>

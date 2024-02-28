@@ -2,11 +2,7 @@
 const { Schema } = require("mongoose");
 const UserSchema = new Schema(
   {
-    // 회원 고유번호(아이디)
-    // id: {
-    //   type: Schema.Types.ObjectId,
-    //   required: true,
-    // },
+    // 아이디
     username: {
       type: String,
       required: true,
@@ -23,31 +19,37 @@ const UserSchema = new Schema(
     // 이메일
     email: {
       type: String,
-    },
-    // 성별
-    gender: {
-      type: String,
+      required: true,
     },
     // 전화번호
     tel: {
       type: String,
       required: true,
     },
-    // 생일
-    birthday: {
-      type: Date,
+    zipCode: {
+      type: String,
+      required: true,
+    },
+    // 받는 분 주소
+    address: {
+      type: String,
+      required: true,
+    },
+    // 받는 분 상세주소
+    addressDetail: {
+      type: String,
+      required: true,
     },
     // 휴대폰 수신 동의
-    // telSubscription: {
-    //   type: Boolean,
-    //   required: true,
-    // },
+    telSubscription: {
+      type: Boolean,
+      default: false,
+    },
     // 이메일 수신 동의
-    // emailSubscription: {
-    //   type: Boolean,
-    //   required: true,
-    // },
-    passwordReset: {type: Boolean,default: false,}
+    emailSubscription: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     versionKey: false,

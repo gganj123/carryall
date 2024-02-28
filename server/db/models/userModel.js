@@ -31,8 +31,17 @@ class UserModel {
 
   // 회원정보 수정
   async update(username, update) {
-    const { password, name, email, tel, zipCode, address, addressDetail } =
-      update;
+    const {
+      password,
+      name,
+      email,
+      tel,
+      zipCode,
+      address,
+      addressDetail,
+      telSubscription,
+      emailSubscription,
+    } = update;
 
     const user = await User.findOneAndUpdate(username, {
       password,
@@ -42,6 +51,8 @@ class UserModel {
       zipCode,
       address,
       addressDetail,
+      telSubscription,
+      emailSubscription,
     });
     return user;
   }
