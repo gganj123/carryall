@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <h1>Test Page</h1>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script>
+      const dataToSend = { 
+        "_id":"65dc4e3a4f804f09180db4a7",
+        "username":"test",
+        "password":"8f5bd8144124cab4e5282e58a81e6692b0532ed8",
+        "name":"테스트0227",
+        "email":"twincornjr05@gmail.com",
+        "gender":"F",
+        "birthday":"2001-02-24T00:00:00.000+00:00"
+      };
+
+      axios.get('http://localhost:5001/users')
+      .then(response => {
+        // 서버로부터 받은 응답을 처리합니다.
+        console.log(response.data); // 서버에서 전송된 데이터 출력
+      })
+      .catch(error => {
+        // 오류가 발생했을 때 처리합니다.
+        console.error('Error fetching data:', error);
+      });
+
+
+      app.get('/users', (req, res) => {
+        res.send('User list');
+      });
+
+      // POST 요청에 대한 /users 엔드포인트 핸들러
+      app.post('/users', (req, res) => {
+        res.send('Create new user');
+      });
+
+      // 동적 라우팅: URL 파라미터 활용
+      app.get('/users/:username', (req, res) => {
+        const userId = req.params.userId;
+        res.send(`username: ${username}`);
+      });
+    </script>
+</body>
+</html>
