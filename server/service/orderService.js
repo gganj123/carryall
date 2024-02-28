@@ -1,6 +1,4 @@
 const orderModel = require('../db/models/orderModel');
-const productModel = require('../db/models/productModel');
-const userModel = require('../db/models/userModel');
 
 class OrderService {
   // 전체 주문 내역 불러오기
@@ -18,7 +16,7 @@ class OrderService {
   }
 
   async addOrder(orderInfo) {
-    const { date, status, name, price, image, option, brand, recipientName, recipientZipCode, recipientAddress, recipientAddressDetail, recipientTel } = orderInfo;
+    const { date, status, name, price, image, option, brand, recipientName, recipientZipCode, recipientAddress, recipientAddressDetail, recipientTel } = orderInfo; //주석처리 해도 되는지 확인
   
     // 주문 생성 및 저장
     const newOrder = await orderModel.create(orderInfo);
