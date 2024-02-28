@@ -22,8 +22,20 @@ class ProductController {
       res.status(400).json({ success: false, message: err.message });
     }
   }
-  // 카테고리별 상품조회 추가 가능
 
+  // 장바구니용 상품 id 조회(상품 금액, 이미지, 브랜드, 상품 이름 리턴)
+    async getProductInformation(req, res) {
+      try {
+        const {_id} = req.params
+        const product = await ProductService.getProductInformation(_id);
+        res.status(200).json({ success: true, data: product });
+      } catch (err) {
+        res.status(400).json({ success: false, message: err.message });
+      }
+    }
+
+
+  // 카테고리별 상품조회 추가 가능
   async createProduct(req, res) {
     try {
       const {
