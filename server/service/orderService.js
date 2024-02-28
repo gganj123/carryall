@@ -18,7 +18,7 @@ class OrderService {
   }
 
   async addOrder(orderInfo) {
-    const { date, status, userId, productId } = orderInfo;
+    const { date, status, name, price, image, option, brand, recipientName, recipientZipCode, recipientAddress, recipientAddressDetail, recipientTel } = orderInfo;
   
     // 주문 생성 및 저장
     const newOrder = await orderModel.create(orderInfo);
@@ -49,12 +49,10 @@ class OrderService {
         throw new Error('상품 재고 업데이트 중 오류가 발생했습니다.' + error.message);
       }
 
-      // 주문 수량이 재고보다 많은 경우 주문 불가능
-
     return newOrder;
   }
   
-  // id로 주문 수정
+  // id로 주문 수정 -> 이 부분 확인안해봄
   async editOrder(orderId, orderInfo) {
     const updatedNewOrder = await orderModel.update(orderId, orderInfo);
     return updatedNewOrder;

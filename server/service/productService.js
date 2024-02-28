@@ -44,13 +44,9 @@ class ProductService {
     }
   }
   async getProductById(_id) {
-    if (!_id) throw Error("특정상품을 가져오기 위한 id가 없습니다.");
     const product = await Product.findById(_id);
-    if (!product) {
-      return res
-        .status(404)
-        .json({ success: false, message: "상품을 찾을 수 없습니다." });
-    }
+    if (!_id) throw Error("특정상품을 가져오기 위한 id가 없습니다.");
+    if (!product) throw Error("상품을 찾을 수 없습니다.");
     return product;
   }
 
@@ -58,11 +54,7 @@ class ProductService {
   async getProductInformation(_id) {
     const product = await Product.findByIdForCart(_id);
     if (!_id) throw Error("특정상품을 가져오기 위한 id가 없습니다.");
-    if (!product) {
-      return res
-        .status(404)
-        .json({ success: false, message: "상품을 찾을 수 없습니다." });
-    }    
+    if (!product) throw Error("상품을 찾을 수 없습니다.");
     return product;
   } 
 }

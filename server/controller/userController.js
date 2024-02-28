@@ -169,6 +169,8 @@ class UserController {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
+
+  // 
   }
 
   async register(req, res) {
