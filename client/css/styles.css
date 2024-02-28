@@ -84,11 +84,8 @@ button.headmenu{
   font-size: 1.2em; 
   font-weight: bold;
 }
-
-button.headmenu:hover{
-  transform: scale(1.1);
-  
-  transition: 0.15s;
+.cate{
+  display: flex; align-items: flex-end;
 }
 
 button.footmenu{
@@ -239,7 +236,7 @@ a {
     flex-shrink: 0;
   
     /* transition */
-    transition: left 0.15s;
+    transition: left 0.3s;
   }
   .slide_button {
     /* layout */
@@ -343,7 +340,10 @@ a {
     flex-direction: column; /* 세로로 정렬 */
     align-items: flex-start; /* 아이템을 왼쪽으로 정렬 */
 }
-
+.warp{
+  display: flex;
+  flex-wrap: wrap;
+}
 .category_box div {
     margin-bottom: 20px; /* 각각의 아이템 사이의 간격 설정 */
 }
@@ -419,4 +419,14 @@ li p{
 
 li h2 {
   font-size: 17px;
+}
+
+.more-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* 원하는 여백값 설정 */
+}
+
+.more-button {
+  /* 버튼에 대한 스타일링을 추가하세요 */
 }

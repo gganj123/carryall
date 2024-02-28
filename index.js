@@ -27,9 +27,6 @@ const adminRequired = require("./server/middlewares/adminRequired.js");
 const errorHandler = require("./server/middlewares/errorHandler.js");
 
 
-
-
-
 app.use(express.static('client'));
 app.use(viewRouter);
 

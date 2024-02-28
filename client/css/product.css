@@ -52,7 +52,8 @@ input[type="text"] {
 
 .container .main .selectbox {
   display: flex;
-  justify-content: end;
+  flex-wrap: wrap;
+  justify-content: space-between;
   margin: 30px;
   /* background-color: aqua; */
 }
@@ -109,6 +110,10 @@ input[type="text"] {
   height: 172.65px;
   object-fit: cover;
   
+}
+select option {
+  width:200px;
+  height: 100px;
 }
 
 .container .main .productList .item .text {
