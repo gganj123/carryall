@@ -60,8 +60,16 @@ async function test() {
       updatedAt: new Date(),
     });
   });
-  return list;
+
+  function suffle(list) {
+    list.sort(() => Math.random() - 0.5);
+    return list;
+  }
+
+  return suffle(list);
 }
+
+
 const { MongoClient } = require('mongodb');
 
 async function main() {
@@ -82,6 +90,7 @@ async function main() {
   }
 }
 
+
 // 메인 함수 호출
 main().catch(console.error);
 
@@ -94,9 +103,6 @@ const viewRouter = require("./server/routes/viewRouter.js");
 // const adminRouter = require("./server/routes/admins.js");
 const adminRequired = require("./server/middlewares/adminRequired.js");
 const errorHandler = require("./server/middlewares/errorHandler.js");
-
-
-
 
 
 app.use(express.static('client'));
