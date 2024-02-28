@@ -22,33 +22,6 @@ class OrderService {
   
     // 주문 생성 및 저장
     const newOrder = await orderModel.create(orderInfo);
-  
-      // 주문 시 재고 삭제
-      try {
-        // productId가 배열인 경우
-        if (Array.isArray(productId)) {
-          for (const id of productId) {
-            const product = await productModel.findById(id);
-            if (product) {
-              product.stock -= 1;
-              await product.save();
-            } else {
-              throw new Error('상품을 찾을 수 없습니다.');
-            }
-          }
-        } else { // productId가 배열이 아닌 경우
-          const product = await productModel.findById(productId);
-          if (product) {
-            product.stock -= 1;
-            await product.save();
-          } else {
-            throw new Error('상품을 찾을 수 없습니다.');
-          }
-        }
-      } catch (error) {
-        throw new Error('상품 재고 업데이트 중 오류가 발생했습니다.' + error.message);
-      }
-
     return newOrder;
   }
   
