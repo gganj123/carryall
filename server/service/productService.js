@@ -21,7 +21,6 @@ class ProductService {
     option,
     stock,
     brand,
-    detail,
   }) {
     if (!_id) throw Error("업데이트에 필요한 PRODUCT ID가 없습니다");
     const updateProduct = await Product.update({ _id},{
@@ -31,8 +30,7 @@ class ProductService {
       image,
       option,
       stock,
-      brand,
-      detail,     
+      brand,   
     });
     if (!updateProduct) throw new Error("제품을 찾지 못했습니다.");
     return updateProduct;

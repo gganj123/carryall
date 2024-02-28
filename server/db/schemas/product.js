@@ -20,7 +20,7 @@ const ProductSchema = new Schema(
       required: true,
     },
     option: {
-      type: String,
+      type: Object,
       required: true,
     },
     stock: {
@@ -28,10 +28,6 @@ const ProductSchema = new Schema(
       required: true,
     },
     brand: {
-      type: String,
-      required: true,
-    },
-    detail: {
       type: String,
       required: true,
     },
