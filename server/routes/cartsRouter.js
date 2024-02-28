@@ -8,9 +8,8 @@ router.get("/", async (req, res) => {
   try {
     const { username } = req.body;
     const found = await Cart.findOne({ username });
-    const carts = found ? found : null;
 
-    res.json(carts);
+    res.json(found);
   } catch (err) {
     console.error(err);
   }

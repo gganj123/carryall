@@ -8,11 +8,11 @@ class UserService {
     this.userModel = userModel;
   }
 
-  //
+  // 로그인
   async login(username, password) {
     const user = await this.userModel.findByUsername({ username });
-    if(!user || user.password !== password) {
-      throw new Error('로그인정보가 일치하지 않습니다.')
+    if (!user || user.password !== password) {
+      throw new Error("로그인정보가 일치하지 않습니다.");
     }
     return user;
   }
@@ -28,6 +28,8 @@ class UserService {
       zipCode,
       address,
       addressDetail,
+      telSubscription,
+      emailSubscription,
     } = userData;
 
     const foundUser = await this.userModel.findByUser(username, email);
@@ -49,6 +51,8 @@ class UserService {
       zipCode,
       address,
       addressDetail,
+      telSubscription,
+      emailSubscription,
     };
 
     const joinNewUser = await this.userModel.join(newUser);
@@ -58,8 +62,17 @@ class UserService {
 
   // 회원정보 수정
   async editUser(username, update) {
-    const { password, name, email, tel, zipCode, address, addressDetail } =
-      update;
+    const {
+      password,
+      name,
+      email,
+      tel,
+      zipCode,
+      address,
+      addressDetail,
+      telSubscription,
+      emailSubscription,
+    } = update;
 
     const hashPassword = hashedPassword(password);
 
@@ -73,6 +86,8 @@ class UserService {
         zipCode,
         address,
         addressDetail,
+        telSubscription,
+        emailSubscription,
       }
     );
 

@@ -8,11 +8,11 @@ const hashedPassword = require("../utils/hashPassword");
 const User = require("../db").User;
 const userController = require("../controller/userController");
 
-const router = express.Router();
+const userRouter = express.Router();
 
 // express-session
-router.use(passport.initialize());
-router.use(
+userRouter.use(passport.initialize());
+userRouter.use(
   session({
     // name: "connect.sid" 명시하지않아도 기본적으로 사용 중
     secret: "password", // 암호화에 사용되는 비밀 키를 설정
@@ -26,7 +26,7 @@ router.use(
   })
 );
 
-router.use(passport.session());
+userRouter.use(passport.session());
 
 passport.use(
   new LocalStrategy(async (userId, password, done) => {
@@ -61,43 +61,18 @@ passport.deserializeUser(async (user, done) => {
 });
 
 // 로그인
-router.post(
-  "/login",
-  async (req, res, next) => {
-    try {
-      passport.authenticate("local", (err, user, info) => {
-        // 세션 생성코드 실행
-        if (err) return res.status(500).json(err); // 서버 에러
-        if (!user) return res.status(404).json(info.message); // 유저없음
-        req.logIn(user, (err) => {
-          // 세션 만들기 시작
-          if (err) return next(err);
-          req.session.username = user.username;
-
-          res.json({
-            message: "로그인 성공",
-            username: user.username,
-            name: user.name,
-          });
-        });
-      })(req, res, next); // 아이디/비번 DB 비교하는 코드 실행
-    } catch (err) {
-      console.error(err);
-    }
-  }
-);
-
+userRouter.post('/login', userController.login);
 // 로그아웃
-router.post("/logout", userController.logout);
+userRouter.post("/logout", userController.logout);
 // 회원가입
-router.post("/join", userController.joinUser);
+userRouter.post("/join", userController.joinUser);
 // 회원정보 수정
-router.put("/user", userController.updateUser);
+userRouter.put("/user", userController.updateUser);
 // 회원 탈퇴
-router.delete("/withdrawal", userController.deleteUser);
+userRouter.delete("/withdrawal", userController.deleteUser);
 // 회원정보
-router.get('/mypage', userController.mypage);
+userRouter.get('/mypage', userController.mypage);
 // 비밀번호 초기화
-router.post("/reset-password", userController.resetPassword);
+userRouter.post("/reset-password", userController.resetPassword);
 
-module.exports = router;
+module.exports = userRouter;
