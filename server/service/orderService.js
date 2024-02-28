@@ -2,7 +2,6 @@ const orderModel = require('../db/models/orderModel');
 const productModel = require('../db/models/productModel');
 const userModel = require('../db/models/userModel');
 
-
 class OrderService {
   // 전체 주문 내역 불러오기
   async getOrders() {
@@ -24,11 +23,21 @@ class OrderService {
     // 주문 생성 및 저장
     const newOrder = await orderModel.create(orderInfo);
   
-    try {
-      // productId가 배열인 경우
-      if (Array.isArray(productId)) {
-        for (const id of productId) {
-          const product = await productModel.findById(id);
+      // 주문 시 재고 삭제
+      try {
+        // productId가 배열인 경우
+        if (Array.isArray(productId)) {
+          for (const id of productId) {
+            const product = await productModel.findById(id);
+            if (product) {
+              product.stock -= 1;
+              await product.save();
+            } else {
+              throw new Error('상품을 찾을 수 없습니다.');
+            }
+          }
+        } else { // productId가 배열이 아닌 경우
+          const product = await productModel.findById(productId);
           if (product) {
             product.stock -= 1;
             await product.save();
@@ -36,18 +45,12 @@ class OrderService {
             throw new Error('상품을 찾을 수 없습니다.');
           }
         }
-      } else { // productId가 배열이 아닌 경우
-        const product = await productModel.findById(productId);
-        if (product) {
-          product.stock -= 1;
-          await product.save();
-        } else {
-          throw new Error('상품을 찾을 수 없습니다.');
-        }
+      } catch (error) {
+        throw new Error('상품 재고 업데이트 중 오류가 발생했습니다.' + error.message);
       }
-    } catch (error) {
-      throw new Error('상품 재고 업데이트 중 오류가 발생했습니다.' + error.message);
-    }
+
+      // 주문 수량이 재고보다 많은 경우 주문 불가능
+
     return newOrder;
   }
   
@@ -62,7 +65,6 @@ class OrderService {
     await orderModel.delete(orderId);
   }
 }
-
 
 const orderService = new OrderService(orderModel);
 
