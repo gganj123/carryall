@@ -2,6 +2,7 @@
 const { Schema } = require("mongoose");
 const UserSchema = new Schema(
   {
+    id: Schema.Types.ObjectId, //order 스키마와 연결하기 위해 추가    
     // 유저 아이디
     username: {
       type: String,
