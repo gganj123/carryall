@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>carryAll</title>
+  <link rel="stylesheet" href="/carryall/client/css/detail.css">
+</head>
+<body>
+  <div class="header" style="height: 60px; width: 1902px; display: flex; align-items: center;"></div>
+    <div class="header" style="height: 60px; width: 1902px; display: flex; align-items: center;background-color: white;">
+        <h1 style="margin-right: 50px; font-family:Roboto; font-weight: 700; font-style: italic; ">CARRYALL</h1>
+        <input class ="inputform" type="text" placeholder="검색" style="height: 50%; padding: 5px; border-radius: 5px; margin-right: 50px;">
+        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold">장바구니</button>
+        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">로그인</button>
+        <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">마이페이지</button>
+        <button style="height: 50%; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">회원가입</button>
+    </div>
+
+  <!-- <div class="container"> -->
+    <div class="container" style="height: 100%; width: 1900px; display: flex; flex-wrap: wrap;">
+      <div class="side1" style="height: 700px; width: 22%; background-color: gray; ">
+          <h1>side1</h1>
+      </div>
+      <div class="main" style="height: 1500px; width: 56%; background-color: #d9d9d9; ">
+        <div class="total">
+          <div class="totalImage">
+            <div>
+              <img class="mainImage" src="1.webp">
+            </div>
+            <div class="detailImage">
+              <ul>
+                <li class="image" id="on"><a href ="#a"><img src="2.webp"></a></li>
+                <li class="image"><a href ="#a"><img src="3.webp"></a></li>
+                <li class="image"><a href ="#a"><img src="4.webp"></a></li>
+                <li class="image"><a href ="#a"><img src="5.webp"></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="totalDetail">
+            <div class="totalDetailOption">
+            <div class="name">
+              <h2>미디엄 빅투아르백 - 서플 카프스킨</h2>
+              <table>
+                <caption>
+                  <details>
+                    <summary>상품정보</summary>
+                    판매가, 상품코드, 옵션 및 결제금액 안내
+                  </details>
+                </caption>
+                <colgroup>
+                  <col style="width: px;">
+                  <col>
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <th>판매가</th>
+                    <td>5,200,000원</td>
+                  </tr>
+                  <tr>
+                    <th>브랜드</th>
+                    <td>셀린느</td>
+                  </tr>
+                  <tr>
+                    <th>옵션선택</th>
+                    <td>
+                      <select name="selectbox">
+                        <option value="1">블랙</option>
+                        <option value="2">화이트</option>
+                        <option value="3">브라운</option>
+                      </select>
+                    </td>  
+                  </tr>
+                  <tr>
+                    <th>수량</th>
+                    <td>
+                      <span class="-"><button>-</button></span>
+                      <span class="">1</span>
+                      <button class="+">+</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>배송비</th>
+                    <td>무료</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div id="information">상세정보</div>
+              <div id="productCost">  
+                <div id="totalCost">총 합계 금액</div>
+              </div>  
+                <div id="totalDetailpurchase">
+                  <button id="addCart">장바구니담기</button>
+                  <button id="buy">구매하기</button>
+                </div>
+              </div>
+              <div id="problem">배송/교환/반품</div>
+              <div id="naverPay">네이버페이로 비회원 구매하기(쇼핑몰 회원 혜택은 제공되지 않아요.)</div>
+            </div>
+          </div>
+        </div>
+        <div class="productDetail">
+          <h1>상품 상세 설명</h1>
+        </div>
+      </div>
+      <div class="side2" style="height: 700px; width: 22%; background-color: gray;">
+        <h1>side2</h1>
+      </div>
+    </div>
+  <!-- </div> -->
+  <div class="footer">
+    <div class="1">이용약관</div>
+    <div class="2">개인정보처리방침</div>
+    <div class="3">이용안내</div>
+    <div class="4">입점/제휴안내</div>
+  </div>
+</body>
+</html>

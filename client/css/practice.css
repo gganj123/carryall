@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* a {color: #000; text-decoration: none;} */
+
+.header{
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d9d9d9;  
+}
+
+.inputform{
+  background-color: white;
+  border: none;
+  width: 450px;
+  padding: 15px 20px;
+  padding-right: 50px; 
+  font-size: 20px;
+}
+
+input[type="text"] {
+  border: none; /* 기본 테두리 제거 */
+  border-bottom: 1px solid black; /* 밑줄 스타일 적용 */
+  border-radius: 0;
+}
+
+.container{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body{
+  font-family: 'Noto Sans KR', sans-serif;
+  margin: 0;
+  padding: 0;
+  /* background-color: black; */
+  /* background-color: #f0f0f0; */
+}
+
+#main {
+  /* background-color: aqua; */
+  width: 56%;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  padding-top: 30px;
+  height: 1500px;
+}
+#main .totalImage {
+  /* background-color: yellow; */
+  width: 500px;
+  height: 100%;
+}
+#main .totalImage img {
+  width: 100%;
+}
+
+#main .totalImage .mainImage {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #dadada;
+}
+
+#main .totalImage li img {
+  width: 100px;
+  height: 100px;
+  margin-top: 15px;
+}
+
+#main .totalImage li {
+  float: left;
+  margin-right: 10px;
+}
+
+#main .totalImage .productDetail {
+  height: 100%;
+}
+
+#main .totalImage .productDetail .content .contentPoint {
+  height: 100px;
+}
+
+#main .totalImage .productDetail .content .contentPoint h1 {
+  font-size: 1.3rem;
+}
+
+#main .totalImage .productDetail > .content > .contentPoint > ul {
+  margin-top: 10px;
+}
+
+#main .totalImage .productDetail .content .contentPoint ul .point {
+  display: inline-block;
+  width: 40%;
+  padding: 8px;
+  margin-left: 10px;
+}
+
+#main .totalImage .productDetail .content .contentDetail {
+  height: 100px;
+}
+
+#main .totalImage .productDetail .content .contentDetail .contentPhoto img {
+  margin-top: 20px;
+}
+
+
+#main .productDetail {
+  margin-top: 20px;
+}
+
+#main .totalDetail {
+  /* background-color: coral; */
+  width: calc(50%);
+}
+#main .totalDetail .totalDetailOption {
+  /* background-color: lime; */
+}
+#main .totalDetail .totalDetailOption h1 {
+  font-size: 1.2rem;
+  padding: 20px 0;
+}
+#main .totalDetail .totalDetailOption > p:nth-child(2) {
+  color: #aaa;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #dadada;
+  padding-bottom: 10px;
+}
+#main .totalDetail .totalDetailOption dl {
+  display: flex;
+  flex-flow: row wrap;
+  
+}
+#main .totalDetail .totalDetailOption dl dt {
+  width: 30%;
+  padding: 10px 0;
+
+}
+#main .totalDetail .totalDetailOption dl dd {
+  width: 70%;
+  padding: 10px 0;
+  
+}
+#main .totalDetail .totalDetailOption dl dd.price {
+  font-weight: 700;
+}
+
+#main .totalDetail .totalDetailOption dl dd.brand {
+  font-weight: 700;
+}
+
+#main .totalDetail .totalDetailOption dl dd select {
+  border-radius: 0px;
+  width: 80px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  font-weight: normal;
+
+}
+
+#main .totalDetail .totalDetailOption .number {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  margin-top: 10px;
+  border-top: 1px solid #dadada;
+}
+#main .totalDetail .totalDetailOption .number .orderName {
+  margin-left: 15px;
+  font-weight: 500;
+}
+#main .totalDetail .totalDetailOption .number .orderNumber {
+  text-align: center;
+}
+#main .totalDetail .totalDetailOption .number .orderNumber input[name="num"] {
+  background: #fff;
+  width: 50px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  margin-right: 15px;
+  border-radius: 0px;
+}
+#main .totalDetail .totalDetailOption .number .orderNumber .numberPrice {}
+#main .totalDetail .totalDetailOption .totalPrice {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+#main .totalDetail .totalDetailOption .totalPrice p {}
+#main .totalDetail .totalDetailOption .totalPrice .price {
+  font-weight: 700;
+}
+#main .totalDetail .totalDetailPurchase {
+  /* background-color: beige; */
+  text-align: right;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  
+}
+#main .totalDetail .totalDetailPurchase button {
+}
+#main .totalDetail .totalDetailPurchase #cartBtn{
+  background-color: #d9d9d9;
+  color: black;
+  width: 200px;
+  height: 68px;
+  font-size: 18px;
+  margin-right: 10px;
+}
+#main .totalDetail .totalDetailPurchase #orderBtn{
+  background-color: #464646;
+  color: white;
+  width: 200px;
+  height: 68px;
+  font-size: 18px;
+}
+
+
+
+
+
+
+
+
+

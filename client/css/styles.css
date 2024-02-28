@@ -1,0 +1,405 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+  /* max-width: 192rem; */
+  line-height: normal;
+  box-sizing: border-box;
+  color: #000;
+  padding: 0;
+  margin: 0;
+  /* margin: 0 auto; */
+  letter-spacing: -0.075rem;
+  word-break: keep-all;
+  
+}
+.font_14{
+  font-size:14px; 
+  font-family: 'Noto Sans KR', Roboto sans-serif; 
+  font-weight: normal;
+}
+
+.font_17{
+  font-size:17px; 
+  font-family: 'Noto Sans KR', Roboto sans-serif; 
+  font-weight: normal;
+}
+
+.font_20{
+  font-size:20px; 
+  font-family: 'Noto Sans KR', Roboto sans-serif; 
+  font-weight: normal;
+}
+
+
+html{
+    width: 100vw;
+    background-color: #fafafa;
+}
+
+
+body{
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    background-color: #fafafa;
+    font-family: 'Noto Sans KR', "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.heade{
+    margin-bottom: 0;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d9d9d9;
+    height: 60px;  
+    display: flex; 
+    align-items: center;
+}
+.wrapper{
+  height : auto;
+  min-height: 100%;
+}
+footer{
+
+
+  position : relative;
+  transform : translateY(-100%);
+  
+
+}
+
+button {    
+  touch-action: manipulation;
+  user-select: none;
+  cursor: pointer;
+}
+
+button.headmenu{
+  height: 50%; 
+  margin-right: 20px; 
+  background-color:#fafafa; 
+  border: #fafafa; 
+  font-size: 1.2em; 
+  font-weight: bold;
+}
+
+button.headmenu:hover{
+  transform: scale(1.1);
+  
+  transition: 0.15s;
+}
+
+button.footmenu{
+  height: 50%; 
+  margin-right: 40px; 
+  background-color:#111111; 
+  border: #111111; 
+  font-size: 1.2em; 
+  font-weight: bold;
+  color:#fafafa;
+}
+
+button.footmenu:hover{
+  transform: scale(1.1);
+  
+  transition: 0.15s;
+}
+
+.nav{
+    padding: 0;
+    margin-top: 0;
+  }
+
+footer {
+    clear: both;
+    color: #fafafa;
+    width: 100%;
+    height: 300px;
+    background-color: #111111;
+    margin: 0;
+}
+
+.image {
+  width: 100%;
+  height: 480px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-color: #e0e0e0;
+  background-size: contain;
+  }
+
+  .image2 {
+    width: 100%;
+    height: 480px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-color: #e0e0e0;
+    background-size: contain;
+    }
+
+    .obimg{
+      width:200px;
+      height: 200px;
+    }
+.content_wrap{
+  width: 49%;
+  height: 49%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+}
+
+
+.headInput{
+    width: 350px;
+    height: 50%; 
+    padding: 15px 20px;
+    font-size: 20px;
+    padding: 5px; 
+    border-radius: 0px; 
+    border: none;
+    margin-right: 50px; 
+    background-color:#fafafa;
+  }
+
+
+  input[type="text"] {
+    border: none; /* 기본 테두리 제거 */
+    border-bottom: 1px solid black; /* 밑줄 스타일 적용 */
+    border-radius: 0;
+}
+
+.header h1,.nav h1 {
+     margin: 0;
+ }
+ h2, h3 {
+    margin-bottom: 5px; /* 원하는 간격으로 조절합니다. */
+    margin-top: 5px
+}
+
+.logo{
+  margin-right: 50px; 
+  font-weight: 700; 
+  font-style: italic;
+}
+
+.logoButton{
+  height: 100%; 
+  margin-right: 50px; 
+  background-color:#fafafa; 
+  border: #fafafa;
+  font-size: 1em;
+}
+a {
+  text-decoration: none;
+}
+
+ .slide {
+    /* layout */
+    display: flex;
+    flex-wrap: nowrap;
+    /* 컨테이너의 내용물이 컨테이너 크기(width, height)를 넘어설 때 보이지 않도록 하기 위해 hidden을 준다. */
+    overflow: hidden;
+  
+    /* position */
+    /* slide_button의 position absolute가 컨테이너 안쪽에서 top, left, right offset이 적용될 수 있도록 relative를 준다. (기본값이 static인데, static인 경우 그 상위 컨테이너로 나가면서 현재 코드에선 html을 기준으로 offset을 적용시키기 때문) */
+    position: relative;
+  
+    /* size */
+    width: 100%;
+  
+    /* slide drag를 위해 DOM요소가 드래그로 선택되는것을 방지 */
+    user-select: none;
+  }
+  .slide_item {
+    /* layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    /* position - 버튼 클릭시 left offset값을 적용시키기 위해 */
+    position: relative;
+    left: 0px;
+  
+    /* size */
+    width: 100%;
+    height: 480px;
+    /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
+    flex-shrink: 0;
+  
+    /* transition */
+    transition: left 0.15s;
+  }
+  .slide_button {
+    /* layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    /* position */
+    position: absolute;
+    /* 버튼이 중앙에 위치하게 하기위해 계산 */
+    top: calc(50% - 16px);
+  
+    /* size */
+    width: 30px;
+    height: 30px;
+  
+    /* style */
+    font-size: 3em;
+    border-radius: 100%;
+    cursor: pointer;
+    color: #fafafa;
+  }
+  
+  .slide_prev_button {
+    left: 7px;
+  }
+  .slide_next_button {
+    right: 20px;
+  }
+  
+  /* 각 슬라이드가 변경되는 것을 시각적으로 확인하기 쉽도록 각 슬라이드별 색상 적용 */
+  .slide_item.item1 {
+    background-color: #91f0d2;
+  }
+  .slide_item.item2 {
+    background-color: #ffeef8;
+  }
+  .slide_item.item3 {
+    background-color: #10111a;
+  }
+  .slide_item.item4 {
+    background-color: #10111a;
+  }
+  .slide_item.item5 {
+    background-color: #1d1615;
+  }
+  
+  /* 페이지네이션 스타일 */
+  ul,
+  li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  .slide_pagination {
+    /* layout */
+    display: flex;
+    gap: 5px;
+  
+    /* position */
+    position: absolute;
+    bottom: 0;
+    /* left:50%, translateX(-50%)를 하면 가로 가운데로 위치시킬 수 있다. */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .slide_pagination > li {
+    /* 현재 슬라이드가 아닌 것은 투명도 부여 */
+    color: #7fb5ff88;
+    cursor: pointer;
+    font-size: 25px;
+  }
+  .slide_pagination > li.active {
+    /* 현재 슬라이드 색상은 투명도 없이 */
+    color: #7fb5ff;
+  }
+  
+  .slide_item_duplicate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 0px;
+    width: 100%;
+    height: 300px;
+    flex-shrink: 0;
+    transition: left 0.5s;
+  }
+
+  .category_box {
+    position:sticky;
+    margin-left: 120px;
+    width: 50%;
+    height: 400px;
+    top:100px;;
+    background-color:#fafafa;
+  }
+
+  .category_box {
+    display: flex; /* flex 컨테이너로 설정 */
+    flex-direction: column; /* 세로로 정렬 */
+    align-items: flex-start; /* 아이템을 왼쪽으로 정렬 */
+}
+
+.category_box div {
+    margin-bottom: 20px; /* 각각의 아이템 사이의 간격 설정 */
+}
+
+.main_story1{
+    background-color: #e4e4e4;
+}
+.main_story2{
+    background-color: #dadada;
+}
+.main_story3{
+    background-color: #cecece;
+}
+.main_story4{
+    background-color:#fafafa;
+}
+
+select {
+    font-size: 1.2em;
+    margin-left: 50px;
+    margin-top: 10px;
+    outline: 0;
+    padding: 4px;
+    border-radius: 5px;
+    background-color: #d9d9d9;
+    border: none;
+    font-weight: 600;
+  }
+  option{
+    font-weight: 600;
+  }
+
+  .top {
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    right: 250px;
+    background-color: #d0d0d0;
+    color: black;
+    padding: 20px 20px;
+    cursor: pointer;
+    border-radius: 30px;
+    font-weight: 700;
+}
+
+.top.on {
+    display: block;
+}
+
+ul.scroll1{
+  padding-left: 0;
+}
+
+ul li.scroll2{
+  background-color: pink;
+  margin-bottom: 20px;
+  list-style: none;
+  text-align: center;
+  color: #fff;
+  font-size: 100px;
+  padding: 100px 0;
+}
+
+/* 짝수, 홀수 색상 구분하기 위해 */
+li.scroll2:nth-child(2n) {
+  background-color: skyblue;
+}

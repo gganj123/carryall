@@ -1,0 +1,58 @@
+[
+    {
+      "date": "2022.05.01",
+      "name": "미디엄 프리옹프 클래식",
+      "category": "tote bag",
+      "brand": "Gucci",
+      "price": 3000000
+    },
+    {
+      "date": "2022.05.02",
+      "name": "스몰 드로우 스트링 백",
+      "category": "shoulder bag",
+      "brand": "Chanel",
+      "price": 890000
+    },
+    {
+      "date": "2022.05.03",
+      "name": "틴 드로우스트링 백",
+      "category": "clutch bag",
+      "brand": "Luis Vuitton",
+      "price": 2300000
+    },
+    {
+      "date": "2022.05.04",
+      "name": "미디엄",
+      "category": "evening bag",
+      "brand": "디올",
+      "price": 1800000
+    },
+    {
+      "date": "2022.05.05",
+      "name": "프리옹프",
+      "category": "drawstring bag",
+      "brand": "프라다",
+      "price": 3000000
+    },
+    {
+      "date": "2022.05.06",
+      "name": "클래식",
+      "category": "duffle bag",
+      "brand": "펜디",
+      "price": 1200000
+    },
+    {
+      "date": "2022.05.07",
+      "name": "파니에",
+      "category": "shopper bag",
+      "brand": "Chanel",
+      "price": 1500000
+    },
+    {
+      "date": "2022.05.08",
+      "name": "스트링파니에",
+      "category": "Boston bag",
+      "brand": "Gucci",
+      "price": 2300000
+    }
+  ]
