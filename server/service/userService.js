@@ -8,7 +8,7 @@ class UserService {
     this.userModel = userModel;
   }
 
-  //
+  // 로그인
   async login(username, password) {
     const user = await this.userModel.findByUsername({ username });
     if(!user || user.password !== password) {
