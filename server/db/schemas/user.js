@@ -2,11 +2,6 @@
 const { Schema } = require("mongoose");
 const UserSchema = new Schema(
   {
-    // 회원 고유번호
-    id: {
-      type: Schema.Types.ObjectId,
-      required: true,
-    },
     // 아이디
     username: {
       type: String,
@@ -24,9 +19,24 @@ const UserSchema = new Schema(
     // 이메일
     email: {
       type: String,
+      required: true,
     },
     // 전화번호
     tel: {
+      type: String,
+      required: true,
+    },
+    zipCode: {
+      type: String,
+      required: true,
+    },
+    // 받는 분 주소
+    address: {
+      type: String,
+      required: true,
+    },
+    // 받는 분 상세주소
+    addressDetail: {
       type: String,
       required: true,
     },
