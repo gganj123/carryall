@@ -13,27 +13,32 @@ class OrderController {
 
   // 주문 추가
   async addOrder(req, res, next) {
-    let {
+    const {
       date,
       status,
-      userId,
-      productId,
+      productInformation,
+      recipientInformation,
     } = req.body;
     if (
       !date ||
       !status ||
-      !userId ||
-      !productId
+      !productInformation ||
+      !productInformation[0].name ||
+      !productInformation[0].price ||
+      !productInformation[0].image ||
+      !productInformation[0].option ||
+      !productInformation[0].brand ||
+      !recipientInformation ||
+      !recipientInformation.recipientName ||
+      !recipientInformation.recipientZipCode ||
+      !recipientInformation.recipientAddress ||
+      !recipientInformation.recipientAddressDetail ||
+      !recipientInformation.recipientTel
     ) {
       return res.status(400).json("모든 요소를 입력해주세요.");
     }
     try {
-      const newOrder = await orderService.addOrder({
-        date,
-        status,
-        userId,
-        productId,
-      });
+      const newOrder = await orderService.addOrder(req.body);
       return res.status(200).json(newOrder);
     } catch (e) {
       next(e);
@@ -53,7 +58,7 @@ class OrderController {
       next(e);
     }
   }
-
+  
   // 주문 수정
   async editOrder(req, res, next) {
     const { _id } = req.params;
