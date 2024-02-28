@@ -6,17 +6,6 @@ require("dotenv").config();
 const { PORT, MONGODB_PASSWORD } = process.env;
 const { connect } = require("mongoose");
 
-const indexRouter = require("./server/routes"); 
-
-const productsRouter = require("./server/routes/productRouter.js");
-const categoriesRouter = require("./server/routes/categoryRouter.js");
-// const cartsRouter = require("./server/routes/carts.js");
-const ordersRouter = require("./server/routes/orders.js");
-const usersRouter = require("./server/routes/usersRouter.js");
-const adminRequired = require("./server/middlewares/adminRequired.js");
-const errorHandler = require("./server/middlewares/errorHandler.js");
-
-// mongoDB 연결
 connect(
   `mongodb+srv://carryall:${MONGODB_PASSWORD}@cluster0.lobzfqe.mongodb.net/`
 )
@@ -27,15 +16,31 @@ app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
-app.use("/", indexRouter);
-app.use("/products", productsRouter);
-app.use("/categories", categoriesRouter);
+const indexRouter = require('./server/routes');
+const productsRouter = require("./server/routes/productrouter.js");
+const categoriesRouter = require("./server/routes/categoryRouter.js");
+const ordersRouter = require("./server/routes/orders.js");
+const usersRouter = require("./server/routes/usersRouter.js");
+const viewRouter = require("./server/routes/viewRouter.js");
+// const adminRouter = require("./server/routes/admins.js");
+const adminRequired = require("./server/middlewares/adminRequired.js");
+const errorHandler = require("./server/middlewares/errorHandler.js");
 
-// app.use("/carts", cartsRouter);
-app.use("/orders", ordersRouter);
-app.use("/users", usersRouter);
 
-app.use(errorHandler); //정확한 에러메세지 알고자 일단 주석처리
+
+
+
+app.use(express.static('client'));
+app.use(viewRouter);
+
+
+app.use('/api', indexRouter);
+app.use("/api/products", productsRouter);
+app.use("/api/categories", categoriesRouter);
+app.use("/api/orders", ordersRouter);
+app.use("/api", usersRouter);
+// app.use("/api/admins", adminRouter);
+app.use(errorHandler);
 
 app.get("/",(req, res)=> {
   res.send("접속 성공");
