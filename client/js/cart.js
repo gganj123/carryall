@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // 로컬 스토리지에 업데이트된 isChecked 속성 저장
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   
-
     displayUserCartInfo();
   });  
 
@@ -114,22 +113,6 @@ function displayUserCartInfo() {
       <p class="cartBoxH5 item">${forattedNum}</p>
     `;
     itemsContainer.appendChild(newItem);
-
-    // 아이템 수량 변경 시 totalPricePerItem 갱신
-    const quantityInput = newItem.querySelector('.quantity');
-    quantityInput.addEventListener('change', function() {
-      const newQuantity = parseInt(quantityInput.value);
-      if (!isNaN(newQuantity) && newQuantity >= 1 && newQuantity <= 99) {
-        item.quantity = newQuantity;
-        item.totalPricePerItem = item.price * newQuantity;
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
-        displayUserCartInfo(); // 화면 갱신
-      } else {
-        alert('수량은 1 이상 99 이하여야 합니다.');
-      }
-    });
-
-    
     
     // 각 체크박스의 상태를 확인하여 체크된 상품들만 가격을 더해서 sumItemPrice에 저장
     const checkbox = newItem.querySelector('.itemCkBtn');
@@ -191,8 +174,13 @@ function increaseQuantity(itemId) {
 
   const updatedCartItems = cartItems.map(item => {
     if (item._id === itemId) {
-      item.quantity += 1;
-      item.totalPricePerItem = item.price * item.quantity; // totalPricePerItem 갱신
+      
+      if (item.quantity < 100) {
+        item.quantity += 1;
+        item.totalPricePerItem = item.price * item.quantity; // totalPricePerItem 갱신
+      } else {
+      alert('수량은 1 이상 99 이하여야 합니다.');
+      }
     }
     return item;
   });
@@ -205,11 +193,30 @@ function decreaseQuantity(itemId) {
   let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const updatedCartItems = cartItems.map(item => {
     if (item._id === itemId && item.quantity > 1) {
-      item.quantity -= 1;
-      item.totalPricePerItem = item.price * item.quantity; // totalPricePerItem 갱신
+      if (item.quantity > 0) {
+        item.quantity -= 1;
+        item.totalPricePerItem = item.price * item.quantity; // totalPricePerItem 갱신
+      } else {
+      alert('수량은 1 이상 99 이하여야 합니다.');
+      }
     }
     return item;
   });
   localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   displayUserCartInfo();
 }
+
+
+    // // 아이템 수량 변경 시 totalPricePerItem 갱신
+    // const quantityInput = newItem.querySelector('.quantity');
+    // quantityInput.addEventListener('change', function() {
+    //   const newQuantity = parseInt(quantityInput.value);
+    //   if (!isNaN(newQuantity) && newQuantity >= 1 && newQuantity <= 99) {
+    //     item.quantity = newQuantity;
+    //     item.totalPricePerItem = item.price * newQuantity;
+    //     localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    //     displayUserCartInfo(); // 화면 갱신
+    //   } else {
+    //     alert('수량은 1 이상 99 이하여야 합니다.');
+    //   }
+    // });

@@ -20,7 +20,6 @@ module.exports = (to, subject, text) => new Promise((resolve, reject) => {
       reject(err);
       return;
     }
-
     resolve(info);
   });
 });

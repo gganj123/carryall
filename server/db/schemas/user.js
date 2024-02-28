@@ -24,11 +24,30 @@ const UserSchema = new Schema(
     email: {
       type: String,
     },
+    // 성별
+    gender: {
+      type: String,
+    },
     // 전화번호
     tel: {
       type: String,
       required: true,
     },
+    // 생일
+    birthday: {
+      type: Date,
+    },
+    // 휴대폰 수신 동의
+    telSubscription: {
+      type: Boolean,
+      required: true,
+    },
+    // 이메일 수신 동의
+    emailSubscription: {
+      type: Boolean,
+      required: true,
+    },
+    passwordReset: {type: Boolean,default: false,}
   },
   {
     versionKey: false,
