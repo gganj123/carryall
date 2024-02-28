@@ -1,8 +1,7 @@
 const userService = require("../service/userService");
-const generateRandomPassword = require("../utils/getRandomPassword");
+const passport = require("passport");
 
 class UserController {
-
   // 로그인
   async login(req, res, next) {
     try {
@@ -26,7 +25,6 @@ class UserController {
       console.error(err);
     }
   }
-
 
   // 로그아웃
   async logout(req, res) {
@@ -56,6 +54,8 @@ class UserController {
         zipCode,
         address,
         addressDetail,
+        telSubscription,
+        emailSubscription,
       } = req.body;
 
       const newUser = await userService.createUser({
@@ -67,6 +67,8 @@ class UserController {
         zipCode,
         address,
         addressDetail,
+        telSubscription,
+        emailSubscription,
       });
 
       res.status(200).json({ message: "회원가입이 완료되었습니다.", newUser });
@@ -79,9 +81,18 @@ class UserController {
   // 회원정보 수정
   async updateUser(req, res) {
     try {
-      const { password, name, email, tel, zipCode, address, addressDetail } =
-        req.body;
-        console.log(req.body)
+      const {
+        password,
+        name,
+        email,
+        tel,
+        zipCode,
+        address,
+        addressDetail,
+        telSubscription,
+        emailSubscription,
+      } = req.body;
+      console.log(req.body);
       await userService.editUser(req.session.username, {
         password,
         name,
@@ -90,6 +101,8 @@ class UserController {
         zipCode,
         address,
         addressDetail,
+        telSubscription,
+        emailSubscription,
       });
       res.status(200).json({ message: "회원정보가 수정되었습니다" });
     } catch (error) {
@@ -135,8 +148,7 @@ class UserController {
 
   async register(req, res) {
     try {
-
-    } catch(error) {
+    } catch (error) {
       res.status(500).json({ error: error.message });
     }
   }
