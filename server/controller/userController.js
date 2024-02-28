@@ -1,4 +1,5 @@
 const userService = require("../service/userService");
+const generateRandomPassword = require("../utils/getRandomPassword");
 
 class UserController {
 

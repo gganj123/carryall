@@ -1,10 +1,8 @@
 const mongoose = require("mongoose");
 const UserSchema = require("../schemas/user");
-
 const User = mongoose.model("users", UserSchema);
 
 class UserModel {
-
   // 아이디 또는 이메일 중복검사
   async findByUser(username, email) {
     const user = await User.findOne({

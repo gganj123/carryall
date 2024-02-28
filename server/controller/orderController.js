@@ -16,23 +16,13 @@ class OrderController {
     let {
       date,
       status,
-      recipientName,
-      recipientZipCode,
-      recipientAddress,
-      recipientAddressDetail,
-      recipientTel,
-      request,
+      userId,
       productId,
     } = req.body;
     if (
       !date ||
       !status ||
-      !recipientName ||
-      !recipientZipCode ||
-      !recipientAddress ||
-      !recipientAddressDetail ||
-      !recipientTel ||
-      !request ||
+      !userId ||
       !productId
     ) {
       return res.status(400).json("모든 요소를 입력해주세요.");
@@ -41,12 +31,7 @@ class OrderController {
       const newOrder = await orderService.addOrder({
         date,
         status,
-        recipientName,
-        recipientZipCode,
-        recipientAddress,
-        recipientAddressDetail,
-        recipientTel,
-        request,
+        userId,
         productId,
       });
       return res.status(200).json(newOrder);

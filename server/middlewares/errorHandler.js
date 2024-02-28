@@ -1,5 +1,3 @@
-// error-handler.js
-
 // 에러 처리 전담 미들웨어
 function errorHandler(error, req, res, next) {
   if (error) {
