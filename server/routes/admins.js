@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const Admin = require("../db").Admin;
-const asyncHandler = require("../utils/asyncHandler");
 const router = Router();
 
 // POST 요청을 처리하는 라우터 - 관리자 추가

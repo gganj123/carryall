@@ -1,4 +1,4 @@
-const userModel = require("../db/models/user");
+const userModel = require("../db/models/userModel");
 const hashedPassword = require("../utils/hashPassword");
 const generateRandomPassword = require("../utils/getRandomPassword");
 const sendMail = require("../utils/sendMail");
@@ -6,6 +6,15 @@ const sendMail = require("../utils/sendMail");
 class UserService {
   constructor(userModel) {
     this.userModel = userModel;
+  }
+
+  // 로그인
+  async login(username, password) {
+    const user = await this.userModel.findByUsername({ username });
+    if(!user || user.password !== password) {
+      throw new Error('로그인정보가 일치하지 않습니다.')
+    }
+    return user;
   }
 
   // 회원가입
