@@ -138,10 +138,19 @@ footer {
     background-color: #e0e0e0;
     background-size: contain;
     }
-
+.obitem{
+  border: 1px solid #eee;
+  border-radius: 0px;
+  height: 282px;
+  width: 244.44px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
     .obimg{
-      width:200px;
-      height: 200px;
+      width: 244.44px;
+  height: 190.65px;
+  object-fit: cover;
+  
     }
 .content_wrap{
   width: 49%;
@@ -151,7 +160,6 @@ footer {
   grid-column-gap: 5px;
   grid-row-gap: 5px;
 }
-
 
 .headInput{
     width: 350px;
@@ -402,4 +410,13 @@ ul li.scroll2{
 /* 짝수, 홀수 색상 구분하기 위해 */
 li.scroll2:nth-child(2n) {
   background-color: skyblue;
+}
+
+li p{
+  font-size: 14px;
+  opacity: .8;
+}
+
+li h2 {
+  font-size: 17px;
 }

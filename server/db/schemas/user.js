@@ -2,8 +2,11 @@
 const { Schema } = require("mongoose");
 const UserSchema = new Schema(
   {
-    id: Schema.Types.ObjectId, //order 스키마와 연결하기 위해 추가    
-    // 유저 아이디
+    // 회원 고유번호(아이디)
+    // id: {
+    //   type: Schema.Types.ObjectId,
+    //   required: true,
+    // },
     username: {
       type: String,
       required: true,
@@ -21,33 +24,30 @@ const UserSchema = new Schema(
     email: {
       type: String,
     },
+    // 성별
+    gender: {
+      type: String,
+    },
     // 전화번호
     tel: {
       type: String,
       required: true,
     },
-    // 받는 분 우편번호
-    zipCode: {
-      type: String,
+    // 생일
+    birthday: {
+      type: Date,
+    },
+    // 휴대폰 수신 동의
+    telSubscription: {
+      type: Boolean,
       required: true,
     },
-    // 받는 분 주소
-    address: {
-      type: String,
+    // 이메일 수신 동의
+    emailSubscription: {
+      type: Boolean,
       required: true,
     },
-    // 받는 분 상세주소
-    addressDetail: {
-      type: String,
-      required: true,
-    },
-    // 관리자 or 회원
-    role: {
-      type: String,
-      required: false,
-      default: "user",
-      enum: ["admin", "user"],
-    },
+    passwordReset: {type: Boolean,default: false,}
   },
   {
     versionKey: false,
