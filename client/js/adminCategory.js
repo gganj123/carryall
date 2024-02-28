@@ -109,7 +109,6 @@ deleteButton.addEventListener('click', function () {
           axios.delete(`/api/categories/${categoryId}`)
           .then(response => {
               // 카테고리 삭제에 성공한 경우
-              alert(`카테고리가 삭제되었습니다.`);
               
               // 화면에서 해당 카테고리를 제거합니다.
               adminListItem.parentNode.removeChild(adminListItem);

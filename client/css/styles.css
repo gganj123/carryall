@@ -84,6 +84,13 @@ button.headmenu{
   font-size: 1.2em; 
   font-weight: bold;
 }
+
+.bs:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s linear;
+    overflow: hidden;
+  }
+
 .cate{
   display: flex; align-items: flex-end;
 }
@@ -350,15 +357,26 @@ a {
 
 .main_story1{
     background-color: #e4e4e4;
+    overflow: hidden;
+
 }
 .main_story2{
     background-color: #dadada;
+    overflow: hidden;
+
 }
 .main_story3{
     background-color: #cecece;
+    overflow: hidden;
+
 }
 .main_story4{
     background-color:#fafafa;
+}
+
+img.bs{
+  width:100%;
+  height: auto;
 }
 
 select {

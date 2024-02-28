@@ -18,11 +18,7 @@
     <div class="mainPhoto" style="background-color: #f7f7f7; margin:0;">
       <img class="mainPhoto" style = "width: 70% ; height:550px; "src="/img/ban_3.jpeg">
     </div>
-    <!-- <div class="category">카테고리
-      <div class="tote">토트백</div>
-      <div class="cross">크로스백</div>
-      <div class="back">백팩</div>
-    </div> -->
+ 
     <div class="container" style="height: 100px; width: 100%; display: flex; flex-wrap: wrap;">
       <div class="side1" style="height: 2000px; width: 20%; background-color: #fafafa; ">
         <div class="category_box" style="text-align: left;">
@@ -30,13 +26,13 @@
               <button class="headmenu cate" style="height: 30%;width: 80%; margin-bottom: 10px;">
                   <h1>Brand</h1>
               </button>
-              <button class="headmenu slideRight cate" style="height: 25%;width: 80%;">
+              <button class="headmenu slideRight cate" id="supremebutt"style="height: 25%;width: 80%;">
                   <h2>Supreme</h2>
               </button>
-              <button class="headmenu slideRight cate" style="height: 25%;width: 80%;">
+              <button class="headmenu slideRight cate" id="stussybutt"style="height: 25%;width: 80%;">
                   <h2>Stussy</h2>
               </button>
-              <button class="headmenu slideRight cate" style="height: 25%;width: 90%;">
+              <button class="headmenu slideRight cate" id="barebutt" style="height: 25%;width: 90%;">
                   <h2>Bare</h2>
               </button>
           </div>
@@ -45,14 +41,14 @@
               <button class="headmenu cate" style="height: 30%;width: 80%; margin-top: 50px; margin-bottom: 10px;">
                   <h1>Category</h1>
               </button>
-              <button class="headmenu slideRight cate" style="height: 22%;width: 80%;">
+              <button class="headmenu slideRight cate" id="tbutt" style="height: 22%;width: 80%;">
                   <h2>Tod's bag</h2>
               </button>
-              <button class="headmenu slideRight cate" style="height: 22%;width: 80%;">
+              <button class="headmenu slideRight cate" id="cbutt" style="height: 22%;width: 80%;">
                   <h2>cross bag</h2>
               </button>
-              <button class="headmenu slideRight cate" style="height: 22%;width: 90%;">
-                  <h2>shoulder bag</h2>
+              <button class="headmenu slideRight cate" id="bbutt" style="height: 22%;width: 90%;">
+                  <h2>back pack</h2>
               </button>
           </div>
       </div>
@@ -74,7 +70,7 @@
               <option value="d">높은가격</option>
           </select>
         </div>
-          <div class="productList" id="objectList">
+          <div class="productList" id="oblistSort">
               <div class="detail" id="detail"></div>
            
           </div> 
@@ -94,7 +90,7 @@
   <script src="/js/footer.js"></script>
   <script src="/js/top.js"></script>
   <script src="/js/product.js"></script>
-  <script src="/js/objectList"></script>
+  <script src="/js/oblistsort.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 </body>
 </html>
