@@ -60,7 +60,7 @@
               <dt>옵션선택</dt>
               <dd>
                 <select name="selectbox" class="selectbox">
-                  <option value="1">black</option>
+                  <option value="1">흠</option>
                   <option value="2">white</option>
                   <option value="3">brown</option>
                 </select>
@@ -93,10 +93,9 @@
   <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script>
       const currentURL = window.location.href;
-
-// URL에서 ID 추출하기
-const urlParams = new URLSearchParams(window.location.search);
-const productId = urlParams.get('id');
+      // URL에서 ID 추출하기
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id');
       document.addEventListener("DOMContentLoaded", function() {
       axios.get('/api/products')
         .then(res => {
@@ -107,17 +106,17 @@ const productId = urlParams.get('id');
       // dataToSend 객체의 정보를 각 요소에 할당
       document.querySelector('.mainImage.img22').src = filteredProduct[0].image;
       document.querySelector('.totalDetailOption h1').innerText = filteredProduct[0].name;
-      document.querySelector('.totalDetailOption .price').innerText = filteredProduct[0].price;
-      document.querySelector('.totalPrice .price').innerText = filteredProduct[0].price;
+      document.querySelector('.totalDetailOption .price').innerText = filteredProduct[0].price.toLocaleString('ko-KR')+"원";
+      document.querySelector('.totalPrice .price').innerText = filteredProduct[0].price.toLocaleString('ko-KR')+"원";
       document.querySelector('.totalDetailOption .brand').innerText = filteredProduct[0].brand;
       document.querySelector('.contentPoint ul').innerHTML = `
         <li class="point">소재: 합성피혁</li>
         <li class="point">색상: 블랙 / 아이보리 / 카멜</li>
-        <li class="point">추가 상세 : ${product.detail}</li>
+        <li class="point">추가 상세 : ${filteredProduct[0].name}</li>
         <li class="point">추가 상세 : ${product.detail}</li>
           `;
       document.querySelector('.totalDetailOption dl select[name="selectbox"]').innerHTML = `
-        <option value="1">${product.option}</option>
+        <option value="1">${filteredProduct[0].option}</option>
         <option value="2">아이보리</option>
         <option value="3">브라운</option>
           `;
@@ -130,11 +129,13 @@ const productId = urlParams.get('id');
       console.error('Error fetching data:', error);
       });
       })
+      document.addEventListener("DOMContentLoaded", function() {
+        const cartBtn = document.getElementById("cartBtn");
+      })
     </script>
       <div style="height: 500px;"></div>
     <footer id="footer"></footer>
     <script src="/js/header.js"></script>
     <script src="/js/footer.js"></script>
-
 </body>
 </html>
