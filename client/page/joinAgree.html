@@ -87,7 +87,7 @@
             </ul>
 
             <h2 class="certiTit">본인 인증방법</h2>
-            <button type="submit" id="fakeBtn">휴대폰 본인인증</button>
+            <button type="button" id="phoneVerify">휴대폰 본인인증</button>
             <p class="certiDesc">이미 회원이신가요? <a href="./loginMember.html">로그인하기</a></p>
             <div class="certiBtn">
               <button type="button" class="btnType01">이전</button>
@@ -114,6 +114,8 @@
       } else {
         subAgreeCheckboxes.forEach(checkbox => {
           checkbox.checked = false;
+          const chkBox = checkbox.closest('li').querySelector('.chkBox');
+          chkBox.classList.remove('active'); // 체크 해제 시 활성화된 요소 비활성화
         });
       }
     });
@@ -162,6 +164,15 @@
       checkbox.addEventListener('click', function() {
         const chkBox = this.closest('li').querySelector('.chkBox');
         chkBox.classList.toggle('active');
+      });
+    });
+
+    // 5. 휴대폰 본인인증 closing
+    document.addEventListener('DOMContentLoaded', function() {
+      const phoneVerifyButton = document.getElementById('phoneVerify');
+
+      phoneVerifyButton.addEventListener('click', function() {
+        alert('본인인증 서비스 준비중입니다.');
       });
     });
 

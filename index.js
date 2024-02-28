@@ -1,6 +1,4 @@
 const express = require("express");
-const fs = require('fs');
-const path = require('path');
 const cors = require("cors");
 const { json, urlencoded } = require("express");
 const app = express();
@@ -8,6 +6,18 @@ require("dotenv").config();
 const { PORT, MONGODB_PASSWORD } = process.env;
 const { connect } = require("mongoose");
 
+const indexRouter = require("./server/routes"); 
+
+const productsRouter = require("./server/routes/productRouter.js");
+// const adminsRouter = require("./server/routes.admins.js");
+const categoriesRouter = require("./server/routes/categoryRouter.js");
+// const cartsRouter = require("./server/routes/carts.js");
+const ordersRouter = require("./server/routes/orders.js");
+const usersRouter = require("./server/routes/usersRouter.js");
+const adminRequired = require("./server/middlewares/adminRequired.js");
+const errorHandler = require("./server/middlewares/errorHandler.js");
+
+// mongoDB 연결
 connect(
   `mongodb+srv://carryall:${MONGODB_PASSWORD}@cluster0.lobzfqe.mongodb.net/`
 )
@@ -18,63 +28,20 @@ app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
-const indexRouter = require('./server/routes');
-const productsRouter = require("./server/routes/products.js");
-const categoriesRouter = require("./server/routes/categories.js");
-const cartsRouter = require("./server/routes/carts.js");
-const ordersRouter = require("./server/routes/orders.js");
-
-app.use('/', indexRouter);
+app.use("/", indexRouter);
 app.use("/products", productsRouter);
 app.use("/categories", categoriesRouter);
-app.use("/carts", cartsRouter);
+
+// app.use("/carts", cartsRouter);
 app.use("/orders", ordersRouter);
+app.use("/", usersRouter);
+// app.use("/admins", adminsRouter); //어드민
 
-// 정적 파일 서빙 설정: client 폴더를 정적 파일 경로로 지정
-app.use(express.static(path.join(__dirname, 'client')));
 
-// HTML 파일 내의 모든 페이지에 대한 경로를 가져옴
-const pageFolder = path.join(__dirname, 'client', 'page');
-const pageFiles = fs.readdirSync(pageFolder);
-pageFiles.forEach(file => {
-  // 파일 확장자를 체크하여 유효한 HTML 파일인지 확인
-  const ext = path.extname(file).toLowerCase();
-  if (ext === '.html') {
-    app.get('/' + path.parse(file).name, (req, res) => {
-      res.sendFile(path.join(pageFolder, file));
-    });
-  }
-});
+app.use(errorHandler); //정확한 에러메세지 알고자 일단 주석처리
 
-// CSS 폴더 내의 모든 CSS 파일에 대한 경로를 가져옴
-const cssFolder = path.join(__dirname, 'client', 'css');
-const cssFiles = fs.readdirSync(cssFolder);
-cssFiles.forEach(file => {
-  app.get('/css/' + file, (req, res) => {
-    res.sendFile(path.join(cssFolder, file));
-  });
-});
-
-// JS 폴더 내의 모든 JS 파일에 대한 경로를 가져옴
-const jsFolder = path.join(__dirname, 'client', 'js');
-const jsFiles = fs.readdirSync(jsFolder);
-jsFiles.forEach(file => {
-  app.get('/js/' + file, (req, res) => {
-    res.sendFile(path.join(jsFolder, file));
-  });
-});
-
-// 이미지 폴더 내의 모든 이미지 파일에 대한 경로를 가져옴
-const imgFolder = path.join(__dirname, 'client', 'img');
-const imgFiles = fs.readdirSync(imgFolder);
-imgFiles.forEach(file => {
-  // 파일 확장자를 체크하여 유효한 이미지 파일인지 확인
-  const ext = path.extname(file).toLowerCase();
-  if (ext === '.webp' || ext === '.jpeg' || ext === '.jpg' || ext === '.png') {
-    app.get('/img/' + file, (req, res) => {
-      res.sendFile(path.join(imgFolder, file));
-    });
-  }
+app.get("/", (req, res) => {
+  res.send("접속 성공");
 });
 
 app.listen(PORT, () => {
