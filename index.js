@@ -10,7 +10,7 @@ const indexRouter = require("./server/routes");
 
 const productsRouter = require("./server/routes/productRouter.js");
 const categoriesRouter = require("./server/routes/categoryRouter.js");
-// const cartsRouter = require("./server/routes/carts.js");
+const cartsRouter = require("./server/routes/cartsRouter.js");
 const ordersRouter = require("./server/routes/orders.js");
 const usersRouter = require("./server/routes/usersRouter.js");
 const adminRequired = require("./server/middlewares/adminRequired.js");
@@ -32,7 +32,6 @@ app.use("/a", indexRouter);
 // app.use("/", indexRouter);
 app.use("/products", productsRouter);
 app.use("/categories", categoriesRouter);
-
 // app.use("/carts", cartsRouter);
 app.use("/orders", ordersRouter);
 app.use("/users", usersRouter);

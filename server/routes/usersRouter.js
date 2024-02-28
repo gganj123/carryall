@@ -89,31 +89,14 @@ router.post(
 
 // 로그아웃
 router.post("/logout", userController.logout);
-
 // 회원가입
 router.post("/join", userController.joinUser);
-
 // 회원정보 수정
 router.put("/user", userController.updateUser);
-
 // 회원 탈퇴
 router.delete("/withdrawal", userController.deleteUser);
-
-// 회원가입 페이지
-// router.get(
-//   "/register",
-//   asyncHandler(async (req, res) => {
-//     const loginUser = await User.findOne({ username: req.session.username });
-
-//     if (loginUser) {
-//       res.redirect("/");
-//     }
-//   })
-// );
-
 // 회원정보
 router.get('/mypage', userController.mypage);
-
 // 비밀번호 초기화
 router.post("/reset-password", userController.resetPassword);
 
