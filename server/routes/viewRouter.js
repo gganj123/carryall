@@ -19,8 +19,7 @@ viewRouter.use('/order',serveStatic('order'));
 viewRouter.use('/practice',serveStatic('practice'));
 viewRouter.use('/test',serveStatic('test'));
 viewRouter.use('/mypage',serveStatic('mypage'));
-
-
+viewRouter.use('/admin/order',serveStatic('adminOrder'));
 
 function serveStatic (resource) {
     const pathName = path.join(__dirname, '../../client/page');

@@ -57,6 +57,7 @@ class OrderModel {
       throw error;
     }
   }
+
 }
 
 const orderModel = new OrderModel();
