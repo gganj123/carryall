@@ -3,7 +3,7 @@
   padding: 0;
 }
 body {
-  height: auto;
+  /* height: auto; */
   background-color: #fff;
 }
 li {
@@ -19,11 +19,11 @@ button {
 .container{
   margin: 0 auto;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   /* margin-top: 60px; */
-  position: relative;
-  margin-top: 12%;
+  /* position: relative; */
+  margin-top: 8%;
   /* transform: translateY(-50%); */
 }
 .tab {

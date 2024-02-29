@@ -13,30 +13,31 @@ class OrderController {
 
   // 주문 추가
   async addOrder(req, res, next) {
-    let {
-      date,
-      status,
-      userId,
-      productId,
-    } = req.body;
+    const { date, status, productInformation, recipientInformation } = req.body;
     if (
       !date ||
       !status ||
-      !userId ||
-      !productId
+      !productInformation ||
+      !productInformation[0].name ||
+      !productInformation[0].price ||
+      !productInformation[0].image ||
+      !productInformation[0].option ||
+      !productInformation[0].brand ||
+      !productInformation[0].quantity ||
+      !recipientInformation ||
+      !recipientInformation.recipientName ||
+      !recipientInformation.recipientZipCode ||
+      !recipientInformation.recipientAddress ||
+      !recipientInformation.recipientAddressDetail ||
+      !recipientInformation.recipientTel
     ) {
       return res.status(400).json("모든 요소를 입력해주세요.");
     }
     try {
-      const newOrder = await orderService.addOrder({
-        date,
-        status,
-        userId,
-        productId,
-      });
+      const newOrder = await orderService.addOrder(req.body);
       return res.status(200).json(newOrder);
-    } catch (e) {
-      next(e);
+    } catch (error) {
+      next(error);
     }
   }
 
@@ -49,8 +50,8 @@ class OrderController {
     try {
       const order = await orderService.getOrder(_id);
       return res.status(200).json(order);
-    } catch (e) {
-      next(e);
+    } catch (error) {
+      next(error);
     }
   }
 
@@ -65,8 +66,8 @@ class OrderController {
     try {
       const order = await orderService.editOrder(_id, req.body);
       return res.status(200).json(order);
-    } catch (e) {
-      next(e);
+    } catch (error) {
+      next(error);
     }
   }
 

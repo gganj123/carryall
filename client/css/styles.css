@@ -65,7 +65,7 @@ footer{
 
 
   position : relative;
-  transform : translateY(-100%);
+  /* transform : translateY(-100%); */
   
 
 }
@@ -85,14 +85,14 @@ button.headmenu{
   font-weight: bold;
 }
 
-button.headmenu.none {
-  display: none;
-} 
+.bs:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s linear;
+    overflow: hidden;
+  }
 
-button.headmenu:hover{
-  transform: scale(1.1);
-  
-  transition: 0.15s;
+.cate{
+  display: flex; align-items: flex-end;
 }
 
 button.footmenu{
@@ -234,7 +234,7 @@ a {
     flex-shrink: 0;
   
     /* transition */
-    transition: left 0.15s;
+    transition: left 0.3s;
   }
   .slide_button {
     /* layout */
@@ -338,22 +338,36 @@ a {
     flex-direction: column; /* 세로로 정렬 */
     align-items: flex-start; /* 아이템을 왼쪽으로 정렬 */
 }
-
+.warp{
+  display: flex;
+  flex-wrap: wrap;
+}
 .category_box div {
     margin-bottom: 20px; /* 각각의 아이템 사이의 간격 설정 */
 }
 
 .main_story1{
     background-color: #e4e4e4;
+    overflow: hidden;
+
 }
 .main_story2{
     background-color: #dadada;
+    overflow: hidden;
+
 }
 .main_story3{
     background-color: #cecece;
+    overflow: hidden;
+
 }
 .main_story4{
     background-color:#fafafa;
+}
+
+img.bs{
+  width:100%;
+  height: auto;
 }
 
 select {
@@ -392,17 +406,30 @@ ul.scroll1{
   padding-left: 0;
 }
 
-ul li.scroll2{
-  background-color: pink;
+.scroll2{
   margin-bottom: 20px;
   list-style: none;
   text-align: center;
-  color: #fff;
+  color: balck;
   font-size: 100px;
   padding: 100px 0;
 }
 
-/* 짝수, 홀수 색상 구분하기 위해 */
-li.scroll2:nth-child(2n) {
-  background-color: skyblue;
+li p{
+  font-size: 14px;
+  opacity: .8;
+}
+
+li h2 {
+  font-size: 17px;
+}
+
+.more-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* 원하는 여백값 설정 */
+}
+
+.more-button {
+  /* 버튼에 대한 스타일링을 추가하세요 */
 }

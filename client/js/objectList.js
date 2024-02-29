@@ -1,49 +1,53 @@
-
-axios.get('http://localhost:5001/products')
-  .then(res => {
-    const productList = res.data;
-    let htmlString = '';
-    console.log(res.data);
-
-    productList.forEach(product => {
-      htmlString += `<div style="height: 300px; width: 23%; margin-right: 20px;">
-      <ul>`
-      htmlString += `<li><img class="obimg" id="${product._id}" src="${product.image}" alt="${product.id}"></li>`;//이미지 넣어서 나오게 해보기
-      htmlString += `<li><strong>Name: ${product.name}</strong></li> `;
-      htmlString += `<li><strong>Brand:</strong> ${product.brand}</li>`;
-      htmlString += `<li><strong>Price: ${product.price.toLocaleString('ko-KR')}</strong></li>`;
-      htmlString += `</div>`;
-    });
-
-    document.getElementById('objectList').innerHTML = htmlString;
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
+  document.addEventListener("DOMContentLoaded", function() {
+    axios.get('/api/products')
+      .then(res => {
+        const productList = res.data;
+        let htmlString = '';
+  
+        productList.forEach((product,index) => {
+          if(index<=7){
+          htmlString += `<div class="item" style="height: 321px; width: 244.44px; margin-bottom:100px;"><a href="/practice?id=${product._id}">`
+          htmlString += `<img div class="img" style="width: 100%; height: auto;  display: block;" id="${product._id}" src='${product.image}'>`;
+          htmlString += `<h2 id="root"> ${product.brand}</h2>`;
+          htmlString += `<div p>${product.name}</div> `;
+          htmlString += `<p>${product.price.toLocaleString('ko-KR')}</p>`;
+          htmlString += `</div></a>`;
+          }
+        });
+  
+        document.getElementById('objectList').innerHTML = htmlString;
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
   });
 
+                          
+  document.addEventListener("DOMContentLoaded", function() {
+    axios.get('/api/products')
+      .then(res => {
+        const productList = res.data;
+        
+        // 가격을 기준으로 내림차순으로 정렬
+        productList.sort((a, b) => a.price - b.price);
+        
+        let htmlString = '';  
+        productList.forEach((product, index) => {
+          if (index <= 7) {
+            htmlString += `<div class="item" style="height: 321px; width: 244.44px; margin-bottom:100px;"><a href="/practice?id=${product._id}">`
+            htmlString += `<img class="img" style="width: 100%; height: auto;  display: block;" id="${product._id}" src="${product.image}">`;
+            htmlString += `<h2 id="root"> ${product.brand}</h2>`;
+            htmlString += `<div p>${product.name}</div> `;
+            htmlString += `<p>${product.price.toLocaleString('ko-KR')}</p>`;
+            htmlString += `</div></a>`;
+          }
+        });
 
-  axios.get('http://localhost:5001/products')
-  .then(res => {
-    // 등록일순으로 데이터 정렬
-    const productList = res.data.sort((a, b) => {
-      return new Date(a.createdAt) - new Date(b.createdAt);
-    });
-
-    let htmlString = '';
-    console.log(productList); // 정렬된 productList를 출력
-
-    productList.forEach(product => {
-      htmlString += `<div class ="font_17" style="height: 300px; width: 23%; margin-right: 20px;">
-      <ul>`
-      htmlString += `<li><img class="obimg" src="${product.image}" alt="${product.name}"></li>`;// 이미지 삽입 부분
-      htmlString += `<li><strong>Name:${product.name}</strong> </li> `;
-      htmlString += `<li><strong>Brand:</strong> ${product.brand}</li>`;
-      htmlString += `<li><strong>Price: ${product.price.toLocaleString('ko-KR')}</strong></li>`;
-      htmlString += `</div>`;
-    });
-
-    document.getElementById('obListDateSorting').innerHTML = htmlString;
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
+        // 정렬된 결과를 oblistSort에도 넣어줌
+        document.getElementById('oblistPriceSort').innerHTML = htmlString;
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
   });
+   

@@ -68,6 +68,12 @@ class UserModel {
     const user = await User.updateOne({ email: email }, { password });
     return user;
   }
+  
+  // 관리자 회원관리
+  async findAllUsers() {
+    const user = await User.find({});
+    return user;
+  }
 }
 
 const userModel = new UserModel();

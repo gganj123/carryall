@@ -4,15 +4,16 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const { body } = require("express-validator");
 const hashedPassword = require("../utils/hashPassword");
 const User = require("../db").User;
 const userController = require("../controller/userController");
 
-const router = express.Router();
+const userRouter = express.Router(); //백에서는 router -> userRouter 변경했으나 아직 프론트는 코드가 그대로인 상태!
 
 // express-session
-router.use(passport.initialize());
-router.use(
+userRouter.use(passport.initialize());
+userRouter.use(
   session({
     // name: "connect.sid" 명시하지않아도 기본적으로 사용 중
     secret: "password", // 암호화에 사용되는 비밀 키를 설정
@@ -26,16 +27,14 @@ router.use(
   })
 );
 
-router.use(passport.session());
+userRouter.use(passport.session());
 
 passport.use(
   new LocalStrategy(async (userId, password, done) => {
     let foundUser = await User.findOne({ username: userId });
 
-    if (!foundUser) {
+    if (!foundUser || foundUser.password !== hashedPassword(password)) {
       return done(null, false, { message: "로그인 정보가 다릅니다." });
-    } else if (foundUser.password !== hashedPassword(password)) {
-      return done(null, false, { message: "비밀번호 정보가 다릅니다." });
     }
     if (foundUser.password == hashedPassword(password)) {
       return done(null, foundUser);
@@ -61,18 +60,21 @@ passport.deserializeUser(async (user, done) => {
 });
 
 // 로그인
-router.post('/login', userController.login);
+userRouter.post('/login', userController.login);
 // 로그아웃
-router.post("/logout", userController.logout);
+userRouter.post("/logout", userController.logout);
 // 회원가입
-router.post("/join", userController.joinUser);
+userRouter.post("/join",[
+  body("username").trim().isLength({ min: 3, max: 20 }).withMessage('아이디는 3글자 이상 20글자 이하로 입력해주세요.'),
+  body("password").trim().isLength({ min: 8, max: 72 }).withMessage('비밀번호는 10글자 이상 72글자 이하로 입력해주세요.')
+], userController.joinUser);
 // 회원정보 수정
-router.put("/user", userController.updateUser);
+userRouter.put("/user", userController.updateUser);
 // 회원 탈퇴
-router.delete("/withdrawal", userController.deleteUser);
+userRouter.delete("/withdrawal", userController.deleteUser);
 // 회원정보
-router.get('/mypage', userController.mypage);
+userRouter.get('/mypage', userController.mypage);
 // 비밀번호 초기화
-router.post("/reset-password", userController.resetPassword);
+userRouter.post("/reset-password", userController.resetPassword);
 
-module.exports = router;
+module.exports = userRouter;

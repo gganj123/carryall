@@ -10,34 +10,10 @@
   <link rel="stylesheet" href="../css/join.css">
 </head>
 <body>
-  <!-- 은지 -->
-  <div class="header" style="height: 0px; width: 1902px; display: flex; align-items: center;"></div>
-  <div class="header" style="height: 60px; width: 1902px; display: flex; align-items: center;background-color: white;">
-    <h1 style="margin-right: 50px; font-family:Roboto; font-weight: 700; font-style: italic; ">carryAll</h1>
-    <input class ="inputform" type="text" placeholder="검색" style="height: 50%; padding: 5px; border-radius: 5px; margin-right: 50px;">
-    <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold">장바구니</button>
-    <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">로그인</button>
-    <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">마이페이지</button>
-    <button style="height: 50%; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">회원가입</button>
-  </div>
-  <!-- 상단 메인 배너 -->
-  <!-- <div class = "nav" style=" background-color:#d9d9d9; height: 480px; width: 1902px;">
-    <h1>nav</h1>
-  </div> -->
+  <!-- 헤더 가져오기 -->
+  <header id="header"></header>
 
-  <!-- 여백 틀 -->
-  <!-- <div class="nav" style="height: 480px; width: 1900px; border: 1px solid tomato; display: flex; flex-wrap: wrap;">
-    <div style="height: 700px; width: 21%; background-color: gray; margin-right: 10px;">
-      <h1>side1</h1>
-    </div>
-    <div style="height: 700px; width: 56%; background-color: #d9d9d9; margin-right: 10px;">
-      <h1>main</h1>
-    </div>
-    <div style="height: 700px; width: 21%; background-color: gray;">
-      <h1>side2</h1>
-    </div>
-  </div> -->
-
+  <!-- 컨텐츠 -->
   <section class="container joinFormWarp">
     <form id="signupForm" action="#" method="post" class="inputForm">
       <fieldset>
@@ -55,8 +31,8 @@
               <!-- 1. 아이디 -->
               <li>
                 <label for="idName" class="label">
-                    <span>* 아이디</span>
-                    <input type="text" class="inputType01" id="idName" required="" >
+                  <span>* 아이디</span>
+                  <input type="text" class="inputType01" id="idName" required="" >
                 </label>
               </li>
               <!-- 2. 비밀번호 -->
@@ -139,14 +115,26 @@
       </fieldset>                        
     </form>
   </section>
+  <!-- 푸터 가져오기 -->
+  <footer id="footer"></footer>
 
+  <!-- 탑버튼 가져오기 -->
+  <div class="top">top</div>
 
-  <!-- 회원가입 폼 script -->
+  <script src="../js/top.js"></script>
+  <script src="../js/header.js"></script>
+  <script src="../js/footer.js"></script>
   <script src="../js/join.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  <!-- 우편번호 API -->
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  
+  <!-- 회원가입 폼 script -->
   <script>
     // 1. 이메일 주소 유효성 추가
     var emailInput = document.getElementById("email");
     var errorText = document.querySelector(".errTxt.n2");
+
     // 이메일 입력란의 내용이 변경될 때마다 이벤트를 수신하도록 설정
     emailInput.addEventListener("input", function() {
       // 이메일 주소가 "@" 기호를 포함하지 않는 경우
@@ -158,6 +146,7 @@
         errorText.classList.remove("active");
       }
     });
+
 
     // 2. 비밀번호 일치 여부를 확인하는 함수
     function checkPasswordMatch() {
@@ -207,6 +196,7 @@
       }).open();
     }
 
+
     //5. api 입력
     function submitForm() {
       // HTML 폼 요소에 입력된 값을 수집합니다.
@@ -238,21 +228,9 @@
       //   "addressDetail":"주소2"
       // }
 
-      // {
-      //   "username":"test",
-      //   "password":"test",
-      //   "email":"test@test.com",
-      //   "emailSubscription":false,
-      //   "tel":"010-0000-0000",
-      //   "telSubscription":true,
-      //   "name":"테스트",
-      //   "zipCode":"123",
-      //   "address":"주소1",
-      //   "addressDetail":"주소2"
-      // }
 
       // 수집된 데이터를 서버에 전송합니다.
-      axios.post('http://localhost:5001/join', {
+      axios.post('http://localhost:5001/api/join', {
         "username": username,
         "password": password,
         "email": email,
@@ -261,13 +239,11 @@
         "zipCode": address01,
         "address": address02,
         "addressDetail": address03,
-        "telSubscription":true,
-        "emailSubscription":true,
       })
       .then(response => {
         // 서버로부터의 응답을 처리, 완료 페이지로 이동
         console.log('회원가입이 완료되었습니다.', response.data);
-        window.location.href = './joinFinished.html';
+        window.location.href = '../joinFinished';
       })
       .catch(error => {
         // 오류가 발생했을 때 콘솔알림.

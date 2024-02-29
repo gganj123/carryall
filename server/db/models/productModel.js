@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const productSchema = require("../schemas/product");
 const Product = mongoose.model("products", productSchema);
 
+
 class ProductModel {
   async find() {
     const products = await Product.find({});
@@ -23,7 +24,6 @@ class ProductModel {
     option,
     stock,
     brand,
-    detail,
   }) {
     const opt = { returnOriginal: false };
     const updatedProduct = await Product.findOneAndUpdate(
@@ -35,7 +35,6 @@ class ProductModel {
         option,
         stock,
         brand,
-        detail,
       },
       opt
     );
@@ -45,7 +44,15 @@ class ProductModel {
     const result = await Product.deleteOne({ _id });
     return result;
   }
+
+  // 장바구니용 상품 id 조회(상품 금액, 이미지, 브랜드, 상품 이름 리턴)
+  async findByIdForCart (_id) {
+    const product = await Product.findOne({ _id })
+    .select("name price image brand");
+    return product;
+  }
 }
+
 const productModel = new ProductModel();
 
 module.exports = productModel;

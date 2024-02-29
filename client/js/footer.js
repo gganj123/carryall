@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     var footerElement = document.getElementById("footer");
     footerElement.innerHTML = `
-    
         <div class="content_wrap" style="width: 100%; height: 100%;">
             <div class="content"><h1 class="logo" style="color:white; margin-top: 10px; margin-left: 30px;">CARRYALL</h1></div>
             <div class="content" style="color:white; margin-top: 10px;">
