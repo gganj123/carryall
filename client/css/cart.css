@@ -147,7 +147,7 @@ li {
 }
 
 .itemName,
-.itemBrand {
+.itemcategoryName {
   margin: 0;
   display: block;
   text-align: left;

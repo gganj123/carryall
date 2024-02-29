@@ -29,7 +29,7 @@ function displayUserCartInfo() {
           <img src="${item.imageUrl}" alt="${item.name} 이미지" class="itemImg">
           <div class="item itemInfo">
               <p class="itemName">${item.name}</p>
-              <p class="itemBrand">${item.brand}</p>
+              <p class="itemcategoryName">${item.categoryName}</p>
           </div>
       </div>
       <p class="cartBoxH2 item">${item.option}</p>

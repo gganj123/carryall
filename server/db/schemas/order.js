@@ -32,7 +32,7 @@ const OrderSchema = new Schema({
         type: String,
         required: true,
       },
-      brand: {
+      categoryName: {
         type: String,
         required: true,
       },
