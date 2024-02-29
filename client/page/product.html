@@ -20,7 +20,7 @@
     </div>
  
     <div class="container" style="height: 100px; width: 100%; display: flex; flex-wrap: wrap;">
-      <div class="side1" style="height: 2000px; width: 20%; background-color: #fafafa; ">
+      <div class="side1" style="height: 2600px; width: 20%; background-color: #fafafa; ">
         <div class="category_box" style="text-align: left;">
           <div>
               <button class="headmenu cate" style="height: 30%;width: 80%; margin-bottom: 10px;">
@@ -58,7 +58,7 @@
 
         
           <div class="selectbox">
-            <div style="width: 40%;">
+            <div style="width: 40%;" class="hdsort">
               <h2>Lastest listings</h2>
               <h3 class="font_20" style="font-weight: 500;">최신상품</h3>
           </div>
@@ -70,9 +70,13 @@
               <option value="d">높은가격</option>
           </select>
         </div>
+        <ul class="scroll1">
           <div class="productList" id="oblistSort">
               <div class="detail" id="detail"></div>
-           
+              <div class="scroll2"  id="oblistsort2">1</div>
+        <div class="scroll2" id="oblistsort2">2</div>
+        <div class="scroll2"  id="oblistsort2">3</div>
+      </ul>
           </div> 
         </div>
         <div style="height: 2000px; width: 22%; background-color: #fafafa;">
@@ -83,13 +87,15 @@
     </div>
   </div>
   <div class="top">top</div>
-
   <div style="height: 500px;"></div>
 
+
   <script src="/js/header.js"></script>
-  <script src="/js/footer.js"></script>
   <script src="/js/top.js"></script>
-  <script src="/js/product.js"></script>
+  <script src="/js/scroll.js"></script>
+
+  <!-- <script src="/js/product.js"></script> -->
+  <!-- <script src="/js/hdsort.js"></script> -->
   <script src="/js/oblistsort.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 </body>

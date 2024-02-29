@@ -415,19 +415,13 @@ ul.scroll1{
   padding-left: 0;
 }
 
-ul li.scroll2{
-  background-color: pink;
+.scroll2{
   margin-bottom: 20px;
   list-style: none;
   text-align: center;
-  color: #fff;
+  color: balck;
   font-size: 100px;
   padding: 100px 0;
-}
-
-/* 짝수, 홀수 색상 구분하기 위해 */
-li.scroll2:nth-child(2n) {
-  background-color: skyblue;
 }
 
 li p{
