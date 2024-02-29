@@ -65,26 +65,12 @@ class ProductController {
         .json({ success: false, message: err.message });
     }
   }
-  // async deleteProduct(req, res) {
-  //   try {
-  //     const { _id } = req.params;
-
-  //     await ProductService.deleteProduct(_id);
-  //     res.status(204).json({ success: true, message: "ok" });
-  //   } catch (err) {
-  //     res.status(400).json({
-  //       success: false,
-  //       message: err.message,
-  //     });
-  //   }
-  // }
-
   async deleteProduct(req, res) {
     try {
       const { _id } = req.params;
-  
-      const success = await ProductService.deleteProduct(_id);
-        res.status(204).json({ success: true, message: "ok" });;
+
+      await ProductService.deleteProduct(_id);
+      res.status(204).json({ success: true, message: "ok" });
     } catch (err) {
       res.status(400).json({
         success: false,
@@ -92,7 +78,6 @@ class ProductController {
       });
     }
   }
-  
 
   // 상품수정, 요청처리, 수정할 책 id와 수정할 내용 추출, 추출한 정보 service에 전달, 상품 수정
   async updateProduct(req, res) {

@@ -85,6 +85,10 @@ button.headmenu{
   font-weight: bold;
 }
 
+button.headmenu.none {
+  display: none;
+} 
+
 button.headmenu:hover{
   transform: scale(1.1);
   

@@ -1,0 +1,99 @@
+<!-- 은지 > 회원 탈퇴 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>carryAll_회원 탈퇴</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+
+  <div class="header" style="height: 0px; width: 1902px; display: flex; align-items: center;"></div>
+  <div class="header" style="height: 60px; width: 1902px; display: flex; align-items: center;background-color: white;">
+    <h1 style="margin-right: 50px; font-family:Roboto; font-weight: 700; font-style: italic; ">carryAll</h1>
+    <input class ="inputform" type="text" placeholder="검색" style="height: 50%; padding: 5px; border-radius: 5px; margin-right: 50px;">
+    <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold">장바구니</button>
+    <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">로그인</button>
+    <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">마이페이지</button>
+    <button style="height: 50%; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">회원가입</button>
+  </div>
+  <!-- 상단 메인 배너 -->
+  <!-- <div class = "nav" style=" background-color:#d9d9d9; height: 480px; width: 1902px;">
+    <h1>nav</h1>
+  </div> -->
+
+  <!-- 여백 틀 -->
+  <!-- <div class="nav" style="height: 480px; width: 1900px; border: 1px solid tomato; display: flex; flex-wrap: wrap;">
+    <div style="height: 700px; width: 21%; background-color: gray; margin-right: 10px;">
+      <h1>side1</h1>
+    </div>
+    <div style="height: 700px; width: 56%; background-color: #d9d9d9; margin-right: 10px;">
+      <h1>main</h1>
+    </div>
+    <div style="height: 700px; width: 21%; background-color: gray;">
+      <h1>side2</h1>
+    </div>
+  </div> -->
+  <section style="height: 100vh; margin-top: 0;" class="container">
+    <form id="loginForm">
+      <h2>비밀번호 확인</h2>
+      <div class="formGroup id">
+        <label for="passwordChk"></label>
+        <input type="text" id="passwordChk" name="passwordChk" placeholder="비밀번호" required>
+      </div>
+      <div class="errTxt login pwdChk">
+        입력된 비밀번호를 확인하세요.
+      </div>
+      <button type="submit" id="chkPwdBtn">확인</button>
+      <p class="reChkTxt">회원님의 안전한 개인정보 보호를 위해<br>비밀번호를 다시 한 번 확인합니다.</p>
+    </form>
+  </section>
+
+  <!-- 로그인 폼 script -->
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  <script>
+    //1. api 붙이기
+
+    // api 명세 기준
+    // {
+    //   "username":"test",
+    //   "password":"test"
+    // }
+    document.addEventListener('DOMContentLoaded', function () {
+      const loginForm = document.getElementById('loginForm');
+
+      loginForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // 폼의 기본 동작(페이지 이동)을 막습니다.
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        axios.post('http://localhost:5001/login', {
+          "username": username,
+          "password": password
+        })
+        .then(response => {
+          // 로그인 성공 시
+          console.log('성공! ', response.data);
+          localStorage.setItem('loggedInUser', JSON.stringify(response.data));
+          window.location.href = './main.html'; // 로그인 성공 시 main.html로 이동
+        })
+        .catch(error => {
+          // 로그인 실패 시
+          console.error('로그인 실패:', error);
+          // 로그인 실패 메시지를 콘솔에 출력합니다.
+          // 에러에 따라 각각의 오류 메시지를 보여줄 수 있습니다.
+          document.querySelector('.errTxt.login.id').classList.add('active');
+          document.querySelector('.errTxt.login.pw').classList.add('active');
+          // if (error.response.status === 401) {
+          // } else if (error.response.status === 403) {
+          // }
+        });
+      });
+    });
+
+</script>
+</body>
+</html>

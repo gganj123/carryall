@@ -36,13 +36,13 @@
       <button type="button" id="joinBtn">일반 회원가입</button>
 
       <h2 class="fakeTit">SNS 간편 회원가입(구현X)</h2>
-      <button type="submit" id="fakeBtn"><img class="snsIcon kakao" src="../img/icon_kakao.png" alt="카카오 간편 가입">카카오 간편 가입</button>
+      <button class="snsJoin" type="button" id="fakeBtn"><img class="snsIcon kakao" src="../img/icon_kakao.png" alt="카카오 간편 가입">카카오 간편 가입</button>
       <div class="btnWrap">
-        <button class="snsJoin"><img class="snsIcon apple" src="../img/icon_apple.png" alt="apple 회원가입">apple 회원가입</button>
-        <button class="snsJoin"><img class="snsIcon naver" src="../img/icon_naver.png" alt="네이버 회원가입">네이버 회원가입</button>
+        <button type="button" class="snsJoin"><img class="snsIcon apple" src="../img/icon_apple.png" alt="apple 회원가입">apple 회원가입</button>
+        <button type="button" class="snsJoin"><img class="snsIcon naver" src="../img/icon_naver.png" alt="네이버 회원가입">네이버 회원가입</button>
       </div>
       <ul class="joinWrap">
-        <li><a href="./loginMember">로그인</a></li>
+        <li><a href="./loginMember.html">로그인</a></li>
         <li><a href="#">아이디 찾기</a></li>
         <li><a href="#">비밀번호 찾기</a></li>
       </ul>
@@ -56,8 +56,29 @@
 
   <!-- 회원가입 폼 script -->
   <script>
+    // 1. 페이지 이동
     document.getElementById("joinBtn").addEventListener("click", function() {
-      window.location.href = "./joinAgree";
+      window.location.href = "./joinAgree.html";
+    });
+
+    // 2. sns로그인 closing
+    document.addEventListener('DOMContentLoaded', function() {
+      const snsJoinButtons = document.querySelectorAll('.snsJoin');
+      
+      snsJoinButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          alert("SNS 로그인은 준비중입니다.");
+        });
+      });
+    });
+
+    // 3. 아이디-비밀번호 찾기 closing
+    const nonFeatLinks = document.querySelectorAll('a.nonFeat');
+    nonFeatLinks.forEach(link => {
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
+        alert("해당 기능은 준비중입니다.");
+      });
     });
   </script>
 </body>

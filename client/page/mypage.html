@@ -17,30 +17,34 @@
       <div class="profileWrap">
         <div class="profileImg"><img src="" alt=""></div>
         <div class="profileTxt">
-          <h4 class="nameId"><span>엘리스</span> 님</h4>
-          <p class="nameDesc">엘리스님의 현재 등급은 <span>silver</span>등급입니다.<br></p>
+          <h4 class="nameId"><span class="localName">엘리스</span> 님</h4>
+          <p class="nameDesc"><span class="localName">엘리스</span> 님의 아이디는 <span class="localIdName">silver</span>입니다.<br></p>
         </div>
         <div class="btnWrap"><a class="profileBtn" href="#">회원정보 변경</a></div>
       </div>
+
       <div class="contWrap">
+        <!-- 왼쪽 nav menu -->
         <ul class="navCont">
           <li class="navTit n1">쇼핑정보</li>
           <li><a href="#">주문/배송조회</a></li>
           <li><a href="#">취소/반품/교환내역</a></li>
           <li><a href="#">장바구니</a></li>
           <li class="navTit">혜택관리</li>
-          <li><a href="#">쿠폰</a></li>
+          <li><a class="develop" href="#">쿠폰(준비중)</a></li>
           <li class="navTit">고객센터</li>
-          <li><a href="#">1:1 문의</a></li>
+          <li><a class="develop" href="#">1:1 문의(준비중)</a></li>
           <li class="navTit">회원정보</li>
-          <li><a href="#">회원정보변경</a></li>
-          <li><a href="#">회원탈퇴</a></li>
-          <li><a href="#">배송지관리</a></li>
+          <li><a href="./loginChange.html">회원정보변경</a></li>
+          <li><a href="./loginWithdraw.html">회원탈퇴</a></li>
+          <li><a class="logout" href="./main.html">로그아웃</a></li>
+          <li><a class="develop" href="#">배송지관리(준비중)</a></li>
         </ul>
 
+        <!-- 오른쪽 해당 컨텐츠 -->
         <div class="mainCont">
           <div class="infoCont">
-            <h3>진행중인 주문</h3>
+            <h3>배송 조회</h3>
             <ul class="shipBox">
               <li>
                 <h6>0</h6>
@@ -67,7 +71,7 @@
           </div>
   
           <div class="infoCont">
-            <h3>최근 주문 내역</h3>
+            <h3>주문 조회</h3>
             
           </div>
         </div>
@@ -78,7 +82,61 @@
   <footer id="footer"></footer>
 
   <script src="../js/admin.js"></script>
-  <script src="/js/header.js"></script>
-  <script src="/js/footer.js"></script>
+  <script>
+
+    // 1. localStorage 의 user 정보 반영하기
+    document.addEventListener("DOMContentLoaded", function() {
+      const loggedInUser = localStorage.getItem("loggedInUser");
+      if (loggedInUser) {
+        const user = JSON.parse(loggedInUser);
+        const localNameElement = document.querySelectorAll(".localName");
+        const localIdNameElement = document.querySelector(".localIdName");
+        localNameElement.forEach(function(element) {
+          if (user.name) {
+            element.textContent = user.name;
+          }
+        });
+        if (user.username) {
+          localIdNameElement.textContent = user.username;
+        }
+      }
+
+
+      // 2. 로그아웃 - localStorage 의 user 정보 삭제 후 메인 이동
+      const logoutLink = document.querySelector("a.logout");
+
+      if (loggedInUser) {
+        const user = JSON.parse(loggedInUser);
+        const localNameElement = document.querySelectorAll(".localName");
+        const localIdNameElement = document.querySelector(".localIdName");
+
+        localNameElement.forEach(function(element) {
+          if (user.name) {
+            element.textContent = user.name;
+          }
+        });
+
+        if (user.username) {
+          localIdNameElement.textContent = user.username;
+        }
+
+        logoutLink.addEventListener("click", function(event) {
+          event.preventDefault();
+          localStorage.removeItem("loggedInUser");
+          window.location.href = "./main.html";
+        });
+      }
+
+    });
+
+    // 3. 고도화 기능 closing alert
+    const developLinks = document.querySelectorAll(".develop");
+    developLinks.forEach(function(link) {
+      link.addEventListener("click", function(event) {
+        event.preventDefault();
+        alert("해당 기능은 준비중입니다.");
+      });
+    });
+  </script>
 </body>
 </html>

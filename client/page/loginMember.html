@@ -16,15 +16,21 @@
       <h2>로그인</h2>
       <ul class="tab">
         <li class="active"><a href="./login_member.html">회원 로그인</a></li>
-        <li><a href="./login_nonMember.html">비회원 주문조회</a></li>
+        <li class="nonMemberPath"><a href="./login_nonMember.html">비회원 주문조회</a></li>
       </ul>
-      <div class="formGroup">
+      <div class="formGroup id">
         <label for="username"></label>
         <input type="text" id="username" name="username" placeholder="이메일 또는 아이디" required>
       </div>
-      <div class="formGroup">
+      <div class="errTxt login id">
+        입력된 아이디를 확인하세요.
+      </div>
+      <div class="formGroup pw">
         <label for="password"></label>
         <input type="password" id="password" name="password" placeholder="비밀번호" required>
+      </div>
+      <div class="errTxt login pw">
+        입력된 비밀번호를 확인하세요.
       </div>
       <button type="submit" id="loginBtn">로그인</button>
       <ul class="joinWrap">
@@ -36,47 +42,57 @@
   </section>
 
   <!-- 로그인 폼 script -->
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   <script>
-    document.getElementById("loginForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      var username = document.getElementById("username").value;
-      var password = document.getElementById("password").value;
+    //1. api 붙이기
 
-      // GET 요청 보내기
-      fetch("/login?username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password))
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+    // api 명세 기준
+    // {
+    //   "username":"test",
+    //   "password":"test"
+    // }
+    document.addEventListener('DOMContentLoaded', function () {
+      const loginForm = document.getElementById('loginForm');
 
-      // POST 요청 보내기
-      fetch("/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password
+      loginForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // 폼의 기본 동작(페이지 이동)을 막습니다.
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        axios.post('http://localhost:5001/login', {
+          "username": username,
+          "password": password
         })
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
+        .then(response => {
+          // 로그인 성공 시
+          console.log('성공! ', response.data);
+          localStorage.setItem('loggedInUser', JSON.stringify(response.data));
+          window.location.href = './main.html'; // 로그인 성공 시 main.html로 이동
+        })
+        .catch(error => {
+          // 로그인 실패 시
+          console.error('로그인 실패:', error);
+          // 로그인 실패 메시지를 콘솔에 출력합니다.
+          // 에러에 따라 각각의 오류 메시지를 보여줄 수 있습니다.
+          document.querySelector('.errTxt.login.id').classList.add('active');
+          document.querySelector('.errTxt.login.pw').classList.add('active');
+          // if (error.response.status === 401) {
+          // } else if (error.response.status === 403) {
+          // }
+        });
       });
     });
-  </script>
-    <div style="height: 500px;"></div>
 
-    <footer id="footer"></footer>
+    // 2. 비회원 주문조회 closing
+    document.addEventListener('DOMContentLoaded', function () {
+      const nonMemberPathLink = document.querySelector('.nonMemberPath a');
 
-<script src="/js/header.js"></script>
-<script src="/js/footer.js"></script>
+      nonMemberPathLink.addEventListener('click', function (event) {
+        event.preventDefault(); // 링크의 기본 동작(이동)을 막습니다.
+        alert("비회원 주문조회는 준비중입니다.");
+      });
+    });
+</script>
 </body>
 </html>
