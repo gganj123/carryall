@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/admin.css" />
     <link rel="stylesheet" href="../css/mypage.css" />
+    <link rel="stylesheet" href="../css/mypageOrder.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   </head>
   <body>
@@ -88,6 +89,22 @@
 
             <div class="infoCont">
               <h3>주문 조회</h3>
+              <div class="orderList">
+                <div class="listTop">
+                  <div class="orderItem">
+                    <div class="num">No.</div>
+                    <div class="orderNum">
+                      <span>주문번호</span>
+                    </div>
+                    <div class="total">주문금액</div>
+                    <div class="date"><span>주문날짜</span></div>
+                    <div class="status">배송상태</div>
+                  </div>
+                </div>
+                <div class="listBody">
+                  <p class="noPost">주문내역이 없습니다.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -111,21 +128,68 @@
           .then((response) => {
             const userData = response.data;
 
-            if(userData) {
-              const localName = document.querySelectorAll('.localName');
-              localName.forEach(name => {
+            if (userData) {
+              const localName = document.querySelectorAll(".localName");
+              localName.forEach((name) => {
                 name.innerHTML = userData.name;
-              })
+              });
             }
-            
+            const localIdName = document.querySelector(".localIdName");
+            localIdName.innerHTML = userData.username;
+
+            userOrder(userData.username);
           })
           .catch((error) => {
-            console.error('로그인 여부 확인 중 오류 발생:', error);
-            window.location.href = "/";
+            console.error("로그인 여부 확인 중 오류 발생:", error);
+            // window.location.href = "/";
           });
       }
 
       userMypage();
+
+      function userOrder(username) {
+        axios
+          .get(`/api/orders/${username}`)
+          .then((response) => {
+            const orderData = response.data;
+
+            let htmlString = "";
+
+            orderData.forEach((order, index) => {
+
+              const date = order.date;
+              const sliceDate = date.slice(0, 10);
+
+              const productList = order.productInformation;
+              let total = 0;
+
+              for(let i = 0; i < productList.length; i++) {
+                total += productList[i].price;
+              }
+
+              htmlString += `
+              <div class="orderItem">
+                <div class="num">
+                  ${index + 1}
+                </div>
+                <div class="orderNum">
+                    <span>${order._id}</span>
+                </div>
+                <div class="total"><span>${total}</span></div>
+                <div class="date"><span>${sliceDate}</span></div>
+                <div class="status">${order.status}</div>
+              </div>`;
+              
+            });
+
+
+            const listBody = document.querySelector(".listBody");
+            listBody.innerHTML = htmlString;
+          })
+          .catch((error) => {
+            console.error("에러", error);
+          });
+      }
 
       // // 3. 고도화 기능 closing alert
       // const developLinks = document.querySelectorAll(".develop");

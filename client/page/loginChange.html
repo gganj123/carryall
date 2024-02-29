@@ -187,7 +187,7 @@
               </div>
             </li>
             <div class="joinBtn btn_box">
-              <button type="button" class="btnType02 modifyForm">확인</button>
+              <button style="width: 100%;" type="submit" class="btnType02 modifyForm" onclick="updateUserInfo()">회원정보 변경하기</button>
             </div>
           </div>
         </fieldset>
@@ -223,76 +223,73 @@
           },
         }).open();
       }
+    
+      // 1. 서버로부터 사용자 정보를 가져와서 각 input 요소에 채워넣는 함수
+      function fetchUserData() {
+        const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  
+        axios.get("/api/userEdit")
+          .then((response) => {
+            const userData = response.data;
+            // 사용자 정보를 각 input 요소에 채워넣습니다.
+            document.getElementById("idName").value = userData.username;
+            document.getElementById("name").value = userData.name;
+            document.getElementById("email").value = userData.email;
+            document.getElementById("phoneNum").value = userData.tel;
+            document.getElementById("address01").value = userData.zipCode;
+            document.getElementById("address02").value = userData.address;
+            document.getElementById("address03").value = userData.addressDetail;
+          })
+          .catch((error) => {
+            console.error("데이터를 가져오는 데 실패했습니다:", error);
+          });
+          
+      }
+      // 페이지 로드 시 사용자 정보를 가져와서 각 input 요소에 채워넣습니다.
+      fetchUserData();
+  
+      const signupForm = document.getElementById("signupForm");
+  
+      // 2. submit 이벤트 리스너 밖으로 updateUserInfo 함수를 이동합니다.
+      function updateUserInfo() {
+        const username = document.getElementById("idName").value;
+        const password = document.getElementById("password").value; // 변경된 비밀번호
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phoneNum = document.getElementById("phoneNum").value;
+        const address01 = document.getElementById("address01").value;
+        const address02 = document.getElementById("address02").value;
+        const address03 = document.getElementById("address03").value;
 
-      document.addEventListener("DOMContentLoaded", function () {
-        // 1. 서버로부터 사용자 정보를 가져와서 각 input 요소에 채워넣는 함수
-        function fetchUserData() {
-          const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-
-          axios
-            .get("/api/userEdit")
-            .then((response) => {
-              const userData = response.data;
-              // 사용자 정보를 각 input 요소에 채워넣습니다.
-              document.getElementById("idName").value = userData.username;
-              document.getElementById("name").value = userData.name;
-              document.getElementById("email").value = userData.email;
-              document.getElementById("phoneNum").value = userData.tel;
-              document.getElementById("address01").value = userData.zipCode;
-              document.getElementById("address02").value = userData.address;
-              document.getElementById("address03").value =
-                userData.addressDetail;
-            })
-            .catch((error) => {
-              console.error("데이터를 가져오는 데 실패했습니다:", error);
-            });
-        }
-
-        // 페이지 로드 시 사용자 정보를 가져와서 각 input 요소에 채워넣습니다.
-        fetchUserData();
-
-        const signupForm = document.getElementById("signupForm");
-
-        signupForm.addEventListener("submit", function (event) {
-          event.preventDefault(); // 폼의 기본 동작(페이지 이동)을 막습니다.
-
-          // 2. 수정된 정보를 서버에 전송하여 업데이트하는 함수
-          function updateUserInfo() {
-            const username = document.getElementById("idName").value;
-            const password = document.getElementById("password").value; // 변경된 비밀번호
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const phoneNum = document.getElementById("phoneNum").value;
-            const address01 = document.getElementById("address01").value;
-            const address02 = document.getElementById("address02").value;
-            const address03 = document.getElementById("address03").value;
-
-            axios
-              .put("/api/user", {
-                username: username,
-                password: password, // 변경된 비밀번호를 서버에 전송합니다.
-                email: email,
-                tel: phoneNum,
-                name: name,
-                zipCode: address01,
-                address: address02,
-                addressDetail: address0,
-              })
-
-              .then((response) => {
-                // 서버로부터의 응답을 처리합니다.
-                console.log("회원 정보 수정이 완료되었습니다.", response.data);
-                // 여기서 다음 단계로 넘어가거나 원하는 작업을 수행할 수 있습니다.
-              })
-              .catch((error) => {
-                // 오류가 발생했을 때 처리합니다.
-                console.error("회원 정보 수정 오류:", error);
-              });
-          }
-
-          updateUserInfo();
-        });
+        axios.put("/api/user", {
+            "username": username,
+            "password": password,
+            "email": email,
+            "tel": phoneNum,
+            "name": name,
+            "zipCode": address01,
+            "address": address02,
+            "addressDetail": address03,
+          })
+  
+          .then(response => {
+            // 서버로부터의 응답을 처리합니다.
+            console.log("회원 정보 수정이 완료되었습니다.", response.data);
+            // 여기서 다음 단계로 넘어가거나 원하는 작업을 수행할 수 있습니다.
+          })
+          .catch(error => {
+            // 오류가 발생했을 때 처리합니다.
+            console.error("회원 정보 수정 오류:", error);
+          });
+      }
+  
+      // submit 이벤트 리스너 내에서 updateUserInfo 함수가 호출되도록 수정합니다.
+      signupForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        // window.history.back();
+        updateUserInfo();
       });
     </script>
+    
   </body>
 </html>

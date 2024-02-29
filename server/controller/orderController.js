@@ -13,16 +13,16 @@ class OrderController {
 
   // 주문 추가
   async addOrder(req, res, next) {
-    const { date, status, productInformation, recipientInformation } = req.body;
+    const { userId, productInformation, recipientInformation } = req.body;
+
     if (
-      !date ||
-      !status ||
+      !userId ||
       !productInformation ||
       !productInformation[0].name ||
       !productInformation[0].price ||
       !productInformation[0].image ||
       !productInformation[0].option ||
-      !productInformation[0].brand ||
+      !productInformation[0].categoryName ||
       !productInformation[0].quantity ||
       !recipientInformation ||
       !recipientInformation.recipientName ||
@@ -77,6 +77,20 @@ class OrderController {
     try {
       await orderService.removeOrder(_id);
       return res.status(200).json(`주문 삭제 완료(ID : ${_id})`);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+    // 주문 상세(주문 하나) 조회
+  async getOrderById(req, res, next) {
+    const { userId } = req.params;
+    if (!userId) {
+      return res.status(400).json("에러 : 해당 아이디를 찾을 수 없습니다.");
+    }
+    try {
+      const order = await orderService.getOrderById(userId);
+      return res.status(200).json(order);
     } catch (error) {
       next(error);
     }

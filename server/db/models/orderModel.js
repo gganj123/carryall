@@ -57,6 +57,18 @@ class OrderModel {
       throw error;
     }
   }
+
+    // user id에 해당하는 주문 내역 불러오기
+  async findOrder(userId) {
+    try {
+      const order = await Order.find({userId});
+      return order;
+    } catch (err) {
+      const error = new Error("해당 아이디의 주문 정보를 불러들이는데 실패했습니다.");
+      error.statusCode = 400;
+      throw error;
+    }
+  }
 }
 
 const orderModel = new OrderModel();

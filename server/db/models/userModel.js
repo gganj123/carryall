@@ -43,16 +43,19 @@ class UserModel {
       emailSubscription,
     } = update;
 
-    const user = await User.findOneAndUpdate(username, {
-      password,
-      email,
-      tel,
-      zipCode,
-      address,
-      addressDetail,
-      telSubscription,
-      emailSubscription,
-    });
+    const user = await User.findOneAndUpdate(
+      { username },
+      {
+        password,
+        email,
+        tel,
+        zipCode,
+        address,
+        addressDetail,
+        telSubscription,
+        emailSubscription,
+      }
+    );
     return user;
   }
 
@@ -67,21 +70,20 @@ class UserModel {
     const user = await User.updateOne({ email: email }, { password });
     return user;
   }
-  
+
   // 관리자 회원관리
   async findAllUsers() {
     const user = await User.find({});
     return user;
   }
-  
+
   // 비밀번호 확인
   async confirmPassword(username, password) {
     const user = await User.findOne({ username });
-    if(user.password == password) {
+    if (user.password == password) {
       return user;
     }
   }
-
 }
 
 const userModel = new UserModel();

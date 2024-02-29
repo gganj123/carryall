@@ -52,8 +52,9 @@ class UserService {
   }
 
   // 회원정보 수정
-  async editUser(username, update) {
+  async editUser(update) {
     const {
+      username,
       password,
       email,
       tel,
@@ -66,8 +67,9 @@ class UserService {
 
     const hashPassword = hashedPassword(password);
 
-    const foundUser = await this.userModel.update(username,
+    const foundUser = await this.userModel.update(
       {
+        username,
         password: hashPassword,
         email,
         tel,
