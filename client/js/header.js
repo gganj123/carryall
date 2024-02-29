@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <div class="heade"></div>
     <div class="heade" style="background-color: #fafafa;">
         <button class="logoButton">
-            <h1 class="logo" style="color:black"><a href="/">CARRYALL</h1></a>
+            <h1 class="logo slideDown" style="color:black"><a href="/">CARRYALL</h1></a>
         </button>
         <input class="headInput" type="text" placeholder="검색">
         <button class="headmenu" style="color:black"><a href="/cart">장바구니</button>

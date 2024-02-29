@@ -13,12 +13,7 @@ class OrderController {
 
   // 주문 추가
   async addOrder(req, res, next) {
-    const {
-      date,
-      status,
-      productInformation,
-      recipientInformation,
-    } = req.body;
+    const { date, status, productInformation, recipientInformation } = req.body;
     if (
       !date ||
       !status ||
@@ -41,8 +36,8 @@ class OrderController {
     try {
       const newOrder = await orderService.addOrder(req.body);
       return res.status(200).json(newOrder);
-    } catch (e) {
-      next(e);
+    } catch (error) {
+      next(error);
     }
   }
 
@@ -55,11 +50,11 @@ class OrderController {
     try {
       const order = await orderService.getOrder(_id);
       return res.status(200).json(order);
-    } catch (e) {
-      next(e);
+    } catch (error) {
+      next(error);
     }
   }
-  
+
   // 주문 수정
   async editOrder(req, res, next) {
     const { _id } = req.params;
@@ -71,8 +66,8 @@ class OrderController {
     try {
       const order = await orderService.editOrder(_id, req.body);
       return res.status(200).json(order);
-    } catch (e) {
-      next(e);
+    } catch (error) {
+      next(error);
     }
   }
 

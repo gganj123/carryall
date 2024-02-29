@@ -31,7 +31,6 @@ function updatePrice() {
   // 총 가격을 화면에 업데이트합니다.
   priceElement.textContent = totalPrice.toLocaleString() + "원";
 }
-
 // document.addEventListener("DOMContentLoaded", function() {
 //   // 서버로부터 데이터를 받아온 후에 실행될 함수
 //   axios.get('http://localhost:5001/products')

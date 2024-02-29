@@ -17,8 +17,7 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 
 const fetch = require('node-fetch')
-
-async function test() {
+async function test() {//크롤링 코드, 추후 삭제
   const response = await fetch("https://api-display.wconcept.co.kr/display/api/v1/category/products/M33439436/004", {
     "headers": {
       "accept": "application/json, text/plain, */*",
@@ -46,7 +45,7 @@ async function test() {
 
   const data = await response.json();
   const list = [];
-  data.data.productList.content.map((item, index) => {
+  data.data.productList.content.map((item) => {
     list.push({
       name: item.itemName,
       categoryId: category[Math.floor(Math.random() * category.length)],
@@ -68,9 +67,9 @@ async function test() {
   return suffle(list);
 }
 
-
 const { MongoClient } = require('mongodb');
 
+// main() -> 크롤링 함수
 async function main() {
   try {
       // MongoDB에 연결
@@ -84,36 +83,31 @@ async function main() {
       // 컬렉션에 데이터 삽입
       await db.collection('products').insertMany(list);
       console.log('저장완료');
-  } catch (error) {
+  } catch (error) { 
       console.error("Error inserting documents:", error);
   }
 }
 
-// 메인 함수 호출 -> 상품 크롤링해오는 코드
 // main().catch(console.error); 
 
-const indexRouter = require('./server/routes');
 const productsRouter = require("./server/routes/productRouter.js");
 const categoriesRouter = require("./server/routes/categoryRouter.js");
 const ordersRouter = require("./server/routes/orderRouter.js");
 const usersRouter = require("./server/routes/usersRouter.js");
 const viewRouter = require("./server/routes/viewRouter.js");
-// const adminRouter = require("./server/routes/admins.js");
 const adminRequired = require("./server/middlewares/adminRequired.js");
 const errorHandler = require("./server/middlewares/errorHandler.js");
-
-// app.use("/carts", cartsRouter);
-app.use("/users", usersRouter);
+// const adminRouter = require("./server/routes/admins.js");
 
 app.use(express.static('client'));
 app.use(viewRouter);
 
 
-app.use('/api', indexRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/categories", categoriesRouter);
 app.use("/api/orders", ordersRouter);
 app.use("/api", usersRouter);
+// app.use("/users", usersRouter); 삭제해도 되는지 지은님이 봐주세요!
 // app.use("/api/admins", adminRouter);
 app.use(errorHandler);
 

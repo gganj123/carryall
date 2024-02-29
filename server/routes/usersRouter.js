@@ -4,11 +4,12 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const { body } = require("express-validator");
 const hashedPassword = require("../utils/hashPassword");
 const User = require("../db").User;
 const userController = require("../controller/userController");
 
-const userRouter = express.Router();
+const userRouter = express.Router(); //백에서는 router -> userRouter 변경했으나 아직 프론트는 코드가 그대로인 상태!
 
 // express-session
 userRouter.use(passport.initialize());
@@ -32,10 +33,8 @@ passport.use(
   new LocalStrategy(async (userId, password, done) => {
     let foundUser = await User.findOne({ username: userId });
 
-    if (!foundUser) {
+    if (!foundUser || foundUser.password !== hashedPassword(password)) {
       return done(null, false, { message: "로그인 정보가 다릅니다." });
-    } else if (foundUser.password !== hashedPassword(password)) {
-      return done(null, false, { message: "비밀번호 정보가 다릅니다." });
     }
     if (foundUser.password == hashedPassword(password)) {
       return done(null, foundUser);
@@ -61,59 +60,20 @@ passport.deserializeUser(async (user, done) => {
 });
 
 // 로그인
-userRouter.post(
-  "/login",
-  async (req, res, next) => {
-    try {
-      passport.authenticate("local", (err, user, info) => {
-        // 세션 생성코드 실행
-        if (err) return res.status(500).json(err); // 서버 에러
-        if (!user) return res.status(404).json(info.message); // 유저없음
-        req.logIn(user, (err) => {
-          // 세션 만들기 시작
-          if (err) return next(err);
-          req.session.username = user.username;
-
-          res.json({
-            message: "로그인 성공",
-            username: user.username,
-            name: user.name,
-          });
-        });
-      })(req, res, next); // 아이디/비번 DB 비교하는 코드 실행
-    } catch (err) {
-      console.error(err);
-    }
-  }
-);
-
+userRouter.post('/login', userController.login);
 // 로그아웃
 userRouter.post("/logout", userController.logout);
-
 // 회원가입
-userRouter.post("/join", userController.joinUser);
-
+userRouter.post("/join",[
+  body("username").trim().isLength({ min: 3, max: 20 }).withMessage('아이디는 3글자 이상 20글자 이하로 입력해주세요.'),
+  body("password").trim().isLength({ min: 8, max: 72 }).withMessage('비밀번호는 10글자 이상 72글자 이하로 입력해주세요.')
+], userController.joinUser);
 // 회원정보 수정
 userRouter.put("/user", userController.updateUser);
-
 // 회원 탈퇴
 userRouter.delete("/withdrawal", userController.deleteUser);
-
-// 회원가입 페이지
-// router.get(
-//   "/register",
-//   asyncHandler(async (req, res) => {
-//     const loginUser = await User.findOne({ username: req.session.username });
-
-//     if (loginUser) {
-//       res.redirect("/");
-//     }
-//   })
-// );
-
 // 회원정보
 userRouter.get('/mypage', userController.mypage);
-
 // 비밀번호 초기화
 userRouter.post("/reset-password", userController.resetPassword);
 
