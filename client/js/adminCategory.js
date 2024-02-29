@@ -1,5 +1,5 @@
 function fetchData() {
-  axios.get('/api/categories')
+  axios.get('http://localhost:5001/categories')
     .then(response => {
       const productList = response.data;
       let htmlString = '';
@@ -14,7 +14,7 @@ function fetchData() {
             <input type="text" class ="cate font_17" value="${product.name}">
           </div>
           <div class="sortbutton">
-            <button class="change butt col font_17">수정</button>
+            <button class="change col font_17">수정</button>
           </div>
           <div class="infoCont" style="width:100%; padding-top: 0;">
             <h3> </h3>
@@ -47,7 +47,7 @@ function addForm(){
     <div class="check">
       <input type="checkbox" name="checkbox1">&ensp;&nbsp;1</div>
       <div class="sort"><input type="text" class ="regi cate font_17"></div>
-      <div class="sortbutton"><button id="regiButton" class="col font_17 butt">등록</button></div>
+      <div class="sortbutton"><button id="regiButton" class="col font_17">등록</button></div>
       <div class="infoCont" style="width:100%; padding-top: 0;">
         <h3> </h3></div>
 </div>`;
@@ -77,7 +77,7 @@ function cateRegifunc() {
     const dataToSend = {   
         "name" : value
 };
-    axios.post('/api/categories', dataToSend)
+    axios.post('http://localhost:5001/categories', dataToSend)
 .then(response => {
     // 서버로부터 받은 응답을 처리합니다.
     console.log(response.data); // 서버에서 전송된 데이터 출력
@@ -106,7 +106,7 @@ deleteButton.addEventListener('click', function () {
           const categoryId = checkbox.id;
 
           // 카테고리를 삭제하는 요청을 보냅니다.
-          axios.delete(`/api/categories/${categoryId}`)
+          axios.delete(`http://localhost:5001/categories/${categoryId}`)
           .then(response => {
               // 카테고리 삭제에 성공한 경우
               alert(`카테고리가 삭제되었습니다.`);
@@ -152,7 +152,7 @@ function changeFunc(event) {
             "name": inputValue
         }
           // 카테고리를 수정하는 요청을 보냄
-          axios.put(`/api/categories/${checkboxId}`, putdata)
+          axios.put(`http://localhost:5001/categories/${checkboxId}`, putdata)
               .then(response => {
                   // 카테고리 수정에 성공한 경우
                  alert(`카테고리명이 수정되었습니다. '${inputValue}'`);

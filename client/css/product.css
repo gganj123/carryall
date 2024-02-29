@@ -10,8 +10,6 @@ body{
   overflow-y: auto;
 }
 
-a {color: #000; text-decoration: none;}
-
 .header{
   margin: 0px;
   padding: 0px;
@@ -59,7 +57,7 @@ input[type="text"] {
 
 .container .main .selectbox select {
   border-radius: 0px;
-  width: 200px;
+  width: 110px;
   padding: 5px;
   border: 1px solid #ddd;
   background-color: #f9f9f9;
@@ -115,11 +113,11 @@ input[type="text"] {
   
 }
 
-.container .main .productList .item h2 {
+.container .main .productList .item .text h2 {
   font-size: 17px;
 }
 
-.container .main .productList .item p {
+.container .main .productList .item .text p {
   font-size: 14px;
   opacity: .8;
 }

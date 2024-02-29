@@ -1,10 +1,7 @@
 const { Router } = require("express");
-const { Order } = require("../db/index.js");
-const { body } = require("express-validator");
 
 const router = Router();
 
-// 주문 신버전 추가된 코드
 const orderController = require('../controller/orderController.js');
 const bodyChecker = require("../middlewares/bodyChecker.js");
 
