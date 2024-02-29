@@ -42,13 +42,13 @@ class OrderController {
   }
 
   // 주문 상세(주문 하나) 조회
-  async getOrder(req, res, next) {
-    const { _id } = req.params;
-    if (!_id) {
-      return res.status(400).json("에러 : 주문 정보를 찾을 수 없습니다.");
+  async getOrderById(req, res, next) {
+    const { userId } = req.params;
+    if (!_userId) {
+      return res.status(400).json("에러 : 해당 아이디를 찾을 수 없습니다.");
     }
     try {
-      const order = await orderService.getOrder(_id);
+      const order = await orderService.getOrderById(userId);
       return res.status(200).json(order);
     } catch (error) {
       next(error);
@@ -81,6 +81,21 @@ class OrderController {
       next(error);
     }
   }
+
+  // user id에 해당하는 주문 내역 불러오기
+  async getOrder(req, res, next) {
+    const { _id } = req.params;
+    if (!_id) {
+      return res.status(400).json("에러 : 주문 정보를 찾을 수 없습니다.");
+    }
+    try {
+      const order = await orderService.getOrder(_id);
+      return res.status(200).json(order);
+    } catch (error) {
+      next(error);
+    }
+  }  
+ 
 }
 
 const orderController = new OrderController();

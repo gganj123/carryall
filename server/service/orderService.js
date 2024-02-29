@@ -15,7 +15,7 @@ class OrderService {
     }
   }
 
-  async addOrder(orderInfo) {
+async addOrder(orderInfo) {
     // 주문 생성 및 저장
     const date = new Date();
     const status = "결제 완료";
@@ -34,6 +34,14 @@ class OrderService {
   // id로 주문 취소
   async removeOrder(orderId) {
     await orderModel.delete(orderId);
+  }
+
+  // user id에 해당하는 주문 내역 불러오기
+  async getOrderById(userId) {
+    if (userId) {
+      const order = await orderModel.findOrder(userId);
+      return order;
+    }
   }
 }
 
