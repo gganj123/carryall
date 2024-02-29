@@ -4,7 +4,7 @@ const { json, urlencoded } = require("express");
 const app = express();
 require("dotenv").config();
 const { PORT, MONGODB_PASSWORD } = process.env;
-const { connect } = require("mongoose");
+const { connect, Schema } = require("mongoose");
 
 // mongoDB 연결
 connect(
@@ -42,7 +42,7 @@ async function test() {//크롤링 코드, 추후 삭제
     "credentials": "omit"
   });;
   const brand = ["STUSSY", "SUPREME", "BARE"];
-  const category = ["토트백", "크로스백", "백팩"];
+  const category = [{_id:Schema.Types.ObjectId,name:"토트백"}, {_id:Schema.Types.ObjectId,name:"크로스백"}, {_id:Schema.Types.ObjectId,name:"백팩"}];
 
   const data = await response.json();
   const list = [];
@@ -89,7 +89,8 @@ async function main() {
   }
 }
 
-// main().catch(console.error); 
+// 메인 함수 호출
+//  main().catch(console.error);
 
 const productsRouter = require("./server/routes/productRouter.js");
 const categoriesRouter = require("./server/routes/categoryRouter.js");
