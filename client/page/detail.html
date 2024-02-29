@@ -56,7 +56,7 @@
               <dt>판매가</dt>
               <dd class="price">5200000</dd>
               <dt>브랜드</dt>
-              <dd class="brand">셀린느</dd>
+              <dd class="categoryName">셀린느</dd>
               <dt>옵션선택</dt>
               <dd>
                 <select name="selectbox" class="selectbox">
@@ -123,7 +123,7 @@
       document.querySelector('.totalDetailOption h1').innerText = filteredProduct[0].name;
       document.querySelector('.totalDetailOption .price').innerText = filteredProduct[0].price.toLocaleString('ko-KR')+"원";
       document.querySelector('.totalPrice .price').innerText = filteredProduct[0].price.toLocaleString('ko-KR')+"원";
-      document.querySelector('.totalDetailOption .brand').innerText = filteredProduct[0].brand;
+      document.querySelector('.totalDetailOption .categoryName').innerText = filteredProduct[0].categoryName;
       document.querySelector('.contentPoint ul').innerHTML = `
         <li class="point">소재 : 합성피혁</li>
         <li class="point">색상 : 블랙 / 아이보리 / 카멜</li>
@@ -169,7 +169,7 @@
           isChecked: true,
           image: product.image,
           name: product.name,
-          brand: product.brand,
+          categoryName: product.categoryName,
           option: product.option,
           quantity: 1,
           price: product.price,

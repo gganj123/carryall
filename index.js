@@ -41,20 +41,25 @@ async function test() {//크롤링 코드, 추후 삭제
     "mode": "cors",
     "credentials": "omit"
   });;
-  const brand = ["STUSSY", "SUPREME", "BARE"];
-  const category = ["65df752e67457938cc02e405", "65df753a67457938cc02e408", "65df755367457938cc02e40b"];
+
+  const category = [
+  {categoryId:"65e08a335a29d582c152f71c", categoryName:"STUSSY"},
+  { categoryId:"65e08a475a29d582c152f71e",categoryName:"SUPREME"}, 
+  { categoryId:"65e08a555a29d582c152f720",categoryName:"BARE"}
+];
 
   const data = await response.json();
   const list = [];
   data.data.productList.content.map((item) => {
+    const index = Math.floor(Math.random() * category.length)
     list.push({
       name: item.itemName,
-      categoryId: category[Math.floor(Math.random() * category.length)],
+      categoryId: category[index].categoryId,
       price: item.customerPrice,
       image: item.imageUrlMobile,
       option: ["black", "white", "brown"],
       stock: 50,
-      brand: brand[Math.floor(Math.random() * brand.length)],
+      categoryName: category[index].categoryName,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -89,7 +94,7 @@ async function main() {
   }
 }
 
-// main().catch(console.error); 
+main().catch(console.error); 
 
 const productsRouter = require("./server/routes/productRouter.js");
 const categoriesRouter = require("./server/routes/categoryRouter.js");
