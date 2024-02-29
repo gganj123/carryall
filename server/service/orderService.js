@@ -43,6 +43,18 @@ async addOrder(orderInfo) {
       return order;
     }
   }
+
+  // 관리자가 배송 상태 수정
+  async editOrderStatus(orderId, orderInfo) {
+    try {
+      const updatedOrder = await orderModel.updateOrder(orderId, orderInfo.status);
+      return updatedOrder;
+    } catch (error) {
+      // 오류 처리
+      console.error('주문 수정 중 오류 발생:', error);
+      throw error;
+    }
+  }  
 }
 
 const orderService = new OrderService(orderModel);

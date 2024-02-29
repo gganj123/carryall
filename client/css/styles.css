@@ -62,10 +62,8 @@ body{
   min-height: 100%;
 }
 footer{
-
-
   position : relative;
-  transform : translateY(-100%);
+  /* transform : translateY(-100%); */
   
 
 }
@@ -430,6 +428,6 @@ li h2 {
   margin-top: 20px; /* 원하는 여백값 설정 */
 }
 
-.more-button {
+/* .more-button { */
   /* 버튼에 대한 스타일링을 추가하세요 */
-}
+/* } */
