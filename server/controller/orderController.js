@@ -28,6 +28,7 @@ class OrderController {
       !productInformation[0].image ||
       !productInformation[0].option ||
       !productInformation[0].brand ||
+      !productInformation[0].quantity ||
       !recipientInformation ||
       !recipientInformation.recipientName ||
       !recipientInformation.recipientZipCode ||

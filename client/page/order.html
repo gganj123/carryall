@@ -35,7 +35,13 @@
                   <p class="cartBoxH5 header">결제 예정 금액</p>
               </div>
               <div class="totalPriceBox">
-                <!-- 가격 표시 -->
+
+                  <p class="cartBoxH1 header sumItemPrice" id="orderSumItemPrice">원</p>
+                  <p class="cartBoxH2 header ">-</p>
+                  <p class="cartBoxH3 header delPrice" id="orderDiscountPrice">원</p>
+                  <p class="cartBoxH4 header ">=</p>
+                  <p class="cartBoxH5 header totalPrice" id="orderTotalPrice">원</p>
+
               </div>              
           </div>
       </div>
@@ -43,37 +49,31 @@
       <li>
         <label for="name" class="label">
           <span>* 이름</span>
-          <input type="text" class="inputType01" id="name" required="">
+          <input type="text" class="inputType01" id="userName" value="이름" readonly>
         </label>
       </li>
       <!-- 6. 휴대폰 번호 -->
       <li>
         <label for="phoneNum" class="label">
           <span>* 휴대폰 번호</span>
-          <input type="text" class="inputType01" id="phoneNum" required="">
+          <input type="text" class="inputType01" id="phoneNum" value="010-1234-5678" readonly>
         </label>
       </li>
       <!-- 7. 주소 -->
         <li>
           <label for="address01" class="label">
             <span>* 주소</span>
-            <input type='radio' name='add' value='' checked/>새로 입력
-            <input type='radio' name='add' value='' />기존 주소
           </label>
           <div class="address_line address_line01 f_fs">
-            <input type="text" name="address" id="address01" class="inputType01" >
-            <a href="#">우편번호 검색</a>
+            <input type="text" name="address" id="address01" class="inputType01" value="zipcode" readonly>
           </div>
           <div class="address_line address_line02 f_c label">
               <label for="address02" class="label"></label>
-              <input type="text" name="address" id="address02" class="inputType01" >
+              <input type="text" name="address" id="address02" class="inputType01" value="address" readonly>
               <label for="address03" class="label"></label>
-              <input type="text" name="address" id="address03" class="inputType01" >
+              <input type="text" name="address" id="address03" class="inputType01" value="address detail" readonly>
           </div>
-          <div>
-            <span>배송 요청사항</span>
-            <input type="text" name="orderRequest" id="request" class="inputType01" >
-          </div>
+
         </li>
           <div>
             <p>결제 수단</p>
@@ -90,11 +90,11 @@
             <label for="paymentChoice4">계좌이체</label>
           </div>
       <div class="orderBtnContainer">
-        <button class="btnPayment" onclick="location.href='./cartTest.html'">상품 주문</button>
+        <button class="btnPayment">상품 주문</button>
       </div>
     </form>
     <script src="../js/order.js"></script>
-    <script src="../js/header.js"></script>
-    <script src="../js/footer.js"></script>
+    <!-- <script src="../js/header.js"></script>
+    <script src="../js/footer.js"></script> -->
 </body>
 </html>

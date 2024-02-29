@@ -79,6 +79,13 @@ li {
   font-weight: 900;
 }
 
+.totalPriceBox {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
 
 .itemContainer {
   width: 100%;

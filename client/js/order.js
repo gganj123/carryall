@@ -1,68 +1,143 @@
 const btnPayment = document.querySelector(".btnPayment")
+const itemsContainer = document.querySelector(".itemContainer");
+sumItemPrice = 0; // 초기화
+discountPrice = 0; // 초기화
+totalItemPrice = 0; // 초기화
+// 주문 완료 페이지 이동
+// btnPayment.addEventListener('click', async () => {
+//   alert('상품 구매가 완료되었습니다.');
+//   location.href = "/orderComplete";
+//   const date = new Date(1651401879369);
+//   axios.post('http://localhost:5001/api/orders', {
+//     "date": date,
+//     "status": "주문완료",
+//     "productInformation": [
+//       // {
+//       //   "name": "1234 번째 상품",
+//       //   "price": 10000,
+//       //   "image": "상품 이미지 URL",
+//       //   "option": "옵션 정보",
+//       //   "brand": "상품 브랜드", 
+//       //   "quantity": 2
+//       // },
 
-btnPayment.addEventListener('click', async () => {
-  alert('상품 구매가 완료되었습니다.');
-  location.href = "/orderComplete";
-  localStorage.removeItem("orderItems");
-})
+//     ],
+//     // "recipientInformation": {
+//     //   "recipientName": "받는 분 이름",
+//     //   "recipientZipCode": "우편번호",
+//     //   "recipientAddress": "주소",
+//     //   "recipientAddressDetail": "상세주소",
+//     //   "recipientTel": "전화번호"
+//     // }
+//   })
+//   .then(response => {
+//     console.log(response);
+//   })
+//   .catch(error => {
+//     console.log(error);
+//   });
+
+//   localStorage.removeItem("orderItems");
+
+// })
 
 displayUserOrderInfo();
 updateTotalPrice();
 
-
 function displayUserOrderInfo() {
   const orderItems = JSON.parse(localStorage.getItem("orderItems")) || [];
   const itemContainer = document.querySelector(".itemContainer");
+  itemsContainer.innerHTML = "";
+  p_list = [];
 
-
-    axios.get(`/products/${orderItems.productId}`)
+  orderItems.forEach(item => { 
+    axios.get('http://localhost:5001/api/products/cartInformation/' + item._id)
     .then(response => {
-      const productList = response.data;
+      // 성공했을 때
+      data = response.data["data"]; // 상품 정보를 받아옴
+      data.quantity = item.quantity; // 상품 정보에 수량 정보를 추가
+      data.option = item.option; // 상품 정보에 옵션 정보를 추가
+      p_list.push(data);
 
-      productList.forEach(item => {
-        const newItem = document.createElement("div");
-        newItem.classList.add("orderItem");
-        newItem.innerHTML = `
-          <div class="cartBoxH1 item" style="display: flex;">
-              <img src="${item.image}" alt="${item.name} 이미지" class="itemImg">
-              <div class="item itemInfo">
-                  <p class="itemName">${item.name}</p>
-                  <p class="itemBrand">${item.brand}</p>
-              </div>
-          </div>
-          <p class="cartBoxH2 item">${item.option}</p>
-          <div class="cartBoxH3 quantityBox item">
-              <p class="quantity item">${item.quantity}</p>
-          </div>
-          <p class="cartBoxH4 item">${item.price}</p>
-          <p class="cartBoxH5 item">${item.totalPricePerItem}</p>
-        `;
-        console.log(item);
-        itemContainer.appendChild(newItem);
-      });
-
+      // 모든 상품 정보를 받아온 후에 drawItems 함수 호출
+      if (p_list.length === orderItems.length) {
+        p_list.sort((a, b) => orderItems.findIndex(item => item._id === a._id) - orderItems.findIndex(item => item._id === b._id));
+        
+        localStorage.setItem("orderItems", JSON.stringify(p_list)); // 수정된 위치
+        drawItems(p_list);
+      }
     })
     .catch(error => {
-      console.error('Error fetching data:', error);
+      // 에러가 났을 때
+      console.log(error);
     });
+  });
 }
 
+function drawItems(orderItems) {
+  const itemsContainer = document.querySelector(".itemContainer");
+  const totalPriceBox = document.querySelector(".totalPrice");
+  itemsContainer.innerHTML = ""; // 이전에 그려진 아이템을 지웁니다.
 
-/** 결제 예정금액 업데이트 */
-function updateTotalPrice(sumItemPrice) {
-  const orderItems = JSON.parse(localStorage.getItem("orderItems")) || [];
-  const totalPriceBox = document.querySelector(".totalPriceBox");
-  let sumOrderItemPrice = orderItems.reduce((sum, item) => sum + item.totalPricePerItem, 0);
-  let discountPrice = 0;
 
-  const newTotalPrice = document.createElement("div");
-  newTotalPrice.classList.add("totalBox");
-  newTotalPrice.innerHTML = `
-    <p class="cartBoxH1 header sumItemPrice">${sumOrderItemPrice.toLocaleString() + "원"}</p>
-    <p class="cartBoxH2 header ">-</p>
-    <p class="cartBoxH3 header delPrice">${discountPrice.toLocaleString() + "원"}</p>
-    <p class="cartBoxH4 header ">=</p>
-    <p class="cartBoxH5 header totalPrice">${(sumOrderItemPrice - discountPrice).toLocaleString() + "원"}</p>
-  `;
-  totalPriceBox.appendChild(newTotalPrice);
+  orderItems.forEach(orderItem => {
+    const itemPrice = orderItem.price * orderItem.quantity;
+    sumItemPrice = sumItemPrice + itemPrice;
+
+    const newItem = document.createElement("div");
+    newItem.classList.add("orderItem");
+    newItem.innerHTML = `
+      <div class="cartBoxH1 item" style="display: flex;">
+          <img src="${orderItem.image}" alt="${orderItem.name} 이미지" class="itemImg">
+          <div class="item itemInfo">
+              <p class="itemName">${orderItem.name}</p>
+              <p class="itemBrand">${orderItem.brand}</p>
+          </div>
+      </div>
+      <p class="cartBoxH2 item">${orderItem.option}</p>
+      <div class="cartBoxH3 quantityBox item">
+          <p class="quantity item">${orderItem.quantity}</p>
+      </div>
+      <p class="cartBoxH4 item">${(orderItem.price).toLocaleString()}원</p>
+      <p class="cartBoxH5 item">${(itemPrice).toLocaleString()}원</p>
+    `;
+    itemsContainer.appendChild(newItem);
+  });
+
+  // 총 가격 계산
+  totalItemPrice = sumItemPrice - discountPrice;
+
+  // 업데이트된 가격 정보로 UI 업데이트
+  updateTotalPrice();
 }
+
+function updateTotalPrice() {
+  const orderSumItemPrice = document.getElementById("orderSumItemPrice");
+  const orderDiscountPrice = document.getElementById("orderDiscountPrice");
+  const orderTotalItemPrice = document.getElementById("orderTotalPrice");
+
+  orderSumItemPrice.innerText = sumItemPrice.toLocaleString() + "원";
+  orderDiscountPrice.innerText = discountPrice.toLocaleString() + "원";
+  orderTotalItemPrice.innerText = totalItemPrice.toLocaleString() + "원";
+}
+
+// user 정보를 받아오는 함수
+// function getUserInfo() {
+//   axios.get('http://localhost:5001/api/users/userInfo')
+//   .then(response => {
+    
+
+//     const userName = response._id;
+//     const userZipCode = response.zipCode;
+//     const userAddress = response.address;
+//     const userAddressDetail = response.addressDetail;
+//     const userPhone = response.tel;
+
+//     document.getElementById("userName").innerText = userName
+//     document.getElementById("userPhone").innerText = userPhone
+
+//     document.getElementById("address01").innerText = userZipCode
+//     document.getElementById("address02").innerText = userAddress
+//     document.getElementById("address03").innerText = userAddressDetail
+//   })
+//}
