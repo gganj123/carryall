@@ -4,6 +4,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const { body } = require("express-validator");
 const hashedPassword = require("../utils/hashPassword");
 const User = require("../db").User;
 const userController = require("../controller/userController");
@@ -32,10 +33,8 @@ passport.use(
   new LocalStrategy(async (userId, password, done) => {
     let foundUser = await User.findOne({ username: userId });
 
-    if (!foundUser) {
+    if (!foundUser || foundUser.password !== hashedPassword(password)) {
       return done(null, false, { message: "로그인 정보가 다릅니다." });
-    } else if (foundUser.password !== hashedPassword(password)) {
-      return done(null, false, { message: "비밀번호 정보가 다릅니다." });
     }
     if (foundUser.password == hashedPassword(password)) {
       return done(null, foundUser);
@@ -65,7 +64,10 @@ userRouter.post('/login', userController.login);
 // 로그아웃
 userRouter.post("/logout", userController.logout);
 // 회원가입
-userRouter.post("/join", userController.joinUser);
+userRouter.post("/join",[
+  body("username").trim().isLength({ min: 3, max: 20 }).withMessage('아이디는 3글자 이상 20글자 이하로 입력해주세요.'),
+  body("password").trim().isLength({ min: 8, max: 72 }).withMessage('비밀번호는 10글자 이상 72글자 이하로 입력해주세요.')
+], userController.joinUser);
 // 회원정보 수정
 userRouter.put("/user", userController.updateUser);
 // 회원 탈퇴

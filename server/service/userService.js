@@ -8,15 +8,6 @@ class UserService {
     this.userModel = userModel;
   }
 
-  // 로그인
-  async login(username, password) {
-    const user = await this.userModel.findByUsername({ username });
-    if (!user || user.password !== password) {
-      throw new Error("로그인정보가 일치하지 않습니다.");
-    }
-    return user;
-  }
-
   // 회원가입
   async createUser(userData) {
     const {
@@ -35,9 +26,9 @@ class UserService {
     const foundUser = await this.userModel.findByUser(username, email);
 
     if (foundUser && foundUser.username == username) {
-      throw new Error("중복된 아이디입니다.");
+      return { err: "중복된 아이디입니다." };
     } else if (foundUser && foundUser.email == email) {
-      throw new Error("중복된 이메일입니다.");
+      return { err: "중복된 이메일입니다." };
     }
 
     const hashPassword = hashedPassword(password);
@@ -105,7 +96,7 @@ class UserService {
     const user = await userModel.findByEmail(email);
 
     if (!user) {
-      throw new Error("해당하는 사용자가 존재하지 않습니다.");
+      return { err: "해당 사용자가 존재하지 않습니다." };
     }
 
     // Generate a random password
