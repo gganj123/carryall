@@ -5,10 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/cart.css">
-
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   <title>Document</title>
 </head>
 <body>
+  <main>
     <h1>주문서 작성 / 결제</h1>
     <form>
         <div class="cartBox">
@@ -26,7 +27,6 @@
           </div>
         </div> 
         <div class="payment">
-          <div class="paymentTitle">결제 예정금액</div>
           <div class="paymentBox">
               <div class="paymentBoxHeader">
                   <p class="cartBoxH1 header">총 상품 금액</p>
@@ -35,53 +35,66 @@
                   <p class="cartBoxH4 header"></p>
                   <p class="cartBoxH5 header">결제 예정 금액</p>
               </div>
-              <div class="totalPrice">
-                <!-- 가격 표시 -->
+              <div class="totalPriceBox">
+
+                  <p class="cartBoxH1 header sumItemPrice" id="orderSumItemPrice">원</p>
+                  <p class="cartBoxH2 header ">-</p>
+                  <p class="cartBoxH3 header delPrice" id="orderDiscountPrice">원</p>
+                  <p class="cartBoxH4 header ">=</p>
+                  <p class="cartBoxH5 header totalPrice" id="orderTotalPrice">원</p>
+
               </div>              
           </div>
       </div>
-      배송지<br>
+      <h3>주문 정보</h3><br>
       <li>
         <label for="name" class="label">
           <span>* 이름</span>
-          <input type="text" class="inputType01" id="name" required="">
+          <input type="text" class="inputType01" id="userName" value="이름" readonly>
         </label>
       </li>
-
       <!-- 6. 휴대폰 번호 -->
       <li>
         <label for="phoneNum" class="label">
           <span>* 휴대폰 번호</span>
-          <input type="text" class="inputType01" id="phoneNum" required="">
+          <input type="text" class="inputType01" id="phoneNum" value="010-1234-5678" readonly>
         </label>
       </li>
-            <!-- 7. 주소 -->
-            <li>
-              <label for="address01" class="label">
-                <span>* 주소</span>
-                <input type='radio' name='add' value='' checked/>기본 주소
-                <input type='radio' name='add' value='' />새로 입력
-              </label>
-              <div class="address_line address_line01 f_fs">
-                <input type="text" name="address" id="address01" class="inputType01" >
-                <a href="#">우편번호 검색</a>
-              </div>
-              <div class="address_line address_line02 f_c label">
-                  <label for="address02" class="label"></label>
-                  <input type="text" name="address" id="address02" class="inputType01" >
-                  <label for="address03" class="label"></label>
-                  <input type="text" name="address" id="address03" class="inputType01" >
-              </div>
-            </li>
+      <!-- 7. 주소 -->
+        <li>
+          <label for="address01" class="label">
+            <span>* 주소</span>
+          </label>
+          <div class="address_line address_line01 f_fs">
+            <input type="text" name="address" id="address01" class="inputType01" value="zipcode" readonly>
+          </div>
+          <div class="address_line address_line02 f_c label">
+              <label for="address02" class="label"></label>
+              <input type="text" name="address" id="address02" class="inputType01" value="address" readonly>
+              <label for="address03" class="label"></label>
+              <input type="text" name="address" id="address03" class="inputType01" value="address detail" readonly>
+          </div>
+
+        </li>
+          <div>
             <p>결제 수단</p>
-            <input type='radio' name='결제수단' value='' checked/>무통장입금
-            <input type='radio' name='결제수단' value='' />신용카드
-            <input type='radio' name='결제수단' value=''/>휴대폰
-            <input type='radio' name='결제수단' value='' />계좌이체
-        <div class="orderBtnContainer">
-          <button class="btnOrderSubmit" onclick="location.href='./cartTest.html'">상품 주문</button>
+            <input type="radio" id="paymentChoice1" name="payment" value="" checked />
+            <label for="paymentChoice1">무통장 입금</label>
+      
+            <input type="radio" id="paymentChoice2" name="payment" value="card" />
+            <label for="paymentChoice2">신용카드</label>
+      
+            <input type="radio" id="paymentChoice3" name="payment" value="phone" />
+            <label for="paymentChoice3">휴대폰</label>
+
+            <input type="radio" id="paymentChoice4" name="payment" value="" />
+            <label for="paymentChoice4">계좌이체</label>
+          </div>
+      <div class="orderBtnContainer">
+        <button class="btnPayment">상품 주문</button>
       </div>
     </form>
-    <script src="../js/order.js"></script>
+  </main>
+  <script src="../js/order.js"></script>
 </body>
 </html>

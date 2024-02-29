@@ -60,9 +60,9 @@
               <dt>옵션선택</dt>
               <dd>
                 <select name="selectbox" class="selectbox">
-                  <option value="1">흠</option>
-                  <option value="2">white</option>
-                  <option value="3">brown</option>
+                  <option value="black">black</option>
+                  <option value="white">white</option>
+                  <option value="brown">brown</option>
                 </select>
               </dd>
               <dt>배송비</dt>
@@ -93,6 +93,20 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
   document.addEventListener("DOMContentLoaded", function() {
+    const selectBox = document.querySelector('.totalDetailOption dl select[name="selectbox"]');
+  
+  // 옵션 선택 이벤트 리스너 추가
+  selectBox.addEventListener("change", function(event) {
+    const selectedOption = event.target.value;
+    updateDetailOption(selectedOption);
+  });
+
+  // 옵션 변경 시 호출될 함수
+  function updateDetailOption(option) {
+    // 여기서는 간단히 예시로 옵션 값을 상세정보에 반영하는 코드를 작성했습니다.
+    // 실제로는 옵션에 맞는 데이터를 서버에서 가져와서 보여줘야 합니다.
+    document.querySelector('.totalDetailOption h1').innerText = option;
+  }
   const currentURL = window.location.href;
   // URL에서 ID 추출하기
   const urlParams = new URLSearchParams(window.location.search);
@@ -101,16 +115,12 @@
   axios.get('/api/products')
     .then(res => {
       function updateQuantity() {
-        const newQuantity = document.getElementById("num").value;
-        updateCartQuantity(newQuantity);
-        localStorage.setItem("quantity", newQuantity);
-        document.querySelector('.number .orderNumber .num').innerText = newQuantity;
-      }
-      function updateCartQuantity(quantity) {
-    // 장바구니에 수량을 반영하는 코드 작성
-    // 예: 장바구니 아이템의 수량을 업데이트하는 등의 작업
-      console.log("장바구니 수량 업데이트:", quantity);
-}
+    // 입력된 수량 가져오기
+    const newQuantity = document.getElementById("num").value;
+    // 가져온 수량을 변수에 저장
+    localStorage.setItem("quantity", newQuantity);
+    console.log(newQuantity);
+  }
       const products = res.data; // 받아온 상품 데이터
       const filteredProduct = products.filter(product => product._id === productId);
       console.log(filteredProduct);
@@ -127,8 +137,8 @@
       document.querySelector('.contentPoint ul').innerHTML = `
         <li class="point">소재 : 합성피혁</li>
         <li class="point">색상 : 블랙 / 아이보리 / 카멜</li>
-        <li class="point">추가 상세 : ${filteredProduct[0].name}</li>
-        <li class="point">추가 상세 : </li>
+        <li class="point">추가 상세 : 상세정보</li>
+        <li class="point">제조사 : </li>
       `;
       document.querySelector('.totalDetailOption dl select[name="selectbox"]').innerHTML = `
         <option value="1">${filteredProduct[0].option}</option>
@@ -170,7 +180,6 @@
           image: product.image,
           name: product.name,
           brand: product.brand,
-          option: product.option,
           quantity: 1,
           price: product.price,
           totalPricePerItem: product.price
@@ -186,11 +195,50 @@
 
       
   }
+
+  const orderBtn = document.getElementById("orderBtn");
+  orderBtn.addEventListener("click", addItemToOrder);
+
+function addItemToOrder() {
+    const newItemId = productId;
+    axios.get('/api/products')
+      .then(response => {
+        const product = response.data.find(item => item._id === newItemId);
+        if (!product) {
+          console.error("Product not found.");
+          return;
+        }
+
+        let orderItems = JSON.parse(localStorage.getItem("orderItems")) || [];
+        let isExist = orderItems.some(item => item._id === newItemId);
+
+        // if (isExist) {
+        //   alert("이미 장바구니에 담긴 상품입니다.");
+        //   return;
+        // }
+        
+        const newItem = {
+          _id: newItemId,
+          option: product.option,
+          quantity: 1,
+        };
+        orderItems.push(newItem);
+
+        localStorage.setItem("orderItems", JSON.stringify(orderItems));
+        // displayUserCartInfo();
+        window.location.href = "order.html";
+      })
+      .catch(error => {
+        console.error("Error fetching product details:", error);
+      });
+  }
+
+
 });
 </script>
 
-      <div style="height: 500px; background-color: #fafafa;"></div>
-    <footer id="footer" ></footer>
+      <div style="height: 500px;"></div>
+    <footer id="footer"></footer>
     <script src="/js/header.js"></script>
     <script src="/js/footer.js"></script>
 </body>
