@@ -156,6 +156,18 @@ class UserController {
       res.status(500).json({ err: err.message });
     }
   }
+
+  // 관리자 회원
+  async adminUsers(req, res) {
+    try {
+      const users = await userService.adminUsers();
+
+      res.json(users);
+
+    } catch (err) {
+      res.status(500).json({ err: err.message });
+    }
+  }
 }
 
 const userController = new UserController();

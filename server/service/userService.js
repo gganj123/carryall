@@ -114,6 +114,13 @@ class UserService {
     const user = await userModel.findByUser(username, null);
     return user;
   }
+
+  // 관리자 회원관리
+  async adminUsers() {
+    const users = await userModel.findAllUsers();
+    return users;
+  }
+
 }
 
 const userService = new UserService(userModel);

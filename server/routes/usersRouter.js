@@ -76,5 +76,7 @@ userRouter.delete("/withdrawal", userController.deleteUser);
 userRouter.get('/mypage', userController.mypage);
 // 비밀번호 초기화
 userRouter.post("/reset-password", userController.resetPassword);
+// 관리자 회원관리
+userRouter.get("/admin/user", userController.adminUsers);
 
 module.exports = userRouter;

@@ -94,7 +94,6 @@ async function main() {
 // 메인 함수 호출
 // main().catch(console.error);
 
-const indexRouter = require('./server/routes');
 const productsRouter = require("./server/routes/productRouter.js");
 const categoriesRouter = require("./server/routes/categoryRouter.js");
 const ordersRouter = require("./server/routes/orders.js");
@@ -109,7 +108,6 @@ app.use(express.static('client'));
 app.use(viewRouter);
 
 
-app.use('/api', indexRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/categories", categoriesRouter);
 app.use("/api/orders", ordersRouter);
