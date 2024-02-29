@@ -92,7 +92,7 @@ async function main() {
 
 
 // 메인 함수 호출
-// main().catch(console.error);
+//  main().catch(console.error);
 
 const indexRouter = require('./server/routes');
 const productsRouter = require("./server/routes/productrouter.js");
