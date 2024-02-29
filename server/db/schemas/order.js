@@ -1,8 +1,7 @@
 //주문 스키마
 const { Schema } = require("mongoose");
+
 const OrderSchema = new Schema({
-  // 주문 고유번호 -> 어차피 _id 자동 생성
-  // id: Schema.Types.ObjectId,
   // 주문 날짜
   date: {
     type: Date,
@@ -13,20 +12,63 @@ const OrderSchema = new Schema({
     type: String,
     required: true,
   },
-  // 받는 분 정보(user와 연결, id)
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  // 주문 상품
-  productId: [
+  // 주문 상품 정보 -> 그 시점의 값이 저장되도록 참조 X
+  productInformation: [
     {
-      //상품 ID
-      type: Schema.Types.ObjectId,
-      ref: "Product",
-      required: true,
-    },
+      name: {
+        type: String,
+        required: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+      image: {
+        type: String,
+        required: true,
+      },
+      option: {
+        type: String,
+        required: true,
+      },
+      brand: {
+        type: String,
+        required: true,
+      },
+      quantity: {
+        type: Number,
+        required: true,
+      },
+    }
   ],
+  
+  // 주문자 관련 정보 -> 그 시점의 값이 저장되도록 참조 X
+  recipientInformation: {
+      // 받는 분 성함
+      recipientName: {
+        type: String,
+        required: true,
+      },
+      // 받는 분 우편번호
+      recipientZipCode: {
+        type: String,
+        required: true,
+      },
+      // 받는 분 주소
+      recipientAddress: {
+        type: String,
+        required: true,
+      },
+      // 받는 분 상세주소
+      recipientAddressDetail: {
+        type: String,
+        required: true,
+      },
+      // 받는 분 전화번호
+      recipientTel: {
+        type: String,
+        required: true,
+      },
+  },
 });
 module.exports = OrderSchema;

@@ -30,6 +30,7 @@ input[type="text"] {
   margin: 0;
   padding: 0;
   height: 100%;
+  background-color: #fafafa;
 }
 
 body{
@@ -48,7 +49,7 @@ body{
   flex-flow: row nowrap;
   justify-content: space-around;
   padding-top: 30px;
-  height: 1500px;
+  height: 1000px;
 }
 #main .totalImage {
   /* background-color: yellow; */
@@ -114,6 +115,7 @@ body{
 #main .totalDetail {
   /* background-color: coral; */
   width: calc(50%);
+  height: 1000px;
 }
 #main .totalDetail .totalDetailOption {
   /* background-color: lime; */
@@ -220,11 +222,6 @@ body{
   height: 68px;
   font-size: 18px;
 }
-
-
-
-
-
 
 
 

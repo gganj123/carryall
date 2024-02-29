@@ -54,70 +54,64 @@
 //     item.appendChild(imgDiv);
 //     item.appendChild(textDiv);
 
-//     // productList에 div.item 추가
-//     productList.appendChild(item);
+// //     // productList에 div.item 추가
+// //     productList.appendChild(item);
+// //   });
+// // }
+// axios.get('http://localhost:5001/products')
+// .then(res => {
+//   const productList = res.data;
+//   let htmlString = '';
+//   console.log(res.data);
+
+//   productList.forEach(product => {
+//     htmlString += `<div style="height: 300px; width: 23%; margin-right: 20px;">
+//     <ul>`
+//     htmlString += `<li><img class="obimg" src="${product.image}" alt="Product Image"></li>`;//이미지 넣어서 나오게 해보기
+//     htmlString += `<li><strong>Name: ${product.name}</strong></li> `;
+//     htmlString += `<li><strong>Brand:</strong> ${product.brand}</li>`;
+//     htmlString += `<li><strong>Price: ${product.price.toLocaleString('ko-KR')}</strong></li>`;
+//     htmlString += `</ul></div>`;
 //   });
 // }
-<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-axios.get('http://localhost:5001/products')
-.then(res => {
-  const productList = res.data;
-  let htmlString = '';
-  console.log(res.data);
 
-  productList.forEach(product => {
-    htmlString += `<div style="height: 300px; width: 23%; margin-right: 20px;">
-    <ul>`
-    htmlString += `<li><img class="obimg" src="${product.image}" alt="Product Image"></li>`;//이미지 넣어서 나오게 해보기
-    htmlString += `<li><strong>Name: ${product.name}</strong></li> `;
-    htmlString += `<li><strong>Brand:</strong> ${product.brand}</li>`;
-    htmlString += `<li><strong>Price: ${product.price.toLocaleString('ko-KR')}</strong></li>`;
-    htmlString += `</ul></div>`;
-  });
-
-  document.getElementById('objectList').innerHTML = htmlString;
-})
-.catch(error => {
-  console.error('Error fetching data:', error);
-});
-
-// 초기 상품 데이터 로드
-renderProducts(products);
+// // 초기 상품 데이터 로드
+// renderProducts(products);
 
 
 
-// 초기 페이지 번호와 페이지당 상품 수 설정
-let currentPage = 1;
-const productsPerPage = 10;
+// // 초기 페이지 번호와 페이지당 상품 수 설정
+// let currentPage = 1;
+// const productsPerPage = 10;
 
-// 스크롤 이벤트 핸들러
-function handleScroll() {
-  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-  if (scrollTop + clientHeight >= scrollHeight - 5) {
-    loadMoreProducts();
-  }
-}
+// // 스크롤 이벤트 핸들러
+// function handleScroll() {
+//   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+//   if (scrollTop + clientHeight >= scrollHeight - 5) {
+//     loadMoreProducts();
+//   }
+// }
 
-// 추가 상품 로드 함수
-function loadMoreProducts() {
-  // 상품 데이터를 가져오는 비동기 함수 호출 (예: Ajax 요청 등)
-  const newProducts = fetchProducts(currentPage, productsPerPage);
-  // 상품 데이터를 화면에 추가
-  renderProducts(newProducts);
-  // 페이지 번호 증가
-  currentPage++;
-}
+// // 추가 상품 로드 함수
+// function loadMoreProducts() {
+//   // 상품 데이터를 가져오는 비동기 함수 호출 (예: Ajax 요청 등)
+//   const newProducts = fetchProducts(currentPage, productsPerPage);
+//   // 상품 데이터를 화면에 추가
+//   renderProducts(newProducts);
+//   // 페이지 번호 증가
+//   currentPage++;
+// }
 
-// 초기 상품 데이터 로드
-renderProducts(products);
+// // 초기 상품 데이터 로드
+// renderProducts(products);
 
-// 스크롤 이벤트 리스너 등록
-window.addEventListener('scroll', handleScroll);
+// // 스크롤 이벤트 리스너 등록
+// window.addEventListener('scroll', handleScroll);
 
-// 가상의 fetchProducts 함수 (실제로는 Ajax 등으로 서버에서 데이터를 가져와야 함)
-function fetchProducts(page, perPage) {
-  // 예시로 현재 페이지와 페이지당 상품 수에 해당하는 데이터를 임의로 반환합니다.
-  const startIndex = (page - 1) * perPage;
-  const endIndex = startIndex + perPage;
-  return products.slice(startIndex, endIndex);
-}
+// // 가상의 fetchProducts 함수 (실제로는 Ajax 등으로 서버에서 데이터를 가져와야 함)
+// function fetchProducts(page, perPage) {
+//   // 예시로 현재 페이지와 페이지당 상품 수에 해당하는 데이터를 임의로 반환합니다.
+//   const startIndex = (page - 1) * perPage;
+//   const endIndex = startIndex + perPage;
+//   return products.slice(startIndex, endIndex);
+// }
