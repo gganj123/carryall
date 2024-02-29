@@ -13,9 +13,10 @@ class OrderController {
 
   // 주문 추가
   async addOrder(req, res, next) {
-    const { productInformation, recipientInformation } = req.body;
+    const { userId, productInformation, recipientInformation } = req.body;
 
     if (
+      !userId ||
       !productInformation ||
       !productInformation[0].name ||
       !productInformation[0].price ||

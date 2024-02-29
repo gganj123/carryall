@@ -48,7 +48,7 @@ class ProductModel {
   // 장바구니용 상품 id 조회(상품 금액, 이미지, 브랜드, 옵션, 상품 이름 리턴)
   async findByIdForCart (_id) {
     const product = await Product.findOne({ _id })
-    .select("name price image option categoryName");
+    .select("name price image categoryName");
     return product;
   }
 }

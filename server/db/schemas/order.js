@@ -12,6 +12,11 @@ const OrderSchema = new Schema({
     type: String,
     required: true,
   },
+  //유저 아이디 -> 상품 조회용
+  userId: {
+    type: String,
+    required: true, 
+  },
   // 주문 상품 정보 -> 그 시점의 값이 저장되도록 참조 X
   productInformation: [
     {
