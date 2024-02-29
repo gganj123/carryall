@@ -65,7 +65,7 @@ footer{
 
 
   position : relative;
-  transform : translateY(-100%);
+  /* transform : translateY(-100%); */
   
 
 }

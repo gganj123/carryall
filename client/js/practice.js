@@ -16,21 +16,15 @@
 //     priceElements[i].textContent = formattedPrice;
 // }
 
-function updatePrice() {
-  // 수량을 가져와 정수로 변환합니다.
-  var num = parseInt(document.getElementById("num").value);
 
-  // 가격을 가져옵니다. 여기서는 클래스 이름이 "price"인 요소의 첫 번째 요소를 가져옵니다.
-  var priceElement = document.getElementsByClassName("price")[1];
-  var priceText = priceElement.textContent;
-  var price = parseFloat(priceText.replace(/[^0-9]/g, '')); // 숫자 외의 문자 제거 후 부동소수점으로 변환
+
 
   // 총 가격을 계산합니다.
-  var totalPrice = price * num;
+  //var totalPrice = price * num;
 
   // 총 가격을 화면에 업데이트합니다.
-  priceElement.textContent = totalPrice.toLocaleString() + "원";
-}
+  //priceElement.textContent = totalPrice.toLocaleString() + "원";
+//}
 // document.addEventListener("DOMContentLoaded", function() {
 //   // 서버로부터 데이터를 받아온 후에 실행될 함수
 //   axios.get('http://localhost:5001/products')
