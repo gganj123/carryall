@@ -10,34 +10,10 @@
   <link rel="stylesheet" href="../css/join.css">
 </head>
 <body>
-  <!-- 은지 -->
-  <div class="header" style="height: 0px; width: 1902px; display: flex; align-items: center;"></div>
-  <div class="header" style="height: 60px; width: 1902px; display: flex; align-items: center;background-color: white;">
-    <h1 style="margin-right: 50px; font-family:Roboto; font-weight: 700; font-style: italic; ">carryAll</h1>
-    <input class ="inputform" type="text" placeholder="검색" style="height: 50%; padding: 5px; border-radius: 5px; margin-right: 50px;">
-    <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold">장바구니</button>
-    <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">로그인</button>
-    <button style="height: 50%; margin-right: 10px; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">마이페이지</button>
-    <button style="height: 50%; background-color:white; border: white; font-size: 1.2em; font-weight: bold;">회원가입</button>
-  </div>
-  <!-- 상단 메인 배너 -->
-  <!-- <div class = "nav" style=" background-color:#d9d9d9; height: 480px; width: 1902px;">
-    <h1>nav</h1>
-  </div> -->
+  <!-- 헤더 가져오기 -->
+  <header id="header"></header>
 
-  <!-- 여백 틀 -->
-  <!-- <div class="nav" style="height: 480px; width: 1900px; border: 1px solid tomato; display: flex; flex-wrap: wrap;">
-    <div style="height: 700px; width: 21%; background-color: gray; margin-right: 10px;">
-      <h1>side1</h1>
-    </div>
-    <div style="height: 700px; width: 56%; background-color: #d9d9d9; margin-right: 10px;">
-      <h1>main</h1>
-    </div>
-    <div style="height: 700px; width: 21%; background-color: gray;">
-      <h1>side2</h1>
-    </div>
-  </div> -->
-
+  <!-- 컨텐츠 -->
   <section class="container">
     <!-- <form action="../../index.html" method="post" class="inputForm" id="termsForm"> -->
     <form class="inputForm" id="termsForm">
@@ -94,7 +70,7 @@
 
             <h2 class="certiTit">본인 인증방법</h2>
             <button type="button" id="phoneVerify">휴대폰 본인인증</button>
-            <p class="certiDesc">이미 회원이신가요? <a href="./loginMember.html">로그인하기</a></p>
+            <p class="certiDesc">이미 회원이신가요? <a href="./loginMember">로그인하기</a></p>
             <div class="certiBtn">
               <button type="button" class="btnType01 before">이전</button>
               <button type="submit" class="btnType02 after">다음</button>
@@ -103,6 +79,16 @@
       </fieldset>                        
     </form>
   </section>
+
+  <!-- 푸터 가져오기 -->
+  <footer id="footer"></footer>
+
+  <!-- 탑버튼 가져오기 -->
+  <div class="top">top</div>
+
+  <script src="../js/top.js"></script>
+  <script src="../js/header.js"></script>
+  <script src="../js/footer.js"></script>
 
   <!-- 회원가입 폼 script -->
   <script>
@@ -147,22 +133,22 @@
     });
 
     // 3. 폼 제출 시 동의 여부 확인
-    document.getElementById('termsForm').addEventListener('submit', function(event) {
-      let subAgreementsChecked = false;
-      subAgreeCheckboxes.forEach(subCheckbox => {
-        if (subCheckbox.checked) {
-          subAgreementsChecked = true;
-        }
-      });
+    // document.getElementById('termsForm').addEventListener('submit', function(event) {
+    //   let subAgreementsChecked = false;
+    //   subAgreeCheckboxes.forEach(subCheckbox => {
+    //     if (subCheckbox.checked) {
+    //       subAgreementsChecked = true;
+    //     }
+    //   });
 
-      if (!subAgreementsChecked) {
-        alert('(필수)약관에 동의해야 합니다.');
-        event.preventDefault(); // 폼 제출을 막음
-      } else if (!allAgreeCheckbox.checked) {
-        alert('모든 (필수)약관에 동의해야 합니다.');
-        event.preventDefault(); // 폼 제출을 막음
-      }
-    });
+    //   if (!subAgreementsChecked) {
+    //     alert('(필수)약관에 동의해야 합니다.');
+    //     event.preventDefault(); 
+    //   } else if (!allAgreeCheckbox.checked) {
+    //     alert('모든 (필수)약관에 동의해야 합니다.');
+    //     event.preventDefault();
+    //   }
+    // });
 
     // 4. 각 label.agree 클릭시 .chkBox에 active 클래스 toggle
     const checkboxes = document.querySelectorAll('.subAgreeCheckbox');
@@ -186,13 +172,13 @@
     // 6. 이전 - 다음 버튼
     const beforeButton = document.querySelector('.btnType01.before');
     beforeButton.addEventListener('click', function() {
-      window.location.href = './join.html'; // 이전 페이지로 이동
+      window.location.href = './join';
     });
 
     const afterButton = document.querySelector('.btnType02.after');
     afterButton.addEventListener('click', function() {
       // 다음 페이지로 이동
-      window.location.href = './joinForm.html';
+      window.location.href = './joinForm';
     });
 
     
