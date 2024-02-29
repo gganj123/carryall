@@ -16,7 +16,6 @@ class ProductController {
     try {
       const { _id } = req.params
       const product = await ProductService.getProductById(_id);
-
       res.status(200).json({ success: true, data: product });
     } catch (err) {
       res.status(400).json({ success: false, message: err.message });

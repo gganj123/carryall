@@ -16,8 +16,6 @@ class OrderController {
     const { productInformation, recipientInformation } = req.body;
 
     if (
-      !date ||
-      !status ||
       !productInformation ||
       !productInformation[0].name ||
       !productInformation[0].price ||
