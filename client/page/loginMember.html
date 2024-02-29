@@ -17,8 +17,8 @@
     <form id="loginForm">
       <h2>로그인</h2>
       <ul class="tab">
-        <li class="active"><a href="./login_member.html">회원 로그인</a></li>
-        <li class="nonMemberPath"><a href="./login_nonMember.html">비회원 주문조회</a></li>
+        <li class="active"><a href="/login_member">회원 로그인</a></li>
+        <li class="nonMemberPath"><a href="/login_nonMember">비회원 주문조회</a></li>
       </ul>
       <div class="formGroup id">
         <label for="username"></label>
@@ -36,9 +36,9 @@
       </div>
       <button type="submit" id="loginBtn">로그인</button>
       <ul class="joinWrap">
-        <li><a href="./join.html">회원가입</a></li>
-        <li><a href="#">아이디 찾기</a></li>
-        <li><a href="#">비밀번호 찾기</a></li>
+        <li><a href="/join">회원가입</a></li>
+        <li><a href="javascript:void(0);">아이디 찾기</a></li>
+        <li><a href="javascript:void(0);">비밀번호 찾기</a></li>
       </ul>
     </form>
   </section>
@@ -72,7 +72,7 @@
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
-        axios.post('http://localhost:5001/api/login', {
+        axios.post('/api/login', {
           "username": username,
           "password": password
         })
@@ -80,7 +80,7 @@
           // 로그인 성공 시
           console.log('성공! ', response.data);
           localStorage.setItem('loggedInUser', JSON.stringify(response.data));
-          window.location.href = './main.html'; // 로그인 성공 시 main.html로 이동
+          window.location.href = '/main'; // 로그인 성공 시 main로 이동
         })
         .catch(error => {
           // 로그인 실패 시

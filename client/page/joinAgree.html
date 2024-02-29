@@ -15,14 +15,14 @@
 
   <!-- 컨텐츠 -->
   <section class="container">
-    <!-- <form action="../../index.html" method="post" class="inputForm" id="termsForm"> -->
+    <!-- <form action="../../index" method="post" class="inputForm" id="termsForm"> -->
     <form class="inputForm" id="termsForm">
       <fieldset>
         <legend class="formTit">회원가입</legend>
           <ul class="pathBox">
-            <li><a style="font-weight: 500;" href="#">약관동의</a></li>
-            <li><a href="./joinForm.html">정보입력</a></li>
-            <li><a href="#">가입완료</a></li>
+            <li><a style="font-weight: 500;" href="javascript:void(0);">약관동의</a></li>
+            <li><a href="/joinForm">정보입력</a></li>
+            <li><a href="javascript:void(0);">가입완료</a></li>
           </ul>
 
           <div class="box agreeBox">
@@ -70,7 +70,7 @@
 
             <h2 class="certiTit">본인 인증방법</h2>
             <button type="button" id="phoneVerify">휴대폰 본인인증</button>
-            <p class="certiDesc">이미 회원이신가요? <a href="./loginMember">로그인하기</a></p>
+            <p class="certiDesc">이미 회원이신가요? <a href="/loginMember">로그인하기</a></p>
             <div class="certiBtn">
               <button type="button" class="btnType01 before">이전</button>
               <button type="button" class="btnType02 after">다음</button>
@@ -120,6 +120,7 @@
         } else {
           // 모든 개별 약관 동의 체크 여부 확인
           let allChecked = true;
+          
           subAgreeCheckboxes.forEach(subCheckbox => {
             if (!subCheckbox.checked) {
               allChecked = false;
@@ -127,6 +128,10 @@
           });
           if (allChecked) {
             allAgreeCheckbox.checked = true;
+            const chkBoxAll = document.querySelectorAll('.chkBox');
+            chkBoxAll.forEach(idx => {
+              idx.classList.add('active');
+            })
           }
         }
       });
@@ -177,7 +182,7 @@
 
     const afterButton = document.querySelector('.btnType02.after');
     afterButton.addEventListener('click', function() {
-      window.location.href = './joinForm.html';
+      window.location.href = '/joinForm';
     });
 
     
