@@ -182,8 +182,9 @@ function addItemToOrder() {
   let orderItems = [];
   // isChecked 값이 true인 아이템만 필터링
   let checkedItems = cartItems.filter(item => item.isChecked);
-  if(checkedItems.length){
-      // 중복된 아이템이 있는지 확인하고 없으면 orderItems에 추가
+
+
+  // 중복된 아이템이 있는지 확인하고 없으면 orderItems에 추가
   checkedItems.forEach(checkedItem => {
     let isExist = orderItems.some(orderItem => orderItem._id === checkedItem._id);
     if (!isExist) {
@@ -202,9 +203,4 @@ function addItemToOrder() {
   // orderItems를 로컬 스토리지에 다시 저장
   localStorage.setItem("orderItems", JSON.stringify(orderItems));
   drawItems(uncheckedItems)
-  location.href = "/order";
-  }else{
-    alert("주문할 상품을 선택해주세요.");
-    return;
-  }
 }

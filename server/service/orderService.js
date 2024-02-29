@@ -20,9 +20,13 @@ class OrderService {
     const { date, status, name, price, image, option, brand, quantity, recipientName, recipientZipCode, recipientAddress, recipientAddressDetail, recipientTel } = orderInfo; //주석처리 해도 되는지 확인
   
     // 주문 생성 및 저장
+    const date = new Date();
+    const status = "결제 완료";
+    orderInfo.date = date;
+    orderInfo.status = status;
     const newOrder = await orderModel.create(orderInfo);
     return newOrder;
-  }
+}
 
   // id로 주문 수정 -> 이 부분 확인안해봄
   async editOrder(orderId, orderInfo) {

@@ -35,7 +35,7 @@
 //       document.querySelector('.totalDetailOption h1').innerText = product.name;
 //       document.querySelector('.totalDetailOption .price').innerText = product.price;
 //       document.querySelector('.totalPrice .price').innerText = product.price;
-//       document.querySelector('.totalDetailOption .brand').innerText = product.brand;
+//       document.querySelector('.totalDetailOption .categoryName').innerText = product.categoryName;
 //       document.querySelector('.contentPoint ul').innerHTML = `
 //           <li class="point">소재: 합성피혁</li>
 //           <li class="point">색상: 블랙 / 아이보리 / 카멜</li>

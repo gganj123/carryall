@@ -45,7 +45,7 @@ class ProductController {
         image,
         option,
         stock,
-        brand,
+        categoryName,
       } = req.body;
 
       const product = await ProductService.createProduct({
@@ -55,7 +55,7 @@ class ProductController {
         image,
         option,
         stock,
-        brand,
+        categoryName,
       });
 
       res.status(201).json({ success: true, data: product });
@@ -90,7 +90,7 @@ class ProductController {
         image,
         option,
         stock,
-        brand,
+        categoryName,
       } = req.body
 
       const updateProduct = await ProductService.updateProduct({_id}, {
@@ -100,7 +100,7 @@ class ProductController {
         image,
         option,
         stock,
-        brand,
+        categoryName,
       });
 
       res.status(200).json({ success: true, data: updateProduct });
