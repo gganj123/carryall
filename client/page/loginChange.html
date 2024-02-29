@@ -1,10 +1,10 @@
-<!-- 은지 > 회원가입 폼 -->
+<!-- 은지 > 회원정보 수정 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>carryAll_회원가입 입력폼</title>
+  <title>carryAll_회원정보 수정폼</title>
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/login.css">
   <link rel="stylesheet" href="../css/join.css">
@@ -41,28 +41,28 @@
   <section class="container joinFormWarp">
     <form id="signupForm" action="#" method="post" class="inputForm">
       <fieldset>
-        <legend class="formTit">회원가입</legend>
-          <ul class="pathBox">
+        <legend class="formTit">회원정보 수정</legend>
+          <!-- <ul class="pathBox">
             <li><a href="./join_agree.html">약관동의</a></li>
             <li><a style="font-weight: 500;" href="#">정보입력</a></li>
             <li><a href="#">가입완료</a></li>
-          </ul>
+          </ul> -->
           <div class="box formBox">
             <ul class="joinBox">
-              <li class="reqTxt">
+              <!-- <li class="reqTxt">
                 <h6>회원정보 입력<span>* 필수 입력 항목입니다.</span></h6>
-              </li>
+              </li> -->
               <!-- 1. 아이디 -->
               <li>
                 <label for="idName" class="label">
-                    <span>* 아이디</span>
-                    <input type="text" class="inputType01" id="idName" required="" >
+                    <span>아이디</span>
+                    <input style="background-color: #fff;" type="text" class="inputType01" id="idName" required="" value="get예정(수정불가)" disabled>
                 </label>
               </li>
-              <!-- 2. 비밀번호 -->
+              <!-- 2. 비밀번호 변경 -->
               <li>
                 <label for="password" class="label">
-                  <span>* 비밀번호</span>
+                  <span>비밀번호 변경</span>
                   <input type="password" class="inputType01" id="password" required="" >
                 </label>
               </li>
@@ -70,7 +70,7 @@
               <!-- 3. 비밀번호 확인 -->
               <li>
                 <label for="passwordReconfirm" class="label">
-                  <span>* 비밀번호 확인</span>
+                  <span>비밀번호 확인</span>
                   <input type="password" class="inputType01" id="passwordReconfirm" required="" >
                 </label>
                 <div class="errTxt n1">
@@ -81,15 +81,15 @@
               <!-- 4. 이름 -->
               <li>
                 <label for="name" class="label">
-                  <span>* 이름</span>
-                  <input type="text" class="inputType01" id="name" required="">
+                  <span>이름</span>
+                  <input style="background-color: #fff;" type="text" class="inputType01" id="name" required="" value="엘리스(수정불가)" disabled>
                 </label>
               </li>
 
               <!-- 5. 이메일 -->
               <li class="f_fs f_d_c label02">
                 <label for="email" class="label">
-                  <span>* 이메일</span>
+                  <span>이메일</span>
                   <input type="text" class="inputType01" id="email">
                 </label>
                 <div class="errTxt n2">
@@ -105,7 +105,7 @@
               <!-- 6. 휴대폰 번호 -->
               <li>
                 <label for="phoneNum" class="label">
-                  <span>* 휴대폰 번호</span>
+                  <span>휴대폰 번호</span>
                   <input type="text" class="inputType01" id="phoneNum" required="" maxlength='13' />
                 </label>
               </li>
@@ -120,8 +120,8 @@
             <!-- 7. 주소 -->
             <li>
               <label style="justify-content: flex-start;" for="address01" class="label">
-                <span style="white-space: nowrap;">* 주소</span>
-                <input type="text" name="address" id="address01" class="inputType01" style="width: 54%; margin-left: 13.4%; margin-right: 20px;">
+                <span>주소</span>
+                <input style="margin-left: 15.1%; margin-right: 20px;" type="text" name="address" id="address01" class="inputType01" style="width: 54%; margin-left: 13.4%; margin-right: 20px;">
                 <a class="addressBtn" href="#" onclick="findAddr()">우편번호 검색</a>
               </label>
               <div style="flex-direction: column; align-items: flex-end;" class="address_line address_line02 f_c label">
@@ -133,7 +133,7 @@
             </li>
             <div class="joinBtn btn_box">
               <button type="button" class="btnType01" onclick="goToPreviousPage()"">이전</button>
-              <button type="button" class="btnType02" onclick="submitForm()">확인</button>
+              <button type="button" class="btnType02 modifyForm" onclick="submitForm()">확인</button>
             </div>
           </div>
       </fieldset>                        
@@ -154,12 +154,9 @@
 
     // 이메일 입력란의 내용이 변경될 때마다 이벤트를 수신하도록 설정
     emailInput.addEventListener("input", function() {
-      // 이메일 주소가 "@" 기호를 포함하지 않는 경우
       if (!emailInput.value.includes("@")) {
-        // 에러 메시지를 보이도록 함
         errorText.classList.add("active");
       } else {
-        // "@" 기호가 포함된 경우 에러 메시지를 숨김
         errorText.classList.remove("active");
       }
     });
@@ -178,16 +175,11 @@
       }
     }
 
-    // 비밀번호와 비밀번호 확인 input 요소에 input 이벤트 추가
-    document.getElementById('password').addEventListener('input', checkPasswordMatch);
-    document.getElementById('passwordReconfirm').addEventListener('input', checkPasswordMatch);
-
     // 3. 전화번호 관련 유효성 추가
     function formatPhoneNumber() {
       const phoneNumberInput = document.getElementById('phoneNum');
       let phoneNumber = phoneNumberInput.value.replace(/[^\d]/g, ''); // 숫자 이외의 문자 모두 제거
 
-      // 포맷 적용
       if (phoneNumber.length >= 4 && phoneNumber.length <= 7) {
         phoneNumber = phoneNumber.replace(/(\d{3})(\d{1,4})/, '$1-$2');
       } else if (phoneNumber.length >= 8) {
@@ -195,8 +187,6 @@
       }
       phoneNumberInput.value = phoneNumber;
     }
-
-    // 휴대폰 번호 입력란에 input 이벤트 추가하여 입력할 때마다 포맷 변경
     document.getElementById('phoneNum').addEventListener('input', formatPhoneNumber); 
 
 
@@ -227,55 +217,57 @@
       const username = document.getElementById('idName').value;
       const password = document.getElementById('password').value;
       const name = document.getElementById('name').value;
-      // const passwordReconfirm = document.getElementById('passwordReconfirm').value;
       const email = document.getElementById('email').value;
       const phoneNum = document.getElementById('phoneNum').value;
       const address01 = document.getElementById('address01').value;
       const address02 = document.getElementById('address02').value;
       const address03 = document.getElementById('address03').value;
 
-      // {
-      //   "username":"singdddsing",
-      //   "password":"test3",
-      //   "email":"testtestest@teddddst.com",
-      //   "tel":"010-9999-0000",
-      //   "name":"테스트유싱 2256",
-      //   "zipCode":"123",
-      //   "address":"주소1",
-      //   "addressDetail":"주소2"
-      // }
-
-
-      // 수집된 데이터를 서버에 전송합니다.
-      axios.post('http://localhost:5001/join', {
+      // 수정된 데이터를 서버에 전송합니다.
+      axios.put('http://localhost:5001/user', {
         "username": username,
         "password": password,
         "email": email,
         "tel": phoneNum,
         "name": name,
-        "zipCode": address01,
-        "address": address02,
-        "addressDetail": address03,
+        "address": `${address01} ${address02} ${address03}`
       })
       .then(response => {
-        // 서버로부터의 응답을 처리, 완료 페이지로 이동
-        console.log('회원가입이 완료되었습니다.', response.data);
-        window.location.href = './joinFinished.html';
+        // 서버로부터의 응답을 처리합니다.
+        console.log('회원 정보 수정이 완료되었습니다.', response.data);
+        // 여기서 다음 단계로 넘어가거나 원하는 작업을 수행할 수 있습니다.
       })
       .catch(error => {
-        // 오류가 발생했을 때 콘솔알림.
-        console.error('회원가입 오류:', error);
+        // 오류가 발생했을 때 처리합니다.
+        console.error('회원 정보 수정 오류:', error);
       });
     }
+
+
+    // 예외. 이전 페이지로 돌아가는 코드를 추가합니다.
     function goToPreviousPage() {
-      // 이전 페이지로 돌아가는 코드.
       window.history.back()
     }
     
-    </script>
+    // 6. localStorage 이름, 아이디값 가져오기
+    document.addEventListener("DOMContentLoaded", function() {
+      const loggedInUser = localStorage.getItem("loggedInUser");
+      
+      if (loggedInUser) {
+        const user = JSON.parse(loggedInUser);
+        const idNameInput = document.getElementById("name");
+        const nameInput = document.getElementById("idName");
+
+        if (user.name) {
+          idNameInput.value = user.name;
+        }
+        if (user.username) {
+          nameInput.value = user.username;
+        }
+      }
+    });
+
+  </script>
 
 </body>
 </html>
-
-
-

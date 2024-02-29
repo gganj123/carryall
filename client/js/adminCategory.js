@@ -14,7 +14,7 @@ function fetchData() {
             <input type="text" class ="cate font_17" value="${product.name}">
           </div>
           <div class="sortbutton">
-            <button class="change butt col font_17">수정</button>
+            <button class="change col font_17">수정</button>
           </div>
           <div class="infoCont" style="width:100%; padding-top: 0;">
             <h3> </h3>
@@ -47,7 +47,7 @@ function addForm(){
     <div class="check">
       <input type="checkbox" name="checkbox1">&ensp;&nbsp;1</div>
       <div class="sort"><input type="text" class ="regi cate font_17"></div>
-      <div class="sortbutton"><button id="regiButton" class="col font_17 butt">등록</button></div>
+      <div class="sortbutton"><button id="regiButton" class="col font_17">등록</button></div>
       <div class="infoCont" style="width:100%; padding-top: 0;">
         <h3> </h3></div>
 </div>`;
@@ -109,7 +109,6 @@ deleteButton.addEventListener('click', function () {
           axios.delete(`/api/categories/${categoryId}`)
           .then(response => {
               // 카테고리 삭제에 성공한 경우
-              alert(`카테고리가 삭제되었습니다.`);
               
               // 화면에서 해당 카테고리를 제거합니다.
               adminListItem.parentNode.removeChild(adminListItem);
