@@ -43,10 +43,11 @@ async function test() {//크롤링 코드, 추후 삭제
   });;
 
   const category = [
-  {categoryId:"65e08a335a29d582c152f71c", categoryName:"STUSSY"},
-  { categoryId:"65e08a475a29d582c152f71e",categoryName:"SUPREME"}, 
-  { categoryId:"65e08a555a29d582c152f720",categoryName:"BARE"}
+  { categoryId:"65e08a335a29d582c152f71c", categoryName:"STUSSY", origin: "중국", detail: "소재 특성 주의" },
+  { categoryId:"65e08a475a29d582c152f71e", categoryName:"SUPREME", origin: "베트남", detail: "드라이 클리닝 권장" }, 
+  { categoryId:"65e08a555a29d582c152f720", categoryName:"BARE", origin: "인도", detail: "세탁기 사용 불가능" }
 ];
+
 
   const data = await response.json();
   const list = [];
@@ -62,6 +63,8 @@ async function test() {//크롤링 코드, 추후 삭제
       categoryName: category[index].categoryName,
       createdAt: new Date(),
       updatedAt: new Date(),
+      detail: category[index].detail,
+      origin: category[index].origin,
     });
   });
 

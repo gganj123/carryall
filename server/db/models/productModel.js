@@ -24,6 +24,8 @@ class ProductModel {
     option,
     stock,
     categoryName,
+    detail,
+    origin,
   }) {
     const opt = { returnOriginal: false };
     const updatedProduct = await Product.findOneAndUpdate(
@@ -35,6 +37,8 @@ class ProductModel {
         option,
         stock,
         categoryName,
+        detail,
+        origin,
       },
       opt
     );
