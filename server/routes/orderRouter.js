@@ -1,12 +1,8 @@
-const mongoose = require('mongoose');
 const { Router } = require("express");
-const { Order } = require("../db");
-const { body } = require("express-validator");
 
 const router = Router();
 
-// 주문 신버전 추가된 코드
-const orderController = require('../controller/orderController');
+const orderController = require('../controller/orderController.js');
 const bodyChecker = require("../middlewares/bodyChecker.js");
 
 router.get("/", orderController.getOrders); // 전체 주문 조회 

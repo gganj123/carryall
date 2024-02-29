@@ -9,7 +9,7 @@ const hashedPassword = require("../utils/hashPassword");
 const User = require("../db").User;
 const userController = require("../controller/userController");
 
-const userRouter = express.Router();
+const userRouter = express.Router(); //백에서는 router -> userRouter 변경했으나 아직 프론트는 코드가 그대로인 상태!
 
 // express-session
 userRouter.use(passport.initialize());

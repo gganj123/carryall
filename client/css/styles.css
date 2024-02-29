@@ -142,19 +142,10 @@ footer {
     background-color: #e0e0e0;
     background-size: contain;
     }
-.obitem{
-  border: 1px solid #eee;
-  border-radius: 0px;
-  height: 282px;
-  width: 244.44px;
-  padding: 5px;
-  margin-bottom: 10px;
-}
+
     .obimg{
-      width: 244.44px;
-  height: 190.65px;
-  object-fit: cover;
-  
+      width:200px;
+      height: 200px;
     }
 .content_wrap{
   width: 49%;
