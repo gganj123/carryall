@@ -1,5 +1,5 @@
 function fetchData() {
-  axios.get('http://localhost:5001/categories')
+  axios.get('/api/categories')
     .then(response => {
       const productList = response.data;
       let htmlString = '';
@@ -77,7 +77,7 @@ function cateRegifunc() {
     const dataToSend = {   
         "name" : value
 };
-    axios.post('http://localhost:5001/categories', dataToSend)
+    axios.post('/api/categories', dataToSend)
 .then(response => {
     // 서버로부터 받은 응답을 처리합니다.
     console.log(response.data); // 서버에서 전송된 데이터 출력
@@ -106,7 +106,7 @@ deleteButton.addEventListener('click', function () {
           const categoryId = checkbox.id;
 
           // 카테고리를 삭제하는 요청을 보냅니다.
-          axios.delete(`http://localhost:5001/categories/${categoryId}`)
+          axios.delete(`/api/categories/${categoryId}`)
           .then(response => {
               // 카테고리 삭제에 성공한 경우
               
@@ -151,7 +151,7 @@ function changeFunc(event) {
             "name": inputValue
         }
           // 카테고리를 수정하는 요청을 보냄
-          axios.put(`http://localhost:5001/categories/${checkboxId}`, putdata)
+          axios.put(`/api/categories/${checkboxId}`, putdata)
               .then(response => {
                   // 카테고리 수정에 성공한 경우
                  alert(`카테고리명이 수정되었습니다. '${inputValue}'`);
