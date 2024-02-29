@@ -3,43 +3,23 @@ const itemsContainer = document.querySelector(".itemContainer");
 sumItemPrice = 0; // 초기화
 discountPrice = 0; // 초기화
 totalItemPrice = 0; // 초기화
+
 // 주문 완료 페이지 이동
-// btnPayment.addEventListener('click', async () => {
-//   alert('상품 구매가 완료되었습니다.');
-//   location.href = "/orderComplete";
-//   const date = new Date(1651401879369);
-//   axios.post('http://localhost:5001/api/orders', {
-//     "date": date,
-//     "status": "주문완료",
-//     "productInformation": [
-//       // {
-//       //   "name": "1234 번째 상품",
-//       //   "price": 10000,
-//       //   "image": "상품 이미지 URL",
-//       //   "option": "옵션 정보",
-//       //   "brand": "상품 브랜드", 
-//       //   "quantity": 2
-//       // },
+btnPayment.addEventListener('click', async () => {
+  alert('상품 구매가 완료되었습니다.');
+  location.href = "/orderComplete";
+  const date = new Date(1651401879369);
+  axios.post('http://localhost:5001/api/orders', orderInfo)
+  .then(response => {
+    console.log(response);
+  })
+  .catch(error => {
+    console.log(error);
+  });
 
-//     ],
-//     // "recipientInformation": {
-//     //   "recipientName": "받는 분 이름",
-//     //   "recipientZipCode": "우편번호",
-//     //   "recipientAddress": "주소",
-//     //   "recipientAddressDetail": "상세주소",
-//     //   "recipientTel": "전화번호"
-//     // }
-//   })
-//   .then(response => {
-//     console.log(response);
-//   })
-//   .catch(error => {
-//     console.log(error);
-//   });
+  localStorage.removeItem("orderItems");
 
-//   localStorage.removeItem("orderItems");
-
-// })
+})
 
 displayUserOrderInfo();
 updateTotalPrice();
@@ -121,23 +101,37 @@ function updateTotalPrice() {
   orderTotalItemPrice.innerText = totalItemPrice.toLocaleString() + "원";
 }
 
-// user 정보를 받아오는 함수
-// function getUserInfo() {
-//   axios.get('http://localhost:5001/api/users/userInfo')
-//   .then(response => {
+/**user 정보를 받아오는 함수 */
+function getUserInfo() {
+  axios.get('http://localhost:5001/api/mypage')
+  .then(response => {
     
 
-//     const userName = response._id;
-//     const userZipCode = response.zipCode;
-//     const userAddress = response.address;
-//     const userAddressDetail = response.addressDetail;
-//     const userPhone = response.tel;
+    const userName = response._id;
+    const userZipCode = response.zipCode;
+    const userAddress = response.address;
+    const userAddressDetail = response.addressDetail;
+    const userPhone = response.tel;
 
-//     document.getElementById("userName").innerText = userName
-//     document.getElementById("userPhone").innerText = userPhone
+    document.getElementById("userName").innerText = userName
+    document.getElementById("userPhone").innerText = userPhone
 
-//     document.getElementById("address01").innerText = userZipCode
-//     document.getElementById("address02").innerText = userAddress
-//     document.getElementById("address03").innerText = userAddressDetail
-//   })
-//}
+    document.getElementById("address01").innerText = userZipCode
+    document.getElementById("address02").innerText = userAddress
+    document.getElementById("address03").innerText = userAddressDetail
+  })
+  
+}
+
+const orderInfo = {
+  "date": new Date(),
+  "status": "결제완료",
+  "productInformation": p_list,
+  "recipientInformation": {
+    "recipientName": userName,
+    "recipientZipCode": userZipCode,
+    "recipientAddress": userAddress,
+    "recipientAddressDetail": userAddressDetail,
+    "recipientTel": userPhone
+  }
+};
