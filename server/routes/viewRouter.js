@@ -1,12 +1,13 @@
 const express = require('express');
 const viewRouter = express.Router();
 const path = require('path');
+const adminVerification = require("../middlewares/adminVerification");
 
 viewRouter.use('/',serveStatic('main'));
 viewRouter.use('/product',serveStatic('product'));
-viewRouter.use('/admin',serveStatic('admin'));
+viewRouter.use('/admin', adminVerification, serveStatic('admin'));
 // 지은 {
-viewRouter.use('/admin/order',serveStatic('adminOrder'));
+viewRouter.use('/admin/order', serveStatic('adminOrder'));
 // }
 viewRouter.use('/cart',serveStatic('cart'));
 viewRouter.use('/cartTest',serveStatic('cartTest'));
@@ -22,6 +23,8 @@ viewRouter.use('/order',serveStatic('order'));
 viewRouter.use('/practice',serveStatic('practice'));
 viewRouter.use('/test',serveStatic('test'));
 viewRouter.use('/mypage',serveStatic('mypage'));
+viewRouter.use('/loginWithdraw',serveStatic('loginWithdraw'));
+viewRouter.use('/loginChange',serveStatic('loginChange'));
 
 
 

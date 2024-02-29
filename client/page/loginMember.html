@@ -79,8 +79,8 @@
         .then(response => {
           // 로그인 성공 시
           console.log('성공! ', response.data);
-          localStorage.setItem('loggedInUser', JSON.stringify(response.data));
-          window.location.href = '/main'; // 로그인 성공 시 main로 이동
+          // localStorage.setItem('loggedInUser', JSON.stringify(response.data));
+          window.location.href = '/'; // 로그인 성공 시 main로 이동
         })
         .catch(error => {
           // 로그인 실패 시

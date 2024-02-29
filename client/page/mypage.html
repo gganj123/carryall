@@ -1,151 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>carryAll_마이페이지</title>
-  <link rel="stylesheet" href="../css/styles.css">
-  <link rel="stylesheet" href="../css/admin.css">
-  <link rel="stylesheet" href="../css/mypage.css">
-</head>
-<body>
-  <!-- 헤더 가져오기 -->
-  <header id="header"></header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>carryAll_마이페이지</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/admin.css" />
+    <link rel="stylesheet" href="../css/mypage.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <!-- 헤더 가져오기 -->
+    <header id="header"></header>
 
-  <!-- 컨텐츠 -->
-  <main class="mypage">
-    <section class="container">
-      <h2>마이페이지</h2>
-      <div class="profileWrap">
-        <div class="profileImg"><img src="" alt=""></div>
-        <div class="profileTxt">
-          <h4 class="nameId"><span class="localName">엘리스</span> 님</h4>
-          <p class="nameDesc"><span class="localName">엘리스</span> 님의 아이디는 <span class="localIdName">silver</span>입니다.<br></p>
-        </div>
-        <div class="btnWrap"><a class="profileBtn" href="javascript:void(0);">회원정보 변경</a></div>
-      </div>
-
-      <div class="contWrap">
-        <!-- 왼쪽 nav menu -->
-        <ul class="navCont">
-          <li class="navTit n1">쇼핑정보</li>
-          <li><a href="javascript:void(0);">주문/배송조회</a></li>
-          <li><a href="javascript:void(0);">취소/반품/교환내역</a></li>
-          <!-- <li><a href="javascript:void(0);">장바구니</a></li> -->
-          <li class="navTit">혜택관리</li>
-          <li><a class="develop" href="javascript:void(0);">쿠폰(준비중)</a></li>
-          <li class="navTit">고객센터</li>
-          <li><a class="develop" href="javascript:void(0);">1:1 문의(준비중)</a></li>
-          <li class="navTit">회원정보</li>
-          <li><a href="/loginChange">회원정보변경</a></li>
-          <li><a href="/loginWithdraw">회원탈퇴</a></li>
-          <li><a class="logout" href="/main">로그아웃</a></li>
-          <li><a class="develop" href="javascript:void(0);">배송지관리(준비중)</a></li>
-        </ul>
-
-        <!-- 오른쪽 해당 컨텐츠 -->
-        <div class="mainCont">
-          <div class="infoCont">
-            <h3>배송 조회</h3>
-            <ul class="shipBox">
-              <li>
-                <h6>0</h6>
-                <p>결제완료</p>
-              </li>
-              <li>
-                <h6>0</h6>
-                <p>상품준비중</p>
-              </li>
-              <li>
-                <h6>0</h6>
-                <p>배송중</p>
-              </li>
-              <li>
-                <h6>1</h6>
-                <p>배송완료</p>
-              </li>
-            </ul>
-            <ul class="shippedBox">
-              <li>취소 내역 : <span>0</span></li>
-              <li>교환 내역 : <span>0</span></li>
-              <li>반품 내역 : <span>0</span></li>
-            </ul>
+    <!-- 컨텐츠 -->
+    <main class="mypage">
+      <section class="container">
+        <h2>마이페이지</h2>
+        <div class="profileWrap">
+          <div class="profileImg"><img src="" alt="" /></div>
+          <div class="profileTxt">
+            <h4 class="nameId"><span class="localName">엘리스</span> 님</h4>
+            <p class="nameDesc">
+              <span class="localName">엘리스</span> 님의 아이디는
+              <span class="localIdName">silver</span>입니다.<br />
+            </p>
           </div>
-  
-          <div class="infoCont">
-            <h3>주문 조회</h3>
+          <div class="btnWrap">
+            <a class="profileBtn" href="javascript:void(0);">회원정보 변경</a>
+          </div>
+        </div>
+
+        <div class="contWrap">
+          <!-- 왼쪽 nav menu -->
+          <ul class="navCont">
+            <li class="navTit n1">쇼핑정보</li>
+            <li><a href="javascript:void(0);">주문/배송조회</a></li>
+            <li><a href="javascript:void(0);">취소/반품/교환내역</a></li>
+            <!-- <li><a href="javascript:void(0);">장바구니</a></li> -->
+            <li class="navTit">혜택관리</li>
+            <li>
+              <a class="develop" href="javascript:void(0);">쿠폰(준비중)</a>
+            </li>
+            <li class="navTit">고객센터</li>
+            <li>
+              <a class="develop" href="javascript:void(0);">1:1 문의(준비중)</a>
+            </li>
+            <li class="navTit">회원정보</li>
+            <li><a href="/loginChange">회원정보변경</a></li>
+            <li><a href="/loginWithdraw">회원탈퇴</a></li>
+            <li><a class="logout" href="/main">로그아웃</a></li>
+            <li>
+              <a class="develop" href="javascript:void(0);"
+                >배송지관리(준비중)</a
+              >
+            </li>
+          </ul>
+
+          <!-- 오른쪽 해당 컨텐츠 -->
+          <div class="mainCont">
+            <div class="infoCont">
+              <h3>배송 조회</h3>
+              <ul class="shipBox">
+                <li>
+                  <h6>0</h6>
+                  <p>결제완료</p>
+                </li>
+                <li>
+                  <h6>0</h6>
+                  <p>상품준비중</p>
+                </li>
+                <li>
+                  <h6>0</h6>
+                  <p>배송중</p>
+                </li>
+                <li>
+                  <h6>1</h6>
+                  <p>배송완료</p>
+                </li>
+              </ul>
+              <ul class="shippedBox">
+                <li>취소 내역 : <span>0</span></li>
+                <li>교환 내역 : <span>0</span></li>
+                <li>반품 내역 : <span>0</span></li>
+              </ul>
+            </div>
+
+            <div class="infoCont">
+              <h3>주문 조회</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 푸터 가져오기 -->
+    <footer id="footer"></footer>
+
+    <!-- 탑버튼 가져오기 -->
+    <div class="top">top</div>
+
+    <script src="../js/top.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="../js/footer.js"></script>
+    <!-- <script src="../js/admin.js"></script> -->
+    <script>
+      function userMypage() {
+        axios
+          .get("/api/mypage")
+          .then((response) => {
+            const userData = response.data;
+
+            if(userData) {
+              const localName = document.querySelectorAll('.localName');
+              localName.forEach(name => {
+                name.innerHTML = userData.name;
+              })
+            }
             
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-  
-  <!-- 푸터 가져오기 -->
-  <footer id="footer"></footer>
-
-  <!-- 탑버튼 가져오기 -->
-  <div class="top">top</div>
-
-  <script src="../js/top.js"></script>
-  <script src="../js/header.js"></script>
-  <script src="../js/footer.js"></script>
-  <script src="../js/admin.js"></script>
-  <script>
-
-    // 1. localStorage 의 user 정보 반영하기
-    document.addEventListener("DOMContentLoaded", function() {
-      const loggedInUser = localStorage.getItem("loggedInUser");
-      if (loggedInUser) {
-        const user = JSON.parse(loggedInUser);
-        const localNameElement = document.querySelectorAll(".localName");
-        const localIdNameElement = document.querySelector(".localIdName");
-        localNameElement.forEach(function(element) {
-          if (user.name) {
-            element.textContent = user.name;
-          }
-        });
-        if (user.username) {
-          localIdNameElement.textContent = user.username;
-        }
+          })
+          .catch((error) => {
+            console.error('로그인 여부 확인 중 오류 발생:', error);
+            window.location.href = "/";
+          });
       }
 
+      userMypage();
 
-      // 2. 로그아웃 - localStorage 의 user 정보 삭제 후 메인 이동
-      const logoutLink = document.querySelector("a.logout");
-
-      if (loggedInUser) {
-        const user = JSON.parse(loggedInUser);
-        const localNameElement = document.querySelectorAll(".localName");
-        const localIdNameElement = document.querySelector(".localIdName");
-
-        localNameElement.forEach(function(element) {
-          if (user.name) {
-            element.textContent = user.name;
-          }
-        });
-
-        if (user.username) {
-          localIdNameElement.textContent = user.username;
-        }
-
-        logoutLink.addEventListener("click", function(event) {
-          event.preventDefault();
-          localStorage.removeItem("loggedInUser");
-          window.location.href = "/main";
-        });
-      }
-
-    });
-
-    // 3. 고도화 기능 closing alert
-    const developLinks = document.querySelectorAll(".develop");
-    developLinks.forEach(function(link) {
-      link.addEventListener("click", function(event) {
-        event.preventDefault();
-        alert("해당 기능은 준비중입니다.");
-      });
-    });
-  </script>
-</body>
+      // // 3. 고도화 기능 closing alert
+      // const developLinks = document.querySelectorAll(".develop");
+      // developLinks.forEach(function(link) {
+      //   link.addEventListener("click", function(event) {
+      //     event.preventDefault();
+      //     alert("해당 기능은 준비중입니다.");
+      //   });
+      // });
+    </script>
+  </body>
 </html>

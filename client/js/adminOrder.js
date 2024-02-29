@@ -15,7 +15,17 @@ function fetchData() {
             </div>
 
             <div class="name"><span>${order.recipientInformation.recipientName}</span></div>
-            <div class="status"><input type="text" class ="cate font_17" value="${order.status}"></div>
+            <div class="status">
+              <select name="orderStatus">
+                <option value="결제완료">결제완료</option>
+                <option value="상품준비">상품준비</option>
+                <option value="배송중">배송중</option>
+                <option value="배송완료">배송완료</option>
+                <option value="취소">취소</option>
+                <option value="교환">교환</option>
+                <option value="반품">반품</option>
+              </select>
+            </div>
             <div class="infoCont" style="width:100%; padding-top: 0;">
               <h3> </h3>
             </div>

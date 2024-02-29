@@ -55,7 +55,6 @@ class UserService {
   async editUser(username, update) {
     const {
       password,
-      name,
       email,
       tel,
       zipCode,
@@ -67,11 +66,9 @@ class UserService {
 
     const hashPassword = hashedPassword(password);
 
-    const foundUser = await this.userModel.update(
-      { username },
+    const foundUser = await this.userModel.update(username,
       {
         password: hashPassword,
-        name,
         email,
         tel,
         zipCode,
@@ -110,7 +107,7 @@ class UserService {
   }
 
   // 마이페이지
-  async mypage(username) {
+  async confirmUser(username) {
     const user = await userModel.findByUser(username, null);
     return user;
   }

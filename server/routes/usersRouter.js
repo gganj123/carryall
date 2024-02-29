@@ -8,6 +8,8 @@ const { body } = require("express-validator");
 const hashedPassword = require("../utils/hashPassword");
 const User = require("../db").User;
 const userController = require("../controller/userController");
+const adminVerification = require("../middlewares/adminVerification");
+
 
 const userRouter = express.Router(); //백에서는 router -> userRouter 변경했으나 아직 프론트는 코드가 그대로인 상태!
 
@@ -73,10 +75,16 @@ userRouter.put("/user", userController.updateUser);
 // 회원 탈퇴
 userRouter.delete("/withdrawal", userController.deleteUser);
 // 회원정보
-userRouter.get('/mypage', userController.mypage);
+userRouter.get('/mypage', userController.confirmUser);
+// 회원정보수정 페이지
+userRouter.get('/userEdit', userController.confirmUser);
 // 비밀번호 초기화
 userRouter.post("/reset-password", userController.resetPassword);
 // 회원 비밀번호 확인
 userRouter.post("/confirm-password", userController.confirmPassword);
+// 주문페이지 이동
+userRouter.post("/order", userController.confirmUser);
+// 주문페이지 이동
+userRouter.get("/admin", adminVerification, userController.confirmUser);
 
 module.exports = userRouter;

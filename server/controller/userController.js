@@ -93,8 +93,8 @@ class UserController {
   async updateUser(req, res) {
     try {
       const {
+        username,
         password,
-        name,
         email,
         tel,
         zipCode,
@@ -104,9 +104,9 @@ class UserController {
         emailSubscription,
       } = req.body;
 
-      await userService.editUser(req.session.username, {
+      await userService.editUser({
+        username,
         password,
-        name,
         email,
         tel,
         zipCode,
@@ -144,9 +144,9 @@ class UserController {
   }
 
   // 마이페이지
-  async mypage(req, res) {
+  async confirmUser(req, res) {
     try {
-      const user = await userService.mypage(req.session.username);
+      const user = await userService.confirmUser(req.session.username);
       if (user) {
         res.json(user);
       } else {
