@@ -74,6 +74,15 @@ class UserModel {
     const user = await User.find({});
     return user;
   }
+  
+  // 비밀번호 확인
+  async confirmPassword(username, password) {
+    const user = await User.findOne({ username });
+    if(user.password == password) {
+      return user;
+    }
+  }
+
 }
 
 const userModel = new UserModel();

@@ -5,6 +5,9 @@ const path = require('path');
 viewRouter.use('/',serveStatic('main'));
 viewRouter.use('/product',serveStatic('product'));
 viewRouter.use('/admin',serveStatic('admin'));
+// 지은 {
+viewRouter.use('/admin/order',serveStatic('adminOrder'));
+// }
 viewRouter.use('/cart',serveStatic('cart'));
 viewRouter.use('/cartTest',serveStatic('cartTest'));
 viewRouter.use('/detail',serveStatic('detail'))

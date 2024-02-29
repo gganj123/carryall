@@ -103,7 +103,7 @@ class UserController {
         telSubscription,
         emailSubscription,
       } = req.body;
-      console.log(req.body);
+
       await userService.editUser(req.session.username, {
         password,
         name,
@@ -157,13 +157,19 @@ class UserController {
     }
   }
 
-  // 관리자 회원
-  async adminUsers(req, res) {
+  // 비밀번호 확인
+  async confirmPassword(req, res) {
     try {
-      const users = await userService.adminUsers();
-
-      res.json(users);
-
+      const { password } = req.body;
+      const user = await userService.confirmPassword(
+        req.session.username,
+        password
+      );
+      if (user) {
+        res.json(user);
+      } else {
+        res.status(404).json({ message: "비밀번호가 틀렸습니다" });
+      }
     } catch (err) {
       res.status(500).json({ err: err.message });
     }

@@ -115,12 +115,13 @@ class UserService {
     return user;
   }
 
-  // 관리자 회원관리
-  async adminUsers() {
-    const users = await userModel.findAllUsers();
-    return users;
-  }
+  // 비밀번호확인
+  async confirmPassword(username, password) {
+    const hashPassword = hashedPassword(password);
+    const user = await userModel.confirmPassword(username, hashPassword);
 
+    return user;
+  }
 }
 
 const userService = new UserService(userModel);

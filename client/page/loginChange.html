@@ -224,7 +224,7 @@
       const address03 = document.getElementById('address03').value;
 
       // 수정된 데이터를 서버에 전송합니다.
-      axios.put('http://localhost:5001/user', {
+      axios.put('/user', {
         "username": username,
         "password": password,
         "email": email,
