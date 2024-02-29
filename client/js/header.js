@@ -11,13 +11,15 @@ document.addEventListener("DOMContentLoaded", function() {
         <button class="headmenu login " ><a href="./loginMember.html">로그인</button>
         <button class="headmenu logout none" ><a href="./loginMember.html">로그아웃</button>
         <button class="headmenu mypage"><a href="./mypage.html">마이페이지</button>
+        <button class="headmenu admin none"><a href="./admin.html">관리자 페이지</button>
         <button class="headmenu"><a href="./join.html">회원가입</button>
     </div>`;
-    // 1. 로그인 여부 localStorage로 작성
+  // 1. 로그인 여부 localStorage로 작성
   const loggedInUser = localStorage.getItem('loggedInUser');
   const loginButton = document.querySelector('.headmenu.login');
   const logoutButton = document.querySelector('.headmenu.logout');
   const mypageButton = document.querySelector('.headmenu.mypage');
+  const adminButton = document.querySelector('.headmenu.admin');
 
   console.log('loggedInUser:', loggedInUser);
 
@@ -26,6 +28,12 @@ document.addEventListener("DOMContentLoaded", function() {
     if (userData.message === "로그인 성공") {
       loginButton.classList.add('none');
       logoutButton.classList.remove('none');
+
+      // Check if the logged in user is an admin
+      if (userData.username === "adminCarryAll") {
+        mypageButton.classList.add('none');
+        adminButton.classList.remove('none');
+      }
     }
   } else {
     loginButton.classList.remove('none');
@@ -38,6 +46,10 @@ document.addEventListener("DOMContentLoaded", function() {
     localStorage.removeItem('loggedInUser');
     loginButton.classList.remove('none');
     logoutButton.classList.add('none');
+
+    // Make sure mypage button is visible after logout
+    mypageButton.classList.remove('none');
+    adminButton.classList.add('none');
   });
 
   // 3. 마이페이지 클릭 시 처리
@@ -48,4 +60,3 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
-
