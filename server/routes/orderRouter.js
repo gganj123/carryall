@@ -10,5 +10,6 @@ router.get("/:_id", orderController.getOrder); //하나의 주문 조회
 router.post("/", orderController.addOrder); // 주문 추가
 router.put("/:_id", bodyChecker, orderController.editOrder); // 주문 수정
 router.delete("/:_id", orderController.removeOrder); // 주문 삭제
+router.put("/changeStatus", orderController.editOrderStatus) //관리자용 API 주문 상태만 수정
 
 module.exports = router;

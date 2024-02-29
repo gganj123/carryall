@@ -81,6 +81,23 @@ class OrderController {
       next(error);
     }
   }
+
+  //관리자용 API 주문 상태만 수정
+  async editOrderStatus(req, res, next) {
+    try {
+      // 요청에서 주문 ID와 업데이트된 상태 가져오기
+      const { orderId, updatedStatus } = req.body;
+  
+      // orderService를 사용하여 주문 상태를 수정하고 업데이트된 주문을 받아옴
+      const updatedOrder = await orderService.updateStatus(orderId, updatedStatus);
+  
+      // 업데이트된 주문을 클라이언트에 응답으로 전송
+      res.json(updatedOrder);
+    } catch (error) {
+      // 오류가 발생한 경우 다음 미들웨어로 전달
+      next(error);
+    }
+  }
 }
 
 const orderController = new OrderController();

@@ -20,9 +20,9 @@ function fetchData() {
             <div class="name"><span>${
               order.recipientInformation.recipientName
             }</span></div>
-            <div class="status"><input type="text" class ="cate font_17" value="${
-              order.status
-            }"></div>
+            <div class="statusBox"><input type="text" class ="cate font_17" id="${order._id} value="${
+              order.status //statusCode 만드는 박스
+            }" onkeypress="changeStatus(event, '${order._id}')"></div>
             <div class="infoCont" style="width:100%; padding-top: 0;">
               <h3> </h3>
             </div>
@@ -72,3 +72,23 @@ deleteButton.addEventListener("click", function () {
     }
   });
 });
+
+
+function changeStatus(event, orderId) {
+  // 엔터 키를 눌렀을 때만 함수 실행
+  if (event.key === 'Enter') {
+    // 변경된 상태 가져오기
+    const updatedStatus = event.target.value;
+
+    // 변경된 상태와 주문 ID를 사용하여 API에 요청 보내기
+    axios.put("/api/orders/changeStatus", { orderId, updatedStatus })
+      .then(response => {
+        console.log("주문 상태 변경 요청이 성공했습니다.");
+        console.log("응답 데이터:", response.data);
+        // 이후에 필요한 작업을 여기에 추가합니다.
+      })
+      .catch(error => {
+        console.error("주문 상태 변경 요청이 실패했습니다:", error);
+      });
+  }
+}

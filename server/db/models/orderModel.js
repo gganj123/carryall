@@ -58,6 +58,23 @@ class OrderModel {
     }
   }
 
+  //관리자용 API 주문 상태만 수정
+  async updateStatus(_id, updatedStatus) {
+    try {
+      // 업데이트할 속성만 포함된 객체 생성
+      const orderInfo = { status: updatedStatus };
+  
+      // findOneAndUpdate 메서드에 새로운 orderInfo 객체 전달
+      const order = await Order.findOneAndUpdate({ _id }, orderInfo, {
+        new: true,
+      });
+      return order;
+    } catch (err) {
+      const error = new Error("배송 상태 수정 중 실패했습니다");
+      error.statusCode = 400;
+      throw error;
+    }
+  }
 }
 
 const orderModel = new OrderModel();

@@ -32,7 +32,11 @@ class OrderService {
     await orderModel.delete(orderId);
   }
 
-
+  //관리자용 API 주문 상태만 수정
+  async editOrderStatus() {
+    const updateOrderStatus = await orderModel.updateStatus(_id, updatedStatus);
+    return updateOrderStatus;
+  }
 }
 
 const orderService = new OrderService(orderModel);
