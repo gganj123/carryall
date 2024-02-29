@@ -39,17 +39,49 @@
 
   <section class="container">
     <form id="loginForm">
-      <h2 class="joinTit">Welcome!</h2>
-      <p class="subTit"><span>"엘리스"</span> 님, 가입을 축하드려요.<br>엘리스 랩의 다양한 혜택을 받아보세요!</p>
+      <h2 style="margin-bottom: 20px;" class="joinTit">Welcome!</h2>
+      <p class="subTit">"<span class="localName">테스트</span>" 님, 가입을 축하드려요.<br>carryAll 의 다양한 혜택을 받아보세요!</p>
       <div class="joinFinishedImg">
         <img src="../img/join_finished.png" alt="carryAll">
       </div>
       <div class="btnWrap">
-        <button class="snsJoin">홈으로</button>
-        <button class="snsJoin joinLogin">로그인</button>
+        <button type="button" class="snsJoin home">홈으로</button>
+        <button type="button" class="snsJoin joinLogin">로그인</button>
       </div>
       
     </form>
   </section>
+
+  <script>
+    // 1. 홈으로 버튼 클릭 시 이동
+    const homeButton = document.querySelector('.snsJoin.home');
+    homeButton.addEventListener('click', function() {
+      window.location.href = './main.html'; // 메인 이동
+    });
+
+    // 2. 로그인 버튼 클릭 시 이동
+    const loginButton = document.querySelector('.snsJoin.joinLogin');
+    loginButton.addEventListener('click', function() {
+      window.location.href = './loginMember.html'; // 로그인 페이지 이동
+    });
+
+    // 3. localStorage 의 user 정보 반영하기
+    document.addEventListener("DOMContentLoaded", function() {
+      const loggedInUser = localStorage.getItem("loggedInUser");
+      if (loggedInUser) {
+        const user = JSON.parse(loggedInUser);
+        const localNameElement = document.querySelectorAll(".localName");
+        const localIdNameElement = document.querySelector(".localIdName");
+        localNameElement.forEach(function(element) {
+          if (user.name) {
+            element.textContent = user.name;
+          }
+        });
+        if (user.username) {
+          localIdNameElement.textContent = user.username;
+        }
+      }
+    });
+  </script>
 </body>
 </html>

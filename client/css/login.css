@@ -172,3 +172,14 @@ h2.fakeTit {
 .formGroup.pw {
   margin-top: 10px;
 }
+#chkPwdBtn {
+  width: 550px;
+  height: 78px;
+  font-size: 18px;
+}
+.reChkTxt {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 17px;
+  line-height: 1.6;
+}

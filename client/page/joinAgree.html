@@ -186,19 +186,13 @@
     // 6. 이전 - 다음 버튼
     const beforeButton = document.querySelector('.btnType01.before');
     beforeButton.addEventListener('click', function() {
-      history.back();
+      window.location.href = './join.html'; // 이전 페이지로 이동
     });
 
     const afterButton = document.querySelector('.btnType02.after');
     afterButton.addEventListener('click', function() {
-      // 약관 전체 동의 체크 여부 확인
-      if (allAgreeCheckbox.checked) {
-        // 모든 약관에 동의되었을 때 다음 페이지로 이동
-        window.location.href = './joinForm.html';
-      } 
-      // else {
-      //   document.getElementById('termsForm').submit(); // 폼 제출
-      // }
+      // 다음 페이지로 이동
+      window.location.href = './joinForm.html';
     });
 
     
