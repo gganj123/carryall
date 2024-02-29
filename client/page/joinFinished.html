@@ -44,32 +44,32 @@
     // 1. 홈으로 버튼 클릭 시 이동
     const homeButton = document.querySelector('.snsJoin.home');
     homeButton.addEventListener('click', function() {
-      window.location.href = './main'; // 메인 이동
+      window.location.href = '/main'; // 메인 이동
     });
 
     // 2. 로그인 버튼 클릭 시 이동
     const loginButton = document.querySelector('.snsJoin.joinLogin');
     loginButton.addEventListener('click', function() {
-      window.location.href = './loginMember'; // 로그인 페이지 이동
+      window.location.href = '/loginMember'; // 로그인 페이지 이동
     });
 
     // 3. localStorage 의 user 정보 반영하기
-    document.addEventListener("DOMContentLoaded", function() {
-      const loggedInUser = localStorage.getItem("loggedInUser");
-      if (loggedInUser) {
-        const user = JSON.parse(loggedInUser);
-        const localNameElement = document.querySelectorAll(".localName");
-        const localIdNameElement = document.querySelector(".localIdName");
-        localNameElement.forEach(function(element) {
-          if (user.name) {
-            element.textContent = user.name;
-          }
-        });
-        if (user.username) {
-          localIdNameElement.textContent = user.username;
-        }
-      }
-    });
+    // document.addEventListener("DOMContentLoaded", function() {
+    //   const loggedInUser = localStorage.getItem("loggedInUser");
+    //   if (loggedInUser) {
+    //     const user = JSON.parse(loggedInUser);
+    //     const localNameElement = document.querySelectorAll(".localName");
+    //     const localIdNameElement = document.querySelector(".localIdName");
+    //     localNameElement.forEach(function(element) {
+    //       if (user.name) {
+    //         element.textContent = user.name;
+    //       }
+    //     });
+    //     if (user.username) {
+    //       localIdNameElement.textContent = user.username;
+    //     }
+    //   }
+    // });
   </script>
 </body>
 </html>

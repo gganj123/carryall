@@ -15,13 +15,13 @@
 
   <!-- 컨텐츠 -->
   <section class="container joinFormWarp">
-    <form id="signupForm" action="#" method="post" class="inputForm">
+    <form id="signupForm" action="javascript:void(0);" method="post" class="inputForm">
       <fieldset>
         <legend class="formTit">회원가입</legend>
           <ul class="pathBox">
-            <li><a href="./join_agree.html">약관동의</a></li>
-            <li><a style="font-weight: 500;" href="#">정보입력</a></li>
-            <li><a href="#">가입완료</a></li>
+            <li><a href="/join_agree">약관동의</a></li>
+            <li><a style="font-weight: 500;" href="javascript:void(0);">정보입력</a></li>
+            <li><a href="javascript:void(0);">가입완료</a></li>
           </ul>
           <div class="box formBox">
             <ul class="joinBox">
@@ -98,7 +98,7 @@
               <label style="justify-content: flex-start;" for="address01" class="label">
                 <span style="white-space: nowrap;">* 주소</span>
                 <input type="text" name="address" id="address01" class="inputType01" style="width: 54%; margin-left: 13.4%; margin-right: 20px;">
-                <a class="addressBtn" href="#" onclick="findAddr()">우편번호 검색</a>
+                <a class="addressBtn" href="javascript:void(0);" onclick="findAddr()">우편번호 검색</a>
               </label>
               <div style="flex-direction: column; align-items: flex-end;" class="address_line address_line02 f_c label">
                   <label for="address02" class="label"></label>
@@ -230,7 +230,7 @@
 
 
       // 수집된 데이터를 서버에 전송합니다.
-      axios.post('http://localhost:5001/api/join', {
+      axios.post('/api/join', {
         "username": username,
         "password": password,
         "email": email,

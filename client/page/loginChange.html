@@ -15,13 +15,13 @@
 
   <!-- 컨텐츠 -->
   <section class="container joinFormWarp">
-    <form id="signupForm" action="#" method="post" class="inputForm">
+    <form id="signupForm" action="javascript:void(0);" method="post" class="inputForm">
       <fieldset>
         <legend class="formTit">회원정보 수정</legend>
           <!-- <ul class="pathBox">
-            <li><a href="./join_agree.html">약관동의</a></li>
-            <li><a style="font-weight: 500;" href="#">정보입력</a></li>
-            <li><a href="#">가입완료</a></li>
+            <li><a href="./join_agree">약관동의</a></li>
+            <li><a style="font-weight: 500;" href="javascript:void(0);">정보입력</a></li>
+            <li><a href="javascript:void(0);">가입완료</a></li>
           </ul> -->
           <div class="box formBox">
             <ul class="joinBox">
@@ -32,7 +32,7 @@
               <li>
                 <label for="idName" class="label">
                     <span>아이디</span>
-                    <input style="background-color: #fff;" type="text" class="inputType01" id="idName" required="" value="get예정(수정불가)" disabled>
+                    <input style="background-color: javascript:void(0);fff;" type="text" class="inputType01" id="idName" required="" value="get예정(수정불가)" disabled>
                 </label>
               </li>
               <!-- 2. 비밀번호 변경 -->
@@ -58,7 +58,7 @@
               <li>
                 <label for="name" class="label">
                   <span>이름</span>
-                  <input style="background-color: #fff;" type="text" class="inputType01" id="name" required="" value="엘리스(수정불가)" disabled>
+                  <input style="background-color: javascript:void(0);fff;" type="text" class="inputType01" id="name" required="" value="엘리스(수정불가)" disabled>
                 </label>
               </li>
 
@@ -98,7 +98,7 @@
               <label style="justify-content: flex-start;" for="address01" class="label">
                 <span>주소</span>
                 <input style="margin-left: 15.1%; margin-right: 20px;" type="text" name="address" id="address01" class="inputType01" style="width: 54%; margin-left: 13.4%; margin-right: 20px;">
-                <a class="addressBtn" href="#" onclick="findAddr()">우편번호 검색</a>
+                <a class="addressBtn" href="javascript:void(0);" onclick="findAddr()">우편번호 검색</a>
               </label>
               <div style="flex-direction: column; align-items: flex-end;" class="address_line address_line02 f_c label">
                   <label for="address02" class="label"></label>
@@ -131,50 +131,10 @@
 
   <!-- 우편번호 API -->
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   <script>
-    // 1. 이메일 주소 유효성 추가
-    var emailInput = document.getElementById("email");
-    var errorText = document.querySelector(".errTxt.n2");
 
-    // 이메일 입력란의 내용이 변경될 때마다 이벤트를 수신하도록 설정
-    emailInput.addEventListener("input", function() {
-      if (!emailInput.value.includes("@")) {
-        errorText.classList.add("active");
-      } else {
-        errorText.classList.remove("active");
-      }
-    });
-
-
-    // 2. 비밀번호 일치 여부를 확인하는 함수
-    function checkPasswordMatch() {
-      const password = document.getElementById('password').value;
-      const passwordReconfirm = document.getElementById('passwordReconfirm').value;
-      const errorText = document.querySelector('.errTxt.n1');
-
-      if (password !== passwordReconfirm) {
-        errorText.classList.add('active');
-      } else {
-        errorText.classList.remove('active');
-      }
-    }
-
-    // 3. 전화번호 관련 유효성 추가
-    function formatPhoneNumber() {
-      const phoneNumberInput = document.getElementById('phoneNum');
-      let phoneNumber = phoneNumberInput.value.replace(/[^\d]/g, ''); // 숫자 이외의 문자 모두 제거
-
-      if (phoneNumber.length >= 4 && phoneNumber.length <= 7) {
-        phoneNumber = phoneNumber.replace(/(\d{3})(\d{1,4})/, '$1-$2');
-      } else if (phoneNumber.length >= 8) {
-        phoneNumber = phoneNumber.replace(/(\d{3})(\d{4})(\d{1,4})/, '$1-$2-$3');
-      }
-      phoneNumberInput.value = phoneNumber;
-    }
-    document.getElementById('phoneNum').addEventListener('input', formatPhoneNumber); 
-
-
-    //4. 우편번호 검색
+    // 우편번호 api
     function findAddr() {
       new daum.Postcode({
         oncomplete: function(data) {
@@ -187,71 +147,73 @@
       }).open();
     }
 
+    document.addEventListener('DOMContentLoaded', function () {
+      // 1. 서버로부터 사용자 정보를 가져와서 각 input 요소에 채워넣는 함수
+      function fetchUserData() {
+        const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
-    //5. api 입력
-    function submitForm() {
-      // HTML 폼 요소에 입력된 값을 수집합니다.
-      // 아이디 : idName
-      // 비밀번호 : password
-      // 이름 : name
-      // 이메일 : email
-      // 휴대폰번호 : phoneNum
-      // 주소 : `${address01}${address02}${address03}`
-
-      const username = document.getElementById('idName').value;
-      const password = document.getElementById('password').value;
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const phoneNum = document.getElementById('phoneNum').value;
-      const address01 = document.getElementById('address01').value;
-      const address02 = document.getElementById('address02').value;
-      const address03 = document.getElementById('address03').value;
-
-      // 수정된 데이터를 서버에 전송합니다.
-      axios.put('http://localhost:5001/api/user', {
-        "username": username,
-        "password": password,
-        "email": email,
-        "tel": phoneNum,
-        "name": name,
-        "address": `${address01} ${address02} ${address03}`
-      })
-      .then(response => {
-        // 서버로부터의 응답을 처리합니다.
-        console.log('회원 정보 수정이 완료되었습니다.', response.data);
-        // 여기서 다음 단계로 넘어가거나 원하는 작업을 수행할 수 있습니다.
-      })
-      .catch(error => {
-        // 오류가 발생했을 때 처리합니다.
-        console.error('회원 정보 수정 오류:', error);
-      });
-    }
-
-
-    // 예외. 이전 페이지로 돌아가는 코드를 추가합니다.
-    function goToPreviousPage() {
-      window.history.back()
-    }
-    
-    // 6. localStorage 이름, 아이디값 가져오기
-    document.addEventListener("DOMContentLoaded", function() {
-      const loggedInUser = localStorage.getItem("loggedInUser");
-      
-      if (loggedInUser) {
-        const user = JSON.parse(loggedInUser);
-        const idNameInput = document.getElementById("name");
-        const nameInput = document.getElementById("idName");
-
-        if (user.name) {
-          idNameInput.value = user.name;
-        }
-        if (user.username) {
-          nameInput.value = user.username;
-        }
+        axios.get('/api/mypage', {
+          params: {
+            username: loggedInUser.username
+          }
+        })
+        .then(response => {
+          const userData = response.data;
+          // 사용자 정보를 각 input 요소에 채워넣습니다.
+          document.getElementById('idName').value = userData.username;
+          document.getElementById('name').value = userData.name;
+          document.getElementById('email').value = userData.email;
+          document.getElementById('phoneNum').value = userData.tel;
+          document.getElementById('address01').value = userData.address.split(' ')[0];
+          document.getElementById('address02').value = userData.address.split(' ')[1];
+          document.getElementById('address03').value = userData.address.split(' ')[2];
+        })
+        .catch(error => {
+          console.error('데이터를 가져오는 데 실패했습니다:', error);
+        });
       }
+
+      // 페이지 로드 시 사용자 정보를 가져와서 각 input 요소에 채워넣습니다.
+      fetchUserData();
+
+      const signupForm = document.getElementById('signupForm');
+
+      signupForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // 폼의 기본 동작(페이지 이동)을 막습니다.
+
+        // 2. 수정된 정보를 서버에 전송하여 업데이트하는 함수
+        function updateUserInfo() {
+          const username = document.getElementById('idName').value;
+          const password = document.getElementById('password').value; // 변경된 비밀번호
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const phoneNum = document.getElementById('phoneNum').value;
+          const address01 = document.getElementById('address01').value;
+          const address02 = document.getElementById('address02').value;
+          const address03 = document.getElementById('address03').value;
+
+          axios.put('/api/user', {
+            "username": username,
+            "password": password, // 변경된 비밀번호를 서버에 전송합니다.
+            "email": email,
+            "tel": phoneNum,
+            "name": name,
+            "address": `${address01} ${address02} ${address03}`
+          })
+          .then(response => {
+            // 서버로부터의 응답을 처리합니다.
+            console.log('회원 정보 수정이 완료되었습니다.', response.data);
+            // 여기서 다음 단계로 넘어가거나 원하는 작업을 수행할 수 있습니다.
+          })
+          .catch(error => {
+            // 오류가 발생했을 때 처리합니다.
+            console.error('회원 정보 수정 오류:', error);
+          });
+        }
+
+        updateUserInfo();
+      });
     });
-
   </script>
-
 </body>
 </html>

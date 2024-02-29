@@ -20,7 +20,7 @@ function displayUserCartInfo1() {
   let p_list = [];
 
   cartItems.forEach(item => { 
-    axios.get('http://localhost:5001/api/products/' + item._id)
+    axios.get('/api/products/' + item._id)
     .then(response => {
       // 성공했을 때
       data = response.data["data"];
