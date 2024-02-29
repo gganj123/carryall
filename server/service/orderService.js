@@ -17,9 +17,13 @@ class OrderService {
 
   async addOrder(orderInfo) {
     // 주문 생성 및 저장
+    const date = new Date();
+    const status = "결제 완료";
+    orderInfo.date = date;
+    orderInfo.status = status;
     const newOrder = await orderModel.create(orderInfo);
     return newOrder;
-  }
+}
 
   // id로 주문 수정 -> 이 부분 확인안해봄
   async editOrder(orderId, orderInfo) {
@@ -30,12 +34,6 @@ class OrderService {
   // id로 주문 취소
   async removeOrder(orderId) {
     await orderModel.delete(orderId);
-  }
-
-  //관리자용 API 주문 상태만 수정
-  async editOrderStatus() {
-    const updateOrderStatus = await orderModel.updateStatus(_id, updatedStatus);
-    return updateOrderStatus;
   }
 }
 
