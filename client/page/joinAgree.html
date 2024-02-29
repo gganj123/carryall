@@ -73,7 +73,7 @@
             <p class="certiDesc">이미 회원이신가요? <a href="./loginMember">로그인하기</a></p>
             <div class="certiBtn">
               <button type="button" class="btnType01 before">이전</button>
-              <button type="submit" class="btnType02 after">다음</button>
+              <button type="button" class="btnType02 after">다음</button>
             </div>
           </div>
       </fieldset>                        
@@ -172,13 +172,12 @@
     // 6. 이전 - 다음 버튼
     const beforeButton = document.querySelector('.btnType01.before');
     beforeButton.addEventListener('click', function() {
-      window.location.href = './join';
+      history.back();
     });
 
     const afterButton = document.querySelector('.btnType02.after');
     afterButton.addEventListener('click', function() {
-      // 다음 페이지로 이동
-      window.location.href = './joinForm';
+      window.location.href = './joinForm.html';
     });
 
     
