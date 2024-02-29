@@ -11,23 +11,23 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 const dummyData = {
-  _id: "65e02f04d953c6503649da48",
+  _id: "65e090e404a0ae80eff295da",
   quantity: 99,
-  option: "black",
+  option: 0,
   isChecked: true
 };  
 
 const dummyData1 = {
-  _id: "65e02f04d953c6503649da49",
+  _id: "65e090e404a0ae80eff295db",
   quantity: 3,
-  option: "white",
+  option: 1,
   isChecked: true
 };  
 
 const dummyData2 = {
-  _id: "65e02f04d953c6503649da4a",
+  _id: "65e090e404a0ae80eff295dc",
   quantity: 1,
-  option: "brown",
+  option: 2,
   isChecked: true
 };  
 

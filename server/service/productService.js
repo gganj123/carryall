@@ -50,7 +50,7 @@ class ProductService {
     return product;
   }
 
-// 장바구니용 상품 id 조회(상품 금액, 이미지, 브랜드, 상품 이름 리턴)
+// 장바구니용 상품 id 조회(상품 금액, 이미지, 브랜드, 옵션, 상품 이름 리턴)
   async getProductInformation(_id) {
     const product = await Product.findByIdForCart(_id);
     if (!_id) throw Error("특정상품을 가져오기 위한 id가 없습니다.");
