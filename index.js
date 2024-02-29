@@ -46,9 +46,9 @@ async function test() {
 
   const data = await response.json();
   const list = [];
-  data.data.productList.content.map((item, index) => {
+  data.data.productList.content.map((item) => {
     list.push({
-      _id: index,
+      // id: index,
       name: item.itemName,
       categoryId: category[Math.floor(Math.random() * category.length)],
       price: item.customerPrice,
@@ -85,7 +85,7 @@ async function main() {
       // 컬렉션에 데이터 삽입
       await db.collection('products').insertMany(list);
       console.log('저장완료');
-  } catch (error) {
+  } catch (error) { 
       console.error("Error inserting documents:", error);
   }
 }
@@ -95,7 +95,7 @@ async function main() {
 //  main().catch(console.error);
 
 const indexRouter = require('./server/routes');
-const productsRouter = require("./server/routes/productrouter.js");
+const productsRouter = require("./server/routes/productRouter.js");
 const categoriesRouter = require("./server/routes/categoryRouter.js");
 const ordersRouter = require("./server/routes/orders.js");
 const usersRouter = require("./server/routes/usersRouter.js");
