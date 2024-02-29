@@ -25,7 +25,7 @@ const dummyData1 = {
 };  
 
 const dummyData2 = {
-  _id: "65e02f04d953c6503649da4a",
+  _id: "65e02f04d953c6503649da54",
   quantity: 1,
   option: "brown",
   isChecked: true

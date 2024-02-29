@@ -79,12 +79,15 @@ function fetchProducts() {
 
 
 bareButton.addEventListener('click', function() {
+  window.scrollTo({ top: 500, behavior: 'smooth' });
     fetchProductsByBrand('bare');
 });
 stussyButton.addEventListener('click', function() {
+  window.scrollTo({ top: 500, behavior: 'smooth' });
     fetchProductsByBrand('stussy');
 });
 supremeButton.addEventListener('click', function() {
+  window.scrollTo({ top: 500, behavior: 'smooth' });
     fetchProductsByBrand('supreme');
 });
 
@@ -120,12 +123,15 @@ const bButton = document.getElementById('bbutt');
 
 
 tButton.addEventListener('click', function() {
+  window.scrollTo({ top: 500, behavior: 'smooth' });
   fetchProductsByCate("65df755367457938cc02e40b");
 });
 cButton.addEventListener('click', function() {
+  window.scrollTo({ top: 500, behavior: 'smooth' });
   fetchProductsByCate("65df752e67457938cc02e405");
 });
 bButton.addEventListener('click', function() {
+  window.scrollTo({ top: 500, behavior: 'smooth' });
   fetchProductsByCate("65df753a67457938cc02e408");
 });
 window.onload = function() {

@@ -59,8 +59,9 @@
               <dd class="brand">셀린느</dd>
               <dt>옵션선택</dt>
               <dd>
-                <select name="selectbox" class="selectbox">
-                  <option value="1">흠</option>
+                <select name="selectbox" class="selectbox">.
+                  <option value="0"style="display: none;">color</option>
+                  <option value="1">black</option>
                   <option value="2">white</option>
                   <option value="3">brown</option>
                 </select>
@@ -132,8 +133,8 @@
       `;
       document.querySelector('.totalDetailOption dl select[name="selectbox"]').innerHTML = `
         <option value="1">${filteredProduct[0].option}</option>
-        <option value="2">아이보리</option>
-        <option value="3">브라운</option>
+        <option value="2">${filteredProduct[1].option}</option>
+        <option value="3">${filteredProduct[2].option}</option>
       `;
       
       console.log(res.data);
@@ -176,7 +177,8 @@
           totalPricePerItem: product.price
         };
         cartItems.push(newItem);
-
+        console.log(newItem+"new");
+        console.log(cartItems+"cart");
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
         // displayUserCartInfo();
       })
@@ -210,7 +212,7 @@ function addItemToOrder() {
         
         const newItem = {
           _id: newItemId,
-          option: product.option,
+          option: product[0].option,
           quantity: 1,
         };
         orderItems.push(newItem);

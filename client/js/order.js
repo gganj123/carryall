@@ -106,6 +106,18 @@ function getUserInfo() {
   axios.get('http://localhost:5001/api/mypage')
   .then(response => {
     
+    const orderInfo = {
+      "date": new Date(),
+      "status": "결제완료",
+      "productInformation": p_list,
+      "recipientInformation": {
+        "recipientName": userName,
+        "recipientZipCode": userZipCode,
+        "recipientAddress": userAddress,
+        "recipientAddressDetail": userAddressDetail,
+        "recipientTel": userPhone
+      }
+    }
 
     const userName = response._id;
     const userZipCode = response.zipCode;
@@ -122,16 +134,3 @@ function getUserInfo() {
   })
   
 }
-
-const orderInfo = {
-  "date": new Date(),
-  "status": "결제완료",
-  "productInformation": p_list,
-  "recipientInformation": {
-    "recipientName": userName,
-    "recipientZipCode": userZipCode,
-    "recipientAddress": userAddress,
-    "recipientAddressDetail": userAddressDetail,
-    "recipientTel": userPhone
-  }
-};
