@@ -85,6 +85,13 @@ li {
   justify-content: flex-end;
   padding: 10px;
 }
+.orderItem{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
 
 
 .itemContainer {
@@ -154,7 +161,7 @@ li {
 }
 
 .itemName,
-.itemBrand {
+.itemcategoryName {
   margin: 0;
   display: block;
   text-align: left;

@@ -43,31 +43,34 @@ function fetchProducts() {
       const productList = res.data;
       let htmlString = '';
 
-      // URL에서 브랜드 정보 가져오기
-      function getBrandFromURL() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('brand');
-      }
-      const filteredProducts = productList.filter(product => product.brand.toLowerCase() === getBrandFromURL().toLowerCase()); // 대소문자 구분 없이 필터링
+          // URL에서 브랜드 정보 가져오기
+          function getBrandFromURL() {
+              const urlParams = new URLSearchParams(window.location.search);
+              return urlParams.get('brand');
+          }
+          const filteredProducts = productList.filter(product => product.brand.toLowerCase() === getBrandFromURL().toLowerCase()); // 대소문자 구분 없이 필터링
+          console.log(filteredProducts);
 
       // 상품 목록을 랜덤하게 재배열
       const shuffledProducts = shuffleArray(filteredProducts);
 
-      shuffledProducts.slice(0, 4).forEach(product => {
-        htmlString += `<div class="item" style="height: 321px; width: 244.44px; margin-bottom:100px;"><a href="/practice?id=${product._id}">`
-        htmlString += `<img class="img" style="width: 100%; height: auto;  display: block;" id="${product._id}" src="${product.image}">`;
-        htmlString += `<h2 id="root"> ${product.brand}</h2>`;
-        htmlString += `<div p>${product.name}</div> `;
-        htmlString += `<p>${product.price.toLocaleString('ko-KR')}</p>`;
-        htmlString += `</div></a>`;
+          shuffledProducts.forEach((product,index) => {
+            if(index<=3){
+              htmlString += `<div class="item" style="height: 321px; width: 244.44px; margin-bottom:100px;"><a href="/practice?id=${product._id}">`
+              htmlString += `<img class="img" style="width: 100%; height: auto;  display: block;" id="${product._id}" src="${product.image}">`;
+              htmlString += `<h2 id="root"> ${product.brand}</h2>`;
+              htmlString += `<div p>${product.name}</div> `;
+              htmlString += `<p>${product.price.toLocaleString('ko-KR')}</p>`;
+              htmlString += `</div></a>`;
+            }
+          });
+          // 화면에 출력
+          console.log("ttt"+ htmlString);
+          document.getElementById('oblistsort2').innerHTML = htmlString;
+      })
+      .catch(error => {
+          console.error('Error fetching data:', error);
       });
-
-      // 화면에 출력
-      document.getElementById('oblistsort2').innerHTML = htmlString;
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
-    });
 }
 
 // 배열을 랜덤하게 섞는 함수

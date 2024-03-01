@@ -15,5 +15,3 @@ bareButton.addEventListener('click', function() {
     window.location.href = '/product?brand=bare';
 });
 
-
-

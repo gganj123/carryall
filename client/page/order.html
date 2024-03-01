@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/cart.css">
   <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-  <title>Document</title>
+  <title>order</title>
 </head>
 <body>
   <main>
     <h1>주문서 작성 / 결제</h1>
-    <form>
+    <div>
         <div class="cartBox">
           <div class="cartBoxHeader">
               <p class="cartBoxH1 header">상품정보</p>
@@ -48,55 +48,44 @@
       </div>
       <h3>주문 정보</h3><br>
       <li>
-        <label for="name" class="label">
+        
           <span>* 이름</span>
-          <input type="text" class="inputType01" id="userName" value="이름" readonly>
-        </label>
+          <input type="text" class="inputType01" id="userName" value="이름" >
+
       </li>
       <!-- 6. 휴대폰 번호 -->
       <li>
-        <label for="phoneNum" class="label">
           <span>* 휴대폰 번호</span>
-          <input type="text" class="inputType01" id="phoneNum" value="010-1234-5678" readonly>
-        </label>
+          <input type="text" class="inputType01" id="phoneNum" value="010-1234-5678" >
       </li>
       <!-- 7. 주소 -->
         <li>
-          <label for="address01" class="label">
+
             <span>* 주소</span>
-          </label>
+
           <div class="address_line address_line01 f_fs">
-            <input type="text" name="address" id="address01" class="inputType01" value="zipcode" readonly>
+            <input type="text" name="address" id="address01" class="inputType01" value="zipcode">
           </div>
           <div class="address_line address_line02 f_c label">
               <label for="address02" class="label"></label>
-              <input type="text" name="address" id="address02" class="inputType01" value="address" readonly>
+              <input type="text" name="address" id="address02" class="inputType01" value="address">
               <label for="address03" class="label"></label>
-              <input type="text" name="address" id="address03" class="inputType01" value="address detail" readonly>
+              <input type="text" name="address" id="address03" class="inputType01" value="address detail">
           </div>
 
         </li>
           <div>
-            <p>결제 수단</p>
-            <input type="radio" id="paymentChoice1" name="payment" value="" checked />
-            <label for="paymentChoice1">무통장 입금</label>
-      
-            <input type="radio" id="paymentChoice2" name="payment" value="card" />
-            <label for="paymentChoice2">신용카드</label>
-      
-            <input type="radio" id="paymentChoice3" name="payment" value="phone" />
-            <label for="paymentChoice3">휴대폰</label>
-
-            <input type="radio" id="paymentChoice4" name="payment" value="" />
-            <label for="paymentChoice4">계좌이체</label>
+            
           </div>
       <div class="orderBtnContainer">
-        <button class="btnPayment">상품 주문</button>
+        <button class="btnPayment" id="btnPayment">상품 주문</button>
       </div>
-    </form>
-
+    </ㅇ>
   </main>
   <script src="../js/order.js"></script>
 
+  <!-- 우편번호 API -->
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
+
 </html>

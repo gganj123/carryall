@@ -13,16 +13,17 @@ class OrderController {
 
   // 주문 추가
   async addOrder(req, res, next) {
-    const { date, status, productInformation, recipientInformation } = req.body;
-    if (
-      !date ||
-      !status ||
+    const { userId, productInformation, recipientInformation } = req.body;
+
+    
+if (
+      !userId ||
       !productInformation ||
       !productInformation[0].name ||
       !productInformation[0].price ||
       !productInformation[0].image ||
       !productInformation[0].option ||
-      !productInformation[0].brand ||
+      !productInformation[0].categoryName ||
       !productInformation[0].quantity ||
       !recipientInformation ||
       !recipientInformation.recipientName ||
@@ -40,7 +41,6 @@ class OrderController {
       next(error);
     }
   }
-
   // 주문 상세(주문 하나) 조회
   async getOrder(req, res, next) {
     const { _id } = req.params;

@@ -4,7 +4,7 @@ const { json, urlencoded } = require("express");
 const app = express();
 require("dotenv").config();
 const { PORT, MONGODB_PASSWORD } = process.env;
-const { connect } = require("mongoose");
+const { connect, ObjectId } = require("mongoose");
 
 connect(
   `mongodb+srv://carryall:${MONGODB_PASSWORD}@cluster0.lobzfqe.mongodb.net/`
@@ -40,20 +40,25 @@ async function test() {//크롤링 코드, 추후 삭제
     "mode": "cors",
     "credentials": "omit"
   });;
-  const brand = ["STUSSY", "SUPREME", "BARE"];
-  const category = ["토트백", "크로스백", "백팩"];
+
+  const category = [
+  {categoryId:"65e08a335a29d582c152f71c", categoryName:"STUSSY"},
+  { categoryId:"65e08a475a29d582c152f71e",categoryName:"SUPREME"}, 
+  { categoryId:"65e08a555a29d582c152f720",categoryName:"BARE"}
+];
 
   const data = await response.json();
   const list = [];
   data.data.productList.content.map((item) => {
+    const index = Math.floor(Math.random() * category.length)
     list.push({
       name: item.itemName,
-      categoryId: category[Math.floor(Math.random() * category.length)],
+      categoryId: category[index].categoryId,
       price: item.customerPrice,
       image: item.imageUrlMobile,
       option: ["black", "white", "brown"],
       stock: 50,
-      brand: brand[Math.floor(Math.random() * brand.length)],
+      categoryName: category[index].categoryName,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -88,14 +93,14 @@ async function main() {
   }
 }
 
-// main().catch(console.error); 
+// 메인 함수 호출
+//  main().catch(console.error);
 
 const productsRouter = require("./server/routes/productRouter.js");
 const categoriesRouter = require("./server/routes/categoryRouter.js");
 const ordersRouter = require("./server/routes/orderRouter.js");
 const usersRouter = require("./server/routes/usersRouter.js");
 const viewRouter = require("./server/routes/viewRouter.js");
-const adminRequired = require("./server/middlewares/adminRequired.js");
 const errorHandler = require("./server/middlewares/errorHandler.js");
 // const adminRouter = require("./server/routes/admins.js");
 

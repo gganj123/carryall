@@ -7,12 +7,12 @@ document.addEventListener("DOMContentLoaded", function() {
             <h1 class="logo slideDown" style="color:black"><a href="/">CARRYALL</h1></a>
         </button>
         <input class="headInput" type="text" placeholder="검색">
-        <button class="headmenu"><a href="./cart">장바구니</button>
-        <button class="headmenu login " ><a href="./loginMember">로그인</button>
-        <button class="headmenu logout none" ><a href="./loginMember">로그아웃</button>
-        <button class="headmenu mypage"><a href="./mypage">마이페이지</button>
-        <button class="headmenu admin none"><a href="./admin">관리자 페이지</button>
-        <button class="headmenu"><a href="./join">회원가입</button>
+        <button class="headmenu"><a href="/cart">장바구니</button>
+        <button class="headmenu login " ><a href="/loginMember">로그인</button>
+        <button class="headmenu logout none" ><a href="/loginMember">로그아웃</button>
+        <button class="headmenu mypage"><a href="/mypage">마이페이지</button>
+        <button class="headmenu admin none"><a href="/admin">관리자 페이지</button>
+        <button class="headmenu"><a href="/join">회원가입</button>
     </div>`;
   // 1. 로그인 여부 localStorage로 작성
   const loggedInUser = localStorage.getItem('loggedInUser');
