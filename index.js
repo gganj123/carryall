@@ -107,6 +107,10 @@ app.use("/api/products", productsRouter);
 app.use("/api/categories", categoriesRouter);
 app.use("/api/orders", ordersRouter);
 app.use("/api", usersRouter);
+
+app.get('/api', (req, res)=>{
+  
+})
 // app.use("/users", usersRouter); 삭제해도 되는지 지은님이 봐주세요!
 // app.use("/api/admins", adminRouter);
 app.use(errorHandler);

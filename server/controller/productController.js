@@ -3,20 +3,35 @@ const ProductService = require("../service/productService");
 class ProductController {
   async getProduct(req, res) {
     try {
-      const products = await ProductService.getProductList();
-      res.status(200).json(products);
+      var params = req.query;
+      var categoryName = params.categoryName;
+      var products = await ProductService.getProductList();
+      const sortOrder = params.sortOrder;
+
+      if(categoryName != null){
+        products = products.filter(p => p._doc.categoryName == categoryName)
+      }
+
+      const filterProducts = [...products];
+
+      if (sortOrder == 'asc') {
+        filterProducts.sort((a, b) => a.price - b.price);
+      } else if (sortOrder == 'desc') {
+        filterProducts.sort((a, b) => b.price - a.price);
+      }
+
+      res.status(200).json(filterProducts);
+  
     } catch (err) {
       res
         .status(err.statusCode || 500)
         .json({ success: false, message: err.message });
     }
   }
-
   async getProductById(req, res) {
     try {
-      const { _id } = req.params
+      const { _id } = req.params._id;
       const product = await ProductService.getProductById(_id);
-
       res.status(200).json({ success: true, data: product });
     } catch (err) {
       res.status(400).json({ success: false, message: err.message });
@@ -108,6 +123,73 @@ class ProductController {
       res.status(400).json({ success: false, message: err.message });
     }
   }
+
+  async getProductsSortedByPrice(req, res) {
+    try {
+      const { sortOrder } = req.query;
+
+      // 상품 목록을 불러옵니다.
+      let products = await ProductService.getProductList();
+
+      // sortOrder에 따라 가격을 정렬합니다.
+      if (sortOrder === "asc") {
+        products.sort((a, b) => a.price - b.price);
+      } else if (sortOrder === "desc") {
+        products.sort((a, b) => b.price - a.price);
+      }
+
+      res.status(200).json(products);
+    } catch (err) {
+      res
+        .status(err.statusCode || 500)
+        .json({ success: false, message: err.message });
+    }
+  }
+  async getFilteredProducts(req, res, categoryName, sortOrder) {
+    try {
+        // 상품 목록을 불러옵니다.
+        let products = await ProductService.getProductList();
+
+        // 카테고리에 따라 필터링합니다.
+        products = products.filter(p => p.categoryName === categoryName);
+
+        // 정렬 순서에 따라 정렬합니다.
+        if (sortOrder === "asc") {
+            products.sort((a, b) => a.price - b.price);
+        } else if (sortOrder === "desc") {
+            products.sort((a, b) => b.price - a.price);
+        }else 
+
+        res.status(200).json(products);
+    } catch (err) {
+        res.status(err.statusCode || 500).json({ success: false, message: err.message });
+    }
 }
+
+
+}
+
+
+
+
+// const Product = require("../models/Product");
+
+// async function getProductsByCategoryName(categoryName) {
+//     try {
+//         // 해당 카테고리 이름에 해당하는 제품을 조회하는 MongoDB 쿼리
+//         const products = await Product.find({ categoryName: categoryName });npm 
+//         return products;
+//     } catch (error) {
+//         throw new Error("Error fetching products by category name");
+//     }
+// }
+
+// module.exports = {
+//     getProductsByCategoryName
+// };
+
+
+
 const productController = new ProductController();
 module.exports = productController;
+
