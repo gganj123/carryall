@@ -8,12 +8,12 @@ class OrderService {
   }
 
   // _id에 해당하는 주문 내역 불러오기
-  async getOrder(_id) {
-    if (_id) {
-      const order = await orderModel.findOrder(_id);
-      return order;
-    }
-  }
+  // async getOrder(_id) {
+  //   if (_id) {
+  //     const order = await orderModel.findOrder(_id);
+  //     return order;
+  //   }
+  // }
 
   async addOrder(orderInfo) {
 

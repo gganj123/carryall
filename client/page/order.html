@@ -4,12 +4,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/cart.css">
+  <link rel="stylesheet" href="/css/cart.css">
+  <link rel="stylesheet" href="/css/styles.css">
+
   <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   <title>order</title>
 </head>
 <body>
   <main>
+    <header id="header"></header>
+
     <h1>주문서 작성 / 결제</h1>
     <div>
         <div class="cartBox">
@@ -82,7 +86,11 @@
       </div>
     </ㅇ>
   </main>
+  <footer id="footer"></footer>
+
   <script src="../js/order.js"></script>
+  <script src="/js/header.js"></script>
+  <script src="/js/footer.js"></script>
 
   <!-- 우편번호 API -->
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
