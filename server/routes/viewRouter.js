@@ -6,6 +6,7 @@ const adminVerification = require("../middlewares/adminVerification");
 viewRouter.use('/',serveStatic('main'));
 viewRouter.use('/product',serveStatic('product'));
 viewRouter.use('/admin', adminVerification, serveStatic('admin'));
+viewRouter.use('/adminTest', adminVerification, serveStatic('adminTest'));
 // 지은 {
 viewRouter.use('/admin/order', serveStatic('adminOrder'));
 // }

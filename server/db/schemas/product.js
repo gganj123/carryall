@@ -30,14 +30,14 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
     },
-    detail: {
-      type: String,
-      required: true,
-    },
     origin: {
       type: String,
-      required: true,
-    }
+      default:"원산지"
+    },
+    detail: {
+      type: String,
+      default:"디테일"
+    },
   },
   {
     timestamps: true,

@@ -6,12 +6,12 @@ require("dotenv").config();
 const { PORT, MONGODB_PASSWORD } = process.env;
 const { connect } = require("mongoose");
 // 지은 {
-  const passport = require("passport");
-  const LocalStrategy = require("passport-local");
-  const session = require("express-session");
-  const MongoStore = require("connect-mongo");
-  const User = require("./server/db").User;
-  const hashedPassword = require("./server/utils/hashPassword.js");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
+const User = require("./server/db").User;
+const hashedPassword = require("./server/utils/hashPassword.js");
 // }
 
 // mongoDB 연결
@@ -56,11 +56,26 @@ async function test() {
   );
 
   const category = [
-  { categoryId:"65e08a335a29d582c152f71c", categoryName:"STUSSY", origin: "중국", detail: "소재 특성 주의" },
-  { categoryId:"65e08a475a29d582c152f71e", categoryName:"SUPREME", origin: "베트남", detail: "드라이 클리닝 권장" }, 
-  { categoryId:"65e08a555a29d582c152f720", categoryName:"BARE", origin: "인도", detail: "세탁기 사용 불가능" }
-];
-//
+    {
+      _id: "65e16de577fdbfc4bd159a6d",
+      name: "STUSSY",
+      origin: "중국",
+      detail: "소재 특성 주의",
+    },
+    {
+      _id: "65e16e5a77fdbfc4bd159a74",
+      name: "SUPREME",
+      origin: "베트남",
+      detail: "드라이 클리닝 권장",
+    },
+    {
+      _id: "65e16e6f77fdbfc4bd159a77",
+      name: "BARE",
+      origin: "인도",
+      detail: "세탁기 사용 불가능",
+    },
+  ];
+  //
 
   const data = await response.json();
   const list = [];
@@ -68,16 +83,16 @@ async function test() {
     const index = Math.floor(Math.random() * category.length);
     list.push({
       name: item.itemName,
-      categoryId: category[index].categoryId,
+      categoryId: category[index]._id,
       price: item.customerPrice,
       image: item.imageUrlMobile,
       option: ["black", "white", "brown"],
       stock: 50,
-      categoryName: category[index].categoryName,
+      categoryName: category[index].name,
       createdAt: new Date(),
       updatedAt: new Date(),
-      detail: category[index].detail,
-      origin: category[index].origin,
+      categoryDetail: category[index].detail,
+      categoryOrigin: category[index].origin,
     });
   });
 
@@ -113,7 +128,7 @@ async function main() {
 }
 
 // 메인 함수 호출
-//  main().catch(console.error);
+// main().catch(console.error);
 
 // 지은 {
 // express-session

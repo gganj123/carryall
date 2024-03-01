@@ -1,5 +1,4 @@
 const CategoryService = require('../service/categoryService');
-const { validationResult } = require("express-validator");
 
 class CategoryController {
   async getCategory(req, res) {
@@ -14,13 +13,16 @@ class CategoryController {
   }
   async createCategory(req, res) {
     try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        res.status(422).json({ success: false, message: "형식 불일치" });
-        return;
-      }
-      const name = req.body;
-      const category = await CategoryService.createCategory(name);
+      const {
+        name,
+        detail,
+        origin,
+      } = req.body;
+      const category = await CategoryService.createCategory({
+        name,
+        detail,
+        origin,
+      });
       res.status(201).json({ success: true, data: category });
     } catch (err) {
       res.status(400).json({ success: false, message: err.message });
@@ -38,8 +40,16 @@ class CategoryController {
   async updateCategory(req, res) {
     try {
       const { _id } = req.params;
-      const { name } = req.body;
-      const updatedCategory = await CategoryService.updateCategory({_id}, {name});
+      const {
+        name,
+        detail,
+        origin,
+      } = req.body;
+      const updatedCategory = await CategoryService.updateCategory({_id}, {
+        name,
+        detail,
+        origin,
+      });
       res.status(200).json({ success: true, data: updatedCategory });
     } catch (err) {
       res.status(400).json({ success: false, message: err.message });

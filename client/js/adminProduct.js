@@ -40,7 +40,9 @@ function fetchData() {
       const productList = response.data;
       let htmlString = "";
       const res = await axios.get("/api/categories");
+
       const idArray = res.data.map((item) => item._id);
+
       productList.forEach((product, index) => {
         const parser = new DOMParser();
         const optionsDoc = parser.parseFromString(
@@ -48,21 +50,23 @@ function fetchData() {
           "text/html"
         );
         const options = optionsDoc.body.children;
-        options[idArray.indexOf(product.categoryId)].setAttribute(
-          "selected",
-          "selected"
-        );
-        const selectedOptionString = optionsDoc.body.innerHTML;
+        let selectedOptionString
+        if (options && options[idArray.indexOf(product.categoryId)]) { // options가 존재하고 유효한 경우에만 실행
+          options[idArray.indexOf(product.categoryId)].setAttribute("selected", "selected");
+          selectedOptionString = optionsDoc.body.innerHTML;
+      } else {
+          console.error("options is null or undefined, or category not found");
+      }
 
         htmlString += `
         <li>
-        <div class="adminList" style="height:100px;height:450px">
+        <div class="adminList" style="height:100px;height:500px">
           <div class="check">
             <input type="checkbox" name="checkbox1" id="${
               product._id
             }">&ensp;&nbsp;${index + 1}
           </div>
-          <div class="sort" style="display:block;height:450px">
+          <div class="sort" style="display:block;height:500px">
             <input type="text" class ="changeName cate font_17" value="${
               product.name
             }" placeholder="상품명 입력" required >
@@ -81,6 +85,8 @@ function fetchData() {
         <input type="text" class ="changeStock cate font_17" placeholder="재고 입력" required value="${
           product.stock
         }">
+        <br />
+
           </div>
           <div class="sortbutton">
             <button class="change col font_17">수정</button>
