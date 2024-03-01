@@ -32,41 +32,55 @@ async function getRandomImage() {
   });
   return list;
 }
-
-(() => {
-  const $ul = document.querySelector('ul');
-  let page = 1
-
-  let $li;
-  let count = $ul.children.length;
-  document.addEventListener('scroll', () => {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-      $li = $ul.appendChild(document.createElement('li'));
-      $li.textContent = ++count;
-    }
-  })
-})();
-fetchData()
+fetchData();
 function fetchData() {
   axios
     .get("/api/products")
-    .then((response) => {
+    .then(async (response) => {
       const productList = response.data;
       let htmlString = "";
-
+      const res = await axios.get("/api/categories");
+      const idArray = res.data.map((item) => item._id);
       productList.forEach((product, index) => {
+        const parser = new DOMParser();
+        const optionsDoc = parser.parseFromString(
+          retrievedOptionList,
+          "text/html"
+        );
+        const options = optionsDoc.body.children;
+        options[idArray.indexOf(product.categoryId)].setAttribute(
+          "selected",
+          "selected"
+        );
+        const selectedOptionString = optionsDoc.body.innerHTML;
+
         htmlString += `
         <li>
-        <div class="adminList" style="height:100px;">
+        <div class="adminList" style="height:100px;height:450px">
           <div class="check">
             <input type="checkbox" name="checkbox1" id="${
               product._id
             }">&ensp;&nbsp;${index + 1}
           </div>
-          <div class="sort" style="display:block">
-            <input type="text" class ="cate font_17" value="${product.name}">
-            <input />
-            <input />
+          <div class="sort" style="display:block;height:450px">
+            <input type="text" class ="changeName cate font_17" value="${
+              product.name
+            }" placeholder="상품명 입력" required >
+            <br />
+            <select class="changeSelect">${selectedOptionString}</select>
+            <br />
+            <br />
+            <input type="text" class ="changePrice cate font_17" placeholder="가격 입력" required value="${
+              product.price
+            }">
+            <br />
+        <img style="width:50%;"  src="${product.image}" alt="alt" />
+        <br />
+        <p class ="cate font_17">["black", "white", "brown"]</p>
+        <br />
+        <input type="text" class ="changeStock cate font_17" placeholder="재고 입력" required value="${
+          product.stock
+        }">
           </div>
           <div class="sortbutton">
             <button class="change col font_17">수정</button>
@@ -90,7 +104,6 @@ function fetchData() {
       console.error("Error fetching data:", error);
     });
 }
-
 
 let htmlString2 = "";
 
@@ -209,41 +222,51 @@ deleteButton.addEventListener("click", function () {
 });
 
 function changeFunc(event) {
-  // 클릭된 요소가 수정 버튼인지 확인
-  if (event.target.classList.contains("change")) {
-    // 수정 버튼이 클릭된 경우, 해당 수정 버튼의 부모 요소를 찾음
-    const adminListItem = event.target.closest(".adminList");
+  getRandomImage().then((img) => {
+    const selectImg = img[Math.floor(Math.random() * img.length)];
+    // 클릭된 요소가 수정 버튼인지 확인
+    if (event.target.classList.contains("change")) {
+      // 수정 버튼이 클릭된 경우, 해당 수정 버튼의 부모 요소를 찾음
+      const adminListItem = event.target.closest(".adminList");
 
-    // 부모 요소 내에서 체크박스를 찾음
-    const checkbox = adminListItem.querySelector('input[type="checkbox"]');
-    const input = adminListItem.querySelector('input[type="text"]');
+      // 부모 요소 내에서 체크박스를 찾음
+      const checkbox = adminListItem.querySelector('input[type="checkbox"]');
+      const name = document.querySelector(".changeName").value;
+      const categoryId = document.querySelector(".changeSelect").value;
+      const stock = document.querySelector(".changeStock").value;
+      const price = document.querySelector(".changePrice").value;
+      const categoryName = document.getElementById(categoryId).textContent;
 
-    // 체크박스가 있는지 확인 후 변수에 할당
-    if (checkbox && input) {
-      // 체크박스와 input 텍스트가 모두 있는 경우
-      const checkboxId = checkbox.id; // 체크박스의 id 가져오기
-      const inputValue = input.value; // input 텍스트의 값 가져오기
+      // 체크박스가 있는지 확인 후 변수에 할당
+      if (checkbox) {
+        // 체크박스와 input 텍스트가 모두 있는 경우
+        const checkboxId = checkbox.id; // 체크박스의 id 가져오기
 
-      // 원하는 작업 수행
-      console.log("체크박스 ID:", checkboxId);
-      console.log("입력된 텍스트:", inputValue);
-      const putdata = {
-        name: inputValue,
-      };
-      // 제품를 수정하는 요청을 보냄
-      axios
-        .put(`/api/products/${checkboxId}`, putdata)
-        .then((response) => {
-          // 제품 수정에 성공한 경우
-          alert(`제품명이 수정되었습니다. '${inputValue}'`);
-        })
-        .catch((error) => {
-          // 제품 수정에 실패한 경우
-          console.error(`제품 ID ${checkboxId} 수정 요청 실패:`, error);
-        });
-    } else {
-      // 체크박스가 없는 경우
-      console.error("해당 수정 버튼의 부모 요소에 체크박스가 없습니다.");
+        // 원하는 작업 수행
+        console.log("체크박스 ID:", checkboxId);
+        const putdata = {
+          name,
+          categoryId,
+          price,
+          image: selectImg,
+          option: ["black", "white", "brown"],
+          stock,
+          categoryName,
+        };
+        // 제품를 수정하는 요청을 보냄
+        axios
+          .put(`/api/products/${checkboxId}`, putdata)
+          .then((response) => {
+            setTimeout(function () {
+              location.reload();
+            }, 500);
+          })
+          .catch((error) => {
+            console.error(`제품 ID ${checkboxId} 수정 요청 실패:`, error);
+          });
+      } else {
+        console.error("해당 수정 버튼의 부모 요소에 체크박스가 없습니다.");
+      }
     }
-  }
+  });
 }
