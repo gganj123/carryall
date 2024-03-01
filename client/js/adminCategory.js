@@ -7,14 +7,14 @@ function fetchData() {
       productList.forEach((product, index) => {
         htmlString += `
         <div class="adminList" style="height:125px display:flex; flex-wrap:wrap;">
-          <div class="check" style="flex:1">
+          <div class="check" style="flex:5">
             <input type="checkbox" name="checkbox1"  id="${product._id}">&ensp;&nbsp;${index + 1}
           </div>
         
-            <input type="text" class ="changeName cate font_17"  style="flex:1;margin-right:40px;" placeholder="카테고리명 입력" required value="${product.name}" >
-            <input type="text" class ="changeOrigin cate font_17"  style="flex:1 ;margin-right:40px;" placeholder="원산지 입력" required value="${product.origin}" >
-            <input type="text" class ="changeDetail cate font_17"  style="flex:1 ;margin-right:40px;" placeholder="디테일 입력" required value="${product.detail}" >
-          <button class="change col font_17" style="flex:1.5" >수정</button>
+            <input type="text" class ="changeName cate font_17"  style="flex:2;margin-right:40px;" placeholder="카테고리명 입력" required value="${product.name}" >
+            <input type="text" class ="changeOrigin cate font_17"  style="flex:2 ;margin-right:40px;" placeholder="원산지 입력" required value="${product.origin}" >
+            <input type="text" class ="changeDetail cate font_17"  style="flex:2 ;margin-right:40px;" placeholder="디테일 입력" required value="${product.detail}" >
+          <button class="change col font_17" style="flex:2" >수정</button>
 
           <div class="infoCont" style="width:100%; padding-top: 0;">
             <h3> </h3>

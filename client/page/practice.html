@@ -252,6 +252,8 @@
               if (isExist) {
                 alert("이미 장바구니에 담긴 상품입니다.");
                 return;
+              }else{
+                alert("장바구니에 추가하였습니다.");
               }
 
               const selectedOption = myListener();
@@ -293,7 +295,7 @@
               
               let orderItems = JSON.parse(localStorage.getItem("orderItems")) || [];
               let isExist = orderItems.some((item) => item._id === newItemId);
-              if(orderItems.length > 0 ){
+              if(orderItems.length > 0){
                 if(confirm("이미 작성하고 있는 주문서가 있습니다. 추가하시겠습니까?") == true){
                   orderItems = orderItems;
                 }else{
