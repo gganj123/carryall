@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function toggleAllCheckboxes() {
+  const totalCheck = document.getElementById("totalCkBtn");
+  const itemsContainer = document.querySelector(".itemContainer");
   const isChecked = totalCheck.checked;
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const checkboxes = itemsContainer.querySelectorAll('.itemCkBtn');
@@ -36,7 +38,7 @@ function displayUserCartInfo() {
   itemsContainer.innerHTML = "";
 
   cartItems.forEach(item => {
-      axios.get('http://localhost:5001/api/products/cartInformation/' + item._id)
+      axios.get('/api/products/cartInformation/' + item._id)
           .then(response => {
               const data = response.data["data"];
               data.quantity = item.quantity;
@@ -46,6 +48,7 @@ function displayUserCartInfo() {
           })
           .catch(error => {
               console.error(error);
+              alert("상품 정보를 가져오는 도중 오류가 발생했습니다." + error);
           });
   });
 }
@@ -67,8 +70,8 @@ function drawItems(cartItems) {
   itemsContainer.innerHTML = "";
   
   cartItems.forEach(cartItem => {
-      const itemPrice = cartItem.price * cartItem.quantity;
-      const cartItemPrice = (cartItem.price).toLocaleString();
+      const itemPrice = (cartItem.price || 0) * cartItem.quantity;
+      const cartItemPrice = (cartItem.price || 0).toLocaleString();
       const formattedNum = itemPrice.toLocaleString();
       if (cartItem.isChecked) sumItemPrice += itemPrice;
 
@@ -80,7 +83,7 @@ function drawItems(cartItems) {
               <img src="${cartItem.image}" alt="${cartItem.name} 이미지" class="itemImg">
               <div class="item itemInfo">
                   <p class="itemName">${cartItem.name}</p>
-                  <p class="itemBrand">${cartItem.brand}</p>
+                  <p class="itemBrand">${cartItem.categoryName}</p>
               </div>
           </div>
           <p class="cartBoxH2 item">${cartItem.option}</p>
@@ -130,6 +133,19 @@ function drawItems(cartItems) {
       const areAllChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
       totalCheck.checked = areAllChecked;
   }
+  const quantityInputs = document.querySelectorAll('.quantity');
+  quantityInputs.forEach(input => {
+      input.addEventListener('change', function() {
+          const itemId = input.closest('.cartItem').querySelector('.itemCkBtn').value;
+          const newQuantity = parseInt(input.value);
+          if (newQuantity < 1 || newQuantity > 99 || isNaN(newQuantity)) {
+              alert('수량은 1부터 99 사이의 정수여야 합니다.');
+              input.value = cartItems.find(item => item._id === itemId).quantity; // 변경된 수량이 유효하지 않으면 이전 수량으로 되돌림
+          } else {
+              updateQuantity(itemId, newQuantity);
+          }
+      });
+  });
 }
 
 function deleteSelectedItems() {
@@ -154,10 +170,15 @@ function deleteAllItems() {
 function increaseQuantity(itemId) {
   let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const updatedCartItems = cartItems.map(item => {
-      if (item._id === itemId && item.quantity < 99) {
+      if (item._id === itemId ) {
+        if(item.quantity < 99){
           item.quantity++;
+        }else{
+          alert("최대 수량은 99개 입니다.");
+          item.quantity = 99;
       }
-      return item;
+    }
+    return item;
   });
   localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   drawItems(updatedCartItems);
@@ -166,8 +187,14 @@ function increaseQuantity(itemId) {
 function decreaseQuantity(itemId) {
   let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const updatedCartItems = cartItems.map(item => {
-      if (item._id === itemId && item.quantity > 1) {
+      if (item._id === itemId ) {
+        if(item.quantity > 1){
           item.quantity--;
+
+        }else {
+          alert("최소 수량은 1개 입니다.");
+          item.quantity = 1; 
+      }
       }
       return item;
   });
@@ -182,9 +209,8 @@ function addItemToOrder() {
   let orderItems = [];
   // isChecked 값이 true인 아이템만 필터링
   let checkedItems = cartItems.filter(item => item.isChecked);
-
-
-  // 중복된 아이템이 있는지 확인하고 없으면 orderItems에 추가
+  if(checkedItems.length){
+      // 중복된 아이템이 있는지 확인하고 없으면 orderItems에 추가
   checkedItems.forEach(checkedItem => {
     let isExist = orderItems.some(orderItem => orderItem._id === checkedItem._id);
     if (!isExist) {
@@ -199,8 +225,26 @@ function addItemToOrder() {
 
   let uncheckedItems = cartItems.filter(item => !item.isChecked);
   localStorage.setItem("cartItems", JSON.stringify(uncheckedItems));
+  if(cartItems = []) localStorage.removeItem("cartItems");
 
   // orderItems를 로컬 스토리지에 다시 저장
   localStorage.setItem("orderItems", JSON.stringify(orderItems));
   drawItems(uncheckedItems)
+  location.href = "/order";
+  }else{
+    alert("주문할 상품을 선택해주세요.");
+    return;
+  }
+}
+
+function updateQuantity(itemId, newQuantity) {
+  let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const updatedCartItems = cartItems.map(item => {
+      if (item._id === itemId) {
+          item.quantity = newQuantity;
+      }
+      return item;
+  });
+  localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+  drawItems(updatedCartItems);
 }

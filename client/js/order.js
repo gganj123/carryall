@@ -1,36 +1,67 @@
-const btnPayment = document.querySelector(".btnPayment")
-const itemsContainer = document.querySelector(".itemContainer");
-sumItemPrice = 0; // 초기화
-discountPrice = 0; // 초기화
-totalItemPrice = 0; // 초기화
+const inputName = document.getElementById("userName");
+const inputPhone = document.getElementById("phoneNum");
+const inputZipCode = document.getElementById("address01");
+const inputAddress = document.getElementById("address02");
+const inputAddressDetail = document.getElementById("address03");
 
-// 주문 완료 페이지 이동
-btnPayment.addEventListener('click', async () => {
-  const date = new Date(1651401879369);
-  axios.post('/api/orders', orderInfo)
-  .then(response => {
-    alert('상품 구매가 완료되었습니다.');
-    location.href = "/orderResult";
+// let phoneNumber = document.querySelector(".phone-number");
+// let address = document.querySelector(".address");
+// let orderNumber = document.querySelector(".order-number");
+// let productname = document.querySelector(".product-name");
+// let paymentamount = document.querySelector(".payment-amount");
+// let btnHome = document.getElementById("btnHome");
+// let btnOrder = document.getElementById("btnOrder");
+
+const btnPayment = document.getElementById("btnPayment");
+
+btnPayment.addEventListener("click", function() {
+  postToServer();
+});
+
+function postToServer() {
+  let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  let orderItems = JSON.parse(localStorage.getItem("orderItems"));
+
+
+  const recipientInformation = {
+    recipientName: inputName.value,
+    recipientZipCode: inputZipCode.value,
+    recipientAddress: inputAddress.value,
+    recipientAddressDetail: inputAddressDetail.value,
+    recipientTel: inputPhone.value
+  };
+  dataToSend = {
+    "userId": loggedInUser.username,
+    "productInformation": JSON.parse(localStorage.getItem("orderItems")),
+    "recipientInformation": recipientInformation
+  }
+  let orderResult = JSON.parse(localStorage.getItem("orderResult")) || [];
+  
+  
+  // console.log(JSON.stringify(dataToSend));
+  // alert(JSON.stringify(dataToSend));
+
+
+
+  axios.post('/api/orders', dataToSend)
+  .then(function (response) {
+    console.log("주문이 성공적으로 처리되었습니다:", response.data);
+    location.href='/orderResult';
+    orderResult.push(response.data);
+    localStorage.setItem("orderResult", JSON.stringify(orderResult)); 
+    localStorage.removeItem("orderItems");
+
   })
-  .catch(error => {
-    alert('상품 구매를 하지 실패하였습니다.');
-    console.log(error);
+  .catch(function (error) {
+    console.log("주문을 처리하는 도중 오류가 발생했습니다:" + error);
+    alert("주문을 처리하는 도중 오류가 발생했습니다.");
   });
+}
 
-  localStorage.removeItem("orderItems");
-
-})
-
-displayUserOrderInfo();
-updateTotalPrice();
-getUserInfo();
-
-function displayUserOrderInfo() {
-  const orderItems = JSON.parse(localStorage.getItem("orderItems")) || [];
-  const itemContainer = document.querySelector(".itemContainer");
-  itemsContainer.innerHTML = "";
+function getOrerItemsInfo() {
+  let orderItems = JSON.parse(localStorage.getItem("orderItems")) || [];
   p_list = [];
-
+  
   orderItems.forEach(item => { 
     axios.get('/api/products/cartInformation/' + item._id)
     .then(response => {
@@ -38,15 +69,14 @@ function displayUserOrderInfo() {
       data = response.data["data"]; // 상품 정보를 받아옴
       data.quantity = item.quantity; // 상품 정보에 수량 정보를 추가
       data.option = item.option; // 상품 정보에 옵션 정보를 추가
+      // data.image = null;
+      // data.name = null;
       p_list.push(data);
 
-      // 모든 상품 정보를 받아온 후에 drawItems 함수 호출
-      if (p_list.length === orderItems.length) {
-        p_list.sort((a, b) => orderItems.findIndex(item => item._id === a._id) - orderItems.findIndex(item => item._id === b._id));
-        
-        localStorage.setItem("orderItems", JSON.stringify(p_list)); // 수정된 위치
-        drawItems(p_list);
-      }
+      localStorage.setItem("orderItems", JSON.stringify(p_list));
+      drawItems(p_list);
+      
+
     })
     .catch(error => {
       // 에러가 났을 때
@@ -57,14 +87,16 @@ function displayUserOrderInfo() {
 
 function drawItems(orderItems) {
   const itemsContainer = document.querySelector(".itemContainer");
-  const totalPriceBox = document.querySelector(".totalPrice");
-  itemsContainer.innerHTML = ""; // 이전에 그려진 아이템을 지웁니다.
+  itemsContainer.innerHTML = "";
+  let sumItemPrice = 0;
+  let discountPrice = 0;
+  let sumTotalPrice = 0;
 
 
   orderItems.forEach(orderItem => {
     const itemPrice = orderItem.price * orderItem.quantity;
-    sumItemPrice = sumItemPrice + itemPrice;
-
+    sumItemPrice += itemPrice;
+   
     const newItem = document.createElement("div");
     newItem.classList.add("orderItem");
     newItem.innerHTML = `
@@ -72,7 +104,7 @@ function drawItems(orderItems) {
           <img src="${orderItem.image}" alt="${orderItem.name} 이미지" class="itemImg">
           <div class="item itemInfo">
               <p class="itemName">${orderItem.name}</p>
-              <p class="itemBrand">${orderItem.brand}</p>
+              <p class="itemBrand">${orderItem.categoryName}</p>
           </div>
       </div>
       <p class="cartBoxH2 item">${orderItem.option}</p>
@@ -85,39 +117,30 @@ function drawItems(orderItems) {
     itemsContainer.appendChild(newItem);
   });
 
-  // 총 가격 계산
-  totalItemPrice = sumItemPrice - discountPrice;
-
-  // 업데이트된 가격 정보로 UI 업데이트
-  updateTotalPrice();
-}
-
-function updateTotalPrice() {
   const orderSumItemPrice = document.getElementById("orderSumItemPrice");
   const orderDiscountPrice = document.getElementById("orderDiscountPrice");
-  const orderTotalItemPrice = document.getElementById("orderTotalPrice");
-
+  const orderTotalPrice = document.getElementById("orderTotalPrice");
   orderSumItemPrice.innerText = sumItemPrice.toLocaleString() + "원";
   orderDiscountPrice.innerText = discountPrice.toLocaleString() + "원";
-  orderTotalItemPrice.innerText = totalItemPrice.toLocaleString() + "원";
+  orderTotalPrice.innerText = (sumItemPrice - discountPrice).toLocaleString() + "원";
 }
 
-/**user 정보를 받아오는 함수 */
-function updateUserInfo(user) {
-  document.getElementById("userName").value = user.name;
-  document.getElementById("phoneNum").value = user.tel;
-  document.getElementById("address01").value = user.zipCode;
-  document.getElementById("address02").value = user.address;
-  document.getElementById("address03").value = user.addressDetail;
-}
-
-function getUserInfo() {
+function getUserInfo(){
   axios.get('/api/mypage')
     .then(response => {
       const userData = response.data;
-      updateUserInfo(userData);
+      // const { name, tel, zipCode, address, addressDetail } = userData;
+      
+      inputName.value = userData.name;
+      inputPhone.value = userData.tel;
+      inputZipCode.value = userData.zipCode;
+      inputAddress.value = userData.address;
+      inputAddressDetail.value = userData.addressDetail;
     })
     .catch(error => {
-      console.log('Error fetching user data:', error);
+      console.error("사용자 정보를 가져오는 도중 오류가 발생했습니다:", error);
     });
 }
+
+getOrerItemsInfo();
+getUserInfo();

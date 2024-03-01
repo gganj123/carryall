@@ -13,11 +13,11 @@ class OrderController {
 
   // 주문 추가
   async addOrder(req, res, next) {
-    const { productInformation, recipientInformation } = req.body;
+    const { userId, productInformation, recipientInformation } = req.body;
 
-    if (
-      !date ||
-      !status ||
+    
+if (
+      !userId ||
       !productInformation ||
       !productInformation[0].name ||
       !productInformation[0].price ||
@@ -41,7 +41,6 @@ class OrderController {
       next(error);
     }
   }
-
   // 주문 상세(주문 하나) 조회
   async getOrder(req, res, next) {
     const { _id } = req.params;
