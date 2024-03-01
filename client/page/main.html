@@ -6,9 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/product.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/animations.css">
+    <link rel="stylesheet" href="/css/product.css">
+
 </head>
 <body>
     <!-- 헤더 가져오기 -->
@@ -26,36 +27,21 @@
         <div class="slide_next_button slide_button">></div>
         <ul class="slide_pagination"></ul>
     </div>
-    <div class="container" style="display: flex; flex-wrap: wrap;">
+    <div class="container" style="display: flex; flex-wrap: wrap; background-color: #fafafa;">
         <div class ="side1" style="height: 3000px; width: 20%;background-color:#fafafa;">
             <div class="category_box" style="text-align: left;">
                     <div>
                         <button class="headmenu cate" style="height: 30%;width: 80%; margin-bottom: 10px;">
-                            <h1>Brand</h1>
+                            <h1>brand</h1>
                         </button>
-                        <button class="headmenu slideRight cate" style="height: 25%;width: 80%;">
-                            <h2>Supreme</h2>
+                        <button class="headmenu slideRight cate supreme"style="height: 25%;width: 80%;">
+                            <h2>supreme</h2>
                         </button>
-                        <button class="headmenu slideRight cate" style="height: 25%;width: 80%;">
-                            <h2>Stussy</h2>
+                        <button class="headmenu slideRight cate stussy" style="height: 25%;width: 80%;">
+                            <h2>stussy</h2>
                         </button>
-                        <button class="headmenu slideRight cate" id="barebutt" style="height: 25%;width: 90%;">
-                            <h2>Bare</h2>
-                        </button>
-                    </div>
-
-                    <div>
-                        <button class="headmenu cate" style="height: 30%;width: 80%; margin-top: 50px; margin-bottom: 10px;">
-                            <h1>Category</h1>
-                        </button>
-                        <button class="headmenu slideRight cate" style="height: 22%;width: 80%;">
-                            <h2>Tod's bag</h2>
-                        </button>
-                        <button class="headmenu slideRight cate" style="height: 22%;width: 80%;">
-                            <h2>cross bag</h2>
-                        </button>
-                        <button class="headmenu slideRight cate" style="height: 22%;width: 90%;">
-                            <h2>shoulder bag</h2>
+                        <button class="headmenu slideRight cate bare" style="height: 25%;width: 90%;">
+                            <h2>bare</h2>
                         </button>
                     </div>
                 </div>
@@ -66,43 +52,29 @@
                     <h2>Lastest listings</h2>
                     <h3 class="font_20" style="font-weight: 500;">최신상품</h3>
                 </div>
-                <select name="sort" id="sort" class="font_17" style="width:100px; margin: 30px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 0px; ">
-                          <option value="a">선택</option>
-                          <option value="a">최신상품</option>
-                          <option value="b">판매인기</option>
-                          <option value="c">낮은가격</option>
-                          <option value="d">높은가격</option>
-                </select>
             </div>
                         <div class="productList" id="objectList">
                             <div class="detail" id="detail"></div>
                             <div class="more-button-container">
-                                <button class="more-button">더 보기</button>
                               </div>
                         </div>
                     
                         <div style="height: 485px; width:100%;  display: flex; flex-wrap: wrap; margin-top: 50px; justify-content: center;">
-                            <div class="main_story1" style="height: 480px; width: 31%; margin-right: 10px;">
-                                <div style="margin-top: 300px; margin-left: 30px;">
-                                    <h1>01<br>Brand Story</h1>
-                                </div>
+                            <div class="main_story1" style="height: 460px; width: 32%; margin-right: 10px;">
+                                    <img class ="bs" src="../img/bs11.png" alt="">
                             </div>
-                            <div class="main_story2" style="height: 480px; width: 31%; margin-right: 10px;">
-                                <div style="margin-top: 300px; margin-left: 30px;">
-                                    <h1>02<br>Brand Story</h1>
-                                </div>
+                            <div class="main_story2" style="height: 460px; width: 32%; margin-right: 10px;">
+                                    <img class ="bs" src="../img/bs22.png" alt="">
                             </div>
-                            <div class="main_story3" style="height: 480px; width: 31%; margin-right: 10px;">
-                                <div style="margin-top: 300px; margin-left: 30px;">
-                                    <h1>03<br>Brand Story</h1>
-                                </div>
+                            <div class="main_story3" style="height: 460px; width: 32%; margin-right: 10px;">
+                                    <img class ="bs" src="../img/bs33.png" alt="">
                             </div>
                         </div>
                             <div class="main_story"
                                 style="height: 480px; width: 100%; background-color: #fafafa; display: flex; flex-wrap: wrap; margin-top: 50px;">
                                 <div style="height: 90px; width: 100%; margin-right: 10px;">
-                                        <h2>Deals of the Week</h2>
-                                        <h3 class="font_20" style="font-weight: 500;">득템 아이템</h3>
+                                        <h2>Best Value</h2>
+                                        <h3 class="font_20" style="font-weight: 500;">가성비 아이템</h3>
                                 </div>
                                     <!-- 데이터 가져오기 -->
                                     <div class="productList" id="oblistPriceSort">
@@ -126,16 +98,17 @@
         </div>
     </div>
  
+
+
+    <footer id="footer"></footer>
     <div class="top">top</div>
-    <!-- <footer id="footer"></footer> -->
 
         <script src="/js/slide.js"></script>
         <script src="/js/top.js"></script>
         <script src="/js/header.js"></script>
         <script src="/js/footer.js"></script>
         <script src="/js/objectList.js"></script>
-        <script src="/js/product.js"></script>
-        <script src="/js/oblistSort.js"></script>
+        <script src="/js/movepage.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 
@@ -145,5 +118,3 @@
 </body>
 
 </html>
-  <div style="height: 500px;"></div>
-  <header id="header"></header>
