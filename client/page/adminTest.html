@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+```<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>관리자 페이지</title>
-  <link rel="stylesheet" href="../css/admin.css">
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/styles.css">
   <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 
 </head>
@@ -18,18 +18,13 @@
       <div class="contWrap">
         <ul class="navCont">
           <li class="navTit n1" style="margin-bottom: 30px;">상품정보</li>
-          <li><a href="#">카테고리 관리</a></li>
-          <li><a href="#">상품 관리</a></li>
-          <div class="infoCont">
-            <h3> </h3></div>
-          <li class="navTit" style="margin-bottom: 30px;">회원정보</li>
-          <li><a href="#">회원정보 관리</a></li>
+          <li><a href="/admin">카테고리 관리</a></li>
+          <li><a href="/admin/product">상품 관리</a></li>
           <div class="infoCont">
             <h3> </h3></div>
           <li class="navTit" style="margin-bottom: 30px;">주문관리</li>
           
-          <li><a href="#">주문 내역</a></li>
-          <li><a href="#">배송 상태</a></li>
+          <li><a href="/admin/order">주문 내역</a></li>
           <div class="infoCont">
             <h3> </h3></div>
         </ul>
@@ -66,10 +61,11 @@
   </main>
 
   <footer id="footer"></footer>
+  <div class="top">top</div>
 
-
-  <script src="../js/header.js"></script>
-  <script src="../js/footer.js"></script>
-  <script src="../js/adminProduct.js"></script>
+  <script src="/js/header.js"></script>
+  <script src="/js/footer.js"></script>
+  <script src="/js/top.js"></script>
+  <script src="/js/adminProduct.js"></script>
 </body>
-</html>
+</html>```

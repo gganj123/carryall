@@ -16,7 +16,7 @@
   <!-- 컨텐츠 -->
   <section class="container">
     <!-- <form action="../../index" method="post" class="inputForm" id="termsForm"> -->
-    <form class="inputForm" id="termsForm">
+    <form action="/joinForm" class="inputForm" id="termsForm">
       <fieldset>
         <legend class="formTit">회원가입</legend>
           <ul class="pathBox">
@@ -74,9 +74,9 @@
               </li>
             </ul>
 
-            <h2 class="certiTit">본인 인증방법</h2>
+            <!-- <h2 class="certiTit">본인 인증방법</h2>
             <button type="button" id="phoneVerify">휴대폰 본인인증</button>
-            <p class="certiDesc">이미 회원이신가요? <a href="/loginMember">로그인하기</a></p>
+            <p class="certiDesc">이미 회원이신가요? <a href="/loginMember">로그인하기</a></p> -->
             <div class="certiBtn">
               <button type="button" class="btnType01 before">이전</button>
               <button type="button" class="btnType02 after">다음</button>
@@ -92,6 +92,7 @@
   <!-- 탑버튼 가져오기 -->
   <div class="top">top</div>
 
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   <script src="../js/top.js"></script>
   <script src="../js/header.js"></script>
   <script src="../js/footer.js"></script>
@@ -123,7 +124,6 @@
           allAgreeCheckbox.checked = false;
         } else {
           let allChecked = true;
-          
           subAgreeCheckboxes.forEach(subCheckbox => {
             if (!subCheckbox.checked) {
               allChecked = false;
@@ -131,18 +131,12 @@
           });
           if (allChecked) {
             allAgreeCheckbox.checked = true;
-            const chkBoxAll = document.querySelectorAll('.chkBox');
-            chkBoxAll.forEach(idx => {
-              idx.classList.add('active');
-            })
           }
         }
       });
     });
 
-
-
-    // 4. 화살표 클릭시 toggle
+    // 3. 화살표 클릭시 toggle
     const iconArrows = document.querySelectorAll('.iconArrow');
     iconArrows.forEach(iconArrow => {
       iconArrow.addEventListener('click', function() {
@@ -152,39 +146,34 @@
       });
     });
 
-    // 5. 휴대폰 본인인증 closing
-    document.addEventListener('DOMContentLoaded', function() {
-      const phoneVerifyButton = document.getElementById('phoneVerify');
-      phoneVerifyButton.addEventListener('click', function() {
-        alert('본인인증 서비스 준비중입니다.');
-      });
-    });
-
-    // 6. 이전 - 다음 버튼
+    // 4. 이전 - 다음 버튼
     const beforeButton = document.querySelector('.btnType01.before');
     beforeButton.addEventListener('click', function() {
       history.back();
     });
+
     const afterButton = document.querySelector('.btnType02.after');
     afterButton.addEventListener('click', function() {
-      window.location.href = '/joinForm';
-    });
-
-    // 7. 다음 버튼 클릭 시 필수 약관 동의 확인
-    afterButton.addEventListener('click', function(e) {
       const allChecked = document.getElementById('allAgreeCheckbox').checked;
       if (!allChecked) {
         alert('(필수) 사항에 모두 동의하셔야 합니다.');
-        // 페이지 이벤트 전파 중지
-        e.stopPropagation();
+      } else {
+        window.location.href = '/joinForm';
       }
     });
 
-    // 8. 헤더 미노출
-    document.addEventListener('DOMContentLoaded', function () {
-      document.querySelector('.headmenu.logout').classList.add('none');
-      document.querySelector('.headmenu.mypage').classList.add('none');
-    });
+    // 5. 다음 버튼 클릭 시 필수 약관 동의 확인
+    // afterButton.addEventListener('submit', function(e) {
+    //   const allChecked = document.getElementById('allAgreeCheckbox').checked;
+    //   if (!allChecked) {
+    //     alert('(필수) 사항에 모두 동의하셔야 합니다.');
+    //     // 페이지 이벤트 전파 중지
+    //     // e.stopPropagation();
+    //   } else {
+    //     window.location.href = '/joinForm';
+    //   }
+    // });
+
     
   </script>
 </body>

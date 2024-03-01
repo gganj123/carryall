@@ -91,24 +91,6 @@
                 </label>
                 <div class="errTxt n2">이메일 주소를 확인하세요.</div>
               </li>
-              <li style="margin: 0">
-                <label
-                  style="justify-content: flex-start; margin-left: 20%"
-                  for="smsConsent01"
-                  class="label"
-                >
-                  <input
-                    style="height: 35px; width: unset"
-                    type="checkbox"
-                    id="smsConsent01"
-                    required=""
-                    checked
-                  />
-                  <span style="display: block; margin-left: 15px">
-                    SMS 수신 동의</span
-                  >
-                </label>
-              </li>
               <!-- 6. 휴대폰 번호 -->
               <li>
                 <label for="phoneNum" class="label">
@@ -120,24 +102,6 @@
                     required=""
                     maxlength="13"
                   />
-                </label>
-              </li>
-              <li style="margin: 0">
-                <label
-                  style="justify-content: flex-start; margin-left: 20%"
-                  for="smsConsent02"
-                  class="label"
-                >
-                  <input 
-                    style="height: 35px; width: unset"
-                    type="checkbox"
-                    id="smsConsent02"
-                    required=""
-                    checked
-                  />
-                  <span style="display: block; margin-left: 15px">
-                    SMS 수신 동의</span
-                  >
                 </label>
               </li>
             </ul>
@@ -274,15 +238,15 @@
 
         axios
           .put("/api/user", {
-            "username": username,
-            "password": password,
-            "passwordReconfirm": passwordReconfirm,
-            "email": email,
-            "tel": phoneNum,
-            "name": name,
-            "zipCode": address01,
-            "address": address02,
-            "addressDetail": address03,
+            username: username,
+            password: password,
+            passwordReconfirm: passwordReconfirm,
+            email: email,
+            tel: phoneNum,
+            name: name,
+            zipCode: address01,
+            address: address02,
+            addressDetail: address03,
           })
           .then((response) => {
             // 서버로부터의 응답을 처리, 완료 페이지로 이동
@@ -294,6 +258,43 @@
           });
       }
 
+      // 2. 비밀번호 일치 여부를 확인하는 함수
+      function checkPassword() {
+        const password = document.getElementById("password").value;
+        const errorText0 = document.querySelector(".errTxt.n0"); // 비밀번호 길이 에러 메시지
+
+        // 비밀번호 길이가 10자리 미만인 경우
+        if (password.length < 10) {
+          errorText0.classList.add("active");
+        } else {
+          errorText0.classList.remove("active");
+        }
+      }
+      document
+        .getElementById("password")
+        .addEventListener("input", checkPassword);
+
+      // 3. 전화번호 관련 유효성 추가
+      function formatPhoneNumber() {
+        const phoneNumberInput = document.getElementById("phoneNum");
+        let phoneNumber = phoneNumberInput.value.replace(/[^\d]/g, ""); // 숫자 이외의 문자 모두 제거
+
+        // 포맷 적용
+        if (phoneNumber.length >= 4 && phoneNumber.length <= 7) {
+          phoneNumber = phoneNumber.replace(/(\d{3})(\d{1,4})/, "$1-$2");
+        } else if (phoneNumber.length >= 8) {
+          phoneNumber = phoneNumber.replace(
+            /(\d{3})(\d{4})(\d{1,4})/,
+            "$1-$2-$3"
+          );
+        }
+        phoneNumberInput.value = phoneNumber;
+      }
+
+      // 휴대폰 번호 입력란에 input 이벤트 추가하여 입력할 때마다 포맷 변경
+      document
+        .getElementById("phoneNum")
+        .addEventListener("input", formatPhoneNumber);
     </script>
   </body>
 </html>

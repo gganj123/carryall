@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/login.css">
 </head>
-<body>  
+<body>
   <!-- 헤더 가져오기 -->
   <header id="header"></header>
 
@@ -18,7 +18,7 @@
       <h2 style="margin-bottom: 20px;" class="joinTit">Welcome!</h2>
       <p class="subTit"><span style="font-weight: 500;" class="localName">신규회원</span> 님, 가입을 축하드려요.<br>carryAll 의 다양한 혜택을 받아보세요!</p>
       <div class="joinFinishedImg">
-        <img src="../img/join_finished.png" alt="carryAll">
+        <img src="../img/joinFinished.png" alt="carryAll">
       </div>
       <div class="btnWrap">
         <button type="button" class="snsJoin home">홈으로</button>
@@ -53,11 +53,29 @@
       window.location.href = '/loginMember'; // 로그인 페이지 이동
     });
 
-    // 4. 헤더 미노출
-    document.addEventListener('DOMContentLoaded', function () {
-      document.querySelector('.headmenu.logout').classList.add('none');
-      document.querySelector('.headmenu.mypage').classList.add('none');
-    });
+    // 3. user 정보 반영하기
+    // function userMypage() {
+    //     axios.get("/api/mypage")
+    //       .then((response) => {
+    //         const userData = response.data;
+    
+    //         if (userData) {
+    //           const localName = document.querySelectorAll('.localName');
+    //           localName.forEach(name => {
+    //             name.innerHTML = userData.name;
+    //           });
+    //         }
+    
+    //       })
+    //       .catch((error) => {
+    //         console.error('로그인 여부 확인 중 오류 발생:', error);
+    //         // alert("로그인이 필요합니다.");
+    //         window.location.href = "/";
+    //       });
+          
+    //   }
+    
+    //   userMypage();
 
   </script>
 </body>

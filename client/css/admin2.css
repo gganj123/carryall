@@ -78,11 +78,6 @@ h2 {
 }
 /* 기본 레이아웃 end */
 
-button {
-  width: 120px;
-  height: 30px;
-  background-color: #bdbdbd;
-}
 .col {
   background-color: #333333;
   color: #ffffff;
@@ -137,4 +132,10 @@ button {
 
 .listBox input[type="text"] {
   width: 100%;
+}
+
+
+.editBtn   {
+  width: 60px;
+  height:38px;
 }
