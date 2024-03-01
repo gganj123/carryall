@@ -53,30 +53,6 @@
       window.location.href = '/loginMember'; // 로그인 페이지 이동
     });
 
-    // 3. user 정보 반영하기
-    // function userMypage() {
-    //     axios.get("/api/mypage")
-    //       .then((response) => {
-    //         const userData = response.data;
-    
-    //         if (userData) {
-    //           const localName = document.querySelectorAll('.localName');
-    //           localName.forEach(name => {
-    //             name.innerHTML = userData.name;
-    //           });
-    //         }
-    
-    //       })
-    //       .catch((error) => {
-    //         console.error('로그인 여부 확인 중 오류 발생:', error);
-    //         // alert("로그인이 필요합니다.");
-    //         window.location.href = "/";
-    //       });
-          
-    //   }
-    
-    //   userMypage();
-
     // 4. 헤더 미노출
     document.addEventListener('DOMContentLoaded', function () {
       document.querySelector('.headmenu.logout').classList.add('none');

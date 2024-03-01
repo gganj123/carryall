@@ -102,6 +102,7 @@
                     type="checkbox"
                     id="smsConsent01"
                     required=""
+                    checked
                   />
                   <span style="display: block; margin-left: 15px">
                     SMS 수신 동의</span
@@ -127,11 +128,12 @@
                   for="smsConsent02"
                   class="label"
                 >
-                  <input
+                  <input 
                     style="height: 35px; width: unset"
                     type="checkbox"
                     id="smsConsent02"
                     required=""
+                    checked
                   />
                   <span style="display: block; margin-left: 15px">
                     SMS 수신 동의</span
@@ -187,7 +189,14 @@
               </div>
             </li>
             <div class="joinBtn btn_box">
-              <button style="width: 100%;" type="submit" class="btnType02 modifyForm" onclick="updateUserInfo()">회원정보 변경하기</button>
+              <button
+                style="width: 100%"
+                type="submit"
+                class="btnType02 modifyForm"
+                onclick="updateUserInfo()"
+              >
+                회원정보 변경하기
+              </button>
             </div>
           </div>
         </fieldset>
@@ -223,12 +232,13 @@
           },
         }).open();
       }
-    
+
       // 1. 서버로부터 사용자 정보를 가져와서 각 input 요소에 채워넣는 함수
       function fetchUserData() {
         const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-  
-        axios.get("/api/userEdit")
+
+        axios
+          .get("/api/userEdit")
           .then((response) => {
             const userData = response.data;
             // 사용자 정보를 각 input 요소에 채워넣습니다.
@@ -243,17 +253,18 @@
           .catch((error) => {
             console.error("데이터를 가져오는 데 실패했습니다:", error);
           });
-          
       }
       // 페이지 로드 시 사용자 정보를 가져와서 각 input 요소에 채워넣습니다.
       fetchUserData();
-  
+
       const signupForm = document.getElementById("signupForm");
-  
+
       // 2. submit 이벤트 리스너 밖으로 updateUserInfo 함수를 이동합니다.
       function updateUserInfo() {
         const username = document.getElementById("idName").value;
         const password = document.getElementById("password").value; // 변경된 비밀번호
+        const passwordReconfirm =
+          document.getElementById("passwordReconfirm").value; // 변경된 비밀번호
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
         const phoneNum = document.getElementById("phoneNum").value;
@@ -261,9 +272,11 @@
         const address02 = document.getElementById("address02").value;
         const address03 = document.getElementById("address03").value;
 
-        axios.put("/api/user", {
+        axios
+          .put("/api/user", {
             "username": username,
             "password": password,
+            "passwordReconfirm": passwordReconfirm,
             "email": email,
             "tel": phoneNum,
             "name": name,
@@ -271,25 +284,16 @@
             "address": address02,
             "addressDetail": address03,
           })
-  
-          .then(response => {
-            // 서버로부터의 응답을 처리합니다.
-            console.log("회원 정보 수정이 완료되었습니다.");
-            // 여기서 다음 단계로 넘어가거나 원하는 작업을 수행할 수 있습니다.
+          .then((response) => {
+            // 서버로부터의 응답을 처리, 완료 페이지로 이동
+            console.log("회원가입이 완료되었습니다.", response.data);
+            window.location.href = "/mypage";
           })
-          .catch(error => {
-            // 오류가 발생했을 때 처리합니다.
-            console.error("회원 정보 수정 오류:", error);
+          .catch((error) => {
+            console.error("회원가입 오류:", error.response.data);
           });
       }
-  
-      // submit 이벤트 리스너 내에서 updateUserInfo 함수가 호출되도록 수정합니다.
-      signupForm.addEventListener("submit", function (event) {
-        alert("회원정보가 변경되었습니다.")
-        window.location.href ='/mypage';
-        updateUserInfo();
-      });
+
     </script>
-    
   </body>
 </html>

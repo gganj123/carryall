@@ -50,7 +50,7 @@
                   <input type="password" class="inputType01" id="passwordReconfirm" required="" >
                 </label>
                 <div class="errTxt n1">
-                  입력된 비밀번호를 확인하세요.
+                  비밀번호가 일치하지 않습니다.
                 </div>
               </li>
     
@@ -108,7 +108,7 @@
               </div>
             </li>
             <div class="joinBtn btn_box">
-              <button type="button" class="btnType01" onclick="goToPreviousPage()"">이전</button>
+              <button type="button" class="btnType01" onclick="goToPreviousPage()">이전</button>
               <button type="button" class="btnType02" onclick="submitForm()">확인</button>
             </div>
           </div>
@@ -200,6 +200,7 @@
     function submitForm() {
       const username = document.getElementById('idName').value;
       const password = document.getElementById('password').value;
+      const passwordReconfirm = document.getElementById('passwordReconfirm').value;
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const phoneNum = document.getElementById('phoneNum').value;
@@ -211,6 +212,7 @@
       axios.post('/api/join', {
         "username": username,
         "password": password,
+        "passwordReconfirm": passwordReconfirm,
         "email": email,
         "tel": phoneNum,
         "name": name,
@@ -224,8 +226,7 @@
         window.location.href = '/joinFinished';
       })
       .catch(error => {
-        // 오류가 발생했을 때 콘솔알림.
-        console.error('회원가입 오류:', error);
+        console.error('회원가입 오류:', error.response.data);
       });
     }
     function goToPreviousPage() {

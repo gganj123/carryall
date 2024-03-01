@@ -1,91 +1,89 @@
 <!-- 은지 > 회원 탈퇴 -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>carryAll_회원 탈퇴</title>
-  <link rel="stylesheet" href="../css/styles.css">
-  <link rel="stylesheet" href="../css/login.css">
-</head>
-<body>
-  <!-- 헤더 가져오기 -->
-  <header id="header"></header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>carryAll_회원 탈퇴</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/login.css" />
+  </head>
+  <body>
+    <!-- 헤더 가져오기 -->
+    <header id="header"></header>
 
-  <!-- 컨텐츠 -->
-  <section style="height: 100vh;" class="container">
-    <form id="loginForm">
-      <h2>비밀번호 확인</h2>
-      <div class="formGroup id">
-        <label for="passwordChk"></label>
-        <input type="password" id="passwordChk" name="passwordChk" placeholder="비밀번호" required>
-      </div>
-      <div class="errTxt login pwdChk">
-        입력된 비밀번호를 확인하세요.
-      </div>
-      <button type="submit" id="chkPwdBtn">확인</button>
-      <p class="reChkTxt">회원님의 안전한 개인정보 보호를 위해<br>비밀번호를 다시 한 번 확인합니다.</p>
-    </form>
-  </section>
+    <!-- 컨텐츠 -->
+    <section style="height: 100vh" class="container">
+      <form id="loginForm">
+        <h2>비밀번호 확인</h2>
+        <div class="formGroup id">
+          <label for="passwordChk"></label>
+          <input
+            type="password"
+            id="passwordChk"
+            name="passwordChk"
+            placeholder="비밀번호"
+            required
+          />
+        </div>
+        <div class="errTxt login pwdChk">입력된 비밀번호를 확인하세요.</div>
+        <button type="submit" id="chkPwdBtn">확인</button>
+        <p class="reChkTxt">
+          회원님의 안전한 개인정보 보호를 위해<br />비밀번호를 다시 한 번
+          확인합니다.
+        </p>
+      </form>
+    </section>
 
-  <!-- 푸터 가져오기 -->
-  <footer id="footer"></footer>
+    <!-- 푸터 가져오기 -->
+    <footer id="footer"></footer>
 
-  <!-- 탑버튼 가져오기 -->
-  <div class="top">top</div>
+    <!-- 탑버튼 가져오기 -->
+    <div class="top">top</div>
 
-  <script src="../js/top.js"></script>
-  <script src="../js/header.js"></script>
-  <script src="../js/footer.js"></script>
+    <script src="../js/top.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="../js/footer.js"></script>
 
-  <!-- 로그인 폼 script -->
-  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const loginForm = document.getElementById('loginForm');
-  
-      loginForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-  
-        const password = document.getElementById('passwordChk').value;
-  
-  
-        // Get 요청으로 사용자 정보 가져오기
-        axios.get('/api/mypage')
-        .then(response => {
-          const userData = response.data;
-          const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-          
-          // 사용자 정보와 로그인된 사용자 정보 비교
-          if (userData.password === hashedPassword) {
-            // 비밀번호가 일치할 경우 계정 삭제 요청
-            axios.delete('/api/withdrawal', {
-              data: {
-                username: loggedInUser.username
+    <!-- 로그인 폼 script -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const loginForm = document.getElementById("loginForm");
+
+        loginForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const password = document.getElementById("passwordChk").value;
+
+          // Get 요청으로 사용자 정보 가져오기
+          axios
+            .post("/api/confirm-password", { password: password })
+            .then((response) => {
+              if (confirm("정말 탈퇴하시겠습니까?")) {
+                axios
+                  .delete("/api/withdrawal")
+                  .then((deleteResponse) => {
+                    console.log("계정이 삭제되었습니다.");
+                    // 로그아웃 처리
+                    window.location.href = "/";
+                  })
+                  .catch((deleteError) => {
+                    console.error("계정 삭제 실패:", deleteError);
+                    document.querySelector(
+                      ".errTxt.login.pwdChk"
+                    ).style.display = "block";
+                  });
               }
             })
-            .then(deleteResponse => {
-              console.log('계정이 삭제되었습니다.');
-              // 로그아웃 처리
-              localStorage.removeItem('loggedInUser');
-              window.location.href = '/main';
-            })
-            .catch(deleteError => {
-              console.error('계정 삭제 실패:', deleteError);
+            .catch((error) => {
+              console.error("탈퇴 실패:", error);
             });
-          } else {
-            // 비밀번호가 일치하지 않을 경우 에러 메시지 표시
-            document.querySelector('.errTxt.login.pwdChk').style.display = 'block';
-          }
-        })
-        .catch(error => {
-          console.error('데이터를 가져오는 데 실패했습니다:', error);
         });
-      });
 
-      document.querySelector('button.headmenu.logout').style.display = 'none';
-    });
-  </script>
-</body>
+        document.querySelector("button.headmenu.logout").style.display = "none";
+      });
+    </script>
+  </body>
 </html>

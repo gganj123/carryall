@@ -85,6 +85,7 @@
                     <div class="quantity">상품수량</div>
                     <div class="date"><span>주문날짜</span></div>
                     <div class="status">배송상태</div>
+                    <div class="btnBox">수정</div>
                   </div>
                 </div>
                 <div class="listBody">
@@ -124,7 +125,7 @@
             localIdName.innerHTML = userData.username;
 
             userOrder(userData.username);
-          }) 
+          })
           .catch((error) => {
             console.error("로그인 여부 확인 중 오류 발생:", error);
             window.location.href = "/loginMember";
@@ -177,6 +178,7 @@
                 <div class="quantity"><span>${quantity}</span></div>
                 <div class="date"><span>${sliceDate}</span></div>
                 <div class="status">${order.status}</div>
+                <div class="btnBox"><button class="editBtn">수정</button></div>
               </div>`;
 
               const stNum = status.indexOf(order.status);
@@ -188,8 +190,8 @@
             orderStatus.forEach((status, index) => {
               status.innerText = num[index];
             });
-            console.log(num)
- 
+            console.log(num);
+
             const listBody = document.querySelector(".listBody");
             listBody.innerHTML = htmlString;
           })
@@ -197,6 +199,8 @@
             console.error("에러", error);
           });
       }
+
+
 
       // // 3. 고도화 기능 closing alert
       // const developLinks = document.querySelectorAll(".develop");

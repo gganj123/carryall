@@ -1,12 +1,5 @@
 const express = require("express");
-// const { MONGODB_PASSWORD } = process.env;
-// const passport = require("passport");
-// const LocalStrategy = require("passport-local");
-// const session = require("express-session");
-// const MongoStore = require("connect-mongo");
 const { body } = require("express-validator");
-// const hashedPassword = require("../utils/hashPassword");
-const User = require("../db").User;
 const userController = require("../controller/userController");
 const adminVerification = require("../middlewares/adminVerification");
 
@@ -32,7 +25,16 @@ userRouter.post(
   userController.joinUser
 );
 // 회원정보 수정
-userRouter.put("/user", userController.updateUser);
+userRouter.put(
+  "/user",
+  [
+    body("password")
+      .trim()
+      .isLength({ min: 8, max: 72 })
+      .withMessage("비밀번호는 10글자 이상 72글자 이하로 입력해주세요."),
+  ],
+  userController.updateUser
+);
 // 회원 탈퇴
 userRouter.delete("/withdrawal", userController.deleteUser);
 // 회원정보
