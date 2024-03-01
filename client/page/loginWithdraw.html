@@ -50,41 +50,27 @@
   
         const password = document.getElementById('passwordChk').value;
   
-        // 비밀번호 해시화
-        const hashedPassword = sha256(password);
-        console.log('해시화된 비밀번호:', hashedPassword);
-  
-        // Get 요청으로 사용자 정보 가져오기
-        axios.get('/api/mypage')
-        .then(response => {
-          const userData = response.data;
-          const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-          
-          // 사용자 정보와 로그인된 사용자 정보 비교
-          if (userData.username === loggedInUser.username && userData.password === hashedPassword) {
-            // 비밀번호가 일치할 경우 계정 삭제 요청
-            axios.delete('/api/withdrawal', {
-              data: {
-                username: loggedInUser.username
-              }
-            })
-            .then(deleteResponse => {
-              console.log('계정이 삭제되었습니다.');
-              // 로그아웃 처리
-              localStorage.removeItem('loggedInUser');
-              window.location.href = '/main';
-            })
-            .catch(deleteError => {
-              console.error('계정 삭제 실패:', deleteError);
-            });
-          } else {
-            // 비밀번호가 일치하지 않을 경우 에러 메시지 표시
-            document.querySelector('.errTxt.login.pwdChk').style.display = 'block';
-          }
-        })
-        .catch(error => {
-          console.error('데이터를 가져오는 데 실패했습니다:', error);
-        });
+        if(confirm('정말 삭제하시겠습니까?')) {
+          // Get 요청으로 사용자 정보 가져오기
+          axios.get('/api/mypage')
+          .then(response => {
+            
+              // 비밀번호가 일치할 경우 계정 삭제 요청
+              axios.delete('/api/withdrawal', password)
+              .then(deleteResponse => {
+                alert('계정이 삭제되었습니다.');
+                // 로그아웃 처리
+                window.location.href = '/';
+              })
+              .catch(deleteError => {
+                console.error('계정 삭제 실패:', deleteError);
+              });
+
+          })
+          .catch(error => {
+            console.error('데이터를 가져오는 데 실패했습니다:', error);
+          });
+        }
       });
     });
   </script>

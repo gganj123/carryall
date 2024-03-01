@@ -111,6 +111,7 @@ div.check{
 }
 .sort{
   width: 30%;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;

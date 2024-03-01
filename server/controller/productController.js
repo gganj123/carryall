@@ -33,7 +33,6 @@ class ProductController {
     try {
       const { _id } = req.params;
       const product = await ProductService.getProductById(_id);
-
       res.status(200).json({ success: true, data: product });
     } catch (err) {
       res.status(400).json({ success: false, message: err.message });
@@ -54,7 +53,17 @@ class ProductController {
   // 카테고리별 상품조회 추가 가능
   async createProduct(req, res) {
     try {
-      const { name, categoryId, price, image, option, stock, brand } = req.body;
+      const {
+        name,
+        categoryId,
+        price,
+        image,
+        option,
+        stock,
+        categoryName,
+        detail,
+        origin,
+      } = req.body;
 
       const product = await ProductService.createProduct({
         name,
@@ -63,7 +72,9 @@ class ProductController {
         image,
         option,
         stock,
-        brand,
+        categoryName,
+        detail,
+        origin,
       });
 
       res.status(201).json({ success: true, data: product });
@@ -91,20 +102,29 @@ class ProductController {
   async updateProduct(req, res) {
     try {
       const { _id } = req.params;
-      const { name, categoryId, price, image, option, stock, brand } = req.body;
+      const {
+        name,
+        categoryId,
+        price,
+        image,
+        option,
+        stock,
+        categoryName,
+        detail,
+        origin,
+      } = req.body
 
-      const updateProduct = await ProductService.updateProduct(
-        { _id },
-        {
-          name,
-          categoryId,
-          price,
-          image,
-          option,
-          stock,
-          brand,
-        }
-      );
+      const updateProduct = await ProductService.updateProduct({_id}, {
+        name,
+        categoryId,
+        price,
+        image,
+        option,
+        stock,
+        categoryName,
+        detail,
+        origin,
+      });
 
       res.status(200).json({ success: true, data: updateProduct });
     } catch (err) {

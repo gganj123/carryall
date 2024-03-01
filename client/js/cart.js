@@ -59,7 +59,7 @@ function drawItems(cartItems) {
           <img src="${cartItem.image}" alt="${cartItem.name} 이미지" class="itemImg">
           <div class="item itemInfo">
               <p class="itemName">${cartItem.name}</p>
-              <p class="itemBrand">${cartItem.brand}</p>
+              <p class="itemcategoryName">${cartItem.categoryName}</p>
           </div>
       </div>
       <p class="cartBoxH2 item">${cartItem.option}</p>

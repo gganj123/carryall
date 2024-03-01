@@ -2,7 +2,7 @@
 // function createProduct(index) {
 //   return {
 //       img: `/carryall/client/img/ban_${index}.jpeg`, // 이미지 경로 예시
-//       brand: `Brand ${index}`,
+//       categoryName: `categoryName ${index}`,
 //       name: `Product ${index}`,
 //       price: `${index}`
 //   };
@@ -39,7 +39,7 @@
 //     const textDiv = document.createElement("div");
 //     textDiv.classList.add("text");
 //     const brandHeading = document.createElement("h2");
-//     brandHeading.textContent = product.brand;
+//     brandHeading.textContent = product.categoryName;
 //     const nameParagraph = document.createElement("p");
 //     nameParagraph.textContent = product.name;
 //     const priceParagraph = document.createElement("p");
@@ -69,7 +69,7 @@
 //     <ul>`
 //     htmlString += `<li><img class="obimg" src="${product.image}" alt="Product Image"></li>`;//이미지 넣어서 나오게 해보기
 //     htmlString += `<li><strong>Name: ${product.name}</strong></li> `;
-//     htmlString += `<li><strong>Brand:</strong> ${product.brand}</li>`;
+//     htmlString += `<li><strong>categoryName:</strong> ${product.categoryName}</li>`;
 //     htmlString += `<li><strong>Price: ${product.price.toLocaleString('ko-KR')}</strong></li>`;
 //     htmlString += `</ul></div>`;
 //   });
