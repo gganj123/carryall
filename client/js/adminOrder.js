@@ -108,26 +108,24 @@ deleteButton.addEventListener("click", function () {
       // 체크된 주문의 ID를 가져옵니다.
       const orderId = checkbox.id;
 
-      if (confirm("삭제하시겠습니까?")) {
-        // 주문를 삭제하는 요청을 보냅니다.
-        axios
-          .delete(`/api/orders/${orderId}`)
-          .then((response) => {
-            // 주문 삭제에 성공한 경우
+      // 주문를 삭제하는 요청을 보냅니다.
+      axios
+        .delete(`/api/orders/${orderId}`)
+        .then((response) => {
+          // 주문 삭제에 성공한 경우
 
-            // 화면에서 해당 주문를 제거합니다.
-            adminListItem.parentNode.removeChild(adminListItem);
+          // 화면에서 해당 주문를 제거합니다.
+          adminListItem.parentNode.removeChild(adminListItem);
 
-            setTimeout(function () {
-              location.reload();
-            }, 500);
-          })
-          .catch((error) => {
-            console.log(orderId);
-            // 주문 삭제에 실패한 경우
-            console.error(`주문 ID ${orderId} 삭제 요청 실패:`, error);
-          });
-      }
+          setTimeout(function () {
+            location.reload();
+          }, 500);
+        })
+        .catch((error) => {
+          console.log(orderId);
+          // 주문 삭제에 실패한 경우
+          console.error(`주문 ID ${orderId} 삭제 요청 실패:`, error);
+        });
     }
   });
 });
