@@ -17,41 +17,46 @@ app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
-const fetch = require('node-fetch')
-async function test() {//크롤링 코드, 추후 삭제
-  const response = await fetch("https://api-display.wconcept.co.kr/display/api/v1/category/products/M33439436/004", {
-    "headers": {
-      "accept": "application/json, text/plain, */*",
-      "accept-language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
-      "content-type": "application/json; charset=UTF-8",
-      "cust_no": "",
-      "display-api-key": "VWmkUPgs6g2fviPZ5JQFQ3pERP4tIXv/J2jppLqSRBk=",
-      "sec-ch-ua": "\"Chromium\";v=\"122\", \"Not(A:Brand\";v=\"24\", \"Google Chrome\";v=\"122\"",
-      "sec-ch-ua-mobile": "?0",
-      "sec-ch-ua-platform": "\"Windows\"",
-      "sec-fetch-dest": "empty",
-      "sec-fetch-mode": "cors",
-      "sec-fetch-site": "same-site",
-      "wck-cust-birthdate": ""
-    },
-    "referrer": "https://display.wconcept.co.kr/",
-    "referrerPolicy": "strict-origin-when-cross-origin",
-    "body": "{\"custNo\":\"\",\"gender\":\"Women\",\"sort\":\"NEW\",\"pageNo\":null,\"pageSize\":60,\"bcds\":[],\"colors\":[],\"benefits\":[],\"discounts\":[],\"status\":[\"01\"],\"shopCds\":[],\"domainType\":\"m\"}",
-    "method": "POST",
-    "mode": "cors",
-    "credentials": "omit"
-  });;
+const fetch = require("node-fetch");
+async function test() {
+  //크롤링 코드, 추후 삭제
+  const response = await fetch(
+    "https://api-display.wconcept.co.kr/display/api/v1/category/products/M33439436/004",
+    {
+      headers: {
+        accept: "application/json, text/plain, */*",
+        "accept-language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
+        "content-type": "application/json; charset=UTF-8",
+        cust_no: "",
+        "display-api-key": "VWmkUPgs6g2fviPZ5JQFQ3pERP4tIXv/J2jppLqSRBk=",
+        "sec-ch-ua":
+          '"Chromium";v="122", "Not(A:Brand";v="24", "Google Chrome";v="122"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"Windows"',
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "wck-cust-birthdate": "",
+      },
+      referrer: "https://display.wconcept.co.kr/",
+      referrerPolicy: "strict-origin-when-cross-origin",
+      body: '{"custNo":"","gender":"Women","sort":"NEW","pageNo":null,"pageSize":60,"bcds":[],"colors":[],"benefits":[],"discounts":[],"status":["01"],"shopCds":[],"domainType":"m"}',
+      method: "POST",
+      mode: "cors",
+      credentials: "omit",
+    }
+  );
 
   const category = [
-  {categoryId:"65e08a335a29d582c152f71c", categoryName:"STUSSY"},
-  { categoryId:"65e08a475a29d582c152f71e",categoryName:"SUPREME"}, 
-  { categoryId:"65e08a555a29d582c152f720",categoryName:"BARE"}
-];
+    { categoryId: "65e08a335a29d582c152f71c", categoryName: "STUSSY" },
+    { categoryId: "65e08a475a29d582c152f71e", categoryName: "SUPREME" },
+    { categoryId: "65e08a555a29d582c152f720", categoryName: "BARE" },
+  ];
 
   const data = await response.json();
   const list = [];
   data.data.productList.content.map((item) => {
-    const index = Math.floor(Math.random() * category.length)
+    const index = Math.floor(Math.random() * category.length);
     list.push({
       name: item.itemName,
       categoryId: category[index].categoryId,
@@ -73,28 +78,30 @@ async function test() {//크롤링 코드, 추후 삭제
   return suffle(list);
 }
 
-const { MongoClient } = require('mongodb');
+const { MongoClient } = require("mongodb");
 
 // main() -> 크롤링 함수
 async function main() {
   try {
-      // MongoDB에 연결
-      const client = new MongoClient(`mongodb+srv://carryall:${MONGODB_PASSWORD}@cluster0.lobzfqe.mongodb.net/`);
-      await client.connect();
-      const db = client.db('test');
+    // MongoDB에 연결
+    const client = new MongoClient(
+      `mongodb+srv://carryall:${MONGODB_PASSWORD}@cluster0.lobzfqe.mongodb.net/`
+    );
+    await client.connect();
+    const db = client.db("test");
 
-      // test 함수를 호출하여 데이터를 가져옴
-      const list = await test();
+    // test 함수를 호출하여 데이터를 가져옴
+    const list = await test();
 
-      // 컬렉션에 데이터 삽입
-      await db.collection('products').insertMany(list);
-      console.log('저장완료');
-  } catch (error) { 
-      console.error("Error inserting documents:", error);
+    // 컬렉션에 데이터 삽입
+    await db.collection("products").insertMany(list);
+    console.log("저장완료");
+  } catch (error) {
+    console.error("Error inserting documents:", error);
   }
 }
 
-main().catch(console.error); 
+// main().catch(console.error);
 
 const productsRouter = require("./server/routes/productRouter.js");
 const categoriesRouter = require("./server/routes/categoryRouter.js");
@@ -104,9 +111,8 @@ const viewRouter = require("./server/routes/viewRouter.js");
 const errorHandler = require("./server/middlewares/errorHandler.js");
 // const adminRouter = require("./server/routes/admins.js");
 
-app.use(express.static('client'));
+app.use(express.static("client"));
 app.use(viewRouter);
-
 
 app.use("/api/products", productsRouter);
 app.use("/api/categories", categoriesRouter);
@@ -116,7 +122,7 @@ app.use("/api", usersRouter);
 // app.use("/api/admins", adminRouter);
 app.use(errorHandler);
 
-app.get("/",(req, res)=> {
+app.get("/", (req, res) => {
   res.send("접속 성공");
 });
 
