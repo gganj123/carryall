@@ -15,12 +15,7 @@ class OrderController {
   async addOrder(req, res, next) {
     const { userId, productInformation, recipientInformation } = req.body;
 
-<<<<<<< HEAD
-    
-if (
-=======
     if (
->>>>>>> 07b7479805c9a1fea711ac3cf530286a19d5a1bf
       !userId ||
       !productInformation ||
       !productInformation[0].name ||

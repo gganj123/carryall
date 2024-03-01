@@ -30,11 +30,8 @@ class ProductController {
   }
   async getProductById(req, res) {
     try {
-<<<<<<< HEAD
-      const { _id } = req.params._id;
-=======
       const { _id } = req.params;
->>>>>>> 07b7479805c9a1fea711ac3cf530286a19d5a1bf
+
       const product = await ProductService.getProductById(_id);
       res.status(200).json({ success: true, data: product });
     } catch (err) {

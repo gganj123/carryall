@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/admin.css" />
     <link rel="stylesheet" href="../css/mypage.css" />
+    <link rel="stylesheet" href="../css/mypageOrder.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   </head>
   <body>
@@ -26,9 +27,9 @@
               <span class="localIdName">silver</span>입니다.<br />
             </p>
           </div>
-          <!-- <div class="btnWrap">
+          <div class="btnWrap">
             <a class="profileBtn" href="javascript:void(0);">회원정보 변경</a>
-          </div> -->
+          </div>
         </div>
 
         <div class="contWrap">
@@ -51,7 +52,9 @@
             <li><a href="/loginWithdraw">회원탈퇴</a></li>
             <li><a class="logout" href="/main">로그아웃</a></li>
             <li>
-              <a class="develop" href="javascript:void(0);">배송지관리(준비중)</a>
+              <a class="develop" href="javascript:void(0);"
+                >배송지관리(준비중)</a
+              >
             </li>
           </ul>
 
@@ -86,6 +89,22 @@
 
             <div class="infoCont">
               <h3>주문 조회</h3>
+              <div class="orderList">
+                <div class="listTop">
+                  <div class="orderItem">
+                    <div class="num">No.</div>
+                    <div class="orderNum">
+                      <span>주문번호</span>
+                    </div>
+                    <div class="total">주문금액</div>
+                    <div class="date"><span>주문날짜</span></div>
+                    <div class="status">배송상태</div>
+                  </div>
+                </div>
+                <div class="listBody">
+                  <p class="noPost">주문내역이 없습니다.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -108,35 +127,78 @@
           .get("/api/mypage")
           .then((response) => {
             const userData = response.data;
-    
+
             if (userData) {
-              const localName = document.querySelectorAll('.localName');
-              const localIdName = document.querySelector('.localIdName');
-              localName.forEach(name => {
+              const localName = document.querySelectorAll(".localName");
+              localName.forEach((name) => {
                 name.innerHTML = userData.name;
               });
-              localIdName.innerHTML = userData.username;
             }
-    
+            const localIdName = document.querySelector(".localIdName");
+            localIdName.innerHTML = userData.username;
+
+            userOrder(userData.username);
           })
           .catch((error) => {
-            console.error('로그인 여부 확인 중 오류 발생:', error);
-            // alert("로그인이 필요합니다.");
+            console.error("로그인 여부 확인 중 오류 발생:", error);
             window.location.href = "/";
           });
       }
-    
+
       userMypage();
-    
-      // 3. 고도화 기능 closing alert
-      const developLinks = document.querySelectorAll(".develop");
-      developLinks.forEach(function (link) {
-        link.addEventListener("click", function (event) {
-          event.preventDefault();
-          alert("해당 기능은 준비중입니다.");
-        });
-      });
+
+      function userOrder(username) {
+        axios
+          .get(`/api/orders/${username}`)
+          .then((response) => {
+            const orderData = response.data;
+
+            let htmlString = "";
+
+            orderData.forEach((order, index) => {
+
+              const date = order.date;
+              const sliceDate = date.slice(0, 10);
+
+              const productList = order.productInformation;
+              let total = 0;
+
+              for(let i = 0; i < productList.length; i++) {
+                total += productList[i].price;
+              }
+
+              htmlString += `
+              <div class="orderItem">
+                <div class="num">
+                  ${index + 1}
+                </div>
+                <div class="orderNum">
+                    <span>${order._id}</span>
+                </div>
+                <div class="total"><span>${total}</span></div>
+                <div class="date"><span>${sliceDate}</span></div>
+                <div class="status">${order.status}</div>
+              </div>`;
+              
+            });
+
+
+            const listBody = document.querySelector(".listBody");
+            listBody.innerHTML = htmlString;
+          })
+          .catch((error) => {
+            console.error("에러", error);
+          });
+      }
+
+      // // 3. 고도화 기능 closing alert
+      // const developLinks = document.querySelectorAll(".develop");
+      // developLinks.forEach(function(link) {
+      //   link.addEventListener("click", function(event) {
+      //     event.preventDefault();
+      //     alert("해당 기능은 준비중입니다.");
+      //   });
+      // });
     </script>
-    
   </body>
 </html>
