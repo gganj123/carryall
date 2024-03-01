@@ -17,8 +17,8 @@
     <form id="loginForm">
       <h2>로그인</h2>
       <ul class="tab">
-        <li class="active"><a href="/login_member">회원 로그인</a></li>
-        <li class="nonMemberPath"><a href="/login_nonMember">비회원 주문조회</a></li>
+        <li class="active"><a href="/loginMember">회원 로그인</a></li>
+        <li class="nonMemberPath"><a href="/loginNonMember">비회원 주문조회</a></li>
       </ul>
       <div class="formGroup id">
         <label for="username"></label>
@@ -80,7 +80,7 @@
           // 로그인 성공 시
           console.log('성공! ', response.data);
           localStorage.setItem('loggedInUser', JSON.stringify(response.data));
-          window.location.href = '/main'; // 로그인 성공 시 main로 이동
+          window.location.href = '/'; // 로그인 성공 시 main로 이동
         })
         .catch(error => {
           // 로그인 실패 시
@@ -92,6 +92,10 @@
           // }
         });
       });
+
+      // 3. 헤더..
+      document.querySelector('button.headmenu.mypage').style.display = 'none';
+      document.querySelector('button.headmenu.logout').style.display = 'none';
     });
 
     // 2. 비회원 주문조회 closing
@@ -103,6 +107,8 @@
         alert("비회원 주문조회는 준비중입니다.");
       });
     });
+
+
 </script>
 </body>
 </html>

@@ -5,6 +5,14 @@ const app = express();
 require("dotenv").config();
 const { PORT, MONGODB_PASSWORD } = process.env;
 const { connect } = require("mongoose");
+// 지은 {
+  const passport = require("passport");
+  const LocalStrategy = require("passport-local");
+  const session = require("express-session");
+  const MongoStore = require("connect-mongo");
+  const User = require("./server/db").User;
+  const hashedPassword = require("./server/utils/hashPassword.js");
+// }
 
 // mongoDB 연결
 connect(
@@ -90,6 +98,56 @@ async function main() {
 }
 
 // main().catch(console.error); 
+
+// 지은 {
+// express-session
+app.use(passport.initialize());
+app.use(
+  session({
+    // name: "connect.sid" 명시하지않아도 기본적으로 사용 중
+    secret: "password", // 암호화에 사용되는 비밀 키를 설정
+    resave: false, // 세션 정보를 갱신할지? false가 일반적
+    saveUninitialized: false, // 로그인 안해도 세션 만들건지? false가 좋음
+    cookie: { maxAge: 24 * 60 * 60 * 1000 },
+    store: MongoStore.create({
+      mongoUrl: `mongodb+srv://carryall:${MONGODB_PASSWORD}@cluster0.lobzfqe.mongodb.net/`,
+      dbName: "test", // 해당 db에 세션 저장해줌
+    }),
+  })
+);
+
+app.use(passport.session());
+
+passport.use(
+  new LocalStrategy(async (userId, password, done) => {
+    let foundUser = await User.findOne({ username: userId });
+
+    if (!foundUser || foundUser.password !== hashedPassword(password)) {
+      return done(null, false, { message: "로그인 정보가 다릅니다." });
+    }
+    if (foundUser.password == hashedPassword(password)) {
+      return done(null, foundUser);
+    }
+  })
+);
+
+// 세션생성
+passport.serializeUser((user, done) => {
+  process.nextTick(() => {
+    // 특정코드 비동기적으로 만들어줌
+    done(null, { username: user.username, name: user.name }); // 세션에 저장 비밀번호는 저장X
+  });
+});
+
+// 쿠키분석
+passport.deserializeUser(async (user, done) => {
+  let foundUser = await User.findOne({ username: user.username });
+
+  process.nextTick(() => {
+    return done(null, foundUser);
+  });
+});
+//}
 
 const productsRouter = require("./server/routes/productRouter.js");
 const categoriesRouter = require("./server/routes/categoryRouter.js");

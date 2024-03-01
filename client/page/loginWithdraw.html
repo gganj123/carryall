@@ -13,7 +13,7 @@
   <header id="header"></header>
 
   <!-- 컨텐츠 -->
-  <section style="height: 100vh; margin-top: 0;" class="container">
+  <section style="height: 100vh;" class="container">
     <form id="loginForm">
       <h2>비밀번호 확인</h2>
       <div class="formGroup id">
@@ -86,6 +86,8 @@
           console.error('데이터를 가져오는 데 실패했습니다:', error);
         });
       });
+
+      document.querySelector('button.headmenu.logout').style.display = 'none';
     });
   </script>
 </body>

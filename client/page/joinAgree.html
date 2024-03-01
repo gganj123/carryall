@@ -36,11 +36,14 @@
               </li>
               
               <li>
-                <label class="agree">
-                  <input type="checkbox" class="subAgreeCheckbox" id="termsCheckbox">
-                  <span>이용약관 (필수) <img src="../img/icon_arrow.png" alt="이용약관 (필수)"></span>
-                </label>
-                <div class="chkBox">
+                <div style="position: relative;">
+                  <label class="agree">
+                    <input type="checkbox" class="subAgreeCheckbox" id="termsCheckbox">
+                    <span>이용약관 (필수)</span>
+                  </label>
+                  <img class="iconArrow" src="../img/icon_arrow.png" alt="이용약관 (필수)">
+                </div>
+                <div class="chkBox active">
                   회사는 회원가입, 민원 등 고객상담 처리, 본인확인(14세 미만 아동 확인) 등 의사소통을 위한 정보 활용 및
                   이벤트 등과 같은 마케팅용도 활용, 회원의 서비스 이용에 대한 통계, 이용자들의 개인정보를 통한 서비스
                   개발을 위해 아래와 같은 개인정보를 수집하고 있습니다.
@@ -52,11 +55,14 @@
               </li>
 
               <li>
-                <label class="agree">
-                  <input type="checkbox" class="subAgreeCheckbox" id="privacyCheckbox">
-                  <span>개인정보 수집 및 이용 (필수) <img src="../img/icon_arrow.png" alt="이용약관 (필수)"></span>
-                </label>
-                <div class="chkBox">
+                <div style="position: relative;">
+                  <label class="agree">
+                    <input type="checkbox" class="subAgreeCheckbox" id="privacyCheckbox">
+                    <span>개인정보 수집 및 이용 (필수)</span>
+                  </label>
+                  <img class="iconArrow" src="../img/icon_arrow.png" alt="이용약관 (필수)">
+                </div>
+                <div class="chkBox active">
                   회사는 회원가입, 민원 등 고객상담 처리, 본인확인(14세 미만 아동 확인) 등 의사소통을 위한 정보 활용 및
                   이벤트 등과 같은 마케팅용도 활용, 회원의 서비스 이용에 대한 통계, 이용자들의 개인정보를 통한 서비스
                   개발을 위해 아래와 같은 개인정보를 수집하고 있습니다.
@@ -106,8 +112,6 @@
       } else {
         subAgreeCheckboxes.forEach(checkbox => {
           checkbox.checked = false;
-          const chkBox = checkbox.closest('li').querySelector('.chkBox');
-          chkBox.classList.remove('active'); // 체크 해제 시 활성화된 요소 비활성화
         });
       }
     });
@@ -118,9 +122,7 @@
         if (!this.checked) {
           allAgreeCheckbox.checked = false;
         } else {
-          // 모든 개별 약관 동의 체크 여부 확인
           let allChecked = true;
-          
           subAgreeCheckboxes.forEach(subCheckbox => {
             if (!subCheckbox.checked) {
               allChecked = false;
@@ -128,39 +130,19 @@
           });
           if (allChecked) {
             allAgreeCheckbox.checked = true;
-            const chkBoxAll = document.querySelectorAll('.chkBox');
-            chkBoxAll.forEach(idx => {
-              idx.classList.add('active');
-            })
           }
         }
       });
     });
 
-    // 3. 폼 제출 시 동의 여부 확인
-    // document.getElementById('termsForm').addEventListener('submit', function(event) {
-    //   let subAgreementsChecked = false;
-    //   subAgreeCheckboxes.forEach(subCheckbox => {
-    //     if (subCheckbox.checked) {
-    //       subAgreementsChecked = true;
-    //     }
-    //   });
 
-    //   if (!subAgreementsChecked) {
-    //     alert('(필수)약관에 동의해야 합니다.');
-    //     event.preventDefault(); 
-    //   } else if (!allAgreeCheckbox.checked) {
-    //     alert('모든 (필수)약관에 동의해야 합니다.');
-    //     event.preventDefault();
-    //   }
-    // });
 
-    // 4. 각 label.agree 클릭시 .chkBox에 active 클래스 toggle
-    const checkboxes = document.querySelectorAll('.subAgreeCheckbox');
-
-    checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('click', function() {
-        const chkBox = this.closest('li').querySelector('.chkBox');
+    // 4. 화살표 클릭시 toggle
+    const iconArrows = document.querySelectorAll('.iconArrow');
+    iconArrows.forEach(iconArrow => {
+      iconArrow.addEventListener('click', function() {
+        const chkBox = iconArrow.parentElement.nextElementSibling;
+        console.log(chkBox)
         chkBox.classList.toggle('active');
       });
     });
@@ -168,7 +150,6 @@
     // 5. 휴대폰 본인인증 closing
     document.addEventListener('DOMContentLoaded', function() {
       const phoneVerifyButton = document.getElementById('phoneVerify');
-
       phoneVerifyButton.addEventListener('click', function() {
         alert('본인인증 서비스 준비중입니다.');
       });
@@ -179,12 +160,26 @@
     beforeButton.addEventListener('click', function() {
       history.back();
     });
-
     const afterButton = document.querySelector('.btnType02.after');
     afterButton.addEventListener('click', function() {
       window.location.href = '/joinForm';
     });
 
+    // 7. 다음 버튼 클릭 시 필수 약관 동의 확인
+    afterButton.addEventListener('click', function(e) {
+      const allChecked = document.getElementById('allAgreeCheckbox').checked;
+      if (!allChecked) {
+        alert('(필수) 사항에 모두 동의하셔야 합니다.');
+        // 페이지 이벤트 전파 중지
+        e.stopPropagation();
+      }
+    });
+
+    // 8. 헤더 미노출
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelector('.headmenu.logout').classList.add('none');
+      document.querySelector('.headmenu.mypage').classList.add('none');
+    });
     
   </script>
 </body>
