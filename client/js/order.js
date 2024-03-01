@@ -5,25 +5,30 @@ discountPrice = 0; // 초기화
 totalItemPrice = 0; // 초기화
 
 // 주문 완료 페이지 이동
-// btnPayment.addEventListener('click', async () => {
-//   const date = new Date(1651401879369);
-//   axios.post('/api/orders', orderInfo)
-//   .then(response => {
-//     alert('상품 구매가 완료되었습니다.');
-//     location.href = "/orderResult";
-//   })
-//   .catch(error => {
-//     alert('상품 구매를 하지 실패하였습니다.');
-//     console.log(error);
-//   });
-
-//   localStorage.removeItem("orderItems");
-
-// })
 
 displayUserOrderInfo();
 updateTotalPrice();
 getUserInfo();
+
+btnPayment.addEventListener('click', async () => {
+  alert('상품 구매가 완료되었습니다.');
+  location.href = "/orderComplete";
+  const date = new Date(1651401879369);
+  axios.post('http://localhost:5001/api/orders', orderInfo)
+  .then(response => {
+    console.log(response);
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
+  localStorage.removeItem("orderItems");
+
+})
+
+displayUserOrderInfo();
+updateTotalPrice();
+
 
 function displayUserOrderInfo() {
   const orderItems = JSON.parse(localStorage.getItem("orderItems")) || [];
@@ -32,6 +37,7 @@ function displayUserOrderInfo() {
   p_list = [];
 
   orderItems.forEach(item => { 
+
     axios.get('/api/products/cartInformation/' + item._id)
     .then(response => {
       // 성공했을 때
@@ -103,6 +109,7 @@ function updateTotalPrice() {
 }
 
 /**user 정보를 받아오는 함수 */
+
 function updateUserInfo(user) {
   document.getElementById("userName").value = user.name;
   document.getElementById("phoneNum").value = user.tel;
@@ -121,3 +128,4 @@ function getUserInfo() {
       console.log('Error fetching user data:', error);
     });
 }
+

@@ -6,7 +6,6 @@ require("dotenv").config();
 const { PORT, MONGODB_PASSWORD } = process.env;
 const { connect } = require("mongoose");
 
-// mongoDB 연결
 connect(
   `mongodb+srv://carryall:${MONGODB_PASSWORD}@cluster0.lobzfqe.mongodb.net/`
 )

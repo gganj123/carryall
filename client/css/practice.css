@@ -155,7 +155,8 @@ body{
 
 #main .totalDetail .totalDetailOption dl dd select {
   border-radius: 0px;
-  width: 80px;
+  width: 120px; 
+  /* 수빈 158번째 줄 수정 80px > 120px */
   padding: 5px;
   border: 1px solid #ddd;
   background-color: #f9f9f9;
