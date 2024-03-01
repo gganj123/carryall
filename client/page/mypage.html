@@ -28,7 +28,7 @@
             </p>
           </div>
           <div class="btnWrap">
-            <a class="profileBtn" href="javascript:void(0);">회원정보 변경</a>
+            <a class="profileBtn" href="/loginChange">회원정보 변경</a>
           </div>
         </div>
 
@@ -37,25 +37,10 @@
           <ul class="navCont">
             <li class="navTit n1">쇼핑정보</li>
             <li><a href="javascript:void(0);">주문/배송조회</a></li>
-            <li><a href="javascript:void(0);">취소/반품/교환내역</a></li>
-            <!-- <li><a href="javascript:void(0);">장바구니</a></li> -->
-            <li class="navTit">혜택관리</li>
-            <li>
-              <a class="develop" href="javascript:void(0);">쿠폰(준비중)</a>
-            </li>
-            <li class="navTit">고객센터</li>
-            <li>
-              <a class="develop" href="javascript:void(0);">1:1 문의(준비중)</a>
-            </li>
             <li class="navTit">회원정보</li>
             <li><a href="/loginChange">회원정보변경</a></li>
             <li><a href="/loginWithdraw">회원탈퇴</a></li>
             <li><a class="logout" href="/main">로그아웃</a></li>
-            <li>
-              <a class="develop" href="javascript:void(0);"
-                >배송지관리(준비중)</a
-              >
-            </li>
           </ul>
 
           <!-- 오른쪽 해당 컨텐츠 -->
@@ -139,10 +124,10 @@
             localIdName.innerHTML = userData.username;
 
             userOrder(userData.username);
-          })
+          }) 
           .catch((error) => {
             console.error("로그인 여부 확인 중 오류 발생:", error);
-            window.location.href = "/";
+            window.location.href = "/loginMember";
           });
       }
 
@@ -200,10 +185,11 @@
 
             const orderStatus = document.querySelectorAll(".orderStatus");
 
-            orderStatus.forEach((order, index) => {
-              order.innerText = num[index];
+            orderStatus.forEach((status, index) => {
+              status.innerText = num[index];
             });
-
+            console.log(num)
+ 
             const listBody = document.querySelector(".listBody");
             listBody.innerHTML = htmlString;
           })

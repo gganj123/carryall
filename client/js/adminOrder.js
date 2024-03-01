@@ -23,7 +23,7 @@ function fetchData() {
             <div class="status">
               <select class="orderStatus" name="orderStatus">
                 <option value="${order.status}">${order.status}</option>
-                <option value="결제완료">결제 완료</option>
+                <option value="결제완료">결제완료</option>
                 <option value="상품준비">상품준비</option>
                 <option value="배송중">배송중</option>
                 <option value="배송완료">배송완료</option>

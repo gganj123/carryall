@@ -67,19 +67,17 @@ class UserService {
 
     const hashPassword = hashedPassword(password);
 
-    const foundUser = await this.userModel.update(
-      {
-        username,
-        password: hashPassword,
-        email,
-        tel,
-        zipCode,
-        address,
-        addressDetail,
-        telSubscription,
-        emailSubscription,
-      }
-    );
+    const foundUser = await this.userModel.update({
+      username,
+      password: hashPassword,
+      email,
+      tel,
+      zipCode,
+      address,
+      addressDetail,
+      telSubscription,
+      emailSubscription,
+    });
 
     return foundUser;
   }
