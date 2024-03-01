@@ -33,45 +33,20 @@ async function getRandomImage() {
   return list;
 }
 
-let modalVisibleId = "";
-function onModalHandler(id) {
-  modalVisibleId = id;
-  render(); 
-}
-function onCloseHandler() {
-  modalVisibleId = "";
-  render();
-}
-function render() {
-  const listElement = document.getElementById("list");
-  listElement.innerHTML = ""; // 기존 목록을 초기화합니다.
+(() => {
+  const $ul = document.querySelector('ul');
+  let page = 1
 
-  somethingList.forEach((list) => {
-    const liElement = document.createElement("li");
-    liElement.textContent = list.name;
-
-    const buttonElement = document.createElement("button");
-    buttonElement.textContent = "상세";
-    buttonElement.addEventListener("click", () => onModalHandler(list.id));
-
-    const modalElement = document.createElement("div");
-    modalElement.className = modalVisibleId === list.id ? "d_block" : "d_none";
-
-    const closeButton = document.createElement("button");
-    closeButton.textContent = "닫기";
-    closeButton.addEventListener("click", onCloseHandler);
-
-    modalElement.appendChild(closeButton);
-
-    liElement.appendChild(buttonElement);
-    liElement.appendChild(modalElement);
-
-    listElement.appendChild(liElement);
-  });
-}
-render();
-
-
+  let $li;
+  let count = $ul.children.length;
+  document.addEventListener('scroll', () => {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      $li = $ul.appendChild(document.createElement('li'));
+      $li.textContent = ++count;
+    }
+  })
+})();
+fetchData()
 function fetchData() {
   axios
     .get("/api/products")
@@ -81,14 +56,17 @@ function fetchData() {
 
       productList.forEach((product, index) => {
         htmlString += `
-        <div class="adminList">
+        <li>
+        <div class="adminList" style="height:100px;">
           <div class="check">
             <input type="checkbox" name="checkbox1" id="${
               product._id
             }">&ensp;&nbsp;${index + 1}
           </div>
-          <div class="sort">
+          <div class="sort" style="display:block">
             <input type="text" class ="cate font_17" value="${product.name}">
+            <input />
+            <input />
           </div>
           <div class="sortbutton">
             <button class="change col font_17">수정</button>
@@ -96,7 +74,9 @@ function fetchData() {
           <div class="infoCont" style="width:100%; padding-top: 0;">
             <h3> </h3>
           </div>
-        </div>`;
+        </div>
+        </li>
+        `;
       });
 
       document.getElementById("adminProList").innerHTML = htmlString;
@@ -111,7 +91,7 @@ function fetchData() {
     });
 }
 
-fetchData();
+
 let htmlString2 = "";
 
 async function fetchCategory() {
@@ -121,23 +101,23 @@ async function fetchCategory() {
     response.data.forEach((category) => {
       optionList += `<option value='${category._id}' id='${category._id}'>${category.name}</option>`;
     });
-    return optionList; 
+    return optionList;
   } catch (error) {
     throw new Error("Error fetching data:", error);
   }
 }
 
 const categoryPromise = fetchCategory();
-let retrievedOptionList; 
+let retrievedOptionList;
 categoryPromise
   .then((optionList) => {
-    retrievedOptionList = optionList
+    retrievedOptionList = optionList;
   })
   .catch((error) => {
     console.error("Error:", error);
   });
 
-function addForm()  {
+function addForm() {
   getRandomImage().then((img) => {
     const selectImg = img[Math.floor(Math.random() * img.length)];
     htmlString2 += `
@@ -168,13 +148,12 @@ function addForm()  {
     document.getElementById("adminProAdd").innerHTML = htmlString2;
     const regiButton = document.getElementById("regiButton");
 
-
     regiButton.addEventListener("click", function () {
       const name = document.querySelector(".postName").value;
       const categoryId = document.querySelector("select").value;
       const stock = document.querySelector(".postStock").value;
       const price = document.querySelector(".postPrice").value;
-      const categoryName = document.getElementById(categoryId).textContent
+      const categoryName = document.getElementById(categoryId).textContent;
       axios
         .post("/api/products", {
           name,
@@ -200,8 +179,6 @@ function addForm()  {
 }
 const addButton = document.getElementById("addButton");
 addButton.addEventListener("click", addForm);
-
-
 
 const deleteButton = document.getElementById("deleteButton");
 deleteButton.addEventListener("click", function () {
@@ -230,7 +207,6 @@ deleteButton.addEventListener("click", function () {
     }
   });
 });
-
 
 function changeFunc(event) {
   // 클릭된 요소가 수정 버튼인지 확인
