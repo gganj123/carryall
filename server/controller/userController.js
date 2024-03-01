@@ -28,6 +28,15 @@ class UserController {
     }
   }
 
+  // 로그인 세션
+  async loggedIn(req, res) {
+    if (req.user) {
+      res.send({ logIn: true, user: req.user });
+    } else {
+      res.send({ logIn: false });
+    }
+  }
+
   // 로그아웃
   async logout(req, res) {
     try {
@@ -174,6 +183,7 @@ class UserController {
       res.status(500).json({ err: err.message });
     }
   }
+
 }
 
 const userController = new UserController();

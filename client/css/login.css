@@ -22,17 +22,20 @@ button {
 .container{
   margin: 0 auto;
   display: flex;
-  /* align-items: center; */
   justify-content: center;
-  /* margin-top: 60px; */
-  /* position: relative; */
   margin-top: 8%;
-  /* transform: translateY(-50%); */
+}
+.container.join {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 300px);
 }
 .tab {
   display: flex;
   margin-bottom: 117px;
   cursor: pointer;
+  display: none;
 }
 .tab li {
   width: 397px;
@@ -82,7 +85,7 @@ h2.fakeTit {
   margin-top: 60px;
 }
 #loginBtn, #joinBtn, #fakeBtn, .snsJoin {
-  width: 705px;
+  width: 550px;
   height: 78px;
   display: flex;
   align-items: center;

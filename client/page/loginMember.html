@@ -93,9 +93,6 @@
         });
       });
 
-      // 3. 헤더..
-      document.querySelector('button.headmenu.mypage').style.display = 'none';
-      document.querySelector('button.headmenu.logout').style.display = 'none';
     });
 
     // 2. 비회원 주문조회 closing
@@ -108,6 +105,20 @@
       });
     });
 
+    // 4. 
+    app.post('/api/login', (req, res) => {
+      const { username, password } = req.body;
+
+      if (username === 'adminCarryAll') {
+        // 관리자 계정으로 로그인한 경우
+        req.session.isAdmin = true;
+        res.status(200).json({ message: '로그인 성공 - 관리자 계정' });
+      } else {
+        // 일반 사용자 계정으로 로그인한 경우
+        req.session.isAdmin = false;
+        res.status(200).json({ message: '로그인 성공 - 일반 계정' });
+      }
+    });
 
 </script>
 </body>

@@ -51,23 +51,12 @@
                     required=""
                   />
                 </label>
+                <div class="errTxt n0">
+                  비밀번호는 10자리 이상 입력해주세요.
+                </div>
               </li>
 
-              <!-- 3. 비밀번호 확인 -->
-              <li>
-                <label for="passwordReconfirm" class="label">
-                  <span>비밀번호 확인</span>
-                  <input
-                    type="password"
-                    class="inputType01"
-                    id="passwordReconfirm"
-                    required=""
-                  />
-                </label>
-                <div class="errTxt n1">입력된 비밀번호를 확인하세요.</div>
-              </li>
-
-              <!-- 4. 이름 -->
+              <!-- 3. 이름 -->
               <li>
                 <label for="name" class="label">
                   <span>이름</span>
@@ -83,7 +72,7 @@
                 </label>
               </li>
 
-              <!-- 5. 이메일 -->
+              <!-- 4. 이메일 -->
               <li class="f_fs f_d_c label02">
                 <label for="email" class="label">
                   <span>이메일</span>
@@ -91,24 +80,8 @@
                 </label>
                 <div class="errTxt n2">이메일 주소를 확인하세요.</div>
               </li>
-              <li style="margin: 0">
-                <label
-                  style="justify-content: flex-start; margin-left: 20%"
-                  for="smsConsent01"
-                  class="label"
-                >
-                  <input
-                    style="height: 35px; width: unset"
-                    type="checkbox"
-                    id="smsConsent01"
-                    required=""
-                  />
-                  <span style="display: block; margin-left: 15px">
-                    SMS 수신 동의</span
-                  >
-                </label>
-              </li>
-              <!-- 6. 휴대폰 번호 -->
+
+              <!-- 5. 휴대폰 번호 -->
               <li>
                 <label for="phoneNum" class="label">
                   <span>휴대폰 번호</span>
@@ -121,26 +94,9 @@
                   />
                 </label>
               </li>
-              <li style="margin: 0">
-                <label
-                  style="justify-content: flex-start; margin-left: 20%"
-                  for="smsConsent02"
-                  class="label"
-                >
-                  <input
-                    style="height: 35px; width: unset"
-                    type="checkbox"
-                    id="smsConsent02"
-                    required=""
-                  />
-                  <span style="display: block; margin-left: 15px">
-                    SMS 수신 동의</span
-                  >
-                </label>
-              </li>
             </ul>
 
-            <!-- 7. 주소 -->
+            <!-- 6. 주소 -->
             <li>
               <label
                 style="justify-content: flex-start"
@@ -289,6 +245,40 @@
         window.location.href ='/mypage';
         updateUserInfo();
       });
+
+
+      // 2. 비밀번호 일치 여부를 확인하는 함수
+      function checkPassword() {
+        const password = document.getElementById('password').value;
+        const errorText0 = document.querySelector('.errTxt.n0'); // 비밀번호 길이 에러 메시지
+
+        // 비밀번호 길이가 10자리 미만인 경우
+        if (password.length < 10) {
+          errorText0.classList.add('active');
+        } else {
+          errorText0.classList.remove('active');
+        }
+      
+      }
+      document.getElementById('password').addEventListener('input', checkPassword);
+
+      // 3. 전화번호 관련 유효성 추가
+      function formatPhoneNumber() {
+        const phoneNumberInput = document.getElementById('phoneNum');
+        let phoneNumber = phoneNumberInput.value.replace(/[^\d]/g, ''); // 숫자 이외의 문자 모두 제거
+
+        // 포맷 적용
+        if (phoneNumber.length >= 4 && phoneNumber.length <= 7) {
+          phoneNumber = phoneNumber.replace(/(\d{3})(\d{1,4})/, '$1-$2');
+        } else if (phoneNumber.length >= 8) {
+          phoneNumber = phoneNumber.replace(/(\d{3})(\d{4})(\d{1,4})/, '$1-$2-$3');
+        }
+        phoneNumberInput.value = phoneNumber;
+      }
+
+      // 휴대폰 번호 입력란에 input 이벤트 추가하여 입력할 때마다 포맷 변경
+      document.getElementById('phoneNum').addEventListener('input', formatPhoneNumber); 
+
     </script>
     
   </body>

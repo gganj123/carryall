@@ -20,35 +20,20 @@
     </div>
  
     <div class="container" style="height: 100px; width: 100%; display: flex; flex-wrap: wrap;">
-      <div class="side1" style="height: 2600px; width: 20%; background-color: #fafafa; ">
+      <div class="side1" style="height: 3400px; width: 20%; background-color: #fafafa; ">
         <div class="category_box" style="text-align: left;">
           <div>
               <button class="headmenu cate" style="height: 30%;width: 80%; margin-bottom: 10px;">
-                  <h1>Brand</h1>
+                  <h1>categoryName</h1>
               </button>
-              <button class="headmenu slideRight cate" id="supremebutt"style="height: 25%;width: 80%;">
+              <button class="headmenu slideRight cate  supremebutt" id="supremebutt" style="height: 25%;width: 80%;">
                   <h2>Supreme</h2>
               </button>
-              <button class="headmenu slideRight cate" id="stussybutt"style="height: 25%;width: 80%;">
+              <button class="headmenu slideRight cate  stussybutt" id="stussybutt" style="height: 25%;width: 80%;">
                   <h2>Stussy</h2>
               </button>
-              <button class="headmenu slideRight cate" id="barebutt" style="height: 25%;width: 90%;">
+              <button class="headmenu slideRight cate  barebutt" id= "barebutt" style="height: 25%;width: 90%;">
                   <h2>Bare</h2>
-              </button>
-          </div>
-
-          <div>
-              <button class="headmenu cate" style="height: 30%;width: 80%; margin-top: 50px; margin-bottom: 10px;">
-                  <h1>Category</h1>
-              </button>
-              <button class="headmenu slideRight cate" id="tbutt" style="height: 22%;width: 80%;">
-                  <h2>Tod's bag</h2>
-              </button>
-              <button class="headmenu slideRight cate" id="cbutt" style="height: 22%;width: 80%;">
-                  <h2>cross bag</h2>
-              </button>
-              <button class="headmenu slideRight cate" id="bbutt" style="height: 22%;width: 90%;">
-                  <h2>back pack</h2>
               </button>
           </div>
       </div>
@@ -58,24 +43,20 @@
 
         
           <div class="selectbox">
-            <div style="width: 40%;" class="hdsort">
+            <div style="width: 40%;" class="hdsort" id="chanText">
               <h2>Lastest listings</h2>
-              <h3 class="font_20" style="font-weight: 500;">최신상품</h3>
+              <h3 class="font_17">최신상품</h3>
           </div>
-            <select name="sort" id="sort" class="font_17" style="width:100px; margin: 30px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 0px; ">
-              <option value="a">선택</option>
-              <option value="a">최신상품</option>
-              <option value="b">판매인기</option>
-              <option value="c">낮은가격</option>
-              <option value="d">높은가격</option>
+            <select name="sort" id="sort" class="font_17" style="width:120px; margin: 30px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 0px;"  onchange="fetchProducts()">
+              <option id= "sort2" value="a" style="display: none;">최신상품</option>
+              <option value="new">최신상품</option>
+              <option value="desc">높은가격</option>
+              <option value="asc">가성비상품</option>
           </select>
         </div>
         <ul class="scroll1">
           <div class="productList" id="oblistSort">
               <div class="detail" id="detail"></div>
-              <div class="scroll2"  id="oblistsort2">1</div>
-        <div class="scroll2" id="oblistsort2">2</div>
-        <div class="scroll2"  id="oblistsort2">3</div>
       </ul>
           </div> 
         </div>
@@ -90,13 +71,15 @@
   <div style="height: 500px;"></div>
 
 
+
   <script src="/js/header.js"></script>
   <script src="/js/top.js"></script>
-  <script src="/js/scroll.js"></script>
-
+  <!-- <script src="/js/scroll.js"></script> -->
   <!-- <script src="/js/product.js"></script> -->
   <!-- <script src="/js/hdsort.js"></script> -->
   <script src="/js/oblistsort.js"></script>
+  <script src="../js/obsort2.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  
 </body>
 </html>

@@ -1,0 +1,126 @@
+<!-- 은지 > 회원가입 폼 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>carryAll_회원가입 입력폼</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/css/join.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <header id="header"></header>
+
+    <main>
+      <section class="container">
+        <div id="userEditForm"></div>
+      </section>
+      <div onclick="수정(id)">수정하기</div>
+    </main>
+    
+
+    <script src="/js/header.js"></script>
+    <script src="/js/footer.js"></script>
+    <script src="/js/adminUserEdit.js"></script>
+
+    <!-- 우편번호 API -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+      // 1. 이메일 주소 유효성 추가
+      var emailInput = document.getElementById("email");
+      var errorText = document.querySelector(".errTxt.n2");
+
+      // 이메일 입력란의 내용이 변경될 때마다 이벤트를 수신하도록 설정
+      emailInput.addEventListener("input", function () {
+        // 이메일 주소가 "@" 기호를 포함하지 않는 경우
+        if (!emailInput.value.includes("@")) {
+          // 에러 메시지를 보이도록 함
+          errorText.classList.add("active");
+        } else {
+          // "@" 기호가 포함된 경우 에러 메시지를 숨김
+          errorText.classList.remove("active");
+        }
+      });
+
+      // 3. 전화번호 관련 유효성 추가
+      function formatPhoneNumber() {
+        const phoneNumberInput = document.getElementById("phoneNum");
+        let phoneNumber = phoneNumberInput.value.replace(/[^\d]/g, ""); // 숫자 이외의 문자 모두 제거
+
+        // 포맷 적용
+        if (phoneNumber.length >= 4 && phoneNumber.length <= 7) {
+          phoneNumber = phoneNumber.replace(/(\d{3})(\d{1,4})/, "$1-$2");
+        } else if (phoneNumber.length >= 8) {
+          phoneNumber = phoneNumber.replace(
+            /(\d{3})(\d{4})(\d{1,4})/,
+            "$1-$2-$3"
+          );
+        }
+        phoneNumberInput.value = phoneNumber;
+      }
+
+      // 휴대폰 번호 입력란에 input 이벤트 추가하여 입력할 때마다 포맷 변경
+      document
+        .getElementById("phoneNum")
+        .addEventListener("input", formatPhoneNumber);
+
+      //4. 우편번호 검색
+      function findAddr() {
+        new daum.Postcode({
+          oncomplete: function (data) {
+            console.log(data);
+            var postInput = document.getElementById("address01");
+            var addrInput = document.getElementById("address02");
+            postInput.value = data.zonecode; // 우편번호 입력란에 우편번호 설정
+            addrInput.value = data.roadAddress || data.jibunAddress; // 도로명 주소가 있으면 roadAddress, 없으면 jibunAddress 설정
+          },
+        }).open();
+      }
+
+      //5. api 입력
+      function submitForm() {
+        // HTML 폼 요소에 입력된 값을 수집합니다.
+        // 비밀번호 : password
+        // 이메일 : email
+        // 휴대폰번호 : phoneNum
+        // 주소 : `${address01}${address02}${address03}`
+
+        const password = document.getElementById("password").value;
+        const email = document.getElementById("email").value;
+        const phoneNum = document.getElementById("phoneNum").value;
+        const address01 = document.getElementById("address01").value;
+        const address02 = document.getElementById("address02").value;
+        const address03 = document.getElementById("address03").value;
+
+        // 수집된 데이터를 서버에 전송합니다.
+        axios
+          .post("/join", {
+            password: password,
+            email: email,
+            tel: phoneNum,
+            zipCode: address01,
+            address: address02,
+            addressDetail: address03,
+          })
+          .then((response) => {
+            // 서버로부터의 응답을 처리, 완료 페이지로 이동
+            console.log("수정완료.", response.data);
+            window.location.href = "./adminUser.html";
+          })
+          .catch((error) => {
+            // 오류가 발생했을 때 콘솔알림.
+            console.error("err:", error);
+          });
+      }
+      function goToPreviousPage() {
+        // 이전 페이지로 돌아가는 코드.
+        window.history.back();
+      }
+    </script>
+  
+  
+
+  </body>
+</html>
