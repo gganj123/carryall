@@ -93,8 +93,8 @@ class UserController {
   async updateUser(req, res) {
     try {
       const {
+        username,
         password,
-        name,
         email,
         tel,
         zipCode,
@@ -103,10 +103,10 @@ class UserController {
         telSubscription,
         emailSubscription,
       } = req.body;
-      console.log(req.body);
-      await userService.editUser(req.session.username, {
+
+      await userService.editUser({
+        username,
         password,
-        name,
         email,
         tel,
         zipCode,
@@ -144,13 +144,31 @@ class UserController {
   }
 
   // 마이페이지
-  async mypage(req, res) {
+  async confirmUser(req, res) {
     try {
-      const user = await userService.mypage(req.session.username);
+      const user = await userService.confirmUser(req.session.username);
       if (user) {
         res.json(user);
       } else {
         res.status(404).json({ message: "로그인해주세요" });
+      }
+    } catch (err) {
+      res.status(500).json({ err: err.message });
+    }
+  }
+
+  // 비밀번호 확인
+  async confirmPassword(req, res) {
+    try {
+      const { password } = req.body;
+      const user = await userService.confirmPassword(
+        req.session.username,
+        password
+      );
+      if (user) {
+        res.json(user);
+      } else {
+        res.status(404).json({ message: "비밀번호가 틀렸습니다" });
       }
     } catch (err) {
       res.status(500).json({ err: err.message });

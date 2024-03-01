@@ -15,8 +15,12 @@ class OrderController {
   async addOrder(req, res, next) {
     const { userId, productInformation, recipientInformation } = req.body;
 
+<<<<<<< HEAD
     
 if (
+=======
+    if (
+>>>>>>> 07b7479805c9a1fea711ac3cf530286a19d5a1bf
       !userId ||
       !productInformation ||
       !productInformation[0].name ||
@@ -42,13 +46,13 @@ if (
     }
   }
   // 주문 상세(주문 하나) 조회
-  async getOrder(req, res, next) {
-    const { _id } = req.params;
-    if (!_id) {
-      return res.status(400).json("에러 : 주문 정보를 찾을 수 없습니다.");
+  async getOrderById(req, res, next) {
+    const { userId } = req.params;
+    if (!userId) {
+      return res.status(400).json("에러 : 해당 아이디를 찾을 수 없습니다.");
     }
     try {
-      const order = await orderService.getOrder(_id);
+      const order = await orderService.getOrderById(userId);
       return res.status(200).json(order);
     } catch (error) {
       next(error);
@@ -81,7 +85,36 @@ if (
       next(error);
     }
   }
-}
+
+    // 주문 상세(주문 하나) 조회
+  async getOrderById(req, res, next) {
+    const { userId } = req.params;
+    if (!userId) {
+      return res.status(400).json("에러 : 해당 아이디를 찾을 수 없습니다.");
+    }
+    try {
+      const order = await orderService.getOrderById(userId);
+      return res.status(200).json(order);
+    } catch (error) {
+      next(error);
+    }
+  }  
+
+  // 관리자가 배송 상태 변경
+  async editOrderStatus(req, res, next) {
+    const { _id } = req.params;
+    if (!_id) {
+      return res.status(400).json({ error: "에러: 해당 주문 정보를 수정할 수 없습니다." });
+    }
+    try {
+      const updatedOrder = await orderService.editOrderStatus(_id, req.body);
+      return res.status(200).json(updatedOrder);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+}  
 
 const orderController = new OrderController();
 

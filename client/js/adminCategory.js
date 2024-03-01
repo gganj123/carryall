@@ -6,12 +6,16 @@ function fetchData() {
 
       productList.forEach((product, index) => {
         htmlString += `
-        <div class="adminList">
+        <div class="adminList" style="height:125px">
           <div class="check">
             <input type="checkbox" name="checkbox1" id="${product._id}">&ensp;&nbsp;${index + 1}
           </div>
-          <div class="sort">
-            <input type="text" class ="cate font_17" value="${product.name}">
+          <div class="sort" style="height:125px;display:block;">
+            <input type="text" class ="changeName cate font_17" placeholder="카테고리명 입력" required value="${product.name}" >
+            <br />
+            <input type="text" class ="changeOrigin cate font_17" placeholder="원산지 입력" required value="${product.origin}" >
+            <br />
+            <input type="text" class ="changeDetail cate font_17" placeholder="디테일 입력" required value="${product.detail}" >
           </div>
           <div class="sortbutton">
             <button class="change col font_17">수정</button>
@@ -43,10 +47,16 @@ let htmlString2 = '';
 
 function addForm(){
     htmlString2 += `
-    <div class="adminList">
+    <div class="adminList" style="height:125px;">
     <div class="check">
       <input type="checkbox" name="checkbox1">&ensp;&nbsp;1</div>
-      <div class="sort"><input type="text" class ="regi cate font_17"></div>
+      <div class="sort" style="height:125px;display:block;">
+        <input type="text" class ="postName cate font_17" placeholder="카테고리명 입력" required >
+        <br />
+        <input type="text" class ="postOrigin cate font_17" placeholder="원산지 입력" required >
+        <br />
+        <input type="text" class ="postDetail cate font_17" placeholder="디테일 입력" required >
+      </div>
       <div class="sortbutton"><button id="regiButton" class="col font_17">등록</button></div>
       <div class="infoCont" style="width:100%; padding-top: 0;">
         <h3> </h3></div>
@@ -71,13 +81,11 @@ addButton.addEventListener('click',addForm);
 
 
 function cateRegifunc() {
-    const inputCate = document.querySelector('.regi');
-    const value = inputCate.value
-    console.log(value)
-    const dataToSend = {   
-        "name" : value
-};
-    axios.post('/api/categories', dataToSend)
+  const name = document.querySelector(".postName").value;
+  const origin = document.querySelector(".postOrigin").value;
+  const detail = document.querySelector(".postDetail").value;
+
+    axios.post('/api/categories', {name,origin,detail})
 .then(response => {
     // 서버로부터 받은 응답을 처리합니다.
     console.log(response.data); // 서버에서 전송된 데이터 출력
@@ -136,32 +144,21 @@ function changeFunc(event) {
 
       // 부모 요소 내에서 체크박스를 찾음
       const checkbox = adminListItem.querySelector('input[type="checkbox"]');
-      const input = adminListItem.querySelector('input[type="text"]');
-     
+      const name = adminListItem.querySelector(".changeName").value;
+      const origin = adminListItem.querySelector(".changeOrigin").value;
+      const detail = adminListItem.querySelector(".changeDetail").value;
+     console.log(name,origin,detail)
       // 체크박스가 있는지 확인 후 변수에 할당
-      if (checkbox && input) {
+      if (checkbox) {
         // 체크박스와 input 텍스트가 모두 있는 경우
         const checkboxId = checkbox.id; // 체크박스의 id 가져오기
-        const inputValue = input.value; // input 텍스트의 값 가져오기
-
-        // 원하는 작업 수행
-        console.log('체크박스 ID:', checkboxId);
-        console.log('입력된 텍스트:', inputValue);
-          const putdata = {   
-            "name": inputValue
-        }
-          // 카테고리를 수정하는 요청을 보냄
-          axios.put(`/api/categories/${checkboxId}`, putdata)
+          axios.put(`/api/categories/${checkboxId}`, {name,origin,detail})
               .then(response => {
-                  // 카테고리 수정에 성공한 경우
-                 alert(`카테고리명이 수정되었습니다. '${inputValue}'`);
               })
               .catch(error => {
-                  // 카테고리 수정에 실패한 경우
                   console.error(`카테고리 ID ${checkboxId} 수정 요청 실패:`, error);
               });
       } else {
-          // 체크박스가 없는 경우
           console.error('해당 수정 버튼의 부모 요소에 체크박스가 없습니다.');
       }
   }

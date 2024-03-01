@@ -1,6 +1,14 @@
 body {
   height: auto;
 }
+.header {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d9d9d9;
+}
 .container {
   padding-bottom: 100px;
 }

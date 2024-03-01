@@ -26,7 +26,7 @@ class OrderService {
     orderInfo.status = status;
     const newOrder = await orderModel.create(orderInfo);
     return newOrder;
-}
+  }
 
   // id로 주문 수정 -> 이 부분 확인안해봄
   async editOrder(orderId, orderInfo) {
@@ -37,6 +37,29 @@ class OrderService {
   // id로 주문 취소
   async removeOrder(orderId) {
     await orderModel.delete(orderId);
+  }
+
+  // user id에 해당하는 주문 내역 불러오기
+  async getOrderById(userId) {
+    if (userId) {
+      const order = await orderModel.findOrder(userId);
+      return order;
+    }
+  }
+
+  // 관리자가 배송 상태 수정
+  async editOrderStatus(orderId, orderInfo) {
+    try {
+      const updatedOrder = await orderModel.updateOrder(
+        orderId,
+        orderInfo.status
+      );
+      return updatedOrder;
+    } catch (error) {
+      // 오류 처리
+      console.error("주문 수정 중 오류 발생:", error);
+      throw error;
+    }
   }
 }
 

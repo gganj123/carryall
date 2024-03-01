@@ -18,7 +18,7 @@ button {
 main {
   margin-top: 8%;
 }
-.container{
+.container {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -58,10 +58,11 @@ h2 {
 .navCont li.navTit.n1 {
   margin-top: 0;
 }
+
 .infoCont {
   width: 70%;
-  padding-top: 20px;
 }
+
 .infoCont h3 {
   border-bottom: 1px solid #424242;
   padding-bottom: 8px;
@@ -77,56 +78,63 @@ h2 {
 }
 /* 기본 레이아웃 end */
 
-button{
-  width : 120px;
-  height : 30px;
-  background-color: #BDBDBD;
+button {
+  width: 120px;
+  height: 30px;
+  background-color: #bdbdbd;
 }
-.col{
+.col {
   background-color: #333333;
   color: #ffffff;
 }
 
-.balance{
+.balance {
   float: right;
   margin-right: 50px;
-
 }
 
-div.adminList{
+.editbutton {
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  line-height: 32px;
+}
+
+.adminList {
   margin: 0;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   justify-content: space-between;
-  height: 50px;
-  margin-top: 10px;
+  height: 60px;
+  border-bottom: solid 1px #ccc;
 }
 
-div.check{
-  width:20%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.sort{
-  width: 30%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-div.sortbutton{
-  width:30%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.adminList.tophead {
+  border-top: solid 1px #000;
 }
 
-input.cate{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 170px;
+.listBox {
   text-align: center;
+  width: calc((100% - 180px) / 3);
+}
+
+.check {
+  width: 80px;
+}
+
+.userId {
+}
+
+.name {
+}
+
+.tel {
+}
+
+.sortbutton {
+  width: 100px;
+}
+
+.listBox input[type="text"] {
+  width: 100%;
 }

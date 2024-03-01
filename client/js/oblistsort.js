@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 const urlParams = new URLSearchParams(window.location.search); //http://localhost:5001/product/?brand=bare
 const brand = urlParams.get('brand');
 console.log(brand);
@@ -6,6 +7,55 @@ console.log(brand);
  function fetchProductsByBrand(bran) {
   console.log(bran);
     axios.get(`/api/products?categoryName=${bran}`)
+=======
+      function getFilterValueFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const brand = urlParams.get('brand');
+        const categoryId = urlParams.get('categoryId');
+        // 브랜드 값이 있으면 브랜드를 반환, 그렇지 않으면 카테고리 ID 반환
+        return brand !== null ? brand : categoryId;
+      }
+
+      // URL에서 브랜드 값 또는 카테고리 ID 가져오기
+      const filterValue = getFilterValueFromURL();
+      console.log(filterValue);
+
+      // 카테고리 ID가 있는 경우에만 해당 카테고리의 상품을 필터링
+      if (filterValue !== null && filterValue !== undefined && filterValue.startsWith("65")) {
+        const filteredProducts = productList.filter(product => product.categoryId === filterValue);
+        console.log(filteredProducts);
+
+        filteredProducts.forEach(product => {
+          htmlString += `<div class="item" style="height: 321px; width: 244.44px; margin-bottom:100px;"><a href="/practice?id=${product._id}">`
+          htmlString += `<img class="img" style="width: 100%; height: auto;  display: block;" id="${product._id}" src="${product.image}">`;
+          htmlString += `<h2 id="root"> ${product.categoryName}</h2>`;
+          htmlString += `<div p>${product.name}</div> `;
+          htmlString += `<p>${product.price.toLocaleString('ko-KR')}</p>`;
+          htmlString += `</div></a>`;
+        });
+      } else {
+        // 카테고리 ID가 없는 경우에는 전체 상품을 출력
+        productList.forEach(product => {
+          htmlString += `<div class="item" style="height: 321px; width: 244.44px; margin-bottom:100px;"><a href="/practice?id=${product._id}">`
+          htmlString += `<img class="img" style="width: 100%; height: auto;  display: block;" id="${product._id}" src="${product.image}">`;
+          htmlString += `<h2 id="root"> ${product.brand}</h2>`;
+          htmlString += `<div p>${product.name}</div> `;
+          htmlString += `<p>${product.price.toLocaleString('ko-KR')}</p>`;
+          htmlString += `</div></a>`;
+        });
+      }
+
+      document.getElementById('oblistSort').innerHTML = htmlString;
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+}
+
+
+  function fetchProductsByBrand(categoryName) {
+    axios.get(`/api/products`)
+>>>>>>> 07b7479805c9a1fea711ac3cf530286a19d5a1bf
       .then(res => {
         const productList = res.data;
         let htmlString = '';

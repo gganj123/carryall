@@ -11,9 +11,9 @@ class CategoryModel {
     const categories = await Category.find({});
     return categories;
   }
-  async update({ _id }, { name }) {
+  async update({ _id }, { name, origin, detail }) {
     const option = { returnOriginal: false };
-    const updatedCategory = await Category.findOneAndUpdate({ _id }, { name }, option);
+    const updatedCategory = await Category.findOneAndUpdate({ _id }, { name, origin, detail }, option);
     return updatedCategory;
   }
   async delete(_id) {

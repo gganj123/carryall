@@ -52,10 +52,10 @@ class UserService {
   }
 
   // 회원정보 수정
-  async editUser(username, update) {
+  async editUser(update) {
     const {
+      username,
       password,
-      name,
       email,
       tel,
       zipCode,
@@ -68,10 +68,9 @@ class UserService {
     const hashPassword = hashedPassword(password);
 
     const foundUser = await this.userModel.update(
-      { username },
       {
+        username,
         password: hashPassword,
-        name,
         email,
         tel,
         zipCode,
@@ -110,8 +109,16 @@ class UserService {
   }
 
   // 마이페이지
-  async mypage(username) {
+  async confirmUser(username) {
     const user = await userModel.findByUser(username, null);
+    return user;
+  }
+
+  // 비밀번호확인
+  async confirmPassword(username, password) {
+    const hashPassword = hashedPassword(password);
+    const user = await userModel.confirmPassword(username, hashPassword);
+
     return user;
   }
 }

@@ -123,6 +123,7 @@
           allAgreeCheckbox.checked = false;
         } else {
           let allChecked = true;
+          
           subAgreeCheckboxes.forEach(subCheckbox => {
             if (!subCheckbox.checked) {
               allChecked = false;
@@ -130,6 +131,10 @@
           });
           if (allChecked) {
             allAgreeCheckbox.checked = true;
+            const chkBoxAll = document.querySelectorAll('.chkBox');
+            chkBoxAll.forEach(idx => {
+              idx.classList.add('active');
+            })
           }
         }
       });
