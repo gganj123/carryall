@@ -5,6 +5,11 @@ discountPrice = 0; // 초기화
 totalItemPrice = 0; // 초기화
 
 // 주문 완료 페이지 이동
+
+displayUserOrderInfo();
+updateTotalPrice();
+getUserInfo();
+
 btnPayment.addEventListener('click', async () => {
   alert('상품 구매가 완료되었습니다.');
   location.href = "/orderComplete";
@@ -24,6 +29,7 @@ btnPayment.addEventListener('click', async () => {
 displayUserOrderInfo();
 updateTotalPrice();
 
+
 function displayUserOrderInfo() {
   const orderItems = JSON.parse(localStorage.getItem("orderItems")) || [];
   const itemContainer = document.querySelector(".itemContainer");
@@ -31,7 +37,8 @@ function displayUserOrderInfo() {
   p_list = [];
 
   orderItems.forEach(item => { 
-    axios.get('http://localhost:5001/api/products/cartInformation/' + item._id)
+
+    axios.get('/api/products/cartInformation/' + item._id)
     .then(response => {
       // 성공했을 때
       data = response.data["data"]; // 상품 정보를 받아옴
@@ -102,35 +109,22 @@ function updateTotalPrice() {
 }
 
 /**user 정보를 받아오는 함수 */
+
+function updateUserInfo(user) {
+  document.getElementById("userName").value = user.name;
+  document.getElementById("phoneNum").value = user.tel;
+  document.getElementById("address01").value = user.zipCode;
+  document.getElementById("address02").value = user.address;
+  document.getElementById("address03").value = user.addressDetail;
+}
+
 function getUserInfo() {
-  axios.get('http://localhost:5001/api/mypage')
-  .then(response => {
-    
-    const orderInfo = {
-      "date": new Date(),
-      "status": "결제완료",
-      "productInformation": p_list,
-      "recipientInformation": {
-        "recipientName": userName,
-        "recipientZipCode": userZipCode,
-        "recipientAddress": userAddress,
-        "recipientAddressDetail": userAddressDetail,
-        "recipientTel": userPhone
-      }
-    }
-
-    const userName = response._id;
-    const userZipCode = response.zipCode;
-    const userAddress = response.address;
-    const userAddressDetail = response.addressDetail;
-    const userPhone = response.tel;
-
-    document.getElementById("userName").innerText = userName
-    document.getElementById("userPhone").innerText = userPhone
-
-    document.getElementById("address01").innerText = userZipCode
-    document.getElementById("address02").innerText = userAddress
-    document.getElementById("address03").innerText = userAddressDetail
-  })
-  
+  axios.get('/api/mypage')
+    .then(response => {
+      const userData = response.data;
+      updateUserInfo(userData);
+    })
+    .catch(error => {
+      console.log('Error fetching user data:', error);
+    });
 }
