@@ -4,6 +4,8 @@ const inputZipCode = document.getElementById("address01");
 const inputAddress = document.getElementById("address02");
 const inputAddressDetail = document.getElementById("address03");
 
+
+
 // let phoneNumber = document.querySelector(".phone-number");
 // let address = document.querySelector(".address");
 // let orderNumber = document.querySelector(".order-number");
@@ -21,6 +23,11 @@ btnPayment.addEventListener("click", function() {
 function postToServer() {
   let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
   let orderItems = JSON.parse(localStorage.getItem("orderItems"));
+  let totalPrice = 0;
+
+  orderItems.forEach(item => {
+    totalPrice += (item.price * item.quantity);
+  });
 
 
   const recipientInformation = {
@@ -30,8 +37,10 @@ function postToServer() {
     recipientAddressDetail: inputAddressDetail.value,
     recipientTel: inputPhone.value
   };
+  
   dataToSend = {
     "userId": loggedInUser.username,
+    "totalPrice": totalPrice,
     "productInformation": JSON.parse(localStorage.getItem("orderItems")),
     "recipientInformation": recipientInformation
   }
@@ -50,7 +59,7 @@ function postToServer() {
     orderResult.push(response.data);
     localStorage.setItem("orderResult", JSON.stringify(orderResult)); 
     localStorage.removeItem("orderItems");
-
+    drawItems([]);
   })
   .catch(function (error) {
     console.log("주문을 처리하는 도중 오류가 발생했습니다:" + error);
@@ -138,7 +147,8 @@ function getUserInfo(){
       inputAddressDetail.value = userData.addressDetail;
     })
     .catch(error => {
-      console.error("사용자 정보를 가져오는 도중 오류가 발생했습니다:", error);
+      alert("로그인이 필요한 기능입니다");
+      location.href = "/loginMember";
     });
 }
 
