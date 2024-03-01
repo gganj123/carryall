@@ -11,7 +11,8 @@ function loggedIn() {
       }
     })
     .catch((error) => {
-      console.log("로그아웃됨");
+      console.error(error);
+      console.log('로그아웃됨')
     });
 }
 
