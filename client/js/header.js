@@ -21,10 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
     event.preventDefault();
     axios.post('/api/logout')
       .then(response => {
-        // 로그아웃 성공 시 로컬 스토리지 비우고 페이지 새로고침
-        // localStorage.clear();
         console.log('로그아웃 성공:', response.data);
-        window.location.reload();
+        window.location.href = '/';
       })
       .catch(error => {
         console.error('로그아웃 중 오류 발생:', error);

@@ -3,8 +3,25 @@ const ProductService = require("../service/productService");
 class ProductController {
   async getProduct(req, res) {
     try {
-      const products = await ProductService.getProductList();
-      res.status(200).json(products);
+      var params = req.query;
+      var categoryName = params.categoryName;
+      var products = await ProductService.getProductList();
+      const sortOrder = params.sortOrder;
+
+      if(categoryName != null){
+        products = products.filter(p => p._doc.categoryName == categoryName)
+      }
+
+      const filterProducts = [...products];
+
+      if (sortOrder == 'asc') {
+        filterProducts.sort((a, b) => a.price - b.price);
+      } else if (sortOrder == 'desc') {
+        filterProducts.sort((a, b) => b.price - a.price);
+      }
+
+      res.status(200).json(filterProducts);
+  
     } catch (err) {
       res
         .status(err.statusCode || 500)
@@ -14,7 +31,7 @@ class ProductController {
 
   async getProductById(req, res) {
     try {
-      const { _id } = req.params
+      const { _id } = req.params;
       const product = await ProductService.getProductById(_id);
       res.status(200).json({ success: true, data: product });
     } catch (err) {
@@ -22,17 +39,16 @@ class ProductController {
     }
   }
 
-  // 장바구니용 상품 id 조회(상품 금액, 이미지, 브랜드, 옵션, 상품 이름 리턴)
-    async getProductInformation(req, res) {
-      try {
-        const {_id} = req.params
-        const product = await ProductService.getProductInformation(_id);
-        res.status(200).json({ success: true, data: product });
-      } catch (err) {
-        res.status(400).json({ success: false, message: err.message });
-      }
+  // 장바구니용 상품 id 조회(상품 금액, 이미지, 브랜드, 상품 이름 리턴)
+  async getProductInformation(req, res) {
+    try {
+      const { _id } = req.params;
+      const product = await ProductService.getProductInformation(_id);
+      res.status(200).json({ success: true, data: product });
+    } catch (err) {
+      res.status(400).json({ success: false, message: err.message });
     }
-
+  }
 
   // 카테고리별 상품조회 추가 가능
   async createProduct(req, res) {
