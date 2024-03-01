@@ -1,64 +1,85 @@
 <!-- 은지 > 회원정보 수정 -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>carryAll_회원정보 수정폼</title>
-  <link rel="stylesheet" href="../css/styles.css">
-  <link rel="stylesheet" href="../css/login.css">
-  <link rel="stylesheet" href="../css/join.css">
-</head>
-<body>
-  <!-- 헤더 가져오기 -->
-  <header id="header"></header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>carryAll_회원정보 수정폼</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="stylesheet" href="../css/join.css" />
+  </head>
+  <body>
+    <!-- 헤더 가져오기 -->
+    <header id="header"></header>
 
-  <!-- 컨텐츠 -->
-  <section class="container joinFormWarp">
-    <form id="signupForm" action="#" method="post" class="inputForm">
-      <fieldset>
-        <legend class="formTit">회원정보 수정</legend>
-          <!-- <ul class="pathBox">
-            <li><a href="./join_agree.html">약관동의</a></li>
-            <li><a style="font-weight: 500;" href="#">정보입력</a></li>
-            <li><a href="#">가입완료</a></li>
-          </ul> -->
+    <!-- 컨텐츠 -->
+    <section class="container joinFormWarp">
+      <form
+        id="signupForm"
+        action="javascript:void(0);"
+        method="post"
+        class="inputForm"
+      >
+        <fieldset>
+          <legend class="formTit">회원정보 수정</legend>
           <div class="box formBox">
             <ul class="joinBox">
-              <!-- <li class="reqTxt">
-                <h6>회원정보 입력<span>* 필수 입력 항목입니다.</span></h6>
-              </li> -->
               <!-- 1. 아이디 -->
               <li>
                 <label for="idName" class="label">
-                    <span>아이디</span>
-                    <input style="background-color: #fff;" type="text" class="inputType01" id="idName" required="" value="get예정(수정불가)" disabled>
+                  <span>아이디</span>
+                  <input
+                    style="background-color: #fff"
+                    type="text"
+                    class="inputType01"
+                    id="idName"
+                    required=""
+                    value="get예정(수정불가)"
+                    disabled
+                  />
                 </label>
               </li>
               <!-- 2. 비밀번호 변경 -->
               <li>
                 <label for="password" class="label">
                   <span>비밀번호 변경</span>
-                  <input type="password" class="inputType01" id="password" required="" >
+                  <input
+                    type="password"
+                    class="inputType01"
+                    id="password"
+                    required=""
+                  />
                 </label>
               </li>
-    
+
               <!-- 3. 비밀번호 확인 -->
               <li>
                 <label for="passwordReconfirm" class="label">
                   <span>비밀번호 확인</span>
-                  <input type="password" class="inputType01" id="passwordReconfirm" required="" >
+                  <input
+                    type="password"
+                    class="inputType01"
+                    id="passwordReconfirm"
+                    required=""
+                  />
                 </label>
-                <div class="errTxt n1">
-                  입력된 비밀번호를 확인하세요.
-                </div>
+                <div class="errTxt n1">입력된 비밀번호를 확인하세요.</div>
               </li>
-    
+
               <!-- 4. 이름 -->
               <li>
                 <label for="name" class="label">
                   <span>이름</span>
-                  <input style="background-color: #fff;" type="text" class="inputType01" id="name" required="" value="엘리스(수정불가)" disabled>
+                  <input
+                    style="background-color: #fff"
+                    type="text"
+                    class="inputType01"
+                    id="name"
+                    required=""
+                    value="엘리스(수정불가)"
+                    disabled
+                  />
                 </label>
               </li>
 
@@ -66,192 +87,209 @@
               <li class="f_fs f_d_c label02">
                 <label for="email" class="label">
                   <span>이메일</span>
-                  <input type="text" class="inputType01" id="email">
+                  <input type="text" class="inputType01" id="email" />
                 </label>
-                <div class="errTxt n2">
-                  이메일 주소를 확인하세요.
-                </div>
+                <div class="errTxt n2">이메일 주소를 확인하세요.</div>
               </li>
-              <li style="margin: 0;">
-                <label style="justify-content: flex-start; margin-left: 20%;" for="smsConsent01" class="label">
-                  <input style="height: 35px; width: unset;" type="checkbox" id="smsConsent01" required="">
-                  <span style="display: block; margin-left: 15px;"> SMS 수신 동의</span>
+              <li style="margin: 0">
+                <label
+                  style="justify-content: flex-start; margin-left: 20%"
+                  for="smsConsent01"
+                  class="label"
+                >
+                  <input
+                    style="height: 35px; width: unset"
+                    type="checkbox"
+                    id="smsConsent01"
+                    required=""
+                  />
+                  <span style="display: block; margin-left: 15px">
+                    SMS 수신 동의</span
+                  >
                 </label>
               </li>
               <!-- 6. 휴대폰 번호 -->
               <li>
                 <label for="phoneNum" class="label">
                   <span>휴대폰 번호</span>
-                  <input type="text" class="inputType01" id="phoneNum" required="" maxlength='13' />
+                  <input
+                    type="text"
+                    class="inputType01"
+                    id="phoneNum"
+                    required=""
+                    maxlength="13"
+                  />
                 </label>
               </li>
-              <li style="margin: 0;">
-                <label style="justify-content: flex-start; margin-left: 20%;" for="smsConsent02" class="label">
-                  <input style="height: 35px; width: unset;" type="checkbox" id="smsConsent02" required="">
-                  <span style="display: block; margin-left: 15px;"> SMS 수신 동의</span>
+              <li style="margin: 0">
+                <label
+                  style="justify-content: flex-start; margin-left: 20%"
+                  for="smsConsent02"
+                  class="label"
+                >
+                  <input
+                    style="height: 35px; width: unset"
+                    type="checkbox"
+                    id="smsConsent02"
+                    required=""
+                  />
+                  <span style="display: block; margin-left: 15px">
+                    SMS 수신 동의</span
+                  >
                 </label>
               </li>
             </ul>
 
             <!-- 7. 주소 -->
             <li>
-              <label style="justify-content: flex-start;" for="address01" class="label">
+              <label
+                style="justify-content: flex-start"
+                for="address01"
+                class="label"
+              >
                 <span>주소</span>
-                <input style="margin-left: 15.1%; margin-right: 20px;" type="text" name="address" id="address01" class="inputType01" style="width: 54%; margin-left: 13.4%; margin-right: 20px;">
-                <a class="addressBtn" href="#" onclick="findAddr()">우편번호 검색</a>
+                <input
+                  style="margin-left: 15.1%; margin-right: 20px"
+                  type="text"
+                  name="address"
+                  id="address01"
+                  class="inputType01"
+                  style="width: 54%; margin-left: 13.4%; margin-right: 20px"
+                />
+                <a
+                  class="addressBtn"
+                  href="javascript:void(0);"
+                  onclick="findAddr()"
+                  >우편번호 검색</a
+                >
               </label>
-              <div style="flex-direction: column; align-items: flex-end;" class="address_line address_line02 f_c label">
-                  <label for="address02" class="label"></label>
-                  <input style="margin-top: 20px;" type="text" name="address" id="address02" class="inputType01" >
-                  <label for="address03" class="label"></label>
-                  <input style="margin-top: 20px;" type="text" name="address" id="address03" class="inputType01" placeholder="추가 상세 주소를 입력하세요." >
+              <div
+                style="flex-direction: column; align-items: flex-end"
+                class="address_line address_line02 f_c label"
+              >
+                <label for="address02" class="label"></label>
+                <input
+                  style="margin-top: 20px"
+                  type="text"
+                  name="address"
+                  id="address02"
+                  class="inputType01"
+                />
+                <label for="address03" class="label"></label>
+                <input
+                  style="margin-top: 20px"
+                  type="text"
+                  name="address"
+                  id="address03"
+                  class="inputType01"
+                  placeholder="추가 상세 주소를 입력하세요."
+                />
               </div>
             </li>
             <div class="joinBtn btn_box">
-              <button type="button" class="btnType01" onclick="goToPreviousPage()"">이전</button>
-              <button type="button" class="btnType02 modifyForm" onclick="submitForm()">확인</button>
+              <button style="width: 100%;" type="submit" class="btnType02 modifyForm" onclick="updateUserInfo()">회원정보 변경하기</button>
             </div>
           </div>
-      </fieldset>                        
-    </form>
-  </section>
+        </fieldset>
+      </form>
+    </section>
 
-  <!-- 푸터 가져오기 -->
-  <footer id="footer"></footer>
+    <!-- 푸터 가져오기 -->
+    <footer id="footer"></footer>
 
-  <!-- 탑버튼 가져오기 -->
-  <div class="top">top</div>
+    <!-- 탑버튼 가져오기 -->
+    <div class="top">top</div>
 
-  <script src="../js/top.js"></script>
-  <script src="../js/header.js"></script>
-  <script src="../js/footer.js"></script>
-  <!-- 회원가입 폼 script -->
-  <script src="../js/join.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="../js/top.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="../js/footer.js"></script>
+    <!-- 회원가입 폼 script -->
+    <script src="../js/join.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 
-  <!-- 우편번호 API -->
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <script>
-    // 1. 이메일 주소 유효성 추가
-    var emailInput = document.getElementById("email");
-    var errorText = document.querySelector(".errTxt.n2");
-
-    // 이메일 입력란의 내용이 변경될 때마다 이벤트를 수신하도록 설정
-    emailInput.addEventListener("input", function() {
-      if (!emailInput.value.includes("@")) {
-        errorText.classList.add("active");
-      } else {
-        errorText.classList.remove("active");
+    <!-- 우편번호 API -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script>
+      // 우편번호 api
+      function findAddr() {
+        new daum.Postcode({
+          oncomplete: function (data) {
+            console.log(data);
+            var postInput = document.getElementById("address01");
+            var addrInput = document.getElementById("address02");
+            postInput.value = data.zonecode; // 우편번호 입력란에 우편번호 설정
+            addrInput.value = data.roadAddress || data.jibunAddress; // 도로명 주소가 있으면 roadAddress, 없으면 jibunAddress 설정
+          },
+        }).open();
       }
-    });
-
-
-    // 2. 비밀번호 일치 여부를 확인하는 함수
-    function checkPasswordMatch() {
-      const password = document.getElementById('password').value;
-      const passwordReconfirm = document.getElementById('passwordReconfirm').value;
-      const errorText = document.querySelector('.errTxt.n1');
-
-      if (password !== passwordReconfirm) {
-        errorText.classList.add('active');
-      } else {
-        errorText.classList.remove('active');
-      }
-    }
-
-    // 3. 전화번호 관련 유효성 추가
-    function formatPhoneNumber() {
-      const phoneNumberInput = document.getElementById('phoneNum');
-      let phoneNumber = phoneNumberInput.value.replace(/[^\d]/g, ''); // 숫자 이외의 문자 모두 제거
-
-      if (phoneNumber.length >= 4 && phoneNumber.length <= 7) {
-        phoneNumber = phoneNumber.replace(/(\d{3})(\d{1,4})/, '$1-$2');
-      } else if (phoneNumber.length >= 8) {
-        phoneNumber = phoneNumber.replace(/(\d{3})(\d{4})(\d{1,4})/, '$1-$2-$3');
-      }
-      phoneNumberInput.value = phoneNumber;
-    }
-    document.getElementById('phoneNum').addEventListener('input', formatPhoneNumber); 
-
-
-    //4. 우편번호 검색
-    function findAddr() {
-      new daum.Postcode({
-        oncomplete: function(data) {
-          console.log(data);
-          var postInput = document.getElementById("address01");
-          var addrInput = document.getElementById("address02");
-          postInput.value = data.zonecode; // 우편번호 입력란에 우편번호 설정
-          addrInput.value = data.roadAddress || data.jibunAddress; // 도로명 주소가 있으면 roadAddress, 없으면 jibunAddress 설정
-        }
-      }).open();
-    }
-
-
-    //5. api 입력
-    function submitForm() {
-      // HTML 폼 요소에 입력된 값을 수집합니다.
-      // 아이디 : idName
-      // 비밀번호 : password
-      // 이름 : name
-      // 이메일 : email
-      // 휴대폰번호 : phoneNum
-      // 주소 : `${address01}${address02}${address03}`
-
-      const username = document.getElementById('idName').value;
-      const password = document.getElementById('password').value;
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const phoneNum = document.getElementById('phoneNum').value;
-      const address01 = document.getElementById('address01').value;
-      const address02 = document.getElementById('address02').value;
-      const address03 = document.getElementById('address03').value;
-
-      // 수정된 데이터를 서버에 전송합니다.
-      axios.put('http://localhost:5001/api/user', {
-        "username": username,
-        "password": password,
-        "email": email,
-        "tel": phoneNum,
-        "name": name,
-        "address": `${address01} ${address02} ${address03}`
-      })
-      .then(response => {
-        // 서버로부터의 응답을 처리합니다.
-        console.log('회원 정보 수정이 완료되었습니다.', response.data);
-        // 여기서 다음 단계로 넘어가거나 원하는 작업을 수행할 수 있습니다.
-      })
-      .catch(error => {
-        // 오류가 발생했을 때 처리합니다.
-        console.error('회원 정보 수정 오류:', error);
-      });
-    }
-
-
-    // 예외. 이전 페이지로 돌아가는 코드를 추가합니다.
-    function goToPreviousPage() {
-      window.history.back()
-    }
     
-    // 6. localStorage 이름, 아이디값 가져오기
-    document.addEventListener("DOMContentLoaded", function() {
-      const loggedInUser = localStorage.getItem("loggedInUser");
-      
-      if (loggedInUser) {
-        const user = JSON.parse(loggedInUser);
-        const idNameInput = document.getElementById("name");
-        const nameInput = document.getElementById("idName");
-
-        if (user.name) {
-          idNameInput.value = user.name;
-        }
-        if (user.username) {
-          nameInput.value = user.username;
-        }
+      // 1. 서버로부터 사용자 정보를 가져와서 각 input 요소에 채워넣는 함수
+      function fetchUserData() {
+        const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  
+        axios.get("/api/userEdit")
+          .then((response) => {
+            const userData = response.data;
+            // 사용자 정보를 각 input 요소에 채워넣습니다.
+            document.getElementById("idName").value = userData.username;
+            document.getElementById("name").value = userData.name;
+            document.getElementById("email").value = userData.email;
+            document.getElementById("phoneNum").value = userData.tel;
+            document.getElementById("address01").value = userData.zipCode;
+            document.getElementById("address02").value = userData.address;
+            document.getElementById("address03").value = userData.addressDetail;
+          })
+          .catch((error) => {
+            console.error("데이터를 가져오는 데 실패했습니다:", error);
+          });
+          
       }
-    });
+      // 페이지 로드 시 사용자 정보를 가져와서 각 input 요소에 채워넣습니다.
+      fetchUserData();
+  
+      const signupForm = document.getElementById("signupForm");
+  
+      // 2. submit 이벤트 리스너 밖으로 updateUserInfo 함수를 이동합니다.
+      function updateUserInfo() {
+        const username = document.getElementById("idName").value;
+        const password = document.getElementById("password").value; // 변경된 비밀번호
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phoneNum = document.getElementById("phoneNum").value;
+        const address01 = document.getElementById("address01").value;
+        const address02 = document.getElementById("address02").value;
+        const address03 = document.getElementById("address03").value;
 
-  </script>
-
-</body>
+        axios.put("/api/user", {
+            "username": username,
+            "password": password,
+            "email": email,
+            "tel": phoneNum,
+            "name": name,
+            "zipCode": address01,
+            "address": address02,
+            "addressDetail": address03,
+          })
+  
+          .then(response => {
+            // 서버로부터의 응답을 처리합니다.
+            console.log("회원 정보 수정이 완료되었습니다.", response.data);
+            // 여기서 다음 단계로 넘어가거나 원하는 작업을 수행할 수 있습니다.
+          })
+          .catch(error => {
+            // 오류가 발생했을 때 처리합니다.
+            console.error("회원 정보 수정 오류:", error);
+          });
+      }
+  
+      // submit 이벤트 리스너 내에서 updateUserInfo 함수가 호출되도록 수정합니다.
+      signupForm.addEventListener("submit", function (event) {
+        alert("회원정보가 변경되었습니다.")
+        window.location.href ='/mypage';
+        updateUserInfo();
+      });
+    </script>
+    
+  </body>
 </html>

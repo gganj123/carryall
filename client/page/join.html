@@ -18,16 +18,16 @@
       <h2>회원가입</h2>
       <button type="button" id="joinBtn">일반 회원가입</button>
 
-      <h2 class="fakeTit">SNS 간편 회원가입(구현X)</h2>
+      <h2 class="fakeTit">SNS 간편 회원가입</h2>
       <button class="snsJoin" type="button" id="fakeBtn"><img class="snsIcon kakao" src="../img/icon_kakao.png" alt="카카오 간편 가입">카카오 간편 가입</button>
       <div class="btnWrap">
         <button type="button" class="snsJoin"><img class="snsIcon apple" src="../img/icon_apple.png" alt="apple 회원가입">apple 회원가입</button>
         <button type="button" class="snsJoin"><img class="snsIcon naver" src="../img/icon_naver.png" alt="네이버 회원가입">네이버 회원가입</button>
       </div>
       <ul class="joinWrap">
-        <li><a href="./loginMember.html">로그인</a></li>
-        <li><a href="#">아이디 찾기</a></li>
-        <li><a href="#">비밀번호 찾기</a></li>
+        <li><a href="/loginMember">로그인</a></li>
+        <li><a href="javascript:void(0);">아이디 찾기</a></li>
+        <li><a href="javascript:void(0);">비밀번호 찾기</a></li>
       </ul>
     </form>
   </section>
@@ -46,7 +46,7 @@
   <script>
     // 1. 페이지 이동
     document.getElementById("joinBtn").addEventListener("click", function() {
-      window.location.href = "./joinAgree.html";
+      window.location.href = "/joinAgree";
     });
 
     // 2. sns로그인 closing
@@ -67,6 +67,12 @@
         event.preventDefault();
         alert("해당 기능은 준비중입니다.");
       });
+    });
+
+    // 4. 헤더 미노출
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelector('.headmenu.logout').classList.add('none');
+      document.querySelector('.headmenu.mypage').classList.add('none');
     });
   </script>
 </body>

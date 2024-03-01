@@ -15,18 +15,18 @@
 
   <!-- 컨텐츠 -->
   <section class="container joinFormWarp">
-    <form id="signupForm" action="#" method="post" class="inputForm">
+    <form id="signupForm" action="javascript:void(0);" method="post" class="inputForm">
       <fieldset>
         <legend class="formTit">회원가입</legend>
           <ul class="pathBox">
-            <li><a href="./join_agree.html">약관동의</a></li>
-            <li><a style="font-weight: 500;" href="#">정보입력</a></li>
-            <li><a href="#">가입완료</a></li>
+            <li><a href="/join_agree">약관동의</a></li>
+            <li><a style="font-weight: 500;" href="javascript:void(0);">정보입력</a></li>
+            <li><a href="javascript:void(0);">가입완료</a></li>
           </ul>
           <div class="box formBox">
             <ul class="joinBox">
               <li class="reqTxt">
-                <h6>회원정보 입력<span>* 필수 입력 항목입니다.</span></h6>
+                <h6>회원정보 입력<span class="allErr">* 필수 입력 항목입니다.</span></h6>
               </li>
               <!-- 1. 아이디 -->
               <li>
@@ -98,7 +98,7 @@
               <label style="justify-content: flex-start;" for="address01" class="label">
                 <span style="white-space: nowrap;">* 주소</span>
                 <input type="text" name="address" id="address01" class="inputType01" style="width: 54%; margin-left: 13.4%; margin-right: 20px;">
-                <a class="addressBtn" href="#" onclick="findAddr()">우편번호 검색</a>
+                <a class="addressBtn" href="javascript:void(0);" onclick="findAddr()">우편번호 검색</a>
               </label>
               <div style="flex-direction: column; align-items: flex-end;" class="address_line address_line02 f_c label">
                   <label for="address02" class="label"></label>
@@ -146,7 +146,6 @@
         errorText.classList.remove("active");
       }
     });
-
 
     // 2. 비밀번호 일치 여부를 확인하는 함수
     function checkPasswordMatch() {
@@ -199,38 +198,17 @@
 
     //5. api 입력
     function submitForm() {
-      // HTML 폼 요소에 입력된 값을 수집합니다.
-      // 아이디 : idName
-      // 비밀번호 : password
-      // 이름 : name
-      // 이메일 : email
-      // 휴대폰번호 : phoneNum
-      // 주소 : `${address01}${address02}${address03}`
-
       const username = document.getElementById('idName').value;
       const password = document.getElementById('password').value;
       const name = document.getElementById('name').value;
-      // const passwordReconfirm = document.getElementById('passwordReconfirm').value;
       const email = document.getElementById('email').value;
       const phoneNum = document.getElementById('phoneNum').value;
       const address01 = document.getElementById('address01').value;
       const address02 = document.getElementById('address02').value;
       const address03 = document.getElementById('address03').value;
 
-      // {
-      //   "username":"singdddsing",
-      //   "password":"test3",
-      //   "email":"testtestest@teddddst.com",
-      //   "tel":"010-9999-0000",
-      //   "name":"테스트유싱 2256",
-      //   "zipCode":"123",
-      //   "address":"주소1",
-      //   "addressDetail":"주소2"
-      // }
-
-
-      // 수집된 데이터를 서버에 전송합니다.
-      axios.post('http://localhost:5001/api/join', {
+      // 수집된 데이터를 서버에 전송
+      axios.post('/api/join', {
         "username": username,
         "password": password,
         "email": email,
@@ -243,7 +221,7 @@
       .then(response => {
         // 서버로부터의 응답을 처리, 완료 페이지로 이동
         console.log('회원가입이 완료되었습니다.', response.data);
-        window.location.href = '../joinFinished';
+        window.location.href = '/joinFinished';
       })
       .catch(error => {
         // 오류가 발생했을 때 콘솔알림.
@@ -254,8 +232,15 @@
       // 이전 페이지로 돌아가는 코드.
       window.history.back()
     }
+
+    // 5. 헤더 미노출
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelector('.headmenu.logout').classList.add('none');
+      document.querySelector('.headmenu.mypage').classList.add('none');
+    });
     
-    </script>
+    
+  </script>
 
 </body>
 </html>
