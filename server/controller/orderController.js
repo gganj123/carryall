@@ -11,12 +11,27 @@ class OrderController {
     }
   }
 
+  // 주문 상세(주문 하나) 조회
+  async getOrder(req, res, next) {
+    const { _id } = req.params;
+    if (!_id) {
+      return res.status(400).json("에러 : 주문 정보를 찾을 수 없습니다.");
+    }
+    try {
+      const order = await orderService.getOrder(_id);
+      return res.status(200).json(order);
+    } catch (e) {
+      next(e);
+    }
+  }
+
   // 주문 추가
   async addOrder(req, res, next) {
-    const { userId, productInformation, recipientInformation } = req.body;
+    const { userId, totalPrice, productInformation, recipientInformation } = req.body;
 
     if (
       !userId ||
+      !totalPrice ||
       !productInformation ||
       !productInformation[0].name ||
       !productInformation[0].price ||
@@ -53,21 +68,6 @@ class OrderController {
       next(error);
     }
   }
-
-
-  //  // 주문 상세(주문 하나) 조회
-  //  async getOrder(req, res, next) {
-  //   const { _id } = req.params;
-  //   if (!_id) {
-  //     return res.status(400).json("에러 : 주문 정보를 찾을 수 없습니다.");
-  //   }
-  //   try {
-  //     const order = await orderService.getOrder(_id);
-  //     return res.status(200).json(order);
-  //   } catch (e) {
-  //     next(e);
-  //   }
-  // }
 
   // 주문 수정
   async editOrder(req, res, next) {

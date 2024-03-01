@@ -1,4 +1,3 @@
-//주문 스키마
 const { Schema } = require("mongoose");
 
 const OrderSchema = new Schema({
@@ -10,6 +9,10 @@ const OrderSchema = new Schema({
   // 주문 현황
   status: {
     type: String,
+    required: true,
+  },
+  totalPrice: {
+    type: Number,
     required: true,
   },
   //유저 아이디 -> 상품 조회용
@@ -46,7 +49,6 @@ const OrderSchema = new Schema({
       },
     }
   ],
-  
   // 주문자 관련 정보 -> 그 시점의 값이 저장되도록 참조 X
   recipientInformation: {
       // 받는 분 성함
