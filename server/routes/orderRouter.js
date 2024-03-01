@@ -13,5 +13,4 @@ orderRouter.delete("/:_id", orderController.removeOrder); // 주문 삭제
 orderRouter.get("/:userId", orderController.getOrderById); //아이디에 해당하는 주문 전부 조회
 orderRouter.put("/admin/:_id", orderController.editOrderStatus);// 관리자가 배송상태 수정
 
-
 module.exports = orderRouter;
