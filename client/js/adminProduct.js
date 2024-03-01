@@ -234,22 +234,20 @@ function changeFunc(event) {
     if (event.target.classList.contains("change")) {
       // 수정 버튼이 클릭된 경우, 해당 수정 버튼의 부모 요소를 찾음
       const adminListItem = event.target.closest(".adminList");
-
+  
       // 부모 요소 내에서 체크박스를 찾음
       const checkbox = adminListItem.querySelector('input[type="checkbox"]');
-      const name = document.querySelector(".changeName").value;
-      const categoryId = document.querySelector(".changeSelect").value;
-      const stock = document.querySelector(".changeStock").value;
-      const price = document.querySelector(".changePrice").value;
-      const categoryName = document.getElementById(categoryId).textContent;
-
+      const name = adminListItem.querySelector(".changeName").value;
+      const tmp = adminListItem.querySelector(".changeSelect")
+      const categoryId = tmp.value;
+      const stock = adminListItem.querySelector(".changeStock").value;
+      const price = adminListItem.querySelector(".changePrice").value;
+      const selectedOption = tmp.options[tmp.selectedIndex];
+      const categoryName = selectedOption.textContent;
       // 체크박스가 있는지 확인 후 변수에 할당
       if (checkbox) {
         // 체크박스와 input 텍스트가 모두 있는 경우
         const checkboxId = checkbox.id; // 체크박스의 id 가져오기
-
-        // 원하는 작업 수행
-        console.log("체크박스 ID:", checkboxId);
         const putdata = {
           name,
           categoryId,
