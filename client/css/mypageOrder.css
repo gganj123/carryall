@@ -1,0 +1,40 @@
+.orderList {
+}
+
+.orderItem {
+  display: flex;
+  height: 56px;
+  align-items: center;
+  border-bottom: solid 1px #ccc;
+}
+
+.orderItem > div {
+  text-align: center;
+}
+
+.orderItem .num {
+  width: 60px;
+}
+
+.orderItem .orderNum {
+  flex: 2;
+}
+
+.orderItem .total {
+  width: 100px;
+}
+
+.orderItem .date {
+  flex: 1;
+}
+
+.orderItem .status {
+  flex: 1;
+}
+
+.noPost {
+  line-height: 16vh;
+  text-align: center;
+  border-bottom: solid 1px #ccc;
+  color:#666;
+}

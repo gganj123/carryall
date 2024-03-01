@@ -3,7 +3,7 @@
       .then(res => {
         const productList = res.data;
         let htmlString = '';
-  
+
         productList.forEach((product,index) => {
           if(index<=7){
           htmlString += `<div class="item" style="height: 321px; width: 244.44px; margin-bottom:100px;"><a href="/practice?id=${product._id}">`
