@@ -19,7 +19,12 @@ viewRouter.use('/order',serveStatic('order'));
 viewRouter.use('/practice',serveStatic('practice'));
 viewRouter.use('/test',serveStatic('test'));
 viewRouter.use('/mypage',serveStatic('mypage'));
+<<<<<<< HEAD
 viewRouter.use('/adminTest',serveStatic('adminTest'))
+=======
+viewRouter.use('/admin/order',serveStatic('adminOrder'));
+viewRouter.use('/mypageTest',serveStatic('mypageTest'))
+>>>>>>> 12368844e4a2d177aace3a3dd5105d77cf4bebc7
 
 
 function serveStatic (resource) {

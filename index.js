@@ -48,10 +48,18 @@ async function test() {
   );
 
   const category = [
+<<<<<<< HEAD
     { categoryId: "65e08a335a29d582c152f71c", categoryName: "STUSSY" },
     { categoryId: "65e08a475a29d582c152f71e", categoryName: "SUPREME" },
     { categoryId: "65e08a555a29d582c152f720", categoryName: "BARE" },
   ];
+=======
+  { categoryId:"65e08a335a29d582c152f71c", categoryName:"STUSSY", origin: "중국", detail: "소재 특성 주의" },
+  { categoryId:"65e08a475a29d582c152f71e", categoryName:"SUPREME", origin: "베트남", detail: "드라이 클리닝 권장" }, 
+  { categoryId:"65e08a555a29d582c152f720", categoryName:"BARE", origin: "인도", detail: "세탁기 사용 불가능" }
+];
+>>>>>>> 12368844e4a2d177aace3a3dd5105d77cf4bebc7
+
 
   const data = await response.json();
   const list = [];
@@ -67,6 +75,8 @@ async function test() {
       categoryName: category[index].categoryName,
       createdAt: new Date(),
       updatedAt: new Date(),
+      detail: category[index].detail,
+      origin: category[index].origin,
     });
   });
 
@@ -101,7 +111,12 @@ async function main() {
   }
 }
 
+<<<<<<< HEAD
 // main().catch(console.error);
+=======
+// 메인 함수 호출
+//  main().catch(console.error);
+>>>>>>> 12368844e4a2d177aace3a3dd5105d77cf4bebc7
 
 const productsRouter = require("./server/routes/productRouter.js");
 const categoriesRouter = require("./server/routes/categoryRouter.js");
