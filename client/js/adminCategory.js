@@ -6,20 +6,16 @@ function fetchData() {
 
       productList.forEach((product, index) => {
         htmlString += `
-        <div class="adminList" style="height:125px">
-          <div class="check">
-            <input type="checkbox" name="checkbox1" id="${product._id}">&ensp;&nbsp;${index + 1}
+        <div class="adminList" style="height:125px display:flex; flex-wrap:wrap;">
+          <div class="check" style="flex:1">
+            <input type="checkbox" name="checkbox1"  id="${product._id}">&ensp;&nbsp;${index + 1}
           </div>
-          <div class="sort" style="height:125px;display:block;">
-            <input type="text" class ="changeName cate font_17" placeholder="카테고리명 입력" required value="${product.name}" >
-            <br />
-            <input type="text" class ="changeOrigin cate font_17" placeholder="원산지 입력" required value="${product.origin}" >
-            <br />
-            <input type="text" class ="changeDetail cate font_17" placeholder="디테일 입력" required value="${product.detail}" >
-          </div>
-          <div class="sortbutton">
-            <button class="change col font_17">수정</button>
-          </div>
+        
+            <input type="text" class ="changeName cate font_17"  style="flex:1;margin-right:40px;" placeholder="카테고리명 입력" required value="${product.name}" >
+            <input type="text" class ="changeOrigin cate font_17"  style="flex:1 ;margin-right:40px;" placeholder="원산지 입력" required value="${product.origin}" >
+            <input type="text" class ="changeDetail cate font_17"  style="flex:1 ;margin-right:40px;" placeholder="디테일 입력" required value="${product.detail}" >
+          <button class="change col font_17" style="flex:1.5" >수정</button>
+
           <div class="infoCont" style="width:100%; padding-top: 0;">
             <h3> </h3>
           </div>

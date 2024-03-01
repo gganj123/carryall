@@ -260,13 +260,9 @@
               const newItem = {
                 _id: newItemId,
                 isChecked: true,
-                image: product.image,
-                name: product.name,
-                brand: product.brand,
+
                 option: selectedOption,
                 quantity: value,
-                price: product.price,
-                totalPricePerItem: value * product.price,
               };
               cartItems.push(newItem);
 
@@ -294,26 +290,25 @@
                 console.error("Product not found.");
                 return;
               }
-
-              let orderItems =
-                JSON.parse(localStorage.getItem("orderItems")) || [];
+              
+              let orderItems = JSON.parse(localStorage.getItem("orderItems")) || [];
               let isExist = orderItems.some((item) => item._id === newItemId);
-
-              // if (isExist) {
-              //   alert("이미 장바구니에 담긴 상품입니다.");
-              //   return;
-              // }
-
+              if(orderItems.length > 0 ){
+                if(confirm("이미 작성하고 있는 주문서가 있습니다. 추가하시겠습니까?") == true){
+                  orderItems = orderItems;
+                }else{
+                  orderItems = [];
+                }
+              }else{
+                orderItems = [];
+              }
               const selectedOption = myListener();
-              // const value = updateValue();
-
               const newItem = {
                 _id: newItemId,
                 option: selectedOption,
                 quantity: value,
               };
               orderItems.push(newItem);
-
               localStorage.setItem("orderItems", JSON.stringify(orderItems));
               // displayUserCartInfo();
               window.location.href = "/order";
