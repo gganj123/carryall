@@ -16,12 +16,10 @@ class OrderService {
   // }
 
   async addOrder(orderInfo) {
-
-    const { name, price, image, option, brand, quantity, recipientName, recipientZipCode, recipientAddress, recipientAddressDetail, recipientTel } = orderInfo; //주석처리 해도 되는지 확인
   
     // 주문 생성 및 저장
     const date = new Date();
-    const status = "결제 완료";
+    const status = "결제완료";
     orderInfo.date = date;
     orderInfo.status = status;
     const newOrder = await orderModel.create(orderInfo);

@@ -163,7 +163,7 @@ fieldset {
 }
 .agreeBox label span img {
   transform: rotate(90deg);
-  width: 12px;
+  width: 16px;
 }
 .agreeBox .chkBox {
   width: 100%;
@@ -213,7 +213,6 @@ p.certiDesc a {
   height: 78px;
   font-size: 18px;
 }
-
 .iconArrow {
   position: absolute;
   top: 50%;

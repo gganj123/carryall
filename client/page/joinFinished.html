@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>carryAll_회원가입 완료</title>
-  <link rel="stylesheet" href="/css/styles.css">
-  <link rel="stylesheet" href="/css/login.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/login.css">
 </head>
-<body>  
+<body>
   <!-- 헤더 가져오기 -->
   <header id="header"></header>
 
@@ -18,7 +18,7 @@
       <h2 style="margin-bottom: 20px;" class="joinTit">Welcome!</h2>
       <p class="subTit"><span style="font-weight: 500;" class="localName">신규회원</span> 님, 가입을 축하드려요.<br>carryAll 의 다양한 혜택을 받아보세요!</p>
       <div class="joinFinishedImg">
-        <img src="../img/join_finished.png" alt="carryAll">
+        <img src="../img/joinFinished.png" alt="carryAll">
       </div>
       <div class="btnWrap">
         <button type="button" class="snsJoin home">홈으로</button>
@@ -34,9 +34,9 @@
   <!-- 탑버튼 가져오기 -->
   <div class="top">top</div>
 
-  <script src="/js/top.js"></script>
-  <script src="/js/header.js"></script>
-  <script src="/js/footer.js"></script>
+  <script src="../js/top.js"></script>
+  <script src="../js/header.js"></script>
+  <script src="../js/footer.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   
   <!-- 가입완료 폼 script -->
@@ -77,17 +77,6 @@
     
     //   userMypage();
 
-    // 4. 헤더 미노출
-    document.addEventListener('DOMContentLoaded', function () {
-      document.querySelector('.headmenu.logout').classList.add('none');
-      document.querySelector('.headmenu.mypage').classList.add('none');
-    });
-    
-
   </script>
-  <footer id="footer"></footer>
-  
-  <script src="/js/header.js"></script>
-  <script src="/js/footer.js"></script>
 </body>
 </html>

@@ -11,7 +11,7 @@ viewRouter.use('/admin/order', serveStatic('adminOrder'));
 viewRouter.use('/cart',serveStatic('cart'));
 viewRouter.use('/cartTest',serveStatic('cartTest'));
 viewRouter.use('/detail',serveStatic('detail'))
-viewRouter.use('/joinagree',serveStatic('joinagree'));
+viewRouter.use('/joinAgree',serveStatic('joinAgree'));
 viewRouter.use('/joinfinished',serveStatic('joinfinished'));
 viewRouter.use('/joinform',serveStatic('joinform'));
 viewRouter.use('/join',serveStatic('join'));

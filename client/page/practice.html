@@ -247,7 +247,7 @@
 
               let cartItems =
                 JSON.parse(localStorage.getItem("cartItems")) || [];
-              let isExist = cartItems.some((item) => item._id === newItemId);
+              let isExist = cartItems.some((item) => item._id === newItemId) && cartItems.some((item) => item.option === myListener());
 
               if (isExist) {
                 alert("이미 장바구니에 담긴 상품입니다.");
@@ -281,7 +281,14 @@
 
         function addItemToOrder() {
           const newItemId = productId;
-          axios
+          axios.get("/api/mypage")
+          .then((response) => {
+            const user = response.data;
+            if (!user) {
+              alert("로그인이 필요한 서비스입니다.");
+              location.href = "/loginMember";
+            }
+            axios
             .get("/api/products")
             .then((response) => {
               const product = response.data.find(
@@ -292,14 +299,13 @@
                 console.error("Product not found.");
                 return;
               }
-              
               let orderItems = JSON.parse(localStorage.getItem("orderItems")) || [];
               let isExist = orderItems.some((item) => item._id === newItemId);
               if(orderItems.length > 0){
-                if(confirm("이미 작성하고 있는 주문서가 있습니다. 추가하시겠습니까?") == true){
+                if(confirm("이미 진행중인 주문서가 있습니다. 이 상품을 주문에 추가할까요?") == true){
                   orderItems = orderItems;
                 }else{
-                  orderItems = [];
+                  return;
                 }
               }else{
                 orderItems = [];
@@ -318,6 +324,11 @@
             .catch((error) => {
               console.error("Error fetching product details:", error);
             });
+          })
+          .catch((error) => {
+            alert("로그인이 필요한 서비스입니다.");
+            location.href = "/loginMember";
+          });
         }
       });
     </script>

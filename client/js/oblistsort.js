@@ -1,7 +1,7 @@
 
 const urlParams = new URLSearchParams(window.location.search); //http://localhost:5001/product/?brand=bare
 const brand = urlParams.get('brand');
-console.log(brand);
+changeText();
  const bran =  brand.toUpperCase()
  function fetchProductsByBrand(bran) {
   console.log(bran);
