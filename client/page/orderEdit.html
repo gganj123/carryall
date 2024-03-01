@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/cart.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <title>Order adjustments</title>
+</head>
+<body>
+    <header id="header"></header>
+    <main>
+        <div class="mainContainer">
+            <div class="cartContainer">
+                <div class="cartTitle">주문정보 수정</div>
+                <div class="cartBox">
+                    <div class="cartBoxHeader">
+                        <p class="cartBoxH1 header">상품정보</p>
+                        <p class="cartBoxH2 header">옵션</p>
+                        <p class="cartBoxH3 header">수량</p>
+                        <p class="cartBoxH4 header">상품금액</p>
+                        <p class="cartBoxH5 header">주문금액</p>
+                    </div>
+
+                    <div class="itemContainer">
+                      <!-- 장바구니 -->
+
+                    </div>
+
+                <div class="payment">
+                    <div class="user-info">
+                      <!-- User's order information goes here -->
+                      <div>
+                        <label for="name">이름:</label>
+                        <input type="text" id="name" name="name"><br><br>
+                        <label for="phone">전화번호:</label>
+                        <input type="text" id="phone" name="phone"><br><br>
+                        <label for="zipcode">우편번호:</label>
+                        <input type="text" id="zipcode" name="zipcode"><br><br>
+                        <label for="address">주소:</label>
+                        <input type="text" id="address" name="address"><br><br>
+                        <label for="addressDetail">주소상세:</label>
+                        <input type="text" id="addressDetail" name="addressDetail"><br><br>
+                      </div>
+                    </div>
+                    <div class="orderBtnContainer">
+                        <button class="btnOrderSubmit" id="btnCancel">취소</button>
+                        <button class="btnOrderSubmit" id="btnCanCelOrder">주문 취소</button>
+                        <button class="btnOrderSubmit" id="btnEditOrder">배송 정보 수정</button>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </main>
+    <script src="../js/orderEdit.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="../js/footer.js"></script>
+    <div id="wrap">
+      <footer id="footer"></footer>
+    </div>
+</body>
+</html>
