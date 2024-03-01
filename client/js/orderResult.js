@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
       phoneNumber.textContent = recipientInformation.recipientTel;
       address.textContent = recipientInformation.recipientAddress;
       console.log(orderResult[0]._id);
-      orderNumber.textContent = orderResult[0]._id; // 예상되는 주문 번호의 키를 사용해야 합니다.
+      orderNumber.textContent = orderResult[0]._id; // 주문번호 채우기
 
       // 주문한 상품 정보 채우기
       let productNameString = "";
