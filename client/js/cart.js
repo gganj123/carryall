@@ -222,7 +222,8 @@ function addItemToOrder() {
     if(checkedItems.length){
         // 중복된 아이템이 있는지 확인하고 없으면 orderItems에 추가
     checkedItems.forEach(checkedItem => {
-      let isExist = orderItems.some(orderItem => orderItem._id === checkedItem._id);
+      let isExist = orderItems.some((orderItem) => orderItem._id === checkedItem._id && orderItem.option === checkedItem.option);
+
       if (!isExist) {
         // 중복된 아이템이 없으면 orderItems에 추가
         orderItems.push({

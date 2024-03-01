@@ -247,7 +247,7 @@
 
               let cartItems =
                 JSON.parse(localStorage.getItem("cartItems")) || [];
-              let isExist = cartItems.some((item) => item._id === newItemId) && cartItems.some((item) => item.option === myListener());
+              let isExist = cartItems.some((item) => item._id === newItemId && item.option === myListener());
 
               if (isExist) {
                 alert("이미 장바구니에 담긴 상품입니다.");
@@ -299,17 +299,11 @@
                 console.error("Product not found.");
                 return;
               }
-              let orderItems = JSON.parse(localStorage.getItem("orderItems")) || [];
+              let orderItems = [];
               let isExist = orderItems.some((item) => item._id === newItemId);
-              if(orderItems.length > 0){
-                if(confirm("이미 진행중인 주문서가 있습니다. 이 상품을 주문에 추가할까요?") == true){
-                  orderItems = orderItems;
-                }else{
-                  return;
-                }
-              }else{
-                orderItems = [];
-              }
+               
+              localStorage.removeItem("orderItems");
+              
               const selectedOption = myListener();
               const newItem = {
                 _id: newItemId,
