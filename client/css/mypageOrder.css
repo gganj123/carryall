@@ -24,6 +24,10 @@
   width: 100px;
 }
 
+.orderItem .quantity {
+  width: 100px;
+}
+
 .orderItem .date {
   flex: 1;
 }

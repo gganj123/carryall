@@ -64,26 +64,26 @@
               <h3>배송 조회</h3>
               <ul class="shipBox">
                 <li>
-                  <h6>0</h6>
+                  <h6 class="orderStatus">0</h6>
                   <p>결제완료</p>
                 </li>
                 <li>
-                  <h6>0</h6>
+                  <h6 class="orderStatus">0</h6>
                   <p>상품준비중</p>
                 </li>
                 <li>
-                  <h6>0</h6>
+                  <h6 class="orderStatus">0</h6>
                   <p>배송중</p>
                 </li>
                 <li>
-                  <h6>1</h6>
+                  <h6 class="orderStatus">1</h6>
                   <p>배송완료</p>
                 </li>
               </ul>
               <ul class="shippedBox">
-                <li>취소 내역 : <span>0</span></li>
-                <li>교환 내역 : <span>0</span></li>
-                <li>반품 내역 : <span>0</span></li>
+                <li>취소 내역 : <span class="orderStatus">0</span></li>
+                <li>교환 내역 : <span class="orderStatus">0</span></li>
+                <li>반품 내역 : <span class="orderStatus">0</span></li>
               </ul>
             </div>
 
@@ -97,6 +97,7 @@
                       <span>주문번호</span>
                     </div>
                     <div class="total">주문금액</div>
+                    <div class="quantity">상품수량</div>
                     <div class="date"><span>주문날짜</span></div>
                     <div class="status">배송상태</div>
                   </div>
@@ -155,16 +156,28 @@
 
             let htmlString = "";
 
-            orderData.forEach((order, index) => {
+            const status = [
+              "결제완료",
+              "상품준비",
+              "배송중",
+              "배송완료",
+              "취소",
+              "교환",
+              "반품",
+            ];
+            let num = [0, 0, 0, 0, 0, 0, 0];
 
+            orderData.forEach((order, index) => {
               const date = order.date;
               const sliceDate = date.slice(0, 10);
 
               const productList = order.productInformation;
               let total = 0;
+              let quantity = 0;
 
-              for(let i = 0; i < productList.length; i++) {
+              for (let i = 0; i < productList.length; i++) {
                 total += productList[i].price;
+                quantity += productList[i].quantity;
               }
 
               htmlString += `
@@ -176,12 +189,20 @@
                     <span>${order._id}</span>
                 </div>
                 <div class="total"><span>${total}</span></div>
+                <div class="quantity"><span>${quantity}</span></div>
                 <div class="date"><span>${sliceDate}</span></div>
                 <div class="status">${order.status}</div>
               </div>`;
-              
+
+              const stNum = status.indexOf(order.status);
+              num[stNum] += 1;
             });
 
+            const orderStatus = document.querySelectorAll(".orderStatus");
+
+            orderStatus.forEach((order, index) => {
+              order.innerText = num[index];
+            });
 
             const listBody = document.querySelector(".listBody");
             listBody.innerHTML = htmlString;
