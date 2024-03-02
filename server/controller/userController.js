@@ -201,6 +201,7 @@ class UserController {
       res.status(500).json({ err: err.message });
     }
   }
+
 }
 
 const userController = new UserController();

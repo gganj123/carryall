@@ -14,20 +14,23 @@ function fetchData() {
             }">&ensp;&nbsp;${index + 1}
           </div>
           <div class="sort" style="height:125px;display:block;">
-            <input type="text" class="changeName cate font_17" placeholder="카테고리명 입력" required value="${
+            <input type="text" class ="changeName cate font_17" placeholder="카테고리명 입력" required value="${
               product.name
             }" >
             <br />
-            <input type="text" class="changeOrigin cate font_17" placeholder="원산지 입력" required value="${
+            <input type="text" class ="changeOrigin cate font_17" placeholder="원산지 입력" required value="${
               product.origin
             }" >
             <br />
-            <input type="text" class="changeDetail cate font_17" placeholder="디테일 입력" required value="${
+            <input type="text" class ="changeDetail cate font_17" placeholder="디테일 입력" required value="${
               product.detail
             }" >
           </div>
           <div class="sortbutton">
-            <button class="change col font_17 editBtn">수정</button>
+            <button class="change col font_17">수정</button>
+          </div>
+          <div class="infoCont" style="width:100%; padding-top: 0;">
+            <h3> </h3>
           </div>
         </div>`;
       });

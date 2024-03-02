@@ -50,49 +50,45 @@ function fetchData() {
           "text/html"
         );
         const options = optionsDoc.body.children;
-        let selectedOptionString
-        if (options && options[idArray.indexOf(product.categoryId)]) { // options가 존재하고 유효한 경우에만 실행
-          options[idArray.indexOf(product.categoryId)].setAttribute("selected", "selected");
+        let selectedOptionString;
+        if (options && options[idArray.indexOf(product.categoryId)]) {
+          // options가 존재하고 유효한 경우에만 실행
+          options[idArray.indexOf(product.categoryId)].setAttribute(
+            "selected",
+            "selected"
+          );
           selectedOptionString = optionsDoc.body.innerHTML;
-      } else {
+        } else {
           console.error("options is null or undefined, or category not found");
-      }
+        }
 
         htmlString += `
         <li>
-        <div class="adminList" style="height:100px;height:500px">
+        <div class="adminList productList">
           <div class="check">
             <input type="checkbox" name="checkbox1" id="${
               product._id
             }">&ensp;&nbsp;${index + 1}
           </div>
-          <div class="sort" style="display:block;height:500px">
-            <input type="text" class ="changeName cate font_17" value="${
+          <div class="productImg">
+            <img src="${product.image}" alt="alt" />
+          </div>
+          <div class="productName">
+            <input type="text" class="changeName cate font_17 designInput" value="${
               product.name
             }" placeholder="상품명 입력" required >
-            <br />
-            <select class="changeSelect">${selectedOptionString}</select>
-            <br />
-            <br />
-            <input type="text" class ="changePrice cate font_17" placeholder="가격 입력" required value="${
+            <select class="changeSelect designInput">${selectedOptionString}</select>
+          </div>
+          <div class="price">
+            <input type="text" class="changePrice cate font_17 designInput" placeholder="가격 입력" required value="${
               product.price
             }">
-            <br />
-        <img style="width:50%;"  src="${product.image}" alt="alt" />
-        <br />
-        <p class ="cate font_17">["black", "white", "brown"]</p>
-        <br />
-        <input type="text" class ="changeStock cate font_17" placeholder="재고 입력" required value="${
-          product.stock
-        }">
-        <br />
-
+            <input type="text" class="changeStock cate font_17 designInput" placeholder="재고 입력" required value="${
+              product.stock
+            }">
           </div>
           <div class="sortbutton">
-            <button class="change col font_17">수정</button>
-          </div>
-          <div class="infoCont" style="width:100%; padding-top: 0;">
-            <h3> </h3>
+            <button class="change col font_17 designButton">수정</button>
           </div>
         </div>
         </li>
@@ -140,29 +136,28 @@ function addForm() {
   getRandomImage().then((img) => {
     const selectImg = img[Math.floor(Math.random() * img.length)];
     htmlString2 += `
-    <div class="adminList" style="height:450px;">
-      <div class="check">
-        <input type="checkbox" name="checkbox1">&ensp;&nbsp;1
+    <li>
+      <div class="adminList ">
+        <div class="check">
+          <input type="checkbox" name="checkbox1">&ensp;&nbsp;1
+        </div>
+        <div class="productImg">
+          <img src="${selectImg}" alt="alt" />
+        </div>
+        <div class="productName">
+          <input type="text" class="postName cate font_17 designInput" placeholder="상품명 입력" required >
+          <select class=" designInput">${retrievedOptionList}</select>
+        </div>
+        <div class="price">
+          <input type="text" class="postPrice cate font_17 designInput" placeholder="가격 입력" required >
+          <input type="text" class="postStock cate font_17 designInput" placeholder="재고 입력" required >
+        </div>
+        <div class="sortbutton">
+          <button id="regiButton" class="col font_17 design-button">등록</button>
+        </div>
       </div>
-      <div  style=" width:30%; height:450px;">
-        <input type="text" class ="postName cate font_17" placeholder="상품명 입력" required >
-        <br />
-        <select>${retrievedOptionList}</select>
-        <br /><br />
-        <input type="text" class ="postPrice cate font_17" placeholder="가격 입력" required >
-        <br />
-        <img style="width:50%;"  src="${selectImg}" alt="alt" />
-        <br />
-        <p class ="cate font_17">["black", "white", "brown"]</p>
-        <br />
-        <input type="text" class ="postStock cate font_17" placeholder="재고 입력" required >
-      </div>
-      <div class="sortbutton">
-        <button id="regiButton" class="col font_17">등록</button>
-      </div>
-      <div class="infoCont" style="width:100%; padding-top: 0;">
-        <h3> </h3></div>
-    </div>`;
+    </li>
+    `;
 
     document.getElementById("adminProAdd").innerHTML = htmlString2;
     const regiButton = document.getElementById("regiButton");
@@ -234,11 +229,11 @@ function changeFunc(event) {
     if (event.target.classList.contains("change")) {
       // 수정 버튼이 클릭된 경우, 해당 수정 버튼의 부모 요소를 찾음
       const adminListItem = event.target.closest(".adminList");
-  
+
       // 부모 요소 내에서 체크박스를 찾음
       const checkbox = adminListItem.querySelector('input[type="checkbox"]');
       const name = adminListItem.querySelector(".changeName").value;
-      const tmp = adminListItem.querySelector(".changeSelect")
+      const tmp = adminListItem.querySelector(".changeSelect");
       const categoryId = tmp.value;
       const stock = adminListItem.querySelector(".changeStock").value;
       const price = adminListItem.querySelector(".changePrice").value;
@@ -261,7 +256,7 @@ function changeFunc(event) {
         axios
           .put(`/api/products/${checkboxId}`, putdata)
           .then((response) => {
-            console.log(putdata)
+            console.log(putdata);
             // setTimeout(function () {
             //   location.reload();
             // }, 500);

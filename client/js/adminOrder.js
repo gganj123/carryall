@@ -7,7 +7,7 @@ function fetchData() {
 
       orderList.forEach((order, index) => {
         htmlString += `
-          <div class="adminList">
+          <div class="adminList orderList">
             <div class="check">
               <input type="checkbox" name="checkbox1" id="${
                 order._id
@@ -21,7 +21,7 @@ function fetchData() {
               order.recipientInformation.recipientName
             }</span></div>
             <div class="status">
-              <select class="orderStatus" name="orderStatus">
+              <select class="orderStatus designInput" name="orderStatus">
                 <option value="${order.status}">${order.status}</option>
                 <option value="결제완료">결제완료</option>
                 <option value="상품준비">상품준비</option>
@@ -33,7 +33,7 @@ function fetchData() {
               </select>
             </div>
             <div class="sortbutton">
-              <button class="change butt col font_17">수정</button>
+              <button class="change butt col font_17 designButton">수정</button>
             </div>
           </div>`;
       });

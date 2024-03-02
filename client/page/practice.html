@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>carryAll</title>
-    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
 
-    <link rel="stylesheet" href="../css/practice.css" />
-    <link rel="stylesheet" href="../css/reset_practice.css" />
+    <link rel="stylesheet" href="/css/practice.css" />
+    <link rel="stylesheet" href="/css/reset_practice.css" />
   </head>
   <body>
     <header id="header"></header>
@@ -247,11 +247,13 @@
 
               let cartItems =
                 JSON.parse(localStorage.getItem("cartItems")) || [];
-              let isExist = cartItems.some((item) => item._id === newItemId);
+              let isExist = cartItems.some((item) => item._id === newItemId && item.option === myListener());
 
               if (isExist) {
                 alert("이미 장바구니에 담긴 상품입니다.");
                 return;
+              }else{
+                alert("장바구니에 추가하였습니다.");
               }
 
               const selectedOption = myListener();
@@ -260,13 +262,9 @@
               const newItem = {
                 _id: newItemId,
                 isChecked: true,
-                image: product.image,
-                name: product.name,
-                brand: product.brand,
+
                 option: selectedOption,
                 quantity: value,
-                price: product.price,
-                totalPricePerItem: value * product.price,
               };
               cartItems.push(newItem);
 
@@ -283,7 +281,14 @@
 
         function addItemToOrder() {
           const newItemId = productId;
-          axios
+          axios.get("/api/mypage")
+          .then((response) => {
+            const user = response.data;
+            if (!user) {
+              alert("로그인이 필요한 서비스입니다.");
+              location.href = "/loginMember";
+            }
+            axios
             .get("/api/products")
             .then((response) => {
               const product = response.data.find(
@@ -294,40 +299,37 @@
                 console.error("Product not found.");
                 return;
               }
-
-              let orderItems =
-                JSON.parse(localStorage.getItem("orderItems")) || [];
+              let orderItems = [];
               let isExist = orderItems.some((item) => item._id === newItemId);
-
-              // if (isExist) {
-              //   alert("이미 장바구니에 담긴 상품입니다.");
-              //   return;
-              // }
-
+               
+              localStorage.removeItem("orderItems");
+              
               const selectedOption = myListener();
-              // const value = updateValue();
-
               const newItem = {
                 _id: newItemId,
                 option: selectedOption,
                 quantity: value,
               };
               orderItems.push(newItem);
-
               localStorage.setItem("orderItems", JSON.stringify(orderItems));
               // displayUserCartInfo();
-              window.location.href = "order.html";
+              window.location.href = "/order";
             })
             .catch((error) => {
               console.error("Error fetching product details:", error);
             });
+          })
+          .catch((error) => {
+            alert("로그인이 필요한 서비스입니다.");
+            location.href = "/loginMember";
+          });
         }
       });
     </script>
 
     <div style="height: 500px"></div>
     <footer id="footer"></footer>
-    <script src="../js/header.js"></script>
-    <script src="../js/footer.js"></script>
+    <script src="/js/header.js"></script>
+    <script src="/js/footer.js"></script>
   </body>
 </html>

@@ -2,7 +2,8 @@
 }
 
 .orderItem {
-  display: flex;
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr 1fr 1fr;
   height: 56px;
   align-items: center;
   border-bottom: solid 1px #ccc;
@@ -40,5 +41,13 @@
   line-height: 16vh;
   text-align: center;
   border-bottom: solid 1px #ccc;
-  color:#666;
+  color: #666;
 }
+
+.orderItem .editBtn {
+  width: auto;
+  height:34px;
+  background-color:#5b5b5b;
+  color:#fff;
+  padding:0 20px;
+  }

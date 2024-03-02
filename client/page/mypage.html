@@ -158,11 +158,10 @@
               const sliceDate = date.slice(0, 10);
 
               const productList = order.productInformation;
-              let total = 0;
               let quantity = 0;
 
+
               for (let i = 0; i < productList.length; i++) {
-                total += productList[i].price;
                 quantity += productList[i].quantity;
               }
 
@@ -174,14 +173,15 @@
                 <div class="orderNum">
                     <span>${order._id}</span>
                 </div>
-                <div class="total"><span>${total}</span></div>
+                <div class="total"><span>${order.totalPrice}</span></div>
                 <div class="quantity"><span>${quantity}</span></div>
                 <div class="date"><span>${sliceDate}</span></div>
                 <div class="status">${order.status}</div>
-                <div class="btnBox"><button class="editBtn">수정</button></div>
+                <div class="btnBox"><button class="editBtn" onclick="orderEdit()">수정</button></div>
               </div>`;
 
               const stNum = status.indexOf(order.status);
+
               num[stNum] += 1;
             });
 
@@ -190,7 +190,6 @@
             orderStatus.forEach((status, index) => {
               status.innerText = num[index];
             });
-            console.log(num);
 
             const listBody = document.querySelector(".listBody");
             listBody.innerHTML = htmlString;
@@ -200,7 +199,25 @@
           });
       }
 
+      // 새환 {
+      function orderEdit(order) {
 
+        if (order.status === "결제완료" || order.status === "상품준비") {
+          axios
+            .get("/api/order/" + order._id)
+            .then((response) => {
+              const orderData = response.data;
+              console.log(orderData);
+              location.href = "/orderEditTest";
+            })
+            .catch((error) => {
+              console.error("에러", error);
+            });
+        } else {
+          alert("해당 상품은 수정이 불가능합니다.");
+        }
+      }
+      // }
 
       // // 3. 고도화 기능 closing alert
       // const developLinks = document.querySelectorAll(".develop");

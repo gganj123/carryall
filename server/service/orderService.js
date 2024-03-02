@@ -8,20 +8,18 @@ class OrderService {
   }
 
   // _id에 해당하는 주문 내역 불러오기
-  async getOrder(_id) {
-    if (_id) {
-      const order = await orderModel.findOrder(_id);
-      return order;
-    }
-  }
+  // async getOrder(_id) {
+  //   if (_id) {
+  //     const order = await orderModel.findOrder(_id);
+  //     return order;
+  //   }
+  // }
 
   async addOrder(orderInfo) {
-
-    const { name, price, image, option, brand, quantity, recipientName, recipientZipCode, recipientAddress, recipientAddressDetail, recipientTel } = orderInfo; //주석처리 해도 되는지 확인
   
     // 주문 생성 및 저장
     const date = new Date();
-    const status = "결제 완료";
+    const status = "결제완료";
     orderInfo.date = date;
     orderInfo.status = status;
     const newOrder = await orderModel.create(orderInfo);

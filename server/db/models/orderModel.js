@@ -16,16 +16,16 @@ class OrderModel {
   }
 
   // 주문 내역 하나 조회
-  async findOrder(_id) {
-    try {
-      const order = await Order.findOne({ _id });
-      return order;
-    } catch (err) {
-      const error = new Error("개별 주문 정보를 불러들이는데 실패했습니다.");
-      error.statusCode = 400;
-      throw error;
-    }
-  }
+  // async findOrder(_id) {
+  //   try {
+  //     const order = await Order.findOne({ _id });
+  //     return order;
+  //   } catch (err) {
+  //     const error = new Error("개별 주문 정보를 불러들이는데 실패했습니다.");
+  //     error.statusCode = 400;
+  //     throw error;
+  //   }
+  // }
 
 
 
