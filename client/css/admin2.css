@@ -34,11 +34,11 @@ h2 {
   margin-bottom: 60px;
 }
 .contWrap {
-  /* background-color: lightblue; */
   width: 100%;
   max-width: 1070px;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 60px;
 }
 .navCont {
   width: 28%;
@@ -106,7 +106,7 @@ h2 {
   border-bottom: solid 1px #ccc;
   padding: 10px 0;
   text-align: center;
-  grid-template-columns: 0.6fr 4fr 2fr;
+  grid-template-columns: 1fr 4fr 2fr;
 }
 .productList.adminList {
   grid-template-columns: 1fr 2fr 4fr 3fr 2fr;
@@ -159,3 +159,4 @@ select.designInput {
   height: 36px;
   padding: 0 16px;
 }
+.adminTit {font-size: 24px; margin-bottom: 60px;}

@@ -85,7 +85,6 @@
                     <div class="quantity">상품수량</div>
                     <div class="date"><span>주문날짜</span></div>
                     <div class="status">배송상태</div>
-                    <div class="btnBox">수정</div>
                   </div>
                 </div>
                 <div class="listBody">
@@ -177,7 +176,6 @@
                 <div class="quantity"><span>${quantity}</span></div>
                 <div class="date"><span>${sliceDate}</span></div>
                 <div class="status">${order.status}</div>
-                <div class="btnBox"><button class="editBtn" onclick="orderEdit()">수정</button></div>
               </div>`;
 
               const stNum = status.indexOf(order.status);
@@ -202,23 +200,23 @@
 
 
       // 새환 {
-      function orderEdit(order) {
+      // function orderEdit(order) {
 
-        if (order.status === "결제완료" || order.status === "상품준비") {
-          axios
-            .get("/api/order/" + order._id)
-            .then((response) => {
-              const orderData = response.data;
-              console.log(orderData);
-              location.href = "/orderEditTest";
-            })
-            .catch((error) => {
-              console.error("에러", error);
-            });
-        } else {
-          alert("해당 상품은 수정이 불가능합니다.");
-        }
-      }
+      //   if (order.status === "결제완료" || order.status === "상품준비") {
+      //     axios
+      //       .get("/api/order/" + order._id)
+      //       .then((response) => {
+      //         const orderData = response.data;
+      //         console.log(orderData);
+      //         location.href = "/orderEditTest";
+      //       })
+      //       .catch((error) => {
+      //         console.error("에러", error);
+      //       });
+      //   } else {
+      //     alert("해당 상품은 수정이 불가능합니다.");
+      //   }
+      // }
       // }
 
       // // 3. 고도화 기능 closing alert

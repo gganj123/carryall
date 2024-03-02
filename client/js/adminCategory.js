@@ -14,7 +14,7 @@ function fetchData() {
             }">&ensp;&nbsp;${index + 1}
           </div>
           <div class="sort"">
-            <input type="text" class ="changeName cate font_17" placeholder="카테고리명 입력" required value="${
+            <input type="text" class ="changeName cate font_17 designInput" placeholder="카테고리명 입력" required value="${
               product.name
             }" >
           </div>
@@ -43,7 +43,7 @@ let htmlString2 = "";
 
 function addForm() {
   htmlString2 += `
-    <div class="adminList productList">
+    <div class="adminList">
       <div class="check">
         <input type="checkbox" name="checkbox1">&ensp;&nbsp;1</div>
       <div class="sort" >
