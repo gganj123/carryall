@@ -137,7 +137,7 @@ function addForm() {
     const selectImg = img[Math.floor(Math.random() * img.length)];
     htmlString2 += `
     <li>
-      <div class="adminList ">
+      <div class="adminList productList">
         <div class="check">
           <input type="checkbox" name="checkbox1">&ensp;&nbsp;1
         </div>
@@ -153,7 +153,7 @@ function addForm() {
           <input type="text" class="postStock cate font_17 designInput" placeholder="재고 입력" required >
         </div>
         <div class="sortbutton">
-          <button id="regiButton" class="col font_17 design-button">등록</button>
+          <button id="regiButton" class="col font_17 designButton">등록</button>
         </div>
       </div>
     </li>

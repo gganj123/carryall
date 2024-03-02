@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="headmenuWrap">
         <button class="headmenu login"><a href="/loginMember">로그인</a></button>
         <button class="headmenu logout admin"><a href="/">로그아웃</a></button>
-        <button class="headmenu login"><a href="/join">회원가입</a></button>
+        <button class="headmenu login"><a href="/joinAgree">회원가입</a></button>
         <button class="headmenu on"><a href="/cart">장바구니</a></button>
         <button class="headmenu logout login"><a href="/mypage">마이페이지</a></button>
         <button class="headmenu admin"><a href="/admin">관리자 페이지</a></button>

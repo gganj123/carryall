@@ -7,31 +7,21 @@ function fetchData() {
 
       productList.forEach((product, index) => {
         htmlString += `
-        <div class="adminList" style="height:125px">
+        <div class="adminList">
           <div class="check">
             <input type="checkbox" name="checkbox1" id="${
               product._id
             }">&ensp;&nbsp;${index + 1}
           </div>
-          <div class="sort" style="height:125px;display:block;">
-            <input type="text" class ="changeName cate font_17" placeholder="카테고리명 입력" required value="${
+          <div class="sort"">
+            <input type="text" class ="changeName cate font_17 designInput" placeholder="카테고리명 입력" required value="${
               product.name
-            }" >
-            <br />
-            <input type="text" class ="changeOrigin cate font_17" placeholder="원산지 입력" required value="${
-              product.origin
-            }" >
-            <br />
-            <input type="text" class ="changeDetail cate font_17" placeholder="디테일 입력" required value="${
-              product.detail
             }" >
           </div>
           <div class="sortbutton">
-            <button class="change col font_17">수정</button>
+            <button class="change col font_17 designButton">수정</button>
           </div>
-          <div class="infoCont" style="width:100%; padding-top: 0;">
-            <h3> </h3>
-          </div>
+
         </div>`;
       });
 
@@ -39,7 +29,6 @@ function fetchData() {
       const changeButton = document.getElementsByClassName("change");
       for (let button of changeButton) {
         button.addEventListener("click", changeFunc);
-        console.log("asd");
       }
     })
     .catch((error) => {
@@ -54,20 +43,17 @@ let htmlString2 = "";
 
 function addForm() {
   htmlString2 += `
-    <div class="adminList" style="height:125px;">
-    <div class="check">
-      <input type="checkbox" name="checkbox1">&ensp;&nbsp;1</div>
-      <div class="sort" style="height:125px;display:block;">
-        <input type="text" class ="postName cate font_17" placeholder="카테고리명 입력" required >
-        <br />
-        <input type="text" class ="postOrigin cate font_17" placeholder="원산지 입력" required >
-        <br />
-        <input type="text" class ="postDetail cate font_17" placeholder="디테일 입력" required >
+    <div class="adminList">
+      <div class="check">
+        <input type="checkbox" name="checkbox1">&ensp;&nbsp;1</div>
+      <div class="sort" >
+        <input type="text" class ="postName cate font_17 designInput" placeholder="카테고리명 입력" required >
       </div>
-      <div class="sortbutton"><button id="regiButton" class="col font_17">등록</button></div>
-      <div class="infoCont" style="width:100%; padding-top: 0;">
-        <h3> </h3></div>
-</div>`;
+      <div class="sortbutton">
+        <button id="regiButton" class="col font_17 designButton">등록</button>
+      </div>
+    </div>
+    `;
 
   document.getElementById("adminCateAdd").innerHTML = htmlString2;
   const regiButton = document.getElementById("regiButton");
@@ -76,9 +62,9 @@ function addForm() {
     cateRegifunc();
 
     alert(`카테고리 등록이 완료 되었습니다`);
-    setTimeout(function () {
-      location.reload();
-    }, 500);
+    // setTimeout(function () {
+    // location.reload();
+    // }, 500);
   });
   // 카데고리 등록버튼 실행
 }
@@ -88,11 +74,9 @@ addButton.addEventListener("click", addForm);
 
 function cateRegifunc() {
   const name = document.querySelector(".postName").value;
-  const origin = document.querySelector(".postOrigin").value;
-  const detail = document.querySelector(".postDetail").value;
 
   axios
-    .post("/api/categories", { name, origin, detail })
+    .post("/api/categories", { name })
     .then((response) => {
       // 서버로부터 받은 응답을 처리합니다.
       console.log(response.data); // 서버에서 전송된 데이터 출력
@@ -129,9 +113,9 @@ deleteButton.addEventListener("click", function () {
           // 화면에서 해당 카테고리를 제거합니다.
           adminListItem.parentNode.removeChild(adminListItem);
           console.log(categoryId);
-          setTimeout(function () {
-            location.reload();
-          }, 500);
+          // setTimeout(function () {
+          // location.reload();
+          // }, 500);
         })
         .catch((error) => {
           console.log(categoryId);
@@ -153,15 +137,13 @@ function changeFunc(event) {
     // 부모 요소 내에서 체크박스를 찾음
     const checkbox = adminListItem.querySelector('input[type="checkbox"]');
     const name = adminListItem.querySelector(".changeName").value;
-    const origin = adminListItem.querySelector(".changeOrigin").value;
-    const detail = adminListItem.querySelector(".changeDetail").value;
-    console.log(name, origin, detail);
+
     // 체크박스가 있는지 확인 후 변수에 할당
     if (checkbox) {
       // 체크박스와 input 텍스트가 모두 있는 경우
       const checkboxId = checkbox.id; // 체크박스의 id 가져오기
       axios
-        .put(`/api/categories/${checkboxId}`, { name, origin, detail })
+        .put(`/api/categories/${checkboxId}`, { name })
         .then((response) => {})
         .catch((error) => {
           console.error(`카테고리 ID ${checkboxId} 수정 요청 실패:`, error);

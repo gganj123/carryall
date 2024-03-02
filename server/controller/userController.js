@@ -31,7 +31,10 @@ class UserController {
   // 로그인 세션
   async loggedIn(req, res) {
     if (req.user) {
-      res.send({ logIn: true, user: req.user });
+
+      const { username } = req.user;
+
+      res.send({ logIn: true, user: username });
     } else {
       res.send({ logIn: false });
     }
@@ -73,12 +76,6 @@ class UserController {
         telSubscription,
         emailSubscription,
       } = req.body;
-
-      // if (password !== passwordReconfirm) {
-      //   return res
-      //     .status(400)
-      //     .json({ message: "비밀번호가 일치하지 않습니다." });
-      // }
 
       const newUser = await userService.createUser({
         username,
@@ -126,7 +123,7 @@ class UserController {
         emailSubscription,
       } = req.body;
 
-      if (!password || password !== passwordReconfirm) {
+      if (password !== passwordReconfirm) {
         return res
           .status(400)
           .json({ message: "비밀번호가 일치하지 않습니다." });
