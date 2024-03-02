@@ -99,7 +99,6 @@ function fetchData() {
       const changeButton = document.getElementsByClassName("change");
       for (let button of changeButton) {
         button.addEventListener("click", changeFunc);
-        console.log("asd");
       }
     })
     .catch((error) => {
@@ -178,9 +177,7 @@ function addForm() {
           stock,
           categoryName,
         })
-        .then((response) => {
-          console.log(response.data);
-        })
+        .then((response) => {})
         .catch((error) => {
           console.error("Error fetching data:", error);
         });
@@ -256,10 +253,10 @@ function changeFunc(event) {
         axios
           .put(`/api/products/${checkboxId}`, putdata)
           .then((response) => {
-            console.log(putdata);
             // setTimeout(function () {
             //   location.reload();
             // }, 500);
+            alert("수정되었습니다");
           })
           .catch((error) => {
             console.error(`제품 ID ${checkboxId} 수정 요청 실패:`, error);

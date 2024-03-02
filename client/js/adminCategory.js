@@ -116,6 +116,7 @@ deleteButton.addEventListener("click", function () {
           // setTimeout(function () {
           // location.reload();
           // }, 500);
+          alert(`삭제되었습니다.`);
         })
         .catch((error) => {
           console.log(categoryId);
@@ -144,7 +145,9 @@ function changeFunc(event) {
       const checkboxId = checkbox.id; // 체크박스의 id 가져오기
       axios
         .put(`/api/categories/${checkboxId}`, { name })
-        .then((response) => {})
+        .then((response) => {
+          alert(`변경되었습니다.`);
+        })
         .catch((error) => {
           console.error(`카테고리 ID ${checkboxId} 수정 요청 실패:`, error);
         });

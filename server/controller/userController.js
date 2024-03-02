@@ -31,10 +31,7 @@ class UserController {
   // 로그인 세션
   async loggedIn(req, res) {
     if (req.user) {
-
-      const { username } = req.user;
-
-      res.send({ logIn: true, user: username });
+      res.send({ logIn: true, user: req.user });
     } else {
       res.send({ logIn: false });
     }
@@ -192,7 +189,7 @@ class UserController {
       );
       if (user) {
         res.json(user);
-      } else {
+      } else {loggedIn
         res.status(404).json({ message: "비밀번호가 틀렸습니다" });
       }
     } catch (err) {
