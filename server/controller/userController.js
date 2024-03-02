@@ -74,15 +74,16 @@ class UserController {
         emailSubscription,
       } = req.body;
 
-      if (password !== passwordReconfirm) {
-        return res
-          .status(400)
-          .json({ message: "비밀번호가 일치하지 않습니다." });
-      }
+      // if (password !== passwordReconfirm) {
+      //   return res
+      //     .status(400)
+      //     .json({ message: "비밀번호가 일치하지 않습니다." });
+      // }
 
       const newUser = await userService.createUser({
         username,
         password,
+        passwordReconfirm,
         name,
         email,
         tel,

@@ -237,7 +237,7 @@
       })
       .catch(error => {
         // 오류가 발생했을 때 콘솔알림.
-        console.error('회원가입 오류:', error);
+        console.error('회원가입 오류:', error.response.data);
       });
     }
     function goToPreviousPage() {

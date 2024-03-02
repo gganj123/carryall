@@ -5,14 +5,20 @@ function loggedIn() {
       const userData = response.data;
 
       if (userData.user.username === "adminCarryAll") {
-        console.log("관리자");
+        const adminEl = document.querySelectorAll('.headmenu.admin');
+        adminEl.forEach( idx => idx.classList.add('on') );
+        console.log("관리자", adminEl);
+        
       } else {
+        const loginEl = document.querySelectorAll('.headmenu.logout');
+        loginEl.forEach( idx => idx.classList.add('on') );
         console.log("일반회원임");
       }
     })
     .catch((error) => {
-      console.error(error);
-      console.log('로그아웃됨')
+      const logoutEl = document.querySelectorAll('.headmenu.login');
+      logoutEl.forEach( idx => idx.classList.add('on') );
+      console.log("로그아웃됨");
     });
 }
 
@@ -31,10 +37,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         <div class="headmenuWrap">
         <button class="headmenu login"><a href="/loginMember">로그인</a></button>
-        <button class="headmenu logout"><a href="/">로그아웃</a></button>
-        <button class="headmenu mypage"><a href="/mypage">마이페이지</a></button>
-        <button class="headmenu admin" style="display: none;"><a href="/admin">관리자 페이지</a></button>
-        <button class="headmenu"><a href="/join">회원가입</a></button>
+        <button class="headmenu logout admin"><a href="/">로그아웃</a></button>
+        <button class="headmenu login"><a href="/join">회원가입</a></button>
+        <button class="headmenu on"><a href="/cart">장바구니</a></button>
+        <button class="headmenu logout login"><a href="/mypage">마이페이지</a></button>
+        <button class="headmenu admin"><a href="/admin">관리자 페이지</a></button>
+        </div>
     </div>`;
 
   loggedIn();

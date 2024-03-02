@@ -27,20 +27,23 @@
   font-family: 'Noto Sans KR', Roboto sans-serif; 
   font-weight: normal;
 }
-
-
 html{
   width: 100vw;
-  background-color: #fafafa;
+  /* background-color: #fafafa; */
 }
 body{
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;
-  background-color: #fafafa;
+  /* background-color: #fafafa; */
   font-family: 'Noto Sans KR', "Roboto", sans-serif;
   margin: 0;
   padding: 0;
+}
+.main_body {
+  height: 100%;
+  display: block;
+  position: relative;
 }
 .head{
   margin-bottom: 0;
@@ -69,10 +72,11 @@ button.headmenu{
   height: 50%;
   width: unset;
   margin-right: 20px; 
-  background-color:#fafafa; 
-  border: #fafafa; 
+  background-color:transparent; 
+  border: transparent; 
   font-size: 1.2em; 
   font-weight: bold;
+  margin-left :  120px;
 }
 .bs:hover{
   transform: scale(1.05);
@@ -87,8 +91,8 @@ button.footmenu{
   margin-right: 40px; 
   background-color:#111111; 
   border: #111111; 
-  font-size: 1.2em; 
-  font-weight: bold;
+  font-size: 17px; 
+  font-weight: 400;
   color:#fafafa;
 }
 button.footmenu:hover{
@@ -224,10 +228,12 @@ a {
 }
   
 .slide_prev_button {
-  left: 7px;
+  left: 20px;
+  background: url(../img/icon_prev.svg) no-repeat center;
 }
 .slide_next_button {
-  right: 20px;
+  right: 35px;
+  background: url(../img/icon_next.svg) no-repeat center;
 }
 
 /* 페이지네이션 스타일 */
@@ -273,19 +279,14 @@ li {
 }
 
 .category_box {
-  position:sticky;
+  /* position:sticky;
   margin-left: 120px;
-  width: 50%;
+  width: 50%; */
   height: 400px;
-  top:100px;;
-  background-color:#fafafa;
+  /* top:100px; */
+  background-color: transparent;
 }
 
-.category_box {
-  display: flex; /* flex 컨테이너로 설정 */
-  flex-direction: column; /* 세로로 정렬 */
-  align-items: flex-start; /* 아이템을 왼쪽으로 정렬 */
-}
 .warp{
   display: flex;
   flex-wrap: wrap;
@@ -294,22 +295,6 @@ li {
   margin-bottom: 20px; /* 각각의 아이템 사이의 간격 설정 */
 }
 
-.main_story1{
-  background-color: #e4e4e4;
-  overflow: hidden;
-
-}
-.main_story2{
-  background-color: #dadada;
-  overflow: hidden;
-}
-.main_story3{
-  background-color: #cecece;
-  overflow: hidden;
-}
-.main_story4{
-  background-color:#fafafa;
-}
 img.bs{
   width:100%;
   height: auto;
@@ -332,8 +317,8 @@ option{
   display: none;
   position: fixed;
   bottom: 50px;
-  right: 250px;
-  background-color: #d0d0d0;
+  right: 160px;
+  background-color: #efefef;
   color: black;
   padding: 20px 20px;
   cursor: pointer;
@@ -366,7 +351,56 @@ li h2 {
   justify-content: center;
   margin-top: 20px; /* 원하는 여백값 설정 */
 }
-
-/* .more-button {
-  /* 버튼에 대한 스타일링을 추가하세요 
-} */
+/* 헤더 css 수정 */
+.headmenu {
+  display: none;
+}
+.headmenu.on {
+  display: block;
+}
+.headmenu a {
+  font-size: 17px;
+  font-weight: 500;
+  background-color: transparent;
+}
+header#header {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+}
+.header.headerWrap {
+  width: 100%;
+  margin: 0 auto;
+  width: 55.73%;
+  min-width: 1070px;
+  background-color: transparent;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
+.headmenuWrap {
+  display: flex;
+}
+.main {
+  margin-top: 60px;
+}
+.side1 {
+  top: 60%;
+  width: auto;
+  left: 20px;
+}
+.category_box .headmenu {
+  display: block;
+}
+.category_box h1 {
+  font-size: 20px;
+}
+.category_box h2 {
+  font-size: 17px;
+}
+.slideRight.cate {
+  text-align: left;
+}
