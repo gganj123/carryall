@@ -31,10 +31,7 @@ class UserController {
   // 로그인 세션
   async loggedIn(req, res) {
     if (req.user) {
-
-      const { username } = req.user;
-
-      res.send({ logIn: true, user: username });
+      res.send({ logIn: true, user: req.user });
     } else {
       res.send({ logIn: false });
     }
