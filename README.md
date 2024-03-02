@@ -25,7 +25,7 @@
 
 <br/>
 
-## ✏️기술 스택 및 도구✏️
+## 🪄 기술 스택 및 도구
 
 ### 💻프론트엔드
   ![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=ffffff)
