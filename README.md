@@ -125,7 +125,7 @@
 
 1. 리포지토리 클론
 ```bash
-git clone https://kdt-gitlab.elice.io/sw_track/class_07/web_project/team06/daladala.git
+git clone https://kdt-gitlab.elice.io/sw_track/class_08/web_project_i/team06/carryall.git
 ```
 
 2. 패키지 설치
@@ -147,16 +147,15 @@ npm run dev
 ### ➕배포 서버에서 사용하기
 ```bash
 // 사이트 주소
-http://kdt-sw-7-team06.elicecoding.com/
-http://kdt-sw-7-team06.elicecoding.com/api-docs -> API 문서
+http://kdt-sw-8-team06.elicecoding.com:5001/
 
 // 관리자 계정
-ID: 
-PW: 
+ID: adminCarryAll
+PW: adminCarryAll1111
 
 // 일반 계정
-ID: 
-PW: 
+ID: test0606
+PW: test0606test0606
 ```
 
 
