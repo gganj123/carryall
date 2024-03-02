@@ -19,11 +19,11 @@ class CategorService {
     if (!_id) throw new Error("삭제하기 위한 카테고리ID가 필요합니다.");
     await Category.delete(_id);
   }
-  async updateCategory(_id, { name}) {
-    if (!name ) throw new Error("수정을 위한 데이터 정보가 일부 없습니다.");
+  async updateCategory(_id, name) {
+    if (!name) throw new Error("수정을 위한 카테고리 이름이 없습니다.");
     if (!_id) throw new Error("수정을 위한 카테고리 ID가 없습니다.");
 
-    const updatedCategory = await Category.update(_id, { name });
+    const updatedCategory = await Category.update(_id, name);
     return updatedCategory;
   }
 }

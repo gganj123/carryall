@@ -20,7 +20,7 @@ class ProductService {
     image,
     option,
     stock,
-    categoryName,
+    brand,
   }) {
     if (!_id) throw Error("업데이트에 필요한 PRODUCT ID가 없습니다");
     const updateProduct = await Product.update({ _id},{
@@ -30,7 +30,7 @@ class ProductService {
       image,
       option,
       stock,
-      categoryName,   
+      brand,   
     });
     if (!updateProduct) throw new Error("제품을 찾지 못했습니다.");
     return updateProduct;
@@ -50,14 +50,13 @@ class ProductService {
     return product;
   }
 
-// 장바구니용 상품 id 조회(상품 금액, 이미지, 브랜드, 옵션, 상품 이름 리턴)
+// 장바구니용 상품 id 조회(상품 금액, 이미지, 브랜드, 상품 이름 리턴)
   async getProductInformation(_id) {
     const product = await Product.findByIdForCart(_id);
     if (!_id) throw Error("특정상품을 가져오기 위한 id가 없습니다.");
     if (!product) throw Error("상품을 찾을 수 없습니다.");
     return product;
   } 
-
 }
 const productService = new ProductService();
 module.exports = productService;

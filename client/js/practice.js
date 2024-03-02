@@ -18,13 +18,6 @@
 
 
 
-
-  // 총 가격을 계산합니다.
-  //var totalPrice = price * num;
-
-  // 총 가격을 화면에 업데이트합니다.
-  //priceElement.textContent = totalPrice.toLocaleString() + "원";
-//}
 // document.addEventListener("DOMContentLoaded", function() {
 //   // 서버로부터 데이터를 받아온 후에 실행될 함수
 //   axios.get('http://localhost:5001/products')
@@ -35,7 +28,7 @@
 //       document.querySelector('.totalDetailOption h1').innerText = product.name;
 //       document.querySelector('.totalDetailOption .price').innerText = product.price;
 //       document.querySelector('.totalPrice .price').innerText = product.price;
-//       document.querySelector('.totalDetailOption .categoryName').innerText = product.categoryName;
+//       document.querySelector('.totalDetailOption .brand').innerText = product.brand;
 //       document.querySelector('.contentPoint ul').innerHTML = `
 //           <li class="point">소재: 합성피혁</li>
 //           <li class="point">색상: 블랙 / 아이보리 / 카멜</li>

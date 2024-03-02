@@ -21,8 +21,9 @@ class ProductModel {
     categoryId,
     price,
     image,
+    option,
     stock,
-    categoryName,
+    brand,
   }) {
     const opt = { returnOriginal: false };
     const updatedProduct = await Product.findOneAndUpdate(
@@ -31,8 +32,9 @@ class ProductModel {
         categoryId,
         price,
         image,
+        option,
         stock,
-        categoryName,
+        brand,
       },
       opt
     );
@@ -43,10 +45,10 @@ class ProductModel {
     return result;
   }
 
-  // 장바구니용 상품 id 조회(상품 금액, 이미지, 브랜드, 옵션, 상품 이름 리턴)
+  // 장바구니용 상품 id 조회(상품 금액, 이미지, 브랜드, 상품 이름 리턴)
   async findByIdForCart (_id) {
     const product = await Product.findOne({ _id })
-    .select("name price image categoryName");
+    .select("name price image brand");
     return product;
   }
 }

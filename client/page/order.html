@@ -1,137 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/cart.css" />
-    <link rel="stylesheet" href="/css/styles.css" />
-
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-    <title>order</title>
-  </head>
-  <body>
-    <main>
-      <header id="header"></header>
-
-      <div class="mainContainer">
-        <div class="cartTitle">주문서 작성 / 결제</div>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/cart.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  <title>order</title>
+</head>
+<body>
+  <main>
+    <h1>주문서 작성 / 결제</h1>
+    <div>
         <div class="cartBox">
-          <div class="cartBoxHeader orderBoxHeader">
-            <p class="cartBoxH1 cartHeader">상품정보</p>
-            <p class="cartBoxH2 cartHeader">옵션</p>
-            <p class="cartBoxH3 cartHeader">수량</p>
-            <p class="cartBoxH4 cartHeader">상품금액</p>
-            <p class="cartBoxH5 cartHeader">주문금액</p>
+          <div class="cartBoxHeader">
+              <p class="cartBoxH1 header">상품정보</p>
+              <p class="cartBoxH2 header">옵션</p>
+              <p class="cartBoxH3 header">수량</p>
+              <p class="cartBoxH4 header">상품금액</p>
+              <p class="cartBoxH5 header">주문금액</p>
           </div>
 
           <div class="itemContainer">
             <!-- 장바구니 결과표시 -->
+
           </div>
-        </div>
+        </div> 
         <div class="payment">
           <div class="paymentBox">
-            <div class="paymentBoxHeader">
-              <p class="cartBoxH1 cartHeader">총 상품 금액</p>
-              <p class="cartBoxH2 cartHeader"></p>
-              <p class="cartBoxH3 cartHeader">할인 금액</p>
-              <p class="cartBoxH4 cartHeader"></p>
-              <p class="cartBoxH5 cartHeader">결제 예정 금액</p>
-            </div>
-            <div class="totalPrice">
-              <div class="paymentBoxBody">
-                <p
-                  class="cartBoxH1 cartHeader sumItemPrice"
-                  id="orderSumItemPrice"
-                >
-                  원
-                </p>
-                <p class="cartBoxH2 cartHeader">-</p>
-                <p
-                  class="cartBoxH3 cartHeader delPrice"
-                  id="orderDiscountPrice"
-                >
-                  원
-                </p>
-                <p class="cartBoxH4 cartHeader">=</p>
-                <p class="cartBoxH5 cartHeader totalPrice" id="orderTotalPrice">
-                  원
-                </p>
+              <div class="paymentBoxHeader">
+                  <p class="cartBoxH1 header">총 상품 금액</p>
+                  <p class="cartBoxH2 header"></p>
+                  <p class="cartBoxH3 header">할인 금액</p>
+                  <p class="cartBoxH4 header"></p>
+                  <p class="cartBoxH5 header">결제 예정 금액</p>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="orderInfo">
-          <h3>주문 정보</h3>
-          <ul class="orderInfoList">
-            <li>
-              <span>* 이름</span>
-              <input
-                type="text"
-                class="inputType01 designInput"
-                id="userName"
-                value="이름"
-              />
-            </li>
-            <!-- 6. 휴대폰 번호 -->
-            <li>
-              <span>* 휴대폰 번호</span>
-              <input
-                type="text"
-                class="inputType01 designInput"
-                id="phoneNum"
-                value="010-1234-5678"
-              />
-            </li>
-            <!-- 7. 주소 -->
-            <li>
-              <span>* 주소</span>
+              <div class="totalPriceBox">
 
-              <div class="address_line address_line01 f_fs">
-                <input
-                  type="text"
-                  name="address"
-                  id="address01"
-                  class="inputType01 designInput"
-                  value="zipcode"
-                />
-              </div>
-              <div class="address_line address_line02 f_c label">
-                <label for="address02" class="label"></label>
-                <input
-                  type="text"
-                  name="address"
-                  id="address02"
-                  class="inputType01 designInput"
-                  value="address"
-                />
-                <label for="address03" class="label"></label>
-                <input
-                  type="text"
-                  name="address"
-                  id="address03"
-                  class="inputType01 designInput"
-                  value="address detail"
-                />
-              </div>
-            </li>
-          </ul>
+                  <p class="cartBoxH1 header sumItemPrice" id="orderSumItemPrice">원</p>
+                  <p class="cartBoxH2 header ">-</p>
+                  <p class="cartBoxH3 header delPrice" id="orderDiscountPrice">원</p>
+                  <p class="cartBoxH4 header ">=</p>
+                  <p class="cartBoxH5 header totalPrice" id="orderTotalPrice">원</p>
 
-          <div class="orderBtnContainer">
-            <button class="btnPayment btnOrderSubmit" id="btnPayment">
-              상품 주문
-            </button>
+              </div>              
           </div>
-        </div>
       </div>
-    </main>
-    <footer id="footer"></footer>
+      <h3>주문 정보</h3><br>
+      <li>
+        
+          <span>* 이름</span>
+          <input type="text" class="inputType01" id="userName" value="이름" >
 
-    <script src="../js/order.js"></script>
-    <script src="/js/header.js"></script>
-    <script src="/js/footer.js"></script>
+      </li>
+      <!-- 6. 휴대폰 번호 -->
+      <li>
+          <span>* 휴대폰 번호</span>
+          <input type="text" class="inputType01" id="phoneNum" value="010-1234-5678" >
+      </li>
+      <!-- 7. 주소 -->
+        <li>
 
-    <!-- 우편번호 API -->
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  </body>
+            <span>* 주소</span>
+
+          <div class="address_line address_line01 f_fs">
+            <input type="text" name="address" id="address01" class="inputType01" value="zipcode">
+          </div>
+          <div class="address_line address_line02 f_c label">
+              <label for="address02" class="label"></label>
+              <input type="text" name="address" id="address02" class="inputType01" value="address">
+              <label for="address03" class="label"></label>
+              <input type="text" name="address" id="address03" class="inputType01" value="address detail">
+          </div>
+
+        </li>
+          <div>
+            
+          </div>
+      <div class="orderBtnContainer">
+        <button class="btnPayment" id="btnPayment">상품 주문</button>
+      </div>
+    </ㅇ>
+  </main>
+  <script src="../js/order.js"></script>
+
+  <!-- 우편번호 API -->
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+
 </html>

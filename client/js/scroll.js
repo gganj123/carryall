@@ -3,45 +3,44 @@
   let $div = document.getElementsByClassName('scroll2')[0];
   let count = $ul.children.length;
 
-  // IntersectionObserver 생성
+  // 인터섹션 옵저버 생성
   const io = new IntersectionObserver((entry, observer) => {
-    // 현재 보이는 target 출력
-    const ioTarget = entry[0].target;
+      // 현재 보이는 target 출력
+      const ioTarget = entry[0].target;
 
-    // viewport에 target이 보이면 하는 일
-    if (entry[0].isIntersecting) {
-      console.log('현재 보이는 타겟', ioTarget);
+      // viewport에 target이 보이면 하는 일
+      if (entry[0].isIntersecting) {
+          console.log('현재 보이는 타겟', ioTarget)
+          // 현재 보이는 target 감시 취소
+          io.unobserve($div);
 
-      // 현재 보이는 target 감시 취소
-      io.unobserve($div);
+          // 새로운 div 추가
+          $div = $ul.appendChild(document.createElement('div'));
+          $div.classList.add('scroll2');
+          $div.setAttribute('id', 'oblistsort2');
+          $div.textContent = ++count; 
+          // 새로 추가된 div 감시
+          io.observe($div);
 
-      // 새로운 div 추가
-      $div = $ul.appendChild(document.createElement('div'));
-      $div.classList.add('scroll2');
-      $div.setAttribute('id', 'oblistsort2');
-      $div.textContent = ++count;
-
-      // 새로 추가된 div 감시
-      io.observe($div);
-
-      // 랜덤한 상품 목록을 가져와서 화면에 출력
-      fetchProducts();
-    }
+          // 랜덤한 상품 목록을 가져와서 화면에 출력
+          fetchProducts();
+      }
   }, {
-    // 타겟이 50% 이상 보이면 감지
-    threshold: 0.5
+      // 타겟이 50% 이상 보이면 감지
+      threshold: 0.5
   });
 
   // div 감시
   io.observe($div);
+
 })();
 
 // 상품 목록을 가져와서 화면에 출력하는 함수
 function fetchProducts() {
   axios.get(`/api/products`)
-    .then(res => {
-      const productList = res.data;
-      let htmlString = '';
+      .then(res => {
+          const productList = res.data;
+          let htmlString = '';
 
           // URL에서 브랜드 정보 가져오기
           function getBrandFromURL() {
@@ -51,8 +50,8 @@ function fetchProducts() {
           const filteredProducts = productList.filter(product => product.brand.toLowerCase() === getBrandFromURL().toLowerCase()); // 대소문자 구분 없이 필터링
           console.log(filteredProducts);
 
-      // 상품 목록을 랜덤하게 재배열
-      const shuffledProducts = shuffleArray(filteredProducts);
+          // 상품 목록을 랜덤하게 재배열
+          const shuffledProducts = shuffleArray(filteredProducts);
 
           shuffledProducts.forEach((product,index) => {
             if(index<=3){
@@ -76,8 +75,8 @@ function fetchProducts() {
 // 배열을 랜덤하게 섞는 함수
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
 }

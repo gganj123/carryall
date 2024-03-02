@@ -3,12 +3,12 @@
       .then(res => {
         const productList = res.data;
         let htmlString = '';
-
+  
         productList.forEach((product,index) => {
           if(index<=7){
           htmlString += `<div class="item" style="height: 321px; width: 244.44px; margin-bottom:100px;"><a href="/practice?id=${product._id}">`
           htmlString += `<img div class="img" style="width: 100%; height: auto;  display: block;" id="${product._id}" src='${product.image}'>`;
-          htmlString += `<h2 id="root"> ${product.categoryName}</h2>`;
+          htmlString += `<h2 id="root"> ${product.brand}</h2>`;
           htmlString += `<div p>${product.name}</div> `;
           htmlString += `<p>${product.price.toLocaleString('ko-KR')}</p>`;
           htmlString += `</div></a>`;
@@ -36,7 +36,7 @@
           if (index <= 7) {
             htmlString += `<div class="item" style="height: 321px; width: 244.44px; margin-bottom:100px;"><a href="/practice?id=${product._id}">`
             htmlString += `<img class="img" style="width: 100%; height: auto;  display: block;" id="${product._id}" src="${product.image}">`;
-            htmlString += `<h2 id="root"> ${product.categoryName}</h2>`;
+            htmlString += `<h2 id="root"> ${product.brand}</h2>`;
             htmlString += `<div p>${product.name}</div> `;
             htmlString += `<p>${product.price.toLocaleString('ko-KR')}</p>`;
             htmlString += `</div></a>`;

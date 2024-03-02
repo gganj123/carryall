@@ -1,17 +1,18 @@
-const stussyButton = document.querySelector('.stussy');
-const supremeButton = document.querySelector('.supreme');
-const bareButton = document.querySelector('.bare');
+  const stussyButton = document.getElementById('stussy');
+  const supremeButton = document.getElementById('supreme');
+  const bareButton = document.getElementById('bare');
 
-// 메인 페이지에서 제품 페이지로 이동하는 버튼 클릭 시
-stussyButton.addEventListener('click', function() {
+  // Stussy 버튼 클릭 시 product 페이지로 이동
+  stussyButton.addEventListener('click', function() {
     window.location.href = '/product?brand=stussy';
-});
+  });
 
-supremeButton.addEventListener('click', function() {
+  // Supreme 버튼 클릭 시 product 페이지로 이동
+  supremeButton.addEventListener('click', function() {
     window.location.href = '/product?brand=supreme';
-});
+  });
 
-bareButton.addEventListener('click', function() {
+  // Bare 버튼 클릭 시 product 페이지로 이동
+  bareButton.addEventListener('click', function() {
     window.location.href = '/product?brand=bare';
-});
-
+  });

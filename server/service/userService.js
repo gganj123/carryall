@@ -32,25 +32,26 @@ class UserService {
       return { err: "중복된 이메일입니다." };
     } else if (password !== passwordReconfirm) {
       return { err: "비밀번호를 확인해주세요." };
-    } 
-      const hashPassword = hashedPassword(password);
+    }
 
-      const newUser = {
-        username,
-        password: hashPassword,
-        name,
-        email,
-        tel,
-        zipCode,
-        address,
-        addressDetail,
-        telSubscription,
-        emailSubscription,
-      };
+    const hashPassword = hashedPassword(password);
 
-      const joinNewUser = await this.userModel.join(newUser);
+    const newUser = {
+      username,
+      password: hashPassword,
+      name,
+      email,
+      tel,
+      zipCode,
+      address,
+      addressDetail,
+      telSubscription,
+      emailSubscription,
+    };
 
-      return joinNewUser;
+    const joinNewUser = await this.userModel.join(newUser);
+
+    return joinNewUser;
   }
 
   // 회원정보 수정
