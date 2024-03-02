@@ -7,14 +7,6 @@ const CategorySchema = new Schema(
       type: String,
       required: true,
     },
-    origin: {
-      type: String,
-      default:"원산지"
-    },
-    detail: {
-      type: String,
-      default:"디테일"
-    },
   },
   {
     versionKey: false,

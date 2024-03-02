@@ -21,11 +21,8 @@ class ProductModel {
     categoryId,
     price,
     image,
-    option,
     stock,
     categoryName,
-    detail,
-    origin,
   }) {
     const opt = { returnOriginal: false };
     const updatedProduct = await Product.findOneAndUpdate(
@@ -36,8 +33,6 @@ class ProductModel {
         image,
         stock,
         categoryName,
-        detail,
-        origin,
       },
       opt
     );

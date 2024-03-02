@@ -13,6 +13,7 @@ class UserService {
     const {
       username,
       password,
+      passwordReconfirm,
       name,
       email,
       tel,
@@ -29,26 +30,27 @@ class UserService {
       return { err: "중복된 아이디입니다." };
     } else if (foundUser && foundUser.email == email) {
       return { err: "중복된 이메일입니다." };
-    }
+    } else if (password !== passwordReconfirm) {
+      return { err: "비밀번호를 확인해주세요." };
+    } 
+      const hashPassword = hashedPassword(password);
 
-    const hashPassword = hashedPassword(password);
+      const newUser = {
+        username,
+        password: hashPassword,
+        name,
+        email,
+        tel,
+        zipCode,
+        address,
+        addressDetail,
+        telSubscription,
+        emailSubscription,
+      };
 
-    const newUser = {
-      username,
-      password: hashPassword,
-      name,
-      email,
-      tel,
-      zipCode,
-      address,
-      addressDetail,
-      telSubscription,
-      emailSubscription,
-    };
+      const joinNewUser = await this.userModel.join(newUser);
 
-    const joinNewUser = await this.userModel.join(newUser);
-
-    return joinNewUser;
+      return joinNewUser;
   }
 
   // 회원정보 수정

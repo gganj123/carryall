@@ -15,13 +15,9 @@ class CategoryController {
     try {
       const {
         name,
-        detail,
-        origin,
       } = req.body;
       const category = await CategoryService.createCategory({
-        name,
-        detail,
-        origin,
+        name
       });
       res.status(201).json({ success: true, data: category });
     } catch (err) {
@@ -42,13 +38,9 @@ class CategoryController {
       const { _id } = req.params;
       const {
         name,
-        detail,
-        origin,
       } = req.body;
       const updatedCategory = await CategoryService.updateCategory({_id}, {
         name,
-        detail,
-        origin,
       });
       res.status(200).json({ success: true, data: updatedCategory });
     } catch (err) {
