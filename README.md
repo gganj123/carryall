@@ -46,7 +46,7 @@
 <br/>
 
 ## 🗃️와이어프레임🗃️
- [FIGMA](https://www.figma.com/file/GRQHgVvi46FUrgWtGidAIe/Daladala?type=design&node-id=0-1&mode=design&t=k8wT5gpi0224onTo-0)<br/>
+ [FIGMA](https://www.figma.com/file/RzbABzzZr18FYZvlkJMub6/Team_06_Wireframe?type=design&node-id=0-1&mode=design&t=FGcT0APlpeZWhsc6-0)<br/>
  
  <br/>
 
