@@ -63,6 +63,7 @@ class UserController {
       const {
         username,
         password,
+        passwordReconfirm,
         name,
         email,
         tel,
@@ -73,9 +74,16 @@ class UserController {
         emailSubscription,
       } = req.body;
 
+      // if (password !== passwordReconfirm) {
+      //   return res
+      //     .status(400)
+      //     .json({ message: "비밀번호가 일치하지 않습니다." });
+      // }
+
       const newUser = await userService.createUser({
         username,
         password,
+        passwordReconfirm,
         name,
         email,
         tel,
@@ -101,9 +109,14 @@ class UserController {
   // 회원정보 수정
   async updateUser(req, res) {
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
       const {
         username,
         password,
+        passwordReconfirm,
         email,
         tel,
         zipCode,
@@ -112,6 +125,12 @@ class UserController {
         telSubscription,
         emailSubscription,
       } = req.body;
+
+      if (!password || password !== passwordReconfirm) {
+        return res
+          .status(400)
+          .json({ message: "비밀번호가 일치하지 않습니다." });
+      }
 
       await userService.editUser({
         username,

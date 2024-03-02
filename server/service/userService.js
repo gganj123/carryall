@@ -13,6 +13,7 @@ class UserService {
     const {
       username,
       password,
+      passwordReconfirm,
       name,
       email,
       tel,
@@ -29,6 +30,8 @@ class UserService {
       return { err: "중복된 아이디입니다." };
     } else if (foundUser && foundUser.email == email) {
       return { err: "중복된 이메일입니다." };
+    } else if (password !== passwordReconfirm) {
+      return { err: "비밀번호를 확인해주세요." };
     }
 
     const hashPassword = hashedPassword(password);
@@ -67,19 +70,17 @@ class UserService {
 
     const hashPassword = hashedPassword(password);
 
-    const foundUser = await this.userModel.update(
-      {
-        username,
-        password: hashPassword,
-        email,
-        tel,
-        zipCode,
-        address,
-        addressDetail,
-        telSubscription,
-        emailSubscription,
-      }
-    );
+    const foundUser = await this.userModel.update({
+      username,
+      password: hashPassword,
+      email,
+      tel,
+      zipCode,
+      address,
+      addressDetail,
+      telSubscription,
+      emailSubscription,
+    });
 
     return foundUser;
   }
