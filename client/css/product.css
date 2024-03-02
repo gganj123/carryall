@@ -4,7 +4,7 @@ body{
   font-family: 'Noto Sans KR', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
+  background-color: transparent;
   height: 1000px;
   min-height: 100vh;
   overflow-y: auto;
@@ -26,7 +26,6 @@ input[type="text"] {
   border-bottom: 1px solid black; /* 밑줄 스타일 적용 */
   border-radius: 0;
 }
-
 .inputform{
   background-color: white;
   border: none;
@@ -35,29 +34,20 @@ input[type="text"] {
   padding-right: 50px; 
   font-size: 20px;
 }
-
 .total {
   width: 100%;
   height: 2000px;
 }
-
 .container{
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  max-width: 1070px;
 }
-
-.container .main {
-  /* height: 2000px; */
-}
-
 .container .main .selectbox {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 30px;
-  /* background-color: aqua; */
 }
-
 .container .main .selectbox select {
   border-radius: 0px;
   width: 200px;
@@ -66,65 +56,68 @@ input[type="text"] {
   background-color: #f9f9f9;
   font-weight: normal;
 }
-
-.total .mainPhoto {
-  /* background-color: greenyellow; */
-}
-
 .total .mainPhoto .mainPhoto {
-  padding-top: 20px;
+  /* padding-top: 20px; */
   width: 1920px;
   height: 460px;
   margin: auto;
   display: block;
 }
-
 .container .main .productList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  /* height: 25%; */
-  /* width: 25%; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  margin-top: 20px;
+  margin-bottom: 100px;
 }
-
 .container .main .productList #detail {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   /* height: 100%; */
 }
-
-
-.container .main .productList .item {
-  border: 1px solid #eee;
+/* .container .main .productList .item {
   border-radius: 0px;
   height: 282px;
   width: 244.44px;
   padding: 5px;
   margin-bottom: 10px;
-}
-
+} */
 .container .main .productList .item img {
   /* width: 25%; */
   width: 244.44px;
   height: 172.65px;
   object-fit: cover;
-  
 }
 select option {
   width:200px;
   height: 100px;
 }
-
-.container .main .productList .item .text {
-  
-}
-
 .container .main .productList .item h2 {
   font-size: 17px;
 }
-
 .container .main .productList .item p {
   font-size: 14px;
   opacity: .8;
+}
+.story_tit {
+  margin-top: 40px;
+}
+.story_wrap {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.story_wrap .main_story {
+  overflow: hidden;
+  width: calc(33.33333% - 25px);
+}
+.story_wrap .main_story img {
+  width: 100%;
+}
+#objectList .item {
+  width: 100% !important;
+  height: auto !important;
+  margin-bottom: 40px !important;
 }

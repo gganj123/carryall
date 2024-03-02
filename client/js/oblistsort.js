@@ -1,4 +1,3 @@
-
 const urlParams = new URLSearchParams(window.location.search); //http://localhost:5001/product/?brand=bare
 const brand = urlParams.get('brand');
 changeText();

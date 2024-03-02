@@ -8,15 +8,14 @@ class OrderService {
   }
 
   // _id에 해당하는 주문 내역 불러오기
-  // async getOrder(_id) {
-  //   if (_id) {
-  //     const order = await orderModel.findOrder(_id);
-  //     return order;
-  //   }
-  // }
+  async getOrder(_id) {
+    if (_id) {
+      const order = await orderModel.findOrder(_id);
+      return order;
+    }
+  }
 
   async addOrder(orderInfo) {
-  
     // 주문 생성 및 저장
     const date = new Date();
     const status = "결제완료";
@@ -26,7 +25,7 @@ class OrderService {
     return newOrder;
   }
 
-  // id로 주문 수정 -> 이 부분 확인안해봄
+  // id로 주문 수정
   async editOrder(orderId, orderInfo) {
     const updatedNewOrder = await orderModel.update(orderId, orderInfo);
     return updatedNewOrder;
@@ -54,7 +53,6 @@ class OrderService {
       );
       return updatedOrder;
     } catch (error) {
-      // 오류 처리
       console.error("주문 수정 중 오류 발생:", error);
       throw error;
     }

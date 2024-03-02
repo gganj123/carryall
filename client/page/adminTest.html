@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관리자 페이지</title>
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+</head>
+<body>
+  <header id="header"></header>
+  
+  <main>
+    <section class="container">
+      <h2>관리자</h2>
+      <div class="contWrap">
+        <ul class="navCont">
+          <li class="navTit n1" style="margin-bottom: 30px;">상품정보</li>
+          <li><a href="#">카테고리 관리</a></li>
+          <li><a href="#">상품 관리</a></li>
+          <div class="infoCont">
+            <h3> </h3></div>
+          <li class="navTit" style="margin-bottom: 30px;">회원정보</li>
+          <li><a href="#">회원정보 관리</a></li>
+          <div class="infoCont">
+            <h3> </h3></div>
+          <li class="navTit" style="margin-bottom: 30px;">주문관리</li>
+          
+          <li><a href="#">주문 내역</a></li>
+          <li><a href="#">배송 상태</a></li>
+          <div class="infoCont">
+            <h3> </h3></div>
+        </ul>
+        <div class="infoCont" style="margin-left: 20px;">
+            <li style="margin-bottom: 70px;"><h3>제품 관리<br></h3></li>
+            
+            <h4>
+              제품 등록 ( 상품 분류 )
+              <button id="deleteButton" class="font_17">선택항목 삭제</button>
+              <button id="addButton" class="balance font_17">추가</button> 
+              <!-- 등록하기 위해 누르기 -->
+            </h4>
+            <div class="adminList">
+              <div class="check">
+              <input type="checkbox" name="checkbox1">&ensp;&nbsp;No.</div>
+              <div class="sort">상세</div>
+              <div class="sortbutton">등록 및 수정</div>
+              <div class="infoCont" style="width:100%; padding-top: 0;">
+                <h3> </h3></div>
+              </div>
+              
+              <!-- 제품 추가 폼 -->
+        <a id="adminProAdd"></a>
+        <!-- 제품 리스트 불러오기 -->
+        <ul id="adminProList"></ul>
+
+      
+      </div>
+      
+    <div style="height: 900px;"></div>
+    </section>
+    
+    <div style="height: 500px;"></div>
+  </main>
+
+  <footer id="footer"></footer>
+
+
+  <script src="../js/header.js"></script>
+  <script src="../js/footer.js"></script>
+  <script src="../js/adminProduct.js"></script>
+</body>
+</html>

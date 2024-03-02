@@ -17,8 +17,12 @@ body {
   width: 140px;
   height: 140px;
   background-color: #fff;
-  margin-right: 47px;
+  margin-right: 37px;
   border-radius: 50%;
+  overflow: hidden;
+}
+.profileImg img {
+  width: 100%;
 }
 .profileTxt {
   display: flex;
