@@ -34,6 +34,12 @@
                   <span>* 아이디</span>
                   <input type="text" class="inputType01" id="idName" required="" >
                 </label>
+                <div class="errTxt n0">
+                  아이디는 3자리 이상 입력해주세요.
+                </div>
+                <div class="errTxt n1">
+                  중복된 아이디입니다.
+                </div>
               </li>
               <!-- 2. 비밀번호 -->
               <li>
@@ -41,7 +47,7 @@
                   <span>* 비밀번호</span>
                   <input type="password" class="inputType01" id="password" required="" >
                 </label>
-                <div class="errTxt n0">
+                <div class="errTxt n2">
                   비밀번호는 10자리 이상 입력해주세요.
                 </div>
               </li>
@@ -52,7 +58,7 @@
                   <span>* 비밀번호 확인</span>
                   <input type="password" class="inputType01" id="passwordReconfirm" required="" >
                 </label>
-                <div class="errTxt n1">
+                <div class="errTxt n3">
                   입력된 비밀번호를 확인하세요.
                 </div>
               </li>
@@ -71,8 +77,11 @@
                   <span>* 이메일</span>
                   <input type="text" class="inputType01" id="email">
                 </label>
-                <div class="errTxt n2">
+                <div class="errTxt n4">
                   이메일 주소를 확인하세요.
+                </div>
+                <div class="errTxt n5">
+                  중복된 이메일입니다.
                 </div>
               </li>
               <li style="margin: 0;">
@@ -134,19 +143,43 @@
   
   <!-- 회원가입 폼 script -->
   <script>
-    // 1. 이메일 주소 유효성 추가
+    // 1. 이메일 주소 유효성 및 중복 여부 확인
     var emailInput = document.getElementById("email");
-    var errorText = document.querySelector(".errTxt.n2");
+    var errorText = document.querySelector(".errTxt.n4");
+    var errorTextDup = document.querySelector(".errTxt.n5");
 
     // 이메일 입력란의 내용이 변경될 때마다 이벤트를 수신하도록 설정
     emailInput.addEventListener("input", function() {
       // 이메일 주소가 "@" 기호를 포함하지 않는 경우
       if (!emailInput.value.includes("@")) {
-        // 에러 메시지를 보이도록 함
         errorText.classList.add("active");
       } else {
-        // "@" 기호가 포함된 경우 에러 메시지를 숨김
         errorText.classList.remove("active");
+      }
+
+      // 이메일 중복 여부 확인 (여기서는 임의의 중복 여부 확인 함수를 사용하도록 가정)
+      if (isEmailDuplicated(emailInput.value)) {
+        errorTextDup.classList.add("active");
+      } else {
+        errorTextDup.classList.remove("active");
+      }
+    });
+
+    // 임의의 이메일 중복 여부 확인 함수
+    function isEmailDuplicated(email) {
+      // 여기서는 간단히 중복 여부를 랜덤으로 반환하도록 설정
+      return Math.random() < 0.5; // 50%의 확률로 중복된 것으로 가정
+    }
+
+    // 2. 아이디 입력란 유효성 검사
+    var idNameInput = document.getElementById("idName");
+    var errorTextID = document.querySelector(".errTxt.n0");
+    idNameInput.addEventListener("input", function() {
+      // 아이디가 3자리 미만인 경우
+      if (idNameInput.value.length < 3) {
+        errorTextID.classList.add("active");
+      } else {
+        errorTextID.classList.remove("active");
       }
     });
 
@@ -154,8 +187,8 @@
     function checkPassword() {
       const password = document.getElementById('password').value;
       const passwordReconfirm = document.getElementById('passwordReconfirm').value;
-      const errorText0 = document.querySelector('.errTxt.n0'); // 비밀번호 길이 에러 메시지
-      const errorText1 = document.querySelector('.errTxt.n1'); // 비밀번호 일치 여부 에러 메시지
+      const errorText0 = document.querySelector('.errTxt.n2'); // 비밀번호 길이 에러 메시지
+      const errorText1 = document.querySelector('.errTxt.n3'); // 비밀번호 일치 여부 에러 메시지
 
       // 비밀번호 길이가 10자리 미만인 경우
       if (password.length < 10) {

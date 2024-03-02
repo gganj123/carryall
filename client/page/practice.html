@@ -9,17 +9,17 @@
     <link rel="stylesheet" href="../css/practice.css" />
     <link rel="stylesheet" href="../css/reset_practice.css" />
   </head>
-  <body>
+  <body style="height: 100%;">
     <header id="header"></header>
 
     <div
       class="container"
-      style="height: 100%; width: 100%; display: flex; flex-wrap: wrap"
+      style="width: 100%; display: flex; flex-wrap: wrap"
     >
-      <div
+      <!-- <div
         class="side1"
         style="height: 100%; width: 22%; background-color: #fafafa"
-      ></div>
+      ></div> -->
       <main id="main">
         <div class="totalImage">
           <div class="mainImage">
@@ -45,60 +45,64 @@
                 </ul>
               </div>
               <div class="contentDetail">
-                <div class="contentPhoto"></div>
+                <div class="contentPhoto">
+                  <img src="../img/prd_detail.png" alt="detail img">
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="totalDetail">
-          <div class="totalDetailOption">
-            <h1>미디엄 빅투아르백 - 서플 카프스킨 블랙</h1>
-            <p>details</p>
-            <dl>
-              <dt>판매가</dt>
-              <dd class="price">5200000</dd>
-              <dt>브랜드</dt>
-              <dd class="brand">셀린느</dd>
-              <dt>옵션선택</dt>
-              <dd>
-                <select name="selectbox" class="selectbox" id="selectbox">
-                  <option value="black"></option>
-                  <option value="white"></option>
-                  <option value="brown"></option>
-                </select>
-              </dd>
-              <dt>배송비</dt>
-              <dd>무료</dd>
-            </dl>
-            <div class="number">
-              <p class="orderName">미디엄 빅투아르백 - 서플 카프스킨 블랙</p>
-              <div class="orderNumber">
-                <input
-                  type="number"
-                  min="1"
-                  name="num"
-                  id="values"
-                  class="num"
-                  value="1"
-                />
-                <!-- <span class="numberPrice">3,000원</span> -->
+          <div class="totalRightWrap">
+            <div class="totalDetailOption">
+              <h1>미디엄 빅투아르백 - 서플 카프스킨 블랙</h1>
+              <p>details</p>
+              <dl>
+                <dt>판매가</dt>
+                <dd class="price">5200000</dd>
+                <dt>브랜드</dt>
+                <dd class="brand">셀린느</dd>
+                <dt>옵션선택</dt>
+                <dd>
+                  <select name="selectbox" class="selectbox" id="selectbox">
+                    <option value="black"></option>
+                    <option value="white"></option>
+                    <option value="brown"></option>
+                  </select>
+                </dd>
+                <dt>배송비</dt>
+                <dd>무료</dd>
+              </dl>
+              <div class="number">
+                <p class="orderName">미디엄 빅투아르백 - 서플 카프스킨 블랙</p>
+                <div class="orderNumber">
+                  <input
+                    type="number"
+                    min="1"
+                    name="num"
+                    id="values"
+                    class="num"
+                    value="1"
+                  />
+                  <!-- <span class="numberPrice">3,000원</span> -->
+                </div>
+              </div>
+              <div class="totalPrice">
+                <p>총 합계 금액</p>
+                <p class="price">5200000</p>
               </div>
             </div>
-            <div class="totalPrice">
-              <p>총 합계 금액</p>
-              <p class="price">5200000</p>
+            <div class="totalDetailPurchase">
+              <button type="button" id="cartBtn">장바구니</button>
+              <button type="button" id="orderBtn">주문하기</button>
             </div>
-          </div>
-          <div class="totalDetailPurchase">
-            <button type="button" id="cartBtn">장바구니</button>
-            <button type="button" id="orderBtn">주문하기</button>
           </div>
         </div>
       </main>
-      <div
+      <!-- <div
         class="side2"
         style="height: 100%; width: 22%; background-color: #fafafa"
-      ></div>
+      ></div> -->
     </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -325,7 +329,6 @@
       });
     </script>
 
-    <div style="height: 500px"></div>
     <footer id="footer"></footer>
     <script src="../js/header.js"></script>
     <script src="../js/footer.js"></script>

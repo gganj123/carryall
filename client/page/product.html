@@ -16,61 +16,52 @@
 
   <div class="total">
     <div class="mainPhoto" style="background-color: #f7f7f7; margin:0;">
-      <img class="mainPhoto" style = "width: 70% ; height:550px; "src="/img/ban_3.jpeg">
+      <img class="mainPhoto" style = "width: 100% ; height: unset; "src="/img/list_ban.png">
     </div>
  
     <div class="container" style="height: 100px; width: 100%; display: flex; flex-wrap: wrap;">
-      <div class="side1" style="height: 3400px; width: 20%; background-color: #fafafa; ">
+      <div class="side1" style="position: fixed;">
         <div class="category_box" style="text-align: left;">
           <div>
-              <button class="headmenu cate" style="height: 30%;width: 80%; margin-bottom: 10px;">
-                  <h1>categoryName</h1>
-              </button>
-              <button class="headmenu slideRight cate  supremebutt" id="supremebutt" style="height: 25%;width: 80%;">
-                  <h2>Supreme</h2>
-              </button>
-              <button class="headmenu slideRight cate  stussybutt" id="stussybutt" style="height: 25%;width: 80%;">
-                  <h2>Stussy</h2>
-              </button>
-              <button class="headmenu slideRight cate  barebutt" id= "barebutt" style="height: 25%;width: 90%;">
-                  <h2>Bare</h2>
-              </button>
+            <button class="headmenu cate" id ="chang">
+              <h1>brand</h1>
+            </button>
+            <button class="headmenu slideRight cate  supremebutt" id="supremebutt" style="height: 25%;width: 80%;">
+              <h2>supreme</h2>
+            </button>
+            <button class="headmenu slideRight cate  stussybutt" id="stussybutt" style="height: 25%;width: 80%;">
+              <h2>stussy</h2>
+            </button>
+            <button class="headmenu slideRight cate  barebutt" id= "barebutt" style="height: 25%;width: 90%;">
+              <h2>bare</h2>
+            </button>
           </div>
-      </div>
-      </div>
-      <div class="main" style="width: 56%; background-color: #fafafa; ">
-        <!-- <h1>main</h1> -->
-
-        
-          <div class="selectbox">
-            <div style="width: 40%;" class="hdsort" id="chanText">
-              <h2>Lastest listings</h2>
-              <h3 class="font_17">최신상품</h3>
-          </div>
-            <select name="sort" id="sort" class="font_17" style="width:120px; margin: 30px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 0px;"  onchange="fetchProducts()">
-              <option id= "sort2" value="a" style="display: none;">최신상품</option>
-              <option value="new">최신상품</option>
-              <option value="desc">높은가격</option>
-              <option value="asc">가성비상품</option>
-          </select>
         </div>
-        <ul class="scroll1">
-          <div class="productList" id="oblistSort">
-              <div class="detail" id="detail"></div>
+      </div>
+      <div class="main" style="width: 100%; max-width: 1070px; margin: 0 auto; margin-top: 55px;">
+      <!-- <h1>main</h1> -->
+      <div class="selectbox">
+        <div style="width: 40%;" class="hdsort" id="chanText">
+          <h2>Brandn Product</h2>
+          <h3 class="font_17">브랜드별 상품</h3>
+        </div>
+        <select name="sort" id="sort" class="font_17" style="width:120px; margin: 30px 0; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 0px;"  onchange="fetchProducts()">
+          <option id= "sort2" value="a" style="display: none;">최신상품</option>
+          <option value="new">최신상품</option>
+          <option value="desc">높은가격</option>
+          <option value="asc">가성비상품</option>
+        </select>
+      </div>
+
+      <ul class="scroll1">
+        <div class="productList" id="oblistSort"></div>
+        <div class="detail" id="detail"></div>
       </ul>
-          </div> 
-        </div>
-        <div style="height: 2000px; width: 22%; background-color: #fafafa;">
 
-        </div>
-      </div>
-      </div>
     </div>
   </div>
+
   <div class="top">top</div>
-  <div style="height: 500px;"></div>
-
-
 
   <script src="/js/header.js"></script>
   <script src="/js/top.js"></script>
@@ -78,7 +69,7 @@
   <!-- <script src="/js/product.js"></script> -->
   <!-- <script src="/js/hdsort.js"></script> -->
   <script src="/js/oblistsort.js"></script>
-  <script src="../js/obsort2.js"></script>
+  <script src="/js/obsort2.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   
 </body>
