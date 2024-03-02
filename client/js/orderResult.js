@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-  const phoneNumber = document.querySelector(".phone-number");
+  // const phoneNumber = document.querySelector(".phone-number");
   const address = document.querySelector(".address");
   const orderNumber = document.querySelector(".order-number");
   const productName = document.querySelector(".product-name");
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
       // 주문 정보 채우기
       time.textContent = orderResult[0].date;
       userName.textContent = recipientInformation.recipientName;
-      phoneNumber.textContent = recipientInformation.recipientTel;
+      // phoneNumber.textContent = recipientInformation.recipientTel;
       address.textContent = recipientInformation.recipientAddress;
       console.log(orderResult[0]._id);
       orderNumber.textContent = orderResult[0]._id; // 주문번호 채우기

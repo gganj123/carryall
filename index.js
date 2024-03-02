@@ -206,6 +206,7 @@ app.get("/", (req, res) => {
   res.send("접속 성공");
 });
 
+
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
 });

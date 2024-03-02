@@ -51,12 +51,23 @@
                     required=""
                   />
                 </label>
-                <div class="errTxt n0">
-                  비밀번호는 10자리 이상 입력해주세요.
-                </div>
               </li>
 
-              <!-- 3. 이름 -->
+              <!-- 3. 비밀번호 확인 -->
+              <li>
+                <label for="passwordReconfirm" class="label">
+                  <span>비밀번호 확인</span>
+                  <input
+                    type="password"
+                    class="inputType01"
+                    id="passwordReconfirm"
+                    required=""
+                  />
+                </label>
+                <div class="errTxt n1">입력된 비밀번호를 확인하세요.</div>
+              </li>
+
+              <!-- 4. 이름 -->
               <li>
                 <label for="name" class="label">
                   <span>이름</span>
@@ -72,7 +83,7 @@
                 </label>
               </li>
 
-              <!-- 4. 이메일 -->
+              <!-- 5. 이메일 -->
               <li class="f_fs f_d_c label02">
                 <label for="email" class="label">
                   <span>이메일</span>
@@ -80,8 +91,7 @@
                 </label>
                 <div class="errTxt n2">이메일 주소를 확인하세요.</div>
               </li>
-
-              <!-- 5. 휴대폰 번호 -->
+              <!-- 6. 휴대폰 번호 -->
               <li>
                 <label for="phoneNum" class="label">
                   <span>휴대폰 번호</span>
@@ -96,7 +106,7 @@
               </li>
             </ul>
 
-            <!-- 6. 주소 -->
+            <!-- 7. 주소 -->
             <li>
               <label
                 style="justify-content: flex-start"
@@ -143,7 +153,14 @@
               </div>
             </li>
             <div class="joinBtn btn_box">
-              <button style="width: 100%;" type="submit" class="btnType02 modifyForm" onclick="updateUserInfo()">회원정보 변경하기</button>
+              <button
+                style="width: 100%"
+                type="submit"
+                class="btnType02 modifyForm"
+                onclick="updateUserInfo()"
+              >
+                회원정보 변경하기
+              </button>
             </div>
           </div>
         </fieldset>
@@ -179,12 +196,13 @@
           },
         }).open();
       }
-    
+
       // 1. 서버로부터 사용자 정보를 가져와서 각 input 요소에 채워넣는 함수
       function fetchUserData() {
         const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-  
-        axios.get("/api/userEdit")
+
+        axios
+          .get("/api/userEdit")
           .then((response) => {
             const userData = response.data;
             // 사용자 정보를 각 input 요소에 채워넣습니다.
@@ -199,17 +217,18 @@
           .catch((error) => {
             console.error("데이터를 가져오는 데 실패했습니다:", error);
           });
-          
       }
       // 페이지 로드 시 사용자 정보를 가져와서 각 input 요소에 채워넣습니다.
       fetchUserData();
-  
+
       const signupForm = document.getElementById("signupForm");
-  
+
       // 2. submit 이벤트 리스너 밖으로 updateUserInfo 함수를 이동합니다.
       function updateUserInfo() {
         const username = document.getElementById("idName").value;
         const password = document.getElementById("password").value; // 변경된 비밀번호
+        const passwordReconfirm =
+          document.getElementById("passwordReconfirm").value; // 변경된 비밀번호
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
         const phoneNum = document.getElementById("phoneNum").value;
@@ -217,69 +236,65 @@
         const address02 = document.getElementById("address02").value;
         const address03 = document.getElementById("address03").value;
 
-        axios.put("/api/user", {
-            "username": username,
-            "password": password,
-            "email": email,
-            "tel": phoneNum,
-            "name": name,
-            "zipCode": address01,
-            "address": address02,
-            "addressDetail": address03,
+        axios
+          .put("/api/user", {
+            username: username,
+            password: password,
+            passwordReconfirm: passwordReconfirm,
+            email: email,
+            tel: phoneNum,
+            name: name,
+            zipCode: address01,
+            address: address02,
+            addressDetail: address03,
           })
-  
-          .then(response => {
-            // 서버로부터의 응답을 처리합니다.
-            console.log("회원 정보 수정이 완료되었습니다.", response.data);
-            // 여기서 다음 단계로 넘어가거나 원하는 작업을 수행할 수 있습니다.
+          .then((response) => {
+            // 서버로부터의 응답을 처리, 완료 페이지로 이동
+            console.log("회원가입이 완료되었습니다.", response.data);
+            window.location.href = "/mypage";
           })
-          .catch(error => {
-            // 오류가 발생했을 때 처리합니다.
-            console.error("회원 정보 수정 오류:", error);
+          .catch((error) => {
+            console.error("회원가입 오류:", error.response.data);
           });
       }
-  
-      // submit 이벤트 리스너 내에서 updateUserInfo 함수가 호출되도록 수정합니다.
-      signupForm.addEventListener("submit", function (event) {
-        alert("회원정보가 변경되었습니다.")
-        window.location.href ='/mypage';
-        updateUserInfo();
-      });
-
 
       // 2. 비밀번호 일치 여부를 확인하는 함수
       function checkPassword() {
-        const password = document.getElementById('password').value;
-        const errorText0 = document.querySelector('.errTxt.n0'); // 비밀번호 길이 에러 메시지
+        const password = document.getElementById("password").value;
+        const errorText0 = document.querySelector(".errTxt.n0"); // 비밀번호 길이 에러 메시지
 
         // 비밀번호 길이가 10자리 미만인 경우
         if (password.length < 10) {
-          errorText0.classList.add('active');
+          errorText0.classList.add("active");
         } else {
-          errorText0.classList.remove('active');
+          errorText0.classList.remove("active");
         }
-      
       }
-      document.getElementById('password').addEventListener('input', checkPassword);
+      document
+        .getElementById("password")
+        .addEventListener("input", checkPassword);
 
       // 3. 전화번호 관련 유효성 추가
       function formatPhoneNumber() {
-        const phoneNumberInput = document.getElementById('phoneNum');
-        let phoneNumber = phoneNumberInput.value.replace(/[^\d]/g, ''); // 숫자 이외의 문자 모두 제거
+        const phoneNumberInput = document.getElementById("phoneNum");
+        let phoneNumber = phoneNumberInput.value.replace(/[^\d]/g, ""); // 숫자 이외의 문자 모두 제거
 
         // 포맷 적용
         if (phoneNumber.length >= 4 && phoneNumber.length <= 7) {
-          phoneNumber = phoneNumber.replace(/(\d{3})(\d{1,4})/, '$1-$2');
+          phoneNumber = phoneNumber.replace(/(\d{3})(\d{1,4})/, "$1-$2");
         } else if (phoneNumber.length >= 8) {
-          phoneNumber = phoneNumber.replace(/(\d{3})(\d{4})(\d{1,4})/, '$1-$2-$3');
+          phoneNumber = phoneNumber.replace(
+            /(\d{3})(\d{4})(\d{1,4})/,
+            "$1-$2-$3"
+          );
         }
         phoneNumberInput.value = phoneNumber;
       }
 
       // 휴대폰 번호 입력란에 input 이벤트 추가하여 입력할 때마다 포맷 변경
-      document.getElementById('phoneNum').addEventListener('input', formatPhoneNumber); 
-
+      document
+        .getElementById("phoneNum")
+        .addEventListener("input", formatPhoneNumber);
     </script>
-    
   </body>
 </html>

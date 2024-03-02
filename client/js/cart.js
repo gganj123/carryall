@@ -37,6 +37,10 @@ function displayUserCartInfo() {
 
   itemsContainer.innerHTML = "";
 
+  if(!cartItems.length) {
+    itemsContainer.innerHTML = `<div class="noCart">상품이 없습니다.</div>`;
+  }
+
   cartItems.forEach(item => {
       axios.get('/api/products/cartInformation/' + item._id)
           .then(response => {
@@ -77,16 +81,16 @@ function drawItems(cartItems) {
 
       const newItem = document.createElement("div");
       newItem.classList.add("cartItem");
-      newItem.innerHTML = `
+      newItem.innerHTML = ` 
           <input type="checkbox" class="itemCkBtn" value="${cartItem._id}, ${cartItem.option}" ${cartItem.isChecked ? 'checked' : ''}>
-          <div class="cartBoxH1 item" style="display: flex;">
-              <img src="${cartItem.image}" alt="${cartItem.name} 이미지" class="itemImg">
+          <div class="cartBoxH1 item itemImgBox">
+              <a href="/practice/?id=${cartItem._id}" class="itemImg"><img src="${cartItem.image}" alt="${cartItem.name} 이미지"></a>
               <div class="item itemInfo">
-                  <p class="itemName">${cartItem.name}</p>
-                  <p class="itemBrand">${cartItem.categoryName}</p>
+                <p class="itemBrand">${cartItem.categoryName}</p>
+                <p class="itemName">${cartItem.name}</p>
               </div>
           </div>
-          <p class="cartBoxH2 item">${cartItem.option}</p>
+          <p class="cartBoxH2 item option">[옵션] : ${cartItem.option}</p>
           <div class="cartBoxH3 quantityBox item">
               <span class="quantityMinus item"><button onclick="decreaseQuantity('${cartItem._id}', '${cartItem.option}')">-</button></span>
               <input class="quantity item" type="number" value="${cartItem.quantity}" min="1" max="99"></input>
@@ -118,11 +122,11 @@ function drawItems(cartItems) {
   function updateTotalPrice(sumItemPrice) {
       totalPriceBox.innerHTML = `
           <div class="paymentBoxBody">
-              <p class="cartBoxH1 header sumItemPrice">${sumItemPrice.toLocaleString() + " 원"}</p>
-              <p class="cartBoxH2 header ">-</p>
-              <p class="cartBoxH3 header delPrice">0 원</p>
-              <p class="cartBoxH4 header ">=</p>
-              <p class="cartBoxH5 header totalPrice">${sumItemPrice.toLocaleString() + " 원"}</p>
+              <p class="cartBoxH1 cartHeader sumItemPrice">${sumItemPrice.toLocaleString() + " 원"}</p>
+              <p class="cartBoxH2 cartHeader ">-</p>
+              <p class="cartBoxH3 cartHeader delPrice">0 원</p>
+              <p class="cartBoxH4 cartHeader ">=</p>
+              <p class="cartBoxH5 cartHeader totalPrice">${sumItemPrice.toLocaleString() + " 원"}</p>
           </div>
       `;
   }

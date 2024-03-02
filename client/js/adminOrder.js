@@ -7,7 +7,7 @@ function fetchData() {
 
       orderList.forEach((order, index) => {
         htmlString += `
-          <div class="adminList">
+          <div class="adminList orderList">
             <div class="check">
               <input type="checkbox" name="checkbox1" id="${
                 order._id
@@ -21,9 +21,9 @@ function fetchData() {
               order.recipientInformation.recipientName
             }</span></div>
             <div class="status">
-              <select class="orderStatus" name="orderStatus">
+              <select class="orderStatus designInput" name="orderStatus">
                 <option value="${order.status}">${order.status}</option>
-                <option value="결제완료">결제 완료</option>
+                <option value="결제완료">결제완료</option>
                 <option value="상품준비">상품준비</option>
                 <option value="배송중">배송중</option>
                 <option value="배송완료">배송완료</option>
@@ -33,7 +33,7 @@ function fetchData() {
               </select>
             </div>
             <div class="sortbutton">
-              <button class="change butt col font_17">수정</button>
+              <button class="change butt col font_17 designButton">수정</button>
             </div>
           </div>`;
       });
@@ -108,26 +108,24 @@ deleteButton.addEventListener("click", function () {
       // 체크된 주문의 ID를 가져옵니다.
       const orderId = checkbox.id;
 
-      if (confirm("삭제하시겠습니까?")) {
-        // 주문를 삭제하는 요청을 보냅니다.
-        axios
-          .delete(`/api/orders/${orderId}`)
-          .then((response) => {
-            // 주문 삭제에 성공한 경우
+      // 주문를 삭제하는 요청을 보냅니다.
+      axios
+        .delete(`/api/orders/${orderId}`)
+        .then((response) => {
+          // 주문 삭제에 성공한 경우
 
-            // 화면에서 해당 주문를 제거합니다.
-            adminListItem.parentNode.removeChild(adminListItem);
+          // 화면에서 해당 주문를 제거합니다.
+          adminListItem.parentNode.removeChild(adminListItem);
 
-            setTimeout(function () {
-              location.reload();
-            }, 500);
-          })
-          .catch((error) => {
-            console.log(orderId);
-            // 주문 삭제에 실패한 경우
-            console.error(`주문 ID ${orderId} 삭제 요청 실패:`, error);
-          });
-      }
+          setTimeout(function () {
+            location.reload();
+          }, 500);
+        })
+        .catch((error) => {
+          console.log(orderId);
+          // 주문 삭제에 실패한 경우
+          console.error(`주문 ID ${orderId} 삭제 요청 실패:`, error);
+        });
     }
   });
 });

@@ -366,35 +366,7 @@ li h2 {
   justify-content: center;
   margin-top: 20px; /* 원하는 여백값 설정 */
 }
-/* 헤더 css 수정 */
-.headmenu {
-  display: none;
-}
-.headmenu.on {
-  display: block;
-}
-.headmenu a {
-  font-size: 17px;
-  font-weight: 500;
-  background-color: transparent;
-}
-header#header {
-  width: 100%;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.header.headerWrap {
-  width: 100%;
-  margin: 0 auto;
-  width: 55.73%;
-  min-width: 1070px;
-  background-color: transparent;
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center;
-}
-.headmenuWrap {
-  display: flex;
-}
+
+/* .more-button {
+  /* 버튼에 대한 스타일링을 추가하세요 
+} */

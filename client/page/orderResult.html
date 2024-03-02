@@ -4,37 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order Result</title>
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/cart.css">
 </head>
 <body>
   <header id="header"></header>
 
   <div class="container">
-    <h1>주문 완료</h1>
-    <p class="success-message">상품 주문이 완료되었습니다.</p>
-    <p class="timestamp">timestamp</p>
-    <div class="delivery-info">
-      <div class="contact-info">
-        <p>배송정보</p>
-        <p class="user-name">이름</p>
-        <p class="phone-number">전화번호</p>
-        <p class="address">주소</p>
+    <div class="orderResult">
+      <div class="orderTop">
+        <p class="success-message">상품 주문이 완료되었습니다.</p>
+        <p class="timestamp">timestamp</p>
       </div>
-      <div class="order-info">
-        <p>주문번호</p>
-        <p class="order-number">0000</p>
+      <div class="delivery-info">
+
+        <div class="infoBox order-info">
+          <p class="infoTit">받으시는 분</p>
+          <p class="user-name">이름</p>
+        </div>
+
+        <div class="infoBox contact-info">
+          <p class="infoTit">배송지</p>
+          <div class="userInfo">
+            <!-- <p class="phone-number">전화번호</p> -->
+            <p class="address">주소</p>
+          </div>
+        </div>
+
+        <div class="infoBox order-info">
+          <p class="infoTit">주문번호</p>
+          <p class="order-number">0000</p>
+        </div>
+        <div class="infoBox product-info">
+          <p class="infoTit">주문상품</p>
+          <p class="product-name">주문상품이름</p>
+        </div>
+        <div class="infoBox payment-info">
+          <p class="infoTit">최종 결제금액</p>
+          <p class="payment-amount">0000원</p>
       </div>
-      <div class="product-info">
-        <p>주문상품</p>
-        <p class="product-name">주문상품이름</p>
+      <div class="buttons">
+        <button id="btnHome">홈으로</button>
+        <button id="btnMypage">마이페이지</button>
       </div>
-      <div class="payment-info">
-        <p>최종 결제금액</p>
-        <p class="payment-amount">0000원</p>
-    </div>
-    <div class="buttons">
-      <button id="btnHome">홈으로</button>
-      <button id="btnMypage">마이페이지</button>
     </div>
   </div>
   <footer id="footer"></footer>

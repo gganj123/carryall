@@ -109,14 +109,14 @@ function drawItems(orderItems) {
     const newItem = document.createElement("div");
     newItem.classList.add("orderItem");
     newItem.innerHTML = `
-      <div class="cartBoxH1 item" style="display: flex;">
+      <div class="cartBoxH1 item itemImgBox">
           <img src="${orderItem.image}" alt="${orderItem.name} 이미지" class="itemImg">
           <div class="item itemInfo">
-              <p class="itemName">${orderItem.name}</p>
-              <p class="itemBrand">${orderItem.categoryName}</p>
+            <p class="itemBrand">${orderItem.categoryName}</p>
+            <p class="itemName">${orderItem.name}</p>
           </div>
       </div>
-      <p class="cartBoxH2 item">${orderItem.option}</p>
+      <p class="cartBoxH2 item option">[옵션] : ${orderItem.option}</p>
       <div class="cartBoxH3 quantityBox item">
           <p class="quantity item">${orderItem.quantity}</p>
       </div>
