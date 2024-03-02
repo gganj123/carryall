@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <button class="headmenu logout admin"><a href="/">로그아웃</a></button>
         <button class="headmenu login"><a href="/joinAgree">회원가입</a></button>
         <button class="headmenu on"><a href="/cart">장바구니</a></button>
-        <button class="headmenu logout login"><a href="/mypage">마이페이지</a></button>
+        <button class="headmenu logout"><a href="/mypage">마이페이지</a></button>
         <button class="headmenu admin"><a href="/admin">관리자 페이지</a></button>
         </div>
     </div>`;

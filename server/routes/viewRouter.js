@@ -12,8 +12,8 @@ viewRouter.use('/cart',serveStatic('cart'));
 viewRouter.use('/cartTest',serveStatic('cartTest'));
 viewRouter.use('/detail',serveStatic('detail'))
 viewRouter.use('/joinAgree',serveStatic('joinAgree'));
-viewRouter.use('/joinfinished',serveStatic('joinfinished'));
-viewRouter.use('/joinform',serveStatic('joinform'));
+viewRouter.use('/joinFinished',serveStatic('joinFinished'));
+viewRouter.use('/joinForm',serveStatic('joinForm'));
 viewRouter.use('/join',serveStatic('join'));
 viewRouter.use('/logincheckPwd',serveStatic('logincheckPwd'));
 viewRouter.use('/loginMember',serveStatic('loginMember'));

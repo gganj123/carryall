@@ -316,7 +316,8 @@
       function submitForm() {
         const username = document.getElementById("idName").value;
         const password = document.getElementById("password").value;
-        const passwordReconfirm = document.getElementById("passwordReconfirm").value;
+        const passwordReconfirm =
+          document.getElementById("passwordReconfirm").value;
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
         const phoneNum = document.getElementById("phoneNum").value;
@@ -345,14 +346,11 @@
           .catch((error) => {
             // 오류가 발생했을 때 콘솔알림.
             console.error("회원가입 오류:", error.response.data);
-            const errTxt = document.querySelector(".errTxt.nId"); // errTxt 변수를 여기로 이동
 
-            if (error.response.data === "중복된 아이디입니다.") {
-              errTxt.innerHTML = "중복된 아이디입니다.";
-              errTxt.classList.add("active");
+            if (typeof error.response.data == "object") {
+              alert(error.response.data.errors[0].msg);
             } else {
-              errTxt.innerHTML = ""; // 에러 메시지 초기화
-              errTxt.classList.remove("active");
+              alert(error.response.data);
             }
           });
       }

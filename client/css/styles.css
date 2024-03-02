@@ -76,7 +76,6 @@ button.headmenu{
   border: transparent; 
   font-size: 1.2em; 
   font-weight: bold;
-  margin-left :  120px;
 }
 .bs:hover{
   transform: scale(1.05);
@@ -390,7 +389,7 @@ header#header {
 .side1 {
   top: 60%;
   width: auto;
-  left: 20px;
+  left: 260px;
 }
 .category_box .headmenu {
   display: block;
