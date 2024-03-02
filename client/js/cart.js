@@ -166,11 +166,14 @@ function deleteSelectedItems() {
 }
 
 function deleteAllItems() {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
   const itemsContainer = document.querySelector(".itemContainer");
   localStorage.removeItem("cartItems");
   itemsContainer.innerHTML = "";
   const totalCheck = document.getElementById("totalCkBtn");
   totalCheck.checked = false;
+  drawItems(cartItems);
 }
 
 function increaseQuantity(itemId, option) {

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>carryAll</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/practice.css">
+  <link rel="stylesheet" href="/css/reset_practice.css">
+
+</head>
+<body>
+
+  <header id="header"></header>
+
+  <div class="container" style="height: 100%; width: 100%; display: flex; flex-wrap: wrap;">
+      <div class="side1" style="height: 100%; width: 22%; background-color: #fafafa; ">
+      </div>
+      <main id="main">
+        <div class="totalImage">
+          <div class="mainImage">
+            <img class="mainImage img22" src="">
+          </div>
+          <!-- <div class="detailImage">
+            <ul>
+              <li class="image" id="on"><a href ="#a"><img src="/carryall/client/img/2.webp"></a></li>
+              <li class="image"><a href ="#a"><img src="/carryall/client/img/3.webp"></a></li>
+              <li class="image"><a href ="#a"><img src="/carryall/client/img/4.webp"></a></li>
+              <li class="image"><a href ="#a"><img src="/carryall/client/img/5.webp"></a></li>
+            </ul>
+          </div> -->
+          <div class="productDetail">
+            <div class="content">
+              <div class="contentPoint">
+                <h1>상세 정보</h1>
+                <ul>
+                  <li class="point">소재 : 합성피혁</li>
+                  <li class="point">색상 : 블랙 / 화이트 / 카멜</li>
+                  <li class="point">추가 상세 : 상세정보 내용</li>
+                  <li class="point">추가 상세 : 상세정보 내용</li>
+                </ul>
+              </div>
+              <div class="contentDetail">
+                <div class="contentPhoto">
+                </div>
+              </div>              
+            </div>
+          </div>
+        </div>
+        <div class="totalDetail">
+          <div class="totalDetailOption">
+            <h1>미디엄 빅투아르백 - 서플 카프스킨 블랙</h1>
+            <p>details</p>
+            <dl>
+              <dt>판매가</dt>
+              <dd class="price">5200000</dd>
+              <dt>브랜드</dt>
+              <dd class="categoryName">셀린느</dd>
+              <dt>옵션선택</dt>
+              <dd>
+                <select name="selectbox" class="selectbox">
+                  <option value="1">흠</option>
+                  <option value="2">white</option>
+                  <option value="3">brown</option>
+                </select>
+              </dd>
+              <dt>배송비</dt>
+              <dd>무료</dd>
+            </dl>
+            <div class="number">
+              <p class="orderName">미디엄 빅투아르백 - 서플 카프스킨 블랙</p>
+              <div class="orderNumber">
+                <input type="number" min="1" name="num" id="num" class="num" value="1" oninput="updateQuantity()">
+                <!-- <span class="numberPrice">3,000원</span> -->
+              </div>
+            </div>
+            <div class="totalPrice">
+              <p>총 합계 금액</p>
+              <p class="price">5200000</p>
+            </div>
+          </div>
+          <div class="totalDetailPurchase">
+            <button type="button" id="cartBtn">장바구니</button>
+            <button type="button" id="orderBtn">주문하기</button>
+          </div>
+        </div>
+      </main>
+      <div class="side2" style="height: 100%; width: 22%; background-color: #fafafa;">
+      </div>
+  </div>
+  
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+  const currentURL = window.location.href;
+  // URL에서 ID 추출하기
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get('id');
+  
+  axios.get('/api/products')
+    .then(res => {
+      function updateQuantity() {
+        const newQuantity = document.getElementById("num").value;
+        updateCartQuantity(newQuantity);
+        localStorage.setItem("quantity", newQuantity);
+        document.querySelector('.number .orderNumber .num').innerText = newQuantity;
+      }
+      function updateCartQuantity(quantity) {
+    // 장바구니에 수량을 반영하는 코드 작성
+    // 예: 장바구니 아이템의 수량을 업데이트하는 등의 작업
+      console.log("장바구니 수량 업데이트:", quantity);
+}
+      const products = res.data; // 받아온 상품 데이터
+      const filteredProduct = products.filter(product => product._id === productId);
+      console.log(filteredProduct);
+      console.log(productId);
+      console.log(filteredProduct[0].name);
+      console.log(filteredProduct[0].option);
+      // dataToSend 객체의 정보를 각 요소에 할당
+      document.querySelector('.number .orderName').innerText = filteredProduct[0].name;
+      document.querySelector('.mainImage.img22').src = filteredProduct[0].image;
+      document.querySelector('.totalDetailOption h1').innerText = filteredProduct[0].name;
+      document.querySelector('.totalDetailOption .price').innerText = filteredProduct[0].price.toLocaleString('ko-KR')+"원";
+      document.querySelector('.totalPrice .price').innerText = filteredProduct[0].price.toLocaleString('ko-KR')+"원";
+      document.querySelector('.totalDetailOption .categoryName').innerText = filteredProduct[0].categoryName;
+      document.querySelector('.contentPoint ul').innerHTML = `
+        <li class="point">소재 : 합성피혁</li>
+        <li class="point">색상 : 블랙 / 아이보리 / 카멜</li>
+        <li class="point">추가 상세 : ${filteredProduct[0].name}</li>
+        <li class="point">추가 상세 : </li>
+      `;
+      document.querySelector('.totalDetailOption dl select[name="selectbox"]').innerHTML = `
+        <option value="1">${filteredProduct[0].option}</option>
+        <option value="2">아이보리</option>
+        <option value="3">브라운</option>
+      `;
+      
+      console.log(res.data);
+    })
+    .catch(error => {
+      // 오류가 발생했을 때 처리합니다.
+      console.error('Error fetching data:', error);
+    });
+
+  const cartBtn = document.getElementById("cartBtn");
+  cartBtn.addEventListener("click", addItemToCart);
+
+  function addItemToCart() {
+    const newItemId = productId;
+    axios.get('/api/products')
+      .then(response => {
+        const product = response.data.find(item => item._id === newItemId);
+        if (!product) {
+          console.error("Product not found.");
+          return;
+        }
+
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        let isExist = cartItems.some(item => item._id === newItemId);
+
+        if (isExist) {
+          alert("이미 장바구니에 담긴 상품입니다.");
+          return;
+        }
+        
+        const newItem = {
+          _id: newItemId,
+          isChecked: true,
+          image: product.image,
+          name: product.name,
+          categoryName: product.categoryName,
+          option: product.option,
+          quantity: 1,
+          price: product.price,
+          totalPricePerItem: product.price
+        };
+        cartItems.push(newItem);
+
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        // displayUserCartInfo();
+      })
+      .catch(error => {
+        console.error("Error fetching product details:", error);
+      });
+
+  
+  }
+});
+</script>
+
+      <div style="height: 500px;"></div>
+    <footer id="footer"></footer>
+    <script src="/js/header.js"></script>
+    <script src="/js/footer.js"></script>
+</body>
+</html>
