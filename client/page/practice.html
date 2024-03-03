@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>carryAll</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+
+    <link rel="stylesheet" href="/css/practice.css" />
+    <link rel="stylesheet" href="/css/reset_practice.css" />
+  </head>
+  <body>
+    <header id="header"></header>
+
+    <div
+      class="container"
+      style="height: 100%; width: 100%; display: flex; flex-wrap: wrap"
+    >
+      <div
+        class="side1"
+        style="height: 100%; width: 22%; background-color: #fafafa"
+      ></div>
+      <main id="main">
+        <div class="totalImage">
+          <div class="mainImage">
+            <img class="mainImage img22" src="" />
+          </div>
+          <!-- <div class="detailImage">
+            <ul>
+              <li class="image" id="on"><a href ="#a"><img src="/carryall/client/img/2.webp"></a></li>
+              <li class="image"><a href ="#a"><img src="/carryall/client/img/3.webp"></a></li>
+              <li class="image"><a href ="#a"><img src="/carryall/client/img/4.webp"></a></li>
+              <li class="image"><a href ="#a"><img src="/carryall/client/img/5.webp"></a></li>
+            </ul>
+          </div> -->
+          <div class="productDetail">
+            <div class="content">
+              <div class="contentPoint">
+                <h1>상세 정보</h1>
+                <ul>
+                  <li class="point">소재 : 합성피혁</li>
+                  <li class="point">색상 : 블랙 / 화이트 / 카멜</li>
+                  <li class="point">추가 상세 : 상세정보 내용</li>
+                  <li class="point">추가 상세 : 상세정보 내용</li>
+                </ul>
+              </div>
+              <div class="contentDetail">
+                <div class="contentPhoto"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="totalDetail">
+          <div class="totalDetailOption">
+            <h1>미디엄 빅투아르백 - 서플 카프스킨 블랙</h1>
+            <p>details</p>
+            <dl>
+              <dt>판매가</dt>
+              <dd class="price">5200000</dd>
+              <dt>브랜드</dt>
+              <dd class="brand">셀린느</dd>
+              <dt>옵션선택</dt>
+              <dd>
+                <select name="selectbox" class="selectbox" id="selectbox">
+                  <option value="black"></option>
+                  <option value="white"></option>
+                  <option value="brown"></option>
+                </select>
+              </dd>
+              <dt>배송비</dt>
+              <dd>무료</dd>
+            </dl>
+            <div class="number">
+              <p class="orderName">미디엄 빅투아르백 - 서플 카프스킨 블랙</p>
+              <div class="orderNumber">
+                <input
+                  type="number"
+                  min="1"
+                  name="num"
+                  id="values"
+                  class="num"
+                  value="1"
+                />
+                <!-- <span class="numberPrice">3,000원</span> -->
+              </div>
+            </div>
+            <div class="totalPrice">
+              <p>총 합계 금액</p>
+              <p class="price">5200000</p>
+            </div>
+          </div>
+          <div class="totalDetailPurchase">
+            <button type="button" id="cartBtn">장바구니</button>
+            <button type="button" id="orderBtn">주문하기</button>
+          </div>
+        </div>
+      </main>
+      <div
+        class="side2"
+        style="height: 100%; width: 22%; background-color: #fafafa"
+      ></div>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        //   const selectBox = document.querySelector('.totalDetailOption dl select[name="selectbox"]');
+
+        // // 옵션 선택 이벤트 리스너 추가
+        // selectBox.addEventListener("change", function(event) {
+        //   const selectedOption = event.target.value;
+        //   updateDetailOption(selectedOption);
+        // });
+
+        // 옵션 변경 시 호출될 함수
+        function updateDetailOption(option) {
+          // 여기서는 간단히 예시로 옵션 값을 상세정보에 반영하는 코드를 작성했습니다.
+          // 실제로는 옵션에 맞는 데이터를 서버에서 가져와서 보여줘야 합니다.
+          document.querySelector(".totalDetailOption h1").innerText = option;
+        }
+        const currentURL = window.location.href;
+        // URL에서 ID 추출하기
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get("id");
+
+        // 수빈 - 옵션 변경 시 변경된 옵션 값 로컬로 이동
+        function myListener() {
+          const selectElement = document.querySelector(
+            '.totalDetailOption dl select[name="selectbox"]'
+          );
+          return selectElement.value; // 선택된 옵션의 값 반환
+        }
+
+        document
+          .querySelector('.totalDetailOption dl select[name="selectbox"]')
+          .addEventListener("change", function () {
+            const selectedOption = myListener(); // 옵션 값 가져오기
+            console.log(selectedOption); // 선택된 옵션의 값 콘솔에 출력
+          });
+
+        // 수빈 - 수량 증가 값 로컬로 이동
+        const input = document.querySelector("input");
+        const log = document.getElementById("values");
+
+        input.addEventListener("input", updateValue);
+
+        function updateValue(e) {
+          const value = e.target.value;
+          log.textContent = value;
+          console.log(value);
+          updateTotalPrice(value); // 총 가격을 업데이트하는 함수 호출
+        }
+
+        function updateTotalPrice(value) {
+          const price = parseFloat(
+            document
+              .querySelector(".totalDetailOption .price")
+              .innerText.replace("원", "")
+              .replace(",", "")
+          ); // 상품 가격을 가져옵니다
+          const totalPrice = price * value; // 총 가격 계산
+          document.querySelector(".totalPrice .price").innerText =
+            totalPrice.toLocaleString("ko-KR") + "원"; // 업데이트된 총 가격을 표시합니다
+        }
+
+        axios
+          .get("/api/products")
+          .then((res) => {
+            //     function updateQuantity() {
+            //   // 입력된 수량 가져오기
+            //   const newQuantity = document.getElementById("num").value;
+            //   // 가져온 수량을 변수에 저장
+            //   localStorage.setItem("quantity", newQuantity);
+            //   console.log(newQuantity);
+            // }
+            const products = res.data; // 받아온 상품 데이터
+            const filteredProduct = products.filter(
+              (product) => product._id === productId
+            );
+            console.log(filteredProduct);
+            console.log(productId);
+            console.log(filteredProduct[0].name);
+            console.log(filteredProduct[0].option);
+            // dataToSend 객체의 정보를 각 요소에 할당
+            document.querySelector(".number .orderName").innerText =
+              filteredProduct[0].name;
+            document.querySelector(".mainImage.img22").src =
+              filteredProduct[0].image;
+            document.querySelector(".totalDetailOption h1").innerText =
+              filteredProduct[0].name;
+            document.querySelector(".totalDetailOption .price").innerText =
+              filteredProduct[0].price.toLocaleString("ko-KR") + "원";
+            document.querySelector(".totalPrice .price").innerText =
+              filteredProduct[0].price.toLocaleString("ko-KR") + "원";
+            document.querySelector(".totalDetailOption .brand").innerText =
+              filteredProduct[0].categoryName;
+            document.querySelector(".contentPoint ul").innerHTML = `
+        <li class="point">소재 : 합성피혁</li>
+        <li class="point">색상 : Black / White / Brown</li>
+        <li class="point">상세 : ${filteredProduct[0].categoryDetail}</li>
+        <li class="point">제조국 : ${filteredProduct[0].categoryOrigin}</li>
+      `;
+            document.querySelector(
+              '.totalDetailOption dl select[name="selectbox"]'
+            ).innerHTML = `
+        <option value="Black">${filteredProduct[0].option[0]}</option>
+        <option value="White">${filteredProduct[0].option[1]}</option>
+        <option value="Brown">${filteredProduct[0].option[2]}</option>
+      `;
+
+            console.log(res.data);
+          })
+          .catch((error) => {
+            // 오류가 발생했을 때 처리합니다.
+            console.error("Error fetching data:", error);
+          });
+
+        // 수빈 - 수량 증가시 금액도 같이 증가
+        // let totalPrice = filteredProduct[0].price;
+        // updateTotalPrice(totalPrice);
+
+        // input.addEventListener("input", function() {
+        //   totalPrice = filteredProduct[0].price * input.value;
+        //   updateTotalPrice(totalPrice);
+        // });
+
+        // function updateTotalPrice(totalPrice) {
+        //   document.querySelector('.totalPrice .price').innerText = totalPrice.toLocaleString('Ko-KR') + "원"
+        // }
+
+        const cartBtn = document.getElementById("cartBtn");
+        cartBtn.addEventListener("click", addItemToCart);
+
+        function addItemToCart() {
+          const newItemId = productId;
+          axios
+            .get("/api/products")
+            .then((response) => {
+              const product = response.data.find(
+                (item) => item._id === newItemId
+              );
+              const value = input.value;
+              if (!product) {
+                console.error("Product not found.");
+                return;
+              }
+
+              let cartItems =
+                JSON.parse(localStorage.getItem("cartItems")) || [];
+              let isExist = cartItems.some((item) => item._id === newItemId && item.option === myListener());
+
+              if (isExist) {
+                alert("이미 장바구니에 담긴 상품입니다.");
+                return;
+              }else{
+                alert("장바구니에 추가하였습니다.");
+              }
+
+              const selectedOption = myListener();
+              // const value = updateValue();
+
+              const newItem = {
+                _id: newItemId,
+                isChecked: true,
+
+                option: selectedOption,
+                quantity: value,
+              };
+              cartItems.push(newItem);
+
+              localStorage.setItem("cartItems", JSON.stringify(cartItems));
+              // displayUserCartInfo();
+            })
+            .catch((error) => {
+              console.error("Error fetching product details:", error);
+            });
+        }
+
+        const orderBtn = document.getElementById("orderBtn");
+        orderBtn.addEventListener("click", addItemToOrder);
+
+        function addItemToOrder() {
+          const newItemId = productId;
+          axios.get("/api/mypage")
+          .then((response) => {
+            const user = response.data;
+            if (!user) {
+              alert("로그인이 필요한 서비스입니다.");
+              location.href = "/loginMember";
+            }
+            axios
+            .get("/api/products")
+            .then((response) => {
+              const product = response.data.find(
+                (item) => item._id === newItemId
+              );
+              const value = input.value;
+              if (!product) {
+                console.error("Product not found.");
+                return;
+              }
+              let orderItems = [];
+              let isExist = orderItems.some((item) => item._id === newItemId);
+               
+              localStorage.removeItem("orderItems");
+              
+              const selectedOption = myListener();
+              const newItem = {
+                _id: newItemId,
+                option: selectedOption,
+                quantity: value,
+              };
+              orderItems.push(newItem);
+              localStorage.setItem("orderItems", JSON.stringify(orderItems));
+              // displayUserCartInfo();
+              window.location.href = "/order";
+            })
+            .catch((error) => {
+              console.error("Error fetching product details:", error);
+            });
+          })
+          .catch((error) => {
+            alert("로그인이 필요한 서비스입니다.");
+            location.href = "/loginMember";
+          });
+        }
+      });
+    </script>
+
+    <div style="height: 500px"></div>
+    <footer id="footer"></footer>
+    <script src="/js/header.js"></script>
+    <script src="/js/footer.js"></script>
+  </body>
+</html>
