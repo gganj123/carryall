@@ -118,7 +118,7 @@ async function fetchCategory() {
     const response = await axios.get("/api/categories");
     let optionList = "";
     response.data.forEach((category) => {
-      optionList += `<option value='${category._id}' id='${category._id}'>${category.name}</option>`;
+      optionList += `<option value='${category._id+"&"+category.origin+"&"+category.detail}' id='${category._id}'>${category.name}</option>`;
     });
     return optionList;
   } catch (error) {
@@ -156,6 +156,8 @@ function addForm() {
         <p class ="cate font_17">["black", "white", "brown"]</p>
         <br />
         <input type="text" class ="postStock cate font_17" placeholder="재고 입력" required >
+        <input type="text" class ="origin cate font_17" readonly>
+        <input type="text" class ="detail cate font_17" readonly>
       </div>
       <div class="sortbutton">
         <button id="regiButton" class="col font_17">등록</button>
@@ -169,10 +171,11 @@ function addForm() {
 
     regiButton.addEventListener("click", function () {
       const name = document.querySelector(".postName").value;
-      const categoryId = document.querySelector("select").value;
+      const cate = document.querySelector("select").value.split("&");
       const stock = document.querySelector(".postStock").value;
       const price = document.querySelector(".postPrice").value;
       const categoryName = document.getElementById(categoryId).textContent;
+      const categoryId = cate[0],origin = cate[1],detail = cate[2]
       axios
         .post("/api/products", {
           name,
@@ -182,6 +185,8 @@ function addForm() {
           option: ["black", "white", "brown"],
           stock,
           categoryName,
+          origin,
+          detail
         })
         .then((response) => {
           console.log(response.data);
